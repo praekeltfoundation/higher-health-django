@@ -14,7 +14,6 @@ import os
 from os.path import join
 
 import environ
-from kombu import Exchange, Queue
 
 root = environ.Path(__file__) - 3
 env = environ.Env(DEBUG=(bool, False))
