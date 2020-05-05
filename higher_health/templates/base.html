@@ -12,7 +12,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>{% if context.title %}{{ context.title }}{% else %}Higher Health – Improving wellbeing. Inspiring success.{% endif %}</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="theme-color" content="#ffffff">
+    <meta name="theme-color" content="#f2f2f2">
 
     <link rel="apple-touch-icon" sizes="180x180" href="{% static 'images/icons/apple-touch-icon.png' %}">
     <link rel="icon" type="image/png" sizes="192x192" href="{% static 'images/icons/android-icon-192x192.png' %}">
@@ -61,5 +61,10 @@
 
     </div>
   </section>
+
+  <script>
+    var list = document.querySelector("ul");
+   list.appendChild(list.firstElementChild);
+  </script>
 </body>
 </html>
