@@ -4,8 +4,9 @@
   --very-dark-grayish-blue: #4e5358;
   --soft-red: #EF4F71;
   --dark-moderate-cyan: #4db09d;
+  --dark-moderate-cyan-2: #3d8d7d;
+  --dark-moderate-cyan-3: #367b6e;
 }
-
 * {
   outline: none;
 }
@@ -32,9 +33,6 @@ img {
 	border: 0;
 }
 
-h1,h2,h3,h4,h5,h6 {
-	margin: 0 1em 1em;
-}
 p {
 	margin: 0.5em 0 1em;
 }
@@ -49,58 +47,59 @@ a {
   color: var(--soft-red);
   text-decoration: none;
 }
-
 a:hover {
   text-decoration: underline;
 }
+
+
+/*
+LAYOUT:
+
+HEADER + NAV
+*/
 .wrapper {
   height: 100%;
 }
 .header {
   background-color: #ffffff;
   position: relative;
+  transition: transform 0.4s;
+}
+.sticky .header {
+  position: fixed;
+  top: 0;
+  z-index: 9999;
+  transform: translate3d(0, -10%, 0);
+  width: 100%;
 }
 
 .header-inner {
   box-sizing: border-box;
   box-shadow: 0 0 60px rgba(51, 51, 51, 0.1);
-  display: flex;
-  padding: 1em 10%;
+  display: block;
+  padding: 10px 5%;
   position: relative;
   width: 100%;
-
-
-  -webkit-transition: all 0.3s linear 0s;
-  -khtml-transition: all 0.3s linear 0s;
-  -moz-transition: all 0.3s linear 0s;
-  -ms-transition: all 0.3s linear 0s;
-  transition: all 0.3s linear 0s;
 }
 
 .header__brand {
-  padding: 0 2em 0 0;
+  padding: 0 10px 0 0;
 }
-
+.header__brand .site-title img {
+  max-width: 270px;
+}
 .header__menu {
   align-self: center;
   width: 100%;
 }
-
 .menu__item {
   display: inline-block;
   padding: 0 0.5em;
-  -webkit-transition: all 0.3s linear 0s;
-  -khtml-transition: all 0.3s linear 0s;
-  -moz-transition: all 0.3s linear 0s;
-  -ms-transition: all 0.3s linear 0s;
-  transition: all 0.3s linear 0s;
 }
-
 .menu__link,
 .sub-menu__item {
   color: #333;
   display: block;
-
   font-family: "Varela Round", sans-serif;
   font-size: 13px;
   font-weight: 400;
@@ -110,25 +109,19 @@ a:hover {
   vertical-align: middle;
 }
 
+/*
+  CONTENT
+*/
+
 .content {
   animation: shrink 10s infinite alternate;
   /*background-image: url("/static/images/banner-a.jpg");
   background-size: 110%;
   background-repeat: no-repeat;
   background-position: 0 0;*/
-
   height: 100%;
-  overflow: auto;
   position: relative;
 }
-
-.content-intro {
-  position: relative;
-  padding: 0 10%;
-  margin: 0 auto;
-  width: 900px;
-}
-
 @keyframes shrink {
   0% {
     background-size: 110%;
@@ -138,10 +131,16 @@ a:hover {
   }
 }
 
+.content-intro {
+  position: relative;
+  padding: 0 5%;
+  margin: 0 auto;
+}
+
 .content-inner {
   color: rgba(23, 47, 51, 1);
-  margin: 2em auto;
-  padding: 2em;
+  margin: 10px auto;
+  padding: 10px;
   text-align: center;
   border-radius: 5px;
   /*background-color: rgba(95,95,95, 0.2);*/
@@ -149,7 +148,6 @@ a:hover {
 
 .content--sidebar {
   text-align: left;
-  max-width: 350px;
   /*background-color: rgba(24, 48, 51, 0.8);*/
 }
 
@@ -159,7 +157,7 @@ a:hover {
 .heading-primary {
   color: #000;
   font-family: "Varela Round", sans-serif;
-  font-size: 35px;
+  font-size: 28px;
 }
 
 .heading-secondary {
@@ -179,11 +177,8 @@ FORM
   border-radius: 5px;
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
   font-family: 'Lato', sans-serif;
-  margin: 2em auto 1em;
   position: relative;
-  padding: 2em;
-  padding-bottom: 40px;
-  width: 450px;
+  padding: 10px;
 }
 label {
   color: #333;
@@ -262,7 +257,9 @@ input[type=checkbox] {
   display: block;
   height: 40px;
   width: 250px;
-  left: 95px;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
   border: 0;
   border-radius: 20px;
   bottom: -20px;
@@ -271,4 +268,63 @@ input[type=checkbox] {
   font-size: 1.1rem;
   font-weight: 300;
   outline: none;
+  cursor: pointer;
+  transition: all 0.4s;
+}
+
+.cta-primary:hover,
+.cta-primary:focus {
+  background: var(--dark-moderate-cyan-2);
+  transform: translateY(-3px);
+}
+
+
+@media screen and (min-width: 1025px) {
+  h1,h2,h3,h4,h5,h6 {
+  	margin: 0 1em 1em;
+  }
+
+  /*
+    HEADER
+  */
+  .header-inner {
+    display: flex;
+    padding: 1em 10%;
+  }
+  .header__brand {
+    padding: 0 2em 0 0;
+  }
+  .header__brand .site-title img {
+    max-width: auto;
+  }
+
+  /*
+    CONTENT
+  */
+  .content-intro {
+    padding: 0 10%;
+    width: 900px;
+  }
+  .content-inner {
+    margin: 2em auto;
+    padding: 2em;
+  }
+  .content--sidebar {
+    max-width: 350px;
+  }
+  .heading-primary {
+    font-size: 35px;
+  }
+  .heading-secondary {
+    font-size: 22px;
+  }
+
+  /*
+    FORM
+  */
+  .login-form {
+    margin: 2em auto 1em;
+    padding: 2em;
+    width: 450px;
+  }
 }
