@@ -1,0 +1,49 @@
+{% load static %}
+<!DOCTYPE html>
+<!--[if lt IE 7]><html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]><html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]><html class="no-js lt-ie9"> <![endif]-->
+<!--[if IE 10]><html class="no-js lt-ie9 ie10"> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js" lang="en-US">
+<!--<![endif]-->
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>{% if context.title %}{{ context.title }}{% else %}Higher Health – Improving wellbeing. Inspiring success.{% endif %}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#ffffff">
+
+    <link rel="apple-touch-icon" sizes="180x180" href="{% static 'images/icons/apple-touch-icon.png' %}">
+    <link rel="icon" type="image/png" sizes="192x192" href="{% static 'images/icons/android-icon-192x192.png' %}">
+    <link rel="icon" type="image/png" sizes="512x512" href="{% static 'images/icons/android-icon-512x512.png' %}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{% static 'images/icons/favicon-32x32.png' %}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{% static 'images/icons/favicon-16x16.png' %}">
+    <link rel="manifest" href="{% static 'manifest.json' %}">
+
+    <link rel="stylesheet" type="text/css" href="{% static 'css/index.css' %}" media="all">
+</head>
+<body>
+  <section class="wrapper">
+    <header id="masthead" class="header">
+      <div class="header-inner">
+        <div class="header__brand">
+          <a class="site-title" href="http://higherhealth.ac.za/" rel="home">
+            <img src="{% static 'images/hh-logo.png' %}" alt="logo">
+          </a>
+        </div>
+        <div class="header__menu">
+          <ul class="menu">
+            <li class="menu__item menu__item--current">
+              <a href="#" aria-current="page" class="menu__link">
+                Home
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </header>
+    {% block content %}{% endblock %}
+  </section>
+</body>
+</html>
