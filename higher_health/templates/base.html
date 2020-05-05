@@ -20,7 +20,6 @@
     <link rel="icon" type="image/png" sizes="32x32" href="{% static 'images/icons/favicon-32x32.png' %}">
     <link rel="icon" type="image/png" sizes="16x16" href="{% static 'images/icons/favicon-16x16.png' %}">
     <link rel="manifest" href="{% static 'manifest.json' %}">
-
     <link rel="stylesheet" type="text/css" href="{% static 'css/index.css' %}" media="all">
 </head>
 <body>
@@ -35,15 +34,32 @@
         <div class="header__menu">
           <ul class="menu">
             <li class="menu__item menu__item--current">
-              <a href="#" aria-current="page" class="menu__link">
-                Home
-              </a>
+              <a href="#" class="menu__link"></a>
             </li>
           </ul>
         </div>
       </div>
     </header>
-    {% block content %}{% endblock %}
+    <div class="content">
+      <div class="content-intro">
+      <!--  <div class="content-inner content--sidebar"></div> -->
+        <div class="content-inner">
+          <h1 class="heading heading-primary">Welcome to HealthCheck <br/>Daily Health Screening Portal</h1>
+          <h3 class="heading heading-secondary">
+            Your daily risk assessment tool
+            Please help us by answering a few questions about you and your health.
+          </h3>
+           <p>You will receive advice on what actions to take based on national
+           guidelines and the data you enter will help us in predictive modelling
+           and planning our national response to COVID-19.
+           Thank you for coming forward and for contributing to the health
+           of all citizens AND stopping the spread of the virus 🦠</p>
+
+           {% block content %}{% endblock %}
+        </div>
+      </div>
+
+    </div>
   </section>
 </body>
 </html>
