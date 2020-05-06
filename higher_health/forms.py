@@ -41,19 +41,11 @@ class LocationCheckerForm(forms.Form):
         ),
         required=False
     )
-    provinceType = forms.CharField(widget=TextInput(attrs={'class':'textInputs','placeholder': 'Which Province are you currently residing?'}),max_length=100)
-    residenceLocation = forms.CharField(widget=TextInput(attrs={'class':'textInputs','placeholder': 'Name of your Suburb, Township, Town or Village (or nearest)'}),max_length=100)
-    locationPin = forms.CharField(widget=TextInput(attrs={'class':'textInputs','placeholder': 'Please share your location using (Or SKIP if you are unable to)','helpText':'This will help us to more accurately map cases of COVID-19'}),max_length=100)
-
-
-class MedicalCheckerForm(forms.Form):
-    firstname = forms.CharField(widget=TextInput(attrs={'class':'textInputs','placeholder': 'First name'}),max_length=100)
-    lastname = forms.CharField(widget=TextInput(attrs={'class':'textInputs','placeholder': 'Last name'}),max_length=100)
 
 class PersonalInfoForm(forms.Form):
-    firstname = forms.CharField(widget=TextInput(attrs={'class':'textInputs','placeholder': 'First name'}),max_length=100)
-    lastname = forms.CharField(widget=TextInput(attrs={'class':'textInputs','placeholder': 'Last name'}),max_length=100)
+    firstname = forms.CharField(widget=TextInput(attrs={'placeholder': 'First name'}),max_length=100)
+    lastname = forms.CharField(widget=TextInput(attrs={'placeholder': 'Last name'}),max_length=100)
 
 class LoginForm(forms.Form):
-    firstname = forms.CharField(widget=TextInput(attrs={'class':'textInputs','placeholder': 'First name'}),max_length=100)
-    lastname = forms.CharField(widget=TextInput(attrs={'class':'textInputs','placeholder': 'Last name'}),max_length=100)
+    firstname = forms.CharField(widget=TextInput(attrs={'placeholder': 'First name'}),max_length=100)
+    lastname = forms.CharField(widget=TextInput(attrs={'placeholder': 'Last name'}),max_length=100)

@@ -1,13 +1,9 @@
-from .forms import LocationCheckerForm, MedicalCheckerForm, PersonalInfoForm, LoginForm
+from .forms import LocationCheckerForm, PersonalInfoForm, LoginForm
 from django.shortcuts import render
 
 def healthcheck_location(request):
     form = LocationCheckerForm()
     return render(request, 'health-check_location-questionnaire.html', {'form': form})
-
-def healthcheck_medical(request):
-    form = MedicalCheckerForm()
-    return render(request, 'health-check_medical-questionnaire.html', {'form': form})
 
 def healthcheck_personalInfo(request):
     form = PersonalInfoForm()
