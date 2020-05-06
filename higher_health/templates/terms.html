@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+
+{% block content %}
+	  <div class="container">
+	  	<div id="content" class="content">
+	  		<div class="content-terms">
+		  		<img alt="WhatsApp" src="{% static 'img/whatsapp2.png' %}" width="100" height="100"/>
+		  		<h1 class="heading heading__primary">WhatsApp Terms and Conditions</h1>
+				  <p>Lorem ipsum dolor sit amet, adipiscing tristique risus nec.</p>
+
+			  	<h3 class="heading heading__label">Felis donec et odio</h3>
+			  	<p>Pellentesque diam volutpat commodo sed.
+            Risus commodo viverra maecenas accumsan lacus vel facilisis volutpat.
+          </p>
+
+					<ol>
+						<li>Morbi tristique senectus et netus.</li>
+						<li>Dictumst vestibulum rhoncus est.</li>
+						<li>Pellentesque elit ullamcorper.</li>
+					</ol>
+
+					<p>Aliquet bibendum enim facilisis gravida neque convallis a cras. Rutrum tellus pellentesque eu tincidunt tortor. Elit duis tristique sollicitudin nibh sit amet. Fames ac turpis egestas integer eget. Diam donec adipiscing tristique risus nec feugiat in fermentum posuere. Feugiat nibh sed pulvinar proin gravida. Aenean vel elit scelerisque mauris pellentesque.</p>
+
+					<p>In eu mi bibendum neque egestas congue quisque egestas diam. Convallis tellus id interdum velit laoreet id donec ultrices tincidunt. Nibh tellus molestie nunc non blandit massa enim nec. Dolor sit amet consectetur adipiscing elit ut aliquam purus sit.</p>
+
+					<p>Pharetra diam sit amet nisl suscipit adipiscing bibendum est. Ipsum nunc aliquet bibendum enim facilisis gravida neque convallis a. Tempor id eu nisl nunc. A erat nam at lectus urna duis convallis convallis. Urna id volutpat lacus laoreet non curabitur.</p>
+
+					<ul>
+						<li>Risus nullam eget felis eget nunc lobortis mattis aliquam.</li>
+						<li>Lectus mauris ultrices eros in cursus turpis massa tincidunt dui. </li>
+						<li>Non odio euismod lacinia at quis risus.</li>
+						<li>Est ultricies integer quis auctor elit sed vulputate mi sit.</li>
+					</ul>
+					<p>Malesuada bibendum arcu vitae elementum. Egestas quis ipsum suspendisse ultrices gravida dictum fusce ut.
+						Nisl rhoncus mattis rhoncus urna neque. Nec nam aliquam sem et tortor consequat id porta.</p>
+				</div>
+
+				<div class="content-policy">
+		  		<h2 class="heading heading__secondary">Privacy Policy</h2>
+		  		<p>Aliquet bibendum enim facilisis gravida neque convallis a cras. Rutrum tellus pellentesque eu tincidunt tortor. Elit duis tristique sollicitudin nibh sit amet. Fames ac turpis egestas integer eget. Diam donec adipiscing tristique risus nec feugiat in fermentum posuere. Feugiat nibh sed pulvinar proin gravida. Aenean vel elit scelerisque mauris pellentesque.</p>
+
+					<p>In eu mi bibendum neque egestas congue quisque egestas diam. Convallis tellus id interdum velit laoreet id donec ultrices tincidunt. Nibh tellus molestie nunc non blandit massa enim nec. Dolor sit amet consectetur adipiscing elit ut aliquam purus sit.</p>
+		  	</div>
+		  </div>
+		  <form id="terms" class="optin-form" action="" method="post">
+	    {% csrf_token %}
+	    	<fieldset>
+	    		{{ form.checkbox }}
+	  			<label id="label_for_id_checkbox" for="id_checkbox">
+	  				{{ form.checkbox.label }}:
+	  			</label>
+	    		{{ form.uuid }}
+	  		</fieldset>
+		  </form>
+		</div>
+	{% endblock %}
