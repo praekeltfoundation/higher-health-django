@@ -73,6 +73,7 @@ TEMPLATES = [
                 "django.template.context_processors.request",
                 "django.contrib.auth.context_processors.auth",
                 "django.contrib.messages.context_processors.messages",
+                "higher_health.context_processors.api_keys",
             ]
         },
     }
@@ -117,6 +118,7 @@ USE_L10N = True
 
 USE_TZ = True
 
+PLACES_API_KEY = env.str("GOOGLE_PLACES_API_KEY")
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.2/howto/static-files/

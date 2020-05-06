@@ -44,24 +44,47 @@
       <div class="content-intro">
       <!--  <div class="content-inner content--sidebar"></div> -->
         <div class="content-inner">
-          <h1 class="heading heading-primary">Welcome to HealthCheck <br/>Daily Health Screening Portal</h1>
-          <h3 class="heading heading-secondary">
-            Your daily risk assessment tool
-            Please help us by answering a few questions about you and your health.
-          </h3>
-           <p>You will receive advice on what actions to take based on national
+          <div class="heading-block">
+            <h1 class="heading heading-primary">Welcome to HealthCheck <br/>Daily Health Screening Portal</h1>
+            <h2 class="heading heading-secondary">Your daily risk assessment tool</h2>
+          </div>
+          <h3>Please help us by answering a few questions about you and your health.</h3>
+          <p>You will receive advice on what actions to take based on national
            guidelines and the data you enter will help us in predictive modelling
            and planning our national response to COVID-19.
            Thank you for coming forward and for contributing to the health
-           of all citizens AND stopping the spread of the virus 🦠</p>
+           of all citizens AND stopping the spread of the virus 🦠
+          </p>
 
            {% block content %}{% endblock %}
         </div>
       </div>
-
     </div>
   </section>
 
+  <section class="map-wrapper">
+    <div class="map-inner">
+      <div id="locationField">
+        <input id="autocomplete"
+          placeholder="Enter your address"
+          onFocus="geolocate()"
+          type="text"/>
+      </div>
+      <table id="address">
+        <tr>
+          <td class="label">Street address</td>
+          <td class="slimField"><input class="field" id="street_number" disabled="true"/></td>
+          <td class="wideField" colspan="2"><input class="field" id="route" disabled="true"/></td>
+        </tr>
+        <tr>
+          <td class="label">City</td>
+          <td class="wideField" colspan="3"><input class="field" id="locality" disabled="true"/></td>
+        </tr>
+      </table>
+      <div id="map"></div>
+    </div>
+  </section>
+  <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key={{PLACES_API_KEY}}&libraries=places"></script>
   <script type="text/javascript">
   	document.addEventListener('DOMContentLoaded',function(e) {
       document.getElementsByTagName('body')[0].addEventListener('scroll',function(e) {
@@ -71,8 +94,11 @@
 					document.getElementsByTagName('body')[0].classList.remove('sticky');
 				}
 			});
-
     });
+
+    /*----GOOGLE PLACES REVIEW----*/
+
+
   </script>
 </body>
 </html>
