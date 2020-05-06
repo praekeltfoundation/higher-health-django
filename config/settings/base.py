@@ -87,7 +87,8 @@ WSGI_APPLICATION = "config.wsgi.application"
 
 DATABASES = {
     "default": env.db(
-        "HIGHER_HEALTH_DATABASE", default="postgres://postgres@localhost:5432/higher_health"
+        "HIGHER_HEALTH_DATABASE",
+        default="postgres://postgres@localhost:5432/higher_health",
     )
 }
 
