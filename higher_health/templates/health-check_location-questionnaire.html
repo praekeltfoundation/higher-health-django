@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <form method="POST" class="login-form">
+    {% csrf_token %}
+    <div class="screening">
+      <ul class="fieldset">
+        {{ form.TextInput.field.widget.attrs.class }}
+        {% for field in form %}
+          <li>
+            {{field}}
+            <label for="{{ field.id_for_label }}" class="label">
+              <a href="">{{field.label}}</a>
+            </label>
+          </li>
+        {% endfor %}
+      </ul>
+    </div>
+    <p>Sharing your location data will help us to further accurately map cases of COVID-19</p>
+    <div class="map">
+      <div id="locationField">
+        <input id="autocomplete"
+          placeholder="Type your physical address"
+          onFocus="geolocate()"
+          type="text"/>
+      </div>
+      <ul id="address" class="fieldset">
+        <li>
+          <label for="street_number" class="label">Street address</label>
+          <input class="field" id="street_number" disabled="true"/>
+          <input class="field" id="route" disabled="true"/>
+        </li>
+        <li>
+          <label for="locality" class="label">City</label>
+          <input class="field" id="locality" disabled="true"/>
+        </li>
+        <li>
+          <label for="country" class="label">Country</label>
+          <input class="field" id="country" disabled="true"/>
+        </li>
+      </ul>
+    </div>
+    <button type="submit" class="cta cta-primary">Next</button>
+  </form>
+{% endblock %}
