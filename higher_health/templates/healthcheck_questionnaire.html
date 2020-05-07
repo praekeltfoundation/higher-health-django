@@ -3,7 +3,7 @@
 {% block content %}
 
   {% if submitted %}
-    <p class="success">Your message was submitted successfully. Thank you.</p>
+    {% include "includes/receipt.html" %}
   {% else %}
     <form action="" method="POST" class="login-form" novalidate>
       {% csrf_token %}
