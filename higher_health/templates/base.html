@@ -22,7 +22,7 @@
     <link rel="manifest" href="{% static 'manifest.json' %}">
     <link rel="stylesheet" type="text/css" href="{% static 'css/index.css' %}" media="all">
 </head>
-<body>
+<body id="healthcheck">
   <section class="wrapper">
     <header id="masthead" class="header">
       <div class="header-inner">
@@ -63,15 +63,33 @@
 
 
   <script type="text/javascript">
+  "use strict";
+    const bodyBlock = document.getElementById('healthcheck'),
+          checkbox = document.getElementById('healthcheck_terms'),
+          questionnairesForm = document.getElementById('questionnaires');
+
   	document.addEventListener('DOMContentLoaded',function(e) {
-      document.getElementsByTagName('body')[0].addEventListener('scroll',function(e) {
+      bodyBlock.addEventListener('scroll',function(e) {
 				if(e.target.scrollTop > 185) {
-          document.getElementsByTagName('body')[0].classList.add('sticky');
+          document.bodyBlock.classList.add('sticky');
 				} else {
-					document.getElementsByTagName('body')[0].classList.remove('sticky');
+					document.bodyBlock.classList.remove('sticky');
 				}
 			});
+
+			checkbox.checked = false;
+      questionnairesForm.classList.add('hidden');
+			checkbox.addEventListener('change', function(e){
+				if (e.target.checked) {
+			    questionnairesForm.classList.add('showing');
+          questionnairesForm.classList.remove('hidden');
+			  } else {
+			    questionnairesForm.classList.add('hidden');
+          questionnairesForm.classList.remove('showing');
+			  }
+			});
     });
+
 
     /*----GOOGLE PLACES REVIEW----*/
     let placeSearch, autocomplete;

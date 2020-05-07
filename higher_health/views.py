@@ -1,18 +1,19 @@
 from django.shortcuts import render
 
-from .forms import LocationCheckerForm, LoginForm, PersonalInfoForm
+from .forms import HealthCheckQuestionnaire, HealthCheckLogin
 
 
-def healthcheck_location(request):
-    form = LocationCheckerForm()
-    return render(request, "health-check_location-questionnaire.html", {"form": form})
-
-
-def healthcheck_personalInfo(request):
-    form = PersonalInfoForm()
-    return render(request, "health-check_personal-info.html", {"form": form})
-
+def healthcheck_questionnaire(request):
+    form = HealthCheckQuestionnaire()
+    return render(request, "healthcheck_questionnaire.html", {"form": form})
 
 def healthcheck_login(request):
-    form = LoginForm()
-    return render(request, "health-check_login.html", {"form": form})
+    form = HealthCheckLogin()
+    return render(request, "healthcheck_login.html", {"form": form})
+
+def healthcheck_terms(
+        request,
+        extra_context=None,
+        template=('healthcheck_terms.html')):
+    locale_code = request.GET.get('locale')
+    return render(request, template, {'locale_code': locale_code})

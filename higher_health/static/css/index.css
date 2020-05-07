@@ -45,9 +45,11 @@ ul {
 
 a {
   color: var(--soft-red);
+  cursor: pointer;
   text-decoration: none;
 }
 a:hover {
+  cursor: grab;
   text-decoration: underline;
 }
 
@@ -181,9 +183,21 @@ CONTENT
 FORM
 
 */
+.showing {
+  display: block;
+  visibility: visible;
+}
+.hidden {
+  display: none;
+  visibility: hidden;
+}
+#questionnaires {
+  transition: all ease-in-out 1s;
+}
 .login-form {
   font-family: 'Lato', sans-serif;
   position: relative;
+
 }
 .login-form__location,
 .login-form__medical {
@@ -191,6 +205,9 @@ FORM
   border-radius: 5px;
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
   padding: 10px;
+}
+.login-form__read-terms {
+  margin: 0 auto;
 }
 .login-form__screening .label {
   display: none;
@@ -262,14 +279,18 @@ input[type="checkbox"] {
   display: inline-block;
 }
 
+#read-terms input[type="checkbox"] {
+  visibility: hidden;
+  position: absolute;
+}
 input[type="checkbox"] ~ label {
-  font-size: 17px;
+  font-size: 16px;
+  text-transform: uppercase;
   visibility: visible;
   display: inline-block;
 	padding: 0 0 10px;
 	cursor: pointer;
 	position: relative;
-	transition: all ease-in-out 1s;
 }
 input[type="checkbox"] ~ label:after {
 	background: #fff;
@@ -281,7 +302,7 @@ input[type="checkbox"] ~ label:after {
 	height: 25px;
 	vertical-align: middle;
 	margin: 0 10px;
-	transition: all linear 1s;
+	transition: all ease-in-out 0.2s;
 }
 input[type="checkbox"] + label,
 input[type="checkbox"]:checked + label {
@@ -372,5 +393,8 @@ input[type="checkbox"]#id_checkbox:disabled ~ label:after {
     margin: 2em auto 1em;
     padding: 2em;
     width: 450px;
+  }
+  .login-form__read-terms {
+    width: 500px;
   }
 }
