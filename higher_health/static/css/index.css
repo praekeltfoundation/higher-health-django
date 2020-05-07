@@ -9,6 +9,40 @@
   --dark-moderate-cyan-3: #367b6e;
 }
 
+
+.receipts-ui {
+  position: relative;
+}
+.receipts-root {
+  color: #05293C;
+  width: 200px;
+  cursor: pointer;
+  display: inline-block;
+  padding: 5px 0;
+  position: relative;
+  box-sizing: content-box;
+  touch-action: none;
+  background: linear-gradient(90deg, green,green, green,yellow,yellow,yellow,red,red,red);
+  height: 200px;
+  border-radius: 100%;
+  margin: 0 auto;
+}
+
+.receipts-rail {
+  background: #D5D5D5;
+  width: 180px;
+  height: 180px;
+  position: absolute;
+  border-radius: 100%;
+  margin: 0 auto;
+  left: 0;
+  right: 0;
+  top: 15px;
+  display: block;
+  vertical-align: middle;
+  align-self: center;
+}
+
 /*----------- RESETS ----------*/
 * {
   outline: none;
@@ -203,7 +237,7 @@ a:hover {
 }
 
 /*
-FORM
+  FORM
 
 */
 .showing {
@@ -268,11 +302,33 @@ label {
   width: auto;
 }
 
+#content-receipt-login label {
+  display: none;
+  visibility: hidden;
+}
+
+#content-receipt-login .cta-primary {
+  background: var(--soft-red);
+  border-radius: 5px;
+  position: relative;
+  width: 50%;
+  margin: 0;
+}
+
+#content-receipt-login input,
+#content-receipt-login textarea,
+#content-receipt-login select {
+  padding: 0 10px;
+}
+
+
+
 input,
 textarea,
 select {
   background: white;
   border: 0;
+  border-radius: 5px;
   display: inline-block;
   margin: 20px auto 0;
 
@@ -375,6 +431,7 @@ input[type="checkbox"]#id_checkbox:disabled ~ label:after {
   transition: all 0.4s;
 }
 
+
 .cta-primary:hover,
 .cta-primary:focus {
   background: var(--dark-moderate-cyan-2);
@@ -383,7 +440,7 @@ input[type="checkbox"]#id_checkbox:disabled ~ label:after {
 
 
 /*
-FORM SUCCESS
+  FORM SUCCESS
 
 */
 
@@ -392,7 +449,7 @@ FORM SUCCESS
 }
 
 /*
-FOOTER
+  FOOTER
 
 */
 
@@ -455,8 +512,11 @@ FOOTER
     margin: 2em auto;
     padding: 2em;
   }
+  .content-columns {
+    padding: 2em 2em 3em;
+  }
   .content-columns__sidebar {
-    max-width: 350px;
+    width: 35%;
   }
   .heading-primary {
     font-size: 35px;

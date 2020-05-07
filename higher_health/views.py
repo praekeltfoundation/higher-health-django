@@ -13,7 +13,7 @@ def healthcheck_questionnaire(request):
         if form.is_valid():
             cd = form.cleaned_data
             # assert False
-            return HttpResponseRedirect('/?submitted=True')
+            return HttpResponseRedirect('/login?submitted=True')
     else:
         form = HealthCheckQuestionnaire()
         if 'submitted' in request.GET:
@@ -23,7 +23,7 @@ def healthcheck_questionnaire(request):
 
 def healthcheck_login(request):
     form = HealthCheckLogin()
-    return render(request, "healthcheck_login.html", {"form": form})
+    return render(request, "includes/receipt.html", {"form": form})
 
 def healthcheck_terms(
         request,

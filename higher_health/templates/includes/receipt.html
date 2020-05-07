@@ -1,19 +1,49 @@
-<div id="content-receipts" class="content-columns content-inner">
-  <div class="content-columns__sidebar content-inner">
-    <h2 class="heading heading-secondary">In order to</h2>
-    <p>Thank you for coming forward and for contributing to the health
-     of all citizens AND stopping the spread of the virus 🦠
-    </p>
-  </div>
-  <div class="content-columns__inner content-inner">
-    <div class="heading-container">
-      <h1 class="heading heading-primary">HealthCheck <br/>Daily Health Screening Portal</h1>
-      <h2 class="heading heading-secondary">Your daily risk assessment report:</h2>
-    </div>
+{% extends 'base.html' %}
+{% block content %}
+<div class="content">
+  <div class="content-intro">
+    <div id="content-receipts" class="content-columns content-inner">
+      <div class="content-columns__sidebar content-inner">
+        <h2 class="heading heading-secondary">Please login</h2>
+        <h3>In order to view your Healthcheck receipt:</h3>
+        <p>Thank you for coming forward and for contributing to the health
+         of all citizens AND stopping the spread of the virus 🦠
+        </p>
 
-    <div class="success-form">
-      <h2 class="heading heading-secondary">Thank you</h2>
-      <p class="success">Your message was submitted successfully.</p>
+        
+        <h1>OR</h1>
+        <div id="content-receipt-login">
+          <form method="POST" class="login-form">
+            {% csrf_token %}
+            <ul class="fieldset">
+              {% for field in form %}
+                <li>
+                  {{field}}
+                  <label for="{{ field.id_for_label }}">
+                    <a href="">{{field.label}}</a>
+                  </label>
+                </li>
+              {% endfor %}
+            </ul>
+            <button type="submit" class="cta cta-primary">Login</button>
+          </form>
+        </div>
+      </div>
+      <div class="content-columns__inner content-inner">
+        <div class="heading-container">
+          <h1 class="heading heading-primary">HealthCheck <br/>Daily Health Screening Portal</h1>
+          <h2 class="heading heading-secondary">Your daily risk assessment report:</h2>
+        </div>
+
+        <div class="success-form">
+          <h2 class="heading heading-secondary">Thank you</h2>
+          <p class="success">Your screening surveys was submitted successfully.</p>
+        </div>
+      </div>
     </div>
   </div>
 </div>
+
+
+  {% endblock %}
+    {% block extra_js %}  {% endblock  %}

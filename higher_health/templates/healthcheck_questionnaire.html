@@ -1,12 +1,11 @@
 {% extends 'base.html' %}
 
 {% block content %}
+  {% if submitted %}
+    {% include "includes/receipt.html" %}
+  {% else %}
   <div class="content">
     <div class="content-intro">
-    {% if submitted %}
-      {% include "includes/receipt.html" %}
-    {% else %}
-      
       <div class="content-inner">
         <div class="heading-container">
           <h1 class="heading heading-primary">Welcome to HealthCheck <br/>Daily Health Screening Portal</h1>
@@ -137,7 +136,8 @@
           </div>
         </form>
       </div>
-    {% endif %}
     </div>
   </div>
+  {% endif %}
+
 {% endblock %}

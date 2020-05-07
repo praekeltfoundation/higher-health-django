@@ -28,7 +28,7 @@
     <header id="masthead" class="header">
       <div class="header-inner">
         <div class="header-brand">
-          <a class="header-brand__link" href="http://higherhealth.ac.za/" rel="home">
+          <a class="header-brand__link" href="/" rel="home">
             <img class="header-brand__logo"  src="{% static 'images/hh-logo.png' %}" alt="Higherhealth Logo">
           </a>
         </div>
@@ -74,9 +74,9 @@
       </div>
     </div>
   </footer>
-
-  <script type="text/javascript">
-  "use strict";
+  {% block extra_js %}
+    <script type="text/javascript">
+    "use strict";
     const bodyBlock = document.getElementById('healthcheck'),
           checkbox = document.getElementById('healthcheck_terms'),
           questionnairesForm = document.getElementById('questionnaires');
@@ -177,5 +177,6 @@
     </script>
     <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key={{PLACES_API_KEY}}&libraries=places&callback=initAutocomplete"
         async defer></script>
+  {% endblock %}
 </body>
 </html>
