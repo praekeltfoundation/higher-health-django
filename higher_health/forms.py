@@ -1,9 +1,11 @@
 from django import forms
+
 from django.forms.widgets import PasswordInput, TextInput
+from django.core.exceptions import ValidationError
 from django.utils.translation import ugettext_lazy as _
 
 
-class LocationCheckerForm(forms.Form):
+class HealthCheckQuestionnaire(forms.Form):
     ageRange = forms.ChoiceField(
         label="How old are you?",
         choices=(
@@ -40,23 +42,13 @@ class LocationCheckerForm(forms.Form):
             ("Northern Cape", _("Northern Cape")),
             ("Western Cape", _("Western Cape")),
         ),
-        required=False,
+        required=True,
     )
 
-
-class PersonalInfoForm(forms.Form):
-    firstname = forms.CharField(
-        widget=TextInput(attrs={"placeholder": "First name"}), max_length=100
+class HealthCheckLogin(forms.Form):
+    phone = forms.CharField(
+        widget=TextInput(attrs={"placeholder": "Phone number"}),required=True, max_length=100
     )
-    lastname = forms.CharField(
-        widget=TextInput(attrs={"placeholder": "Last name"}), max_length=100
-    )
-
-
-class LoginForm(forms.Form):
-    firstname = forms.CharField(
-        widget=TextInput(attrs={"placeholder": "First name"}), max_length=100
-    )
-    lastname = forms.CharField(
-        widget=TextInput(attrs={"placeholder": "Last name"}), max_length=100
+    fullname = forms.CharField(
+        widget=TextInput(attrs={"placeholder": "Last name"}),required=True, max_length=100
     )

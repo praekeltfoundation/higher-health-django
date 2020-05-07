@@ -45,9 +45,13 @@ ul {
 
 a {
   color: var(--soft-red);
+  cursor: pointer;
   text-decoration: none;
+  -webkit-transition: 0.5s ease;
 }
+
 a:hover {
+  cursor: grab;
   text-decoration: underline;
 }
 
@@ -57,7 +61,6 @@ LAYOUT:
 
 HEADER + NAV
 */
-
 .wrapper {
   position: relative;
 }
@@ -113,7 +116,8 @@ HEADER + NAV
 }
 
 /*
-  CONTENT
+CONTENT
+
 */
 
 .content {
@@ -142,7 +146,7 @@ HEADER + NAV
 
 .content-inner {
   color: rgba(23, 47, 51, 1);
-  margin: 10px auto;
+  margin: 10px auto 2em;
   padding: 10px;
   /*background-color: rgba(95,95,95, 0.2);*/
 }
@@ -163,32 +167,59 @@ HEADER + NAV
   color: #000;
   font-family: "Varela Round", sans-serif;
   font-size: 28px;
-  margin: 0 1em;
 }
 
 .heading-secondary {
   font-family: 'Lato', sans-serif;
   font-size: 22px;
-  font-weight: 300;
+  font-weight: 400;
 }
 
+.subheading {
+  font-size: 17px;
+  display: inline;
+}
 
 /*
-
 FORM
 
 */
+.showing {
+  display: block;
+  visibility: visible;
+}
+.hidden {
+  display: none;
+  visibility: hidden;
+}
+#questionnaires {
+  transition: all ease-in-out 1s;
+}
 .login-form {
+  font-family: 'Lato', sans-serif;
+  position: relative;
+
+}
+.login-form__location,
+.login-form__medical {
   background: #fff;
   border-radius: 5px;
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
-  font-family: 'Lato', sans-serif;
-  position: relative;
   padding: 10px;
 }
-
-.label {
-  color: rgba(68, 68, 68, 0.3);
+.login-form__screening {
+  margin: 0 0 2em;
+}
+.login-form__screening .subtitle {
+  font-weight: bold;
+}
+.login-form__map input[type="text"] {
+  margin: 0;
+}
+.login-form__read-terms {
+  margin: 0 auto;
+}
+.login-form__screening .label {
   display: none;
   visibility: hidden;
 }
@@ -201,6 +232,15 @@ FORM
   text-decoration-color: rgba(68, 68, 68, 0.3);
   text-underline-position: under;
 }
+
+.errorlist li {
+  color: red;
+}
+
+label {
+  color: rgba(68, 68, 68, 0.8);
+}
+
 #address input {
   height: auto;
   width: auto;
@@ -212,7 +252,7 @@ select {
   background: white;
   border: 0;
   display: inline-block;
-  margin: 20px auto;
+  margin: 20px auto 0;
 
   border-bottom: 1px solid rgba(68, 68, 68, 0.3);
   color: rgba(68, 68, 68, 0.8);
@@ -220,11 +260,6 @@ select {
   height: 40px;
   outline: 0;
   width: 100%;
-}
-input[type=checkbox]
-input[type=radio] {
-  border: none;
-  width: auto;
 }
 
 textarea {
@@ -235,16 +270,43 @@ textarea {
   font-size: 1rem;
 }
 
-input[type=checkbox] ~ label {
-  font-size: 17px;
+input[type="checkbox"]
+input[type="radio"] {
+  width: auto;
+}
+
+.radio-field {
+  position: relative;
+}
+
+.radio-value {
+  color: rgba(23, 47, 51, 1);
+}
+
+#medical input[type="radio"] {
+  margin: 10px;
+  height: auto;
+  width: auto;
+}
+
+input[type="checkbox"] {
+  display: inline-block;
+}
+
+#read-terms input[type="checkbox"] {
+  visibility: hidden;
+  position: absolute;
+}
+input[type="checkbox"] ~ label {
+  font-size: 16px;
+  text-transform: uppercase;
   visibility: visible;
   display: inline-block;
 	padding: 0 0 10px;
 	cursor: pointer;
 	position: relative;
-	transition: all ease-in-out 1s;
 }
-input[type=checkbox] ~ label:after {
+input[type="checkbox"] ~ label:after {
 	background: #fff;
 	border: 2px solid var(--soft-red);
 	content: "";
@@ -254,27 +316,23 @@ input[type=checkbox] ~ label:after {
 	height: 25px;
 	vertical-align: middle;
 	margin: 0 10px;
-	transition: all linear 1s;
+	transition: all ease-in-out 0.2s;
 }
-input[type=checkbox] + label,
-input[type=checkbox]:checked + label {
+input[type="checkbox"] + label,
+input[type="checkbox"]:checked + label {
   background-image: none;
 }
-input[type=checkbox]:checked + label:after {
+input[type="checkbox"]:checked + label:after {
   background: var(--soft-red) url('/static/images/icons/check.png') 0 50%/25px no-repeat;;
   opacity: 1;
 }
-input[type=checkbox]#id_checkbox:disabled ~ label {
+input[type="checkbox"]#id_checkbox:disabled ~ label {
  	color: #333;
 }
-input[type=checkbox]#id_checkbox:disabled ~ label:after {
+input[type="checkbox"]#id_checkbox:disabled ~ label:after {
 	border-color: #333;
 }
-input[type=checkbox] {
-  display: inline-block;
-  position: absolute;
-  visibility: hidden;
-}
+
 .cta-primary {
   position: absolute;
   display: block;
@@ -302,6 +360,50 @@ input[type=checkbox] {
 }
 
 
+/*
+FORM SUCCESS
+
+*/
+
+.success-form {
+  text-align: center;
+}
+
+/*
+FOOTER
+
+*/
+
+.footer {
+  background-color: #00AF9E;
+  color: #fff;
+  padding: 20px 10px;
+  text-align: center;
+}
+
+.footer-inner {
+}
+
+.footer-powered-by {
+  position: relative;
+}
+
+.logo-list {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: 1fr;
+  grid-column-gap: 0px;
+  grid-row-gap: 0px;
+}
+
+.logo-list__image {
+  width: auto;
+}
+.logo-list__item {
+  margin: 1em 0;
+}
+/*---------------*/
+
 @media screen and (min-width: 1025px) {
   /*
     HEADER
@@ -314,9 +416,8 @@ input[type=checkbox] {
     padding: 0 2em 0 0;
   }
   .header__brand .site-title img {
-    max-width: auto;
+    max-width: none;
   }
-
   .heading-container {
     margin: 0 0 2em;
   }
@@ -337,6 +438,7 @@ input[type=checkbox] {
   }
   .heading-primary {
     font-size: 35px;
+    margin: 0 1em;
   }
   .heading-secondary {
     font-size: 22px;
@@ -345,9 +447,27 @@ input[type=checkbox] {
   /*
     FORM
   */
-  .login-form {
+  .login-form__location,
+  .login-form__medical {
     margin: 2em auto 1em;
     padding: 2em;
     width: 450px;
+  }
+  .login-form__read-terms {
+    width: 500px;
+  }
+  /*
+    FOOTER
+  */
+  .footer {
+    padding: 20px 10%;
+  }
+  .footer-inner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .logo-list__item {
+    margin: 0 1em;
   }
 }
