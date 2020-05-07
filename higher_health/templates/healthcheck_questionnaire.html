@@ -1,12 +1,11 @@
 {% extends 'base.html' %}
 
 {% block content %}
-
   {% if submitted %}
     {% include "includes/receipt.html" %}
   {% else %}
     <form action="" method="POST" class="login-form" novalidate>
-      {% csrf_token %}
+    {% csrf_token %}
       <div class="login-form__read-terms">
         <ul id="read-terms" class="fieldset">
           <li>
@@ -22,10 +21,10 @@
           <h2 class="heading-secondary">Personal Questionare</h2>
           <div class="login-form__screening">
             <ul class="fieldset">
-              {{ form.TextInput.field.widget.attrs.class }}
               {% for field in form %}
                 <li>
                   {{field}}
+                  {{field.errors}}
                   <label for="{{ field.id_for_label }}" class="label">
                     <a href="">{{field.label}}</a>
                   </label>
@@ -33,7 +32,7 @@
               {% endfor %}
             </ul>
           </div>
-          <p>Sharing your location data will help us to further accurately map cases of COVID-19</p>
+          <p class="subtitle">Sharing your location data will help us to further accurately map cases of COVID-19</p>
           <div class="login-form__map">
             <div id="locationField">
               <input id="autocomplete"

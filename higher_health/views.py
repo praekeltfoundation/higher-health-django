@@ -1,6 +1,7 @@
 from django.shortcuts import render
 
 from django.http import HttpResponseRedirect
+from django.core.exceptions import ValidationError
 from .forms import HealthCheckQuestionnaire, HealthCheckLogin
 
 
@@ -17,7 +18,7 @@ def healthcheck_questionnaire(request):
         form = HealthCheckQuestionnaire()
         if 'submitted' in request.GET:
             submitted = True
-            # raise FieldError(e[0])
+
     return render(request, "healthcheck_questionnaire.html", {"form": form, "submitted": submitted })
 
 def healthcheck_login(request):

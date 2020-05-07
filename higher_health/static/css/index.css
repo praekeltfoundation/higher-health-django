@@ -208,6 +208,15 @@ FORM
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
   padding: 10px;
 }
+.login-form__screening {
+  margin: 0 0 2em;
+}
+.login-form__screening .subtitle {
+  font-weight: bold;
+}
+.login-form__map input[type="text"] {
+  margin: 0;
+}
 .login-form__read-terms {
   margin: 0 auto;
 }
@@ -225,6 +234,10 @@ FORM
   text-underline-position: under;
 }
 
+.errorlist li {
+  color: red;
+}
+
 label {
   color: rgba(68, 68, 68, 0.8);
 }
@@ -240,7 +253,7 @@ select {
   background: white;
   border: 0;
   display: inline-block;
-  margin: 20px auto;
+  margin: 20px auto 0;
 
   border-bottom: 1px solid rgba(68, 68, 68, 0.3);
   color: rgba(68, 68, 68, 0.8);
@@ -346,6 +359,7 @@ input[type="checkbox"]#id_checkbox:disabled ~ label:after {
   background: var(--dark-moderate-cyan-2);
   transform: translateY(-3px);
 }
+
 
 /*
 FORM SUCCESS

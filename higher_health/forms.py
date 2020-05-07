@@ -1,4 +1,5 @@
 from django import forms
+
 from django.forms.widgets import PasswordInput, TextInput
 from django.core.exceptions import ValidationError
 from django.utils.translation import ugettext_lazy as _
@@ -16,7 +17,6 @@ class HealthCheckQuestionnaire(forms.Form):
         ),
         required=True,
     )
-
     gender = forms.ChoiceField(
         label="Please provide us with the gender you identify as",
         choices=(
