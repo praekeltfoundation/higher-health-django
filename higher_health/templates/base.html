@@ -27,9 +27,9 @@
   <section class="wrapper">
     <header id="masthead" class="header">
       <div class="header-inner">
-        <div class="header__brand">
-          <a class="site-title" href="http://higherhealth.ac.za/" rel="home">
-            <img src="{% static 'images/hh-logo.png' %}" alt="Higherhealth Logo">
+        <div class="header-brand">
+          <a class="header-brand__link" href="http://higherhealth.ac.za/" rel="home">
+            <img class="header-brand__logo"  src="{% static 'images/hh-logo.png' %}" alt="Higherhealth Logo">
           </a>
         </div>
         <div class="header__menu">
@@ -41,25 +41,7 @@
         </div>
       </div>
     </header>
-    <div class="content">
-      <div class="content-intro">
-      <!--  <div class="content-inner content--sidebar"></div> -->
-        <div class="content-inner">
-          <div class="heading-container">
-            <h1 class="heading heading-primary">Welcome to HealthCheck <br/>Daily Health Screening Portal</h1>
-            <h2 class="heading heading-secondary">Your daily risk assessment tool</h2>
-            <h3>Please help us by answering a few questions about you and your health.</h3>
-            <p>You will receive advice on what actions to take based on national
-             guidelines and the data you enter will help us in predictive modelling
-             and planning our national response to COVID-19.
-             Thank you for coming forward and for contributing to the health
-             of all citizens AND stopping the spread of the virus 🦠
-            </p>
-          </div>
-           {% block content %}{% endblock %}
-        </div>
-      </div>
-    </div>
+    {% block content %}{% endblock %}
   </section>
   <footer class="footer">
     <div class="footer-inner">
@@ -92,7 +74,6 @@
       </div>
     </div>
   </footer>
-
 
   <script type="text/javascript">
   "use strict";
