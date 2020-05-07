@@ -47,7 +47,9 @@ a {
   color: var(--soft-red);
   cursor: pointer;
   text-decoration: none;
+  -webkit-transition: 0.5s ease;
 }
+
 a:hover {
   cursor: grab;
   text-decoration: underline;

@@ -71,19 +71,30 @@
   	document.addEventListener('DOMContentLoaded',function(e) {
       bodyBlock.addEventListener('scroll',function(e) {
 				if(e.target.scrollTop > 185) {
-          document.bodyBlock.classList.add('sticky');
+          bodyBlock.classList.add('sticky');
 				} else {
-					document.bodyBlock.classList.remove('sticky');
+					bodyBlock.classList.remove('sticky');
 				}
 			});
+      //Review & cleanup
+      let checkboxKey = sessionStorage.getItem('checkbox');
+      if(checkboxKey === 'true') {
+        checkbox.checked = true;
+        questionnairesForm.classList.add('showing');
+        questionnairesForm.classList.remove('hidden');
+      } else {
+        checkbox.checked = false;
+        questionnairesForm.classList.add('hidden');
+        questionnairesForm.classList.remove('showing');
+      }
 
-			checkbox.checked = false;
-      questionnairesForm.classList.add('hidden');
 			checkbox.addEventListener('change', function(e){
 				if (e.target.checked) {
+          sessionStorage.setItem('checkbox', 'true');
 			    questionnairesForm.classList.add('showing');
           questionnairesForm.classList.remove('hidden');
 			  } else {
+          sessionStorage.setItem('checkbox', 'false');
 			    questionnairesForm.classList.add('hidden');
           questionnairesForm.classList.remove('showing');
 			  }
@@ -99,7 +110,6 @@
       locality: 'long_name',
       country: 'long_name'
     };
-
 
     function initAutocomplete() {
       // Create the autocomplete object, restricting the search predictions to
