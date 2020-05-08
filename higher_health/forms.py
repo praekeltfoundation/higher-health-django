@@ -12,7 +12,7 @@ class HealthCheckQuestionnaire(forms.Form):
 
     YES_NO_NOT_SURE = ((YES, "Yes"), (NO, "No"), (NOT_SURE, "Not Sure"))
 
-    ageRange = forms.ChoiceField(
+    age_range = forms.ChoiceField(
         label="How old are you?",
         choices=(
             ("", _("Age")),
@@ -95,7 +95,7 @@ class HealthCheckQuestionnaire(forms.Form):
         widget=forms.RadioSelect,
         required=True,
     )
-    symptoms_confirm_contact = forms.ChoiceField(
+    medical_exposure = forms.ChoiceField(
         label="Have you been in close contact to someone confirmed to be infected with COVID19?",
         choices=YES_NO_NOT_SURE,
         widget=forms.RadioSelect,
@@ -107,7 +107,7 @@ class HealthCheckQuestionnaire(forms.Form):
         widget=forms.RadioSelect,
         required=True,
     )
-    symptoms_confirm_accuracy = forms.ChoiceField(
+    medical_confirm_accuracy = forms.ChoiceField(
         label="Please confirm that the information you shared is accurate to the best of your knowledge and that you give the National Department of Health permission to contact you if necessary?",
         choices=YES_NO,
         widget=forms.RadioSelect,

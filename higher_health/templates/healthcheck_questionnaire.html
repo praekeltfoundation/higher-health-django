@@ -37,7 +37,7 @@
               <div class="login-form__screening">
                 <ul class="fieldset">
                   {% for field in form %}
-                    {% if "symptoms_" not in field.name %}
+                    {% if "symptoms_" not in field.name and "medical_" not in field.name %}
                       <li>
                         {{field}}
                         {{field.errors}}
@@ -79,8 +79,8 @@
               <h2 class="heading-secondary">Medical Questionare</h2>
               <ul id="medical" class="fieldset">
                 {% for field in form %}
-                  {% if "symptoms_" in field.name %}
-                    {% if field.name == "symptoms_confirm_accuracy" %}
+                  {% if "symptoms_" in field.name or "medical_" in field.name %}
+                    {% if field.name == "medical_confirm_accuracy" %}
                       <h3 class="subheading">And finally</h3>
                     {% endif %}
                     <li>
