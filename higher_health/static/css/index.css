@@ -266,6 +266,9 @@ a:hover {
   text-underline-position: under;
 }
 
+.address-error {
+  border: 1px solid red;
+}
 .errorlist li {
   color: red;
 }

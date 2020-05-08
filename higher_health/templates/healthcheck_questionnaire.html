@@ -18,7 +18,7 @@
            of all citizens AND stopping the spread of the virus 🦠
           </p>
         </div>
-        <form action="" method="POST" class="login-form" novalidate>
+        <form action="" method="POST" id="login_form" class="login-form" novalidate>
         {% csrf_token %}
           <div class="login-form__read-terms">
             <ul id="read-terms" class="fieldset">
@@ -54,7 +54,9 @@
                   <input id="autocomplete"
                     placeholder="Type your physical address"
                     onFocus="geolocate()"
-                    type="text"/>
+                    type="text"
+                    required
+                    />
                 </div>
                 <ul id="address" class="fieldset">
                   <li>
@@ -91,7 +93,7 @@
                 {% endfor %}
               </ul>
             </div>
-            <button type="submit" class="cta cta-primary">Check</button>
+            <button id="entrySubmit" type="submit" class="cta cta-primary">Check</button>
           </div>
         </form>
       </div>
@@ -103,8 +105,12 @@
 {% block form_js %}
   <script type="text/javascript">
   "use strict";
+    let addressValid;
     const checkbox = document.getElementById('healthcheck_terms'),
-      questionnairesForm = document.getElementById('questionnaires');
+      questionnairesForm = document.getElementById('questionnaires'),
+      entryForm = document.getElementById('login_form'),
+      addressField = document.getElementById('autocomplete'),
+      entrySubmit = document.getElementById('entrySubmit');
 
     document.addEventListener('DOMContentLoaded',function(e) {
       //Review & cleanup
@@ -129,7 +135,25 @@
           questionnairesForm.classList.remove('showing');
         }
       });
+
+
+
+
+    console.log(entrySubmit,entryForm,addressField)
+      entrySubmit.addEventListener('click', function (event) {
+        addressValid = addressField.checkValidity();
+        console.log(addressValid, e.target);
+        document.getElementById('locationField').classList.remove('address-error');
+        // if (addressValid) {
+        //   entryForm.submit();
+        //   addressField.classList.remove('address-error');
+        // } else {
+        // addressField.classList.add('address-error');
+        // }
+      });
+
     });
+
     /*----GOOGLE PLACES REVIEW----*/
     let placeSearch, autocomplete;
     const componentForm = {
