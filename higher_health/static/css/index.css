@@ -9,6 +9,7 @@
   --dark-moderate-cyan-3: #367b6e;
 }
 
+
 /*----------- RESETS ----------*/
 * {
   outline: none;
@@ -197,13 +198,23 @@ a:hover {
   font-weight: 400;
 }
 
+.heading-label {
+  font-weight: 500;
+  margin: 0;
+  text-transform: uppercase;
+}
+
 .subheading {
   font-size: 17px;
   display: inline;
 }
 
+.terms__content {
+  margin: 1em 5%;
+}
+
 /*
-FORM
+  FORM
 
 */
 .showing {
@@ -255,6 +266,9 @@ FORM
   text-underline-position: under;
 }
 
+.address-error {
+  border: 1px solid red;
+}
 .errorlist li {
   color: red;
 }
@@ -268,11 +282,33 @@ label {
   width: auto;
 }
 
+#content-receipt-login label {
+  display: none;
+  visibility: hidden;
+}
+
+#content-receipt-login .cta-primary {
+  background: var(--soft-red);
+  border-radius: 5px;
+  position: relative;
+  width: 50%;
+  margin: 0;
+}
+
+#content-receipt-login input,
+#content-receipt-login textarea,
+#content-receipt-login select {
+  padding: 0 10px;
+}
+
+
+
 input,
 textarea,
 select {
   background: white;
   border: 0;
+  border-radius: 5px;
   display: inline-block;
   margin: 20px auto 0;
 
@@ -375,6 +411,7 @@ input[type="checkbox"]#id_checkbox:disabled ~ label:after {
   transition: all 0.4s;
 }
 
+
 .cta-primary:hover,
 .cta-primary:focus {
   background: var(--dark-moderate-cyan-2);
@@ -383,7 +420,7 @@ input[type="checkbox"]#id_checkbox:disabled ~ label:after {
 
 
 /*
-FORM SUCCESS
+  FORM SUCCESS
 
 */
 
@@ -392,7 +429,7 @@ FORM SUCCESS
 }
 
 /*
-FOOTER
+  FOOTER
 
 */
 
@@ -455,16 +492,24 @@ FOOTER
     margin: 2em auto;
     padding: 2em;
   }
+  .content-columns {
+    padding: 2em 2em 3em;
+  }
   .content-columns__sidebar {
-    max-width: 350px;
+    width: 35%;
+  }
+  .terms__content {
+    padding: 2em 20% 2em 10%;
   }
   .heading-primary {
     font-size: 35px;
-    margin: 0 1em;
+    margin: 0;
+    /*margin: 0 1em;*/ ?
   }
   .heading-secondary {
     font-size: 22px;
   }
+
 
   /*
     CONTENT FORM SUCCESS PAGE
