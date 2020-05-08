@@ -15,6 +15,7 @@ matrix:
       script:
         - flake8
         - py.test
+        - createdb higher_health
         - python manage.py makemigrations higher_health --dry-run | grep 'No changes detected' || (echo 'There are changes which require migrations.' && exit 1)
         - black --check .
         - isort -c -rc .
