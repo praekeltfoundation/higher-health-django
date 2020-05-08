@@ -44,6 +44,8 @@ class HealthCheckQuestionnaire(forms.Form):
         ),
         required=True,
     )
+    latitude = forms.CharField(widget=forms.HiddenInput())
+    longitude = forms.CharField(widget=forms.HiddenInput())
 
 class HealthCheckLogin(forms.Form):
     phone = forms.CharField(
