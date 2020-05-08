@@ -7,9 +7,7 @@ class HealthCheckQuestionnaire(forms.Form):
     YES = "yes"
     NO = "no"
     NOT_SURE = "not_sure"
-
     YES_NO = ((YES, "Yes"), (NO, "No"))
-
     YES_NO_NOT_SURE = ((YES, "Yes"), (NO, "No"), (NOT_SURE, "Not Sure"))
 
     age_range = forms.ChoiceField(
