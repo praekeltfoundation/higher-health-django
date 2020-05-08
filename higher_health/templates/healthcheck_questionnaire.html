@@ -50,7 +50,7 @@
                     {% endif %}
                   {% endfor %}
                   <li>
-                    {% if form.latitude or form.longitude %}
+
                       <p class="subtitle">Sharing your location data will help us to further accurately map cases of COVID-19</p>
                       <div class="login-form__map">
                         <div id="locationField">
@@ -61,10 +61,12 @@
                             required
                             />
                         </div>
-                        {{form.latitude}}
-                        {{form.longitude}}
-                        {% if form.latitude.errors or form.longitude.errors %}
-                            {{form.latitude.errors}}
+                        {% if form.latitude or form.longitude %}
+                          {{form.latitude}}
+                          {{form.longitude}}
+                          {% if form.latitude.errors or form.longitude.errors %}
+                              {{form.latitude.errors}}
+                          {% endif %}
                         {% endif %}
                         <ul id="address" class="fieldset">
                           <li>
@@ -83,7 +85,7 @@
                         </ul>
                       </div>
 
-                    {% endif %}
+
                   </li>
                 </ul>
               </div>
