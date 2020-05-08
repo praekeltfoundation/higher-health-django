@@ -37,7 +37,7 @@
               <div class="login-form__screening">
                 <ul class="fieldset">
                   {% for field in form %}
-                    {% if "symptoms_" not in field.name and "medical_" not in field.name %}
+                    {% if "symptoms_" not in field.name and "medical_" not in field.name and field.name != "city" %}
                       <li>
                         {{field}}
                         {{field.errors}}
@@ -65,7 +65,7 @@
                   </li>
                   <li>
                     <label for="locality" class="label">City</label>
-                    <input class="field" id="locality" disabled="true"/>
+                    <input class="field" name="city" id="locality" disabled="true"/>
                   </li>
                   <li>
                     <label for="country" class="label">Country</label>
