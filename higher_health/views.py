@@ -2,6 +2,7 @@ from django.http import HttpResponseRedirect
 from django.shortcuts import render
 
 from .forms import HealthCheckLogin, HealthCheckQuestionnaire
+from .utils import get_risk_level
 
 
 def healthcheck_questionnaire(request):
@@ -9,9 +10,9 @@ def healthcheck_questionnaire(request):
     if request.method == "POST":
         form = HealthCheckQuestionnaire(request.POST)
         if form.is_valid():
-            # cd = form.cleaned_data
-            # assert False
-            return HttpResponseRedirect("/?submitted=True")
+            cd = form.cleaned_data
+            risk_level = get_risk_level(cd)
+            return HttpResponseRedirect(f"/?submitted=True&risk_level={risk_level}")
     else:
         form = HealthCheckQuestionnaire()
         if "submitted" in request.GET:
