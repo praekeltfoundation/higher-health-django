@@ -25,8 +25,9 @@
 </head>
 <body id="healthcheck">
   <section class="wrapper">
-    <header id="masthead" class="header">
-      <div class="header-inner">
+    {% block header %}
+      <header id="masthead" class="header">
+        <div class="header-inner">
         <div class="header-brand">
           <a class="header-brand__link" href="/" rel="home">
             <img class="header-brand__logo"  src="{% static 'images/hh-logo.png' %}" alt="Higherhealth Logo">
@@ -40,7 +41,8 @@
           </ul>
         </div>
       </div>
-    </header>
+      </header>
+    {% endblock %}
     {% block content %}{% endblock %}
   </section>
   <footer class="footer">

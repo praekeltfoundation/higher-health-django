@@ -7,6 +7,7 @@ from .utils import get_risk_level
 
 def healthcheck_questionnaire(request):
     submitted = False
+    risk_level = False
     if request.method == "POST":
         form = HealthCheckQuestionnaire(request.POST)
         if form.is_valid():
