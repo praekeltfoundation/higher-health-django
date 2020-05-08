@@ -6,7 +6,7 @@
     {% if submitted %}
       {% include "includes/receipt.html" %}
     {% else %}
-      
+
       <div class="content-inner">
         <div class="heading-container">
           <h1 class="heading heading-primary">Welcome to HealthCheck <br/>Daily Health Screening Portal</h1>
@@ -37,13 +37,15 @@
               <div class="login-form__screening">
                 <ul class="fieldset">
                   {% for field in form %}
-                    <li>
-                      {{field}}
-                      {{field.errors}}
-                      <label for="{{ field.id_for_label }}" class="label">
-                        <a href="">{{field.label}}</a>
-                      </label>
-                    </li>
+                    {% if "symptoms_" not in field.name %}
+                      <li>
+                        {{field}}
+                        {{field.errors}}
+                        <label for="{{ field.id_for_label }}" class="label">
+                          <a href="">{{field.label}}</a>
+                        </label>
+                      </li>
+                    {% endif %}
                   {% endfor %}
                 </ul>
               </div>
@@ -76,61 +78,18 @@
             <div class="login-form__medical">
               <h2 class="heading-secondary">Medical Questionare</h2>
               <ul id="medical" class="fieldset">
-                <li id="sweating">
-                  <label for="sweating" class="label">Do you feel very hot or cold? Are you sweating or shivering? When you touch your forehead, does it feel hot?</label>
-                  <p class="radio-field"><input type="radio" value="yes" name="sweating"><span class="radio-value">Yes</span></p>
-                  <p class="radio-field"><input type="radio" value="no" name="sweating"><span class="radio-value">No</span></p>
-                </li>
-
-                <li id="cough">
-                  <label for="cough" class="label">Do you have a cough that recently started?</label>
-                  <p class="radio-field"><input type="radio" value="yes" name="cough"><span class="radio-value">Yes</span></p>
-                  <p class="radio-field"><input type="radio" value="no" name="cough"><span class="radio-value">No</span></p>
-                </li>
-
-                <li id="sore_throat">
-                  <label for="sore_throat" class="label">Do you have a sore throat or pain when swallowing?</label>
-                  <p class="radio-field"><input type="radio" value="yes" name="sore_throat"><span class="radio-value">Yes</span></p>
-                  <p class="radio-field"><input type="radio" value="no" name="sore_throat"><span class="radio-value">No</span></p>
-                </li>
-
-                <li id="breathlessness">
-                  <label for="breathlessness" class="label">Do you have breathlessness or a difficulty breathing, that you’ve noticed recently?</label>
-                  <p class="radio-field"><input type="radio" value="yes" name="breathlessness"><span class="radio-value">Yes</span></p>
-                  <p class="radio-field"><input type="radio" value="no" name="breathlessness"><span class="radio-value">No</span></p>
-                </li>
-
-                <li id="muscles_hurt">
-                  <label for="muscles_hurt" class="label">In the past couple of days, have you experienced pain in your body, especially your muscles hurting more than usual?</label>
-                  <p class="radio-field"><input type="radio" value="yes" name="muscles_hurt"><span class="radio-value">Yes</span></p>
-                  <p class="radio-field"><input type="radio" value="no" name="muscles_hurt"><span class="radio-value">No</span></p>
-                </li>
-
-                <li id="taste">
-                  <label for="taste" class="label">Have you noticed any recent changes in your ability to taste or smell things?</label>
-                  <p class="radio-field"><input type="radio" value="yes" name="taste"><span class="radio-value">Yes</span></p>
-                  <p class="radio-field"><input type="radio" value="no" name="taste"><span class="radio-value">No</span></p>
-                </li>
-
-                <li id="confirm_contact">
-                  <label for="confirm_contact" class="label">Have you been in close contact to someone confirmed to be infected with COVID19?</label>
-                  <p class="radio-field"><input type="radio" value="yes" name="confirm_contact"><span class="radio-value">Yes</span></p>
-                  <p class="radio-field"><input type="radio" value="no" name="confirm_contact"><span class="radio-value">No</span></p>
-                  <p class="radio-field"><input type="radio" value="not sure" name="confirm_contact"><span class="radio-value">Not Sure</span></p>
-                </li>
-
-                <li id="pre_existing_condition">
-                  <label for="pre_existing_condition" class="label">Do you have a pre-existing medical condition we should be aware of? (Examples: lung disease, heart disease, diabetes with complications, TB, HIV)</label>
-                  <p class="radio-field"><input type="radio" value="yes" name="pre_existing_condition"><span class="radio-value">Yes</span></p>
-                  <p class="radio-field"><input type="radio" value="no" name="pre_existing_condition"><span class="radio-value">No</span></p>
-                  <p class="radio-field"><input type="radio" value="not sure" name="pre_existing_condition"><span class="radio-value">Not Sure</span></p>
-                </li>
-                <h3 class="subheading">And finally</h3>
-                <li id="confirm_accuracy">
-                  <label for="confirm_accuracy" class="label">Please confirm that the information you shared is accurate to the best of your knowledge and that you give the National Department of Health permission to contact you if necessary?</label>
-                  <p class="radio-field"><input type="radio" value="yes" name="confirm_accuracy"><span class="radio-value">Yes</span></p>
-                  <p class="radio-field"><input type="radio" value="no" name="confirm_accuracy"><span class="radio-value">No</span></p>
-                </li>
+                {% for field in form %}
+                  {% if "symptoms_" in field.name %}
+                    {% if field.name == "symptoms_confirm_accuracy" %}
+                      <h3 class="subheading">And finally</h3>
+                    {% endif %}
+                    <li>
+                      <label for="sweating" class="label">{{ field.label }}</label>
+                      {{field.errors}}
+                      {{ field }}
+                    </li>
+                  {% endif %}
+                {% endfor %}
               </ul>
             </div>
             <button type="submit" class="cta cta-primary">Check</button>
