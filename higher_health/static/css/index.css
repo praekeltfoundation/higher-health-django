@@ -475,14 +475,6 @@ input[type="checkbox"]#id_checkbox:disabled ~ label:after {
   position: relative;
 }
 
-.logo-list {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  grid-template-rows: 1fr;
-  grid-column-gap: 0px;
-  grid-row-gap: 0px;
-}
-
 .logo-list__image {
   width: auto;
 }
@@ -563,6 +555,13 @@ input[type="checkbox"]#id_checkbox:disabled ~ label:after {
     display: flex;
     justify-content: space-between;
     align-items: center;
+  }
+  .logo-list {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: 1fr;
+    grid-column-gap: 0px;
+    grid-row-gap: 0px;
   }
   .logo-list__item {
     margin: 0 1em;

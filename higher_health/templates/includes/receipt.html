@@ -16,6 +16,8 @@
           </li>
         </ul>
       </div>
+
+      {{timestamp}}
       <div class="receipts-results receipts-results--{% if request.GET.risk_level == "low" %}low{% elif request.GET.risk_level == "mid" %}mid{% elif request.GET.risk_level == "high" %}high{% endif %}
       ">
         <div class="receipts-headings">
