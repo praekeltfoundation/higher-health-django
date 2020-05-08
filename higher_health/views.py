@@ -5,6 +5,8 @@ from .forms import HealthCheckLogin, HealthCheckQuestionnaire
 from .utils import get_risk_level, save_data
 
 
+
+
 def healthcheck_questionnaire(request):
     submitted = False
     if request.method == "POST":
@@ -21,7 +23,6 @@ def healthcheck_questionnaire(request):
         form = HealthCheckQuestionnaire()
         if "submitted" in request.GET:
             submitted = True
-
     return render(
         request,
         "healthcheck_questionnaire.html",

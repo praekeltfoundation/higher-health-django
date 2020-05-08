@@ -17,12 +17,11 @@
         </ul>
       </div>
 
-      {{timestamp}}
-      <div class="receipts-results receipts-results--{% if request.GET.risk_level == "low" %}low{% elif request.GET.risk_level == "mid" %}mid{% elif request.GET.risk_level == "high" %}high{% endif %}
+      <div class="receipts-results receipts-results--{% if request.GET.risk_level == "low" %}low{% elif request.GET.risk_level == "moderate" %}mid{% elif request.GET.risk_level == "high" or request.GET.risk_level == "critical" %}high{% endif %}
       ">
         <div class="receipts-headings">
           <h4 class="heading subtitle">HealthCheck Clearance
-          {% if request.GET.risk_level == "low" %}Granted{% elif request.GET.risk_level == "mid" or request.GET.risk_level == "high" %}Denied{% endif %}
+          {% if request.GET.risk_level == "low" %}Granted{% elif request.GET.risk_level == "moderate" or request.GET.risk_level == "high" or request.GET.risk_level == "critical" %}Denied{% endif %}
           </h4>
         </div>
         <div class="risks">
@@ -31,7 +30,7 @@
             <li class="risk-cat__item">
               <h5 class="risk-cat__label">Risk Level: </h5>
               <p class="risk-cat__val">
-                {% if request.GET.risk_level == "low" %}Low{% elif request.GET.risk_level == "mid" %}Medium{% elif request.GET.risk_level == "high" %}High{% endif %}
+                {% if request.GET.risk_level == "low" %}Low{% elif request.GET.risk_level == "moderate" %}Medium{% elif request.GET.risk_level == "high" or request.GET.risk_level == "critical" %}High{% endif %}
               </p>
             </li>
             <li class="risk-cat__item">

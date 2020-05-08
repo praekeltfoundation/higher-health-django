@@ -330,6 +330,7 @@ a:hover {
 
 label {
   color: rgba(68, 68, 68, 0.8);
+  cursor: pointer;
 }
 
 #address input {
