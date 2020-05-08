@@ -1,7 +1,6 @@
 from django import forms
-
-from django.forms.widgets import PasswordInput, TextInput
 from django.core.exceptions import ValidationError
+from django.forms.widgets import PasswordInput, TextInput
 from django.utils.translation import ugettext_lazy as _
 
 
@@ -45,10 +44,15 @@ class HealthCheckQuestionnaire(forms.Form):
         required=True,
     )
 
+
 class HealthCheckLogin(forms.Form):
     phone = forms.CharField(
-        widget=TextInput(attrs={"placeholder": "Phone number"}),required=True, max_length=100
+        widget=TextInput(attrs={"placeholder": "Phone number"}),
+        required=True,
+        max_length=100,
     )
     fullname = forms.CharField(
-        widget=TextInput(attrs={"placeholder": "Last name"}),required=True, max_length=100
+        widget=TextInput(attrs={"placeholder": "Last name"}),
+        required=True,
+        max_length=100,
     )
