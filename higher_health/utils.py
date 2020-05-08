@@ -38,11 +38,10 @@ def get_location(data):
     if "-" not in lng:
         lng = f"+{lng}"
 
-    return f"{lat}{lng}"
+    return f"{lat}{lng}/"
 
 
 def save_data(data, risk_level):
-    print(data)
     return Covid19Triage.objects.create(
         **{
             "source": "WEB",
