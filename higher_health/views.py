@@ -1,4 +1,3 @@
-from django.core.exceptions import ValidationError
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
 
@@ -10,7 +9,7 @@ def healthcheck_questionnaire(request):
     if request.method == "POST":
         form = HealthCheckQuestionnaire(request.POST)
         if form.is_valid():
-            cd = form.cleaned_data
+            # cd = form.cleaned_data
             # assert False
             return HttpResponseRedirect("/login?submitted=True")
     else:
