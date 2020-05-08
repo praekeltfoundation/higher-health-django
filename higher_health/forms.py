@@ -15,8 +15,16 @@ class HealthCheckQuestionnaire(forms.Form):
         (s.code, s.name) for s in pycountry.subdivisions.get(country_code="ZA")
     )
 
-    first_name = forms.CharField(label="Name", widget=TextInput(attrs={"placeholder": "Type our name"}), required=True)
-    last_name = forms.CharField(label="Surname", widget=TextInput(attrs={"placeholder": "Type our surname"}), required=True)
+    first_name = forms.CharField(
+        label="Name",
+        widget=TextInput(attrs={"placeholder": "Type our name"}),
+        required=True,
+    )
+    last_name = forms.CharField(
+        label="Surname",
+        widget=TextInput(attrs={"placeholder": "Type our surname"}),
+        required=True,
+    )
     age_range = forms.ChoiceField(
         label="How old are you?",
         choices=(

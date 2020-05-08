@@ -16,7 +16,9 @@
           </li>
         </ul>
       </div>
-
+      {% for obj in form %}
+          {{obj}}
+      {% endfor %}
       <div class="receipts-results receipts-results--{% if request.GET.risk_level == "low" %}low{% elif request.GET.risk_level == "moderate" %}mid{% elif request.GET.risk_level == "high" or request.GET.risk_level == "critical" %}high{% endif %}
       ">
         <div class="receipts-headings">
