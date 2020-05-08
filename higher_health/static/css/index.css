@@ -10,38 +10,28 @@
 }
 
 
-.receipts-ui {
+.receipts-circle, .receipts-circle .receipts-segment {
+  border-color: lightgray;
+  border-radius: 50%;
+  border-style: solid;
+  border-width: 5px;
+  box-sizing: border-box;
+  height: 100px;
   position: relative;
-}
-.receipts-root {
-  color: #05293C;
-  width: 200px;
-  cursor: pointer;
-  display: inline-block;
-  padding: 5px 0;
-  position: relative;
-  box-sizing: content-box;
-  touch-action: none;
-  background: linear-gradient(90deg, green,green, green,yellow,yellow,yellow,red,red,red);
-  height: 200px;
-  border-radius: 100%;
-  margin: 0 auto;
+  width: 100px;
 }
 
-.receipts-rail {
-  background: #D5D5D5;
-  width: 180px;
-  height: 180px;
+.receipts-circle .receipts-segment {
+  -webkit-clip-path: inset(0 40px 50px 40px);
+  left: -5px;
   position: absolute;
-  border-radius: 100%;
-  margin: 0 auto;
-  left: 0;
-  right: 0;
-  top: 15px;
-  display: block;
-  vertical-align: middle;
-  align-self: center;
+  top: -5px;
 }
+
+.receipts-circle .segment:nth-child(1) {border-color: red; transform: rotate(-20deg);}
+.receipts-circle .segment:nth-child(2) {border-color: blue; transform: rotate(70deg);}
+.receipts-circle .segment:nth-child(3) {border-color: green; transform: rotate(160deg);}
+.receipts-circle .segment:nth-child(4) {border-color: yellow; transform: rotate(250deg);}
 
 /*----------- RESETS ----------*/
 * {
