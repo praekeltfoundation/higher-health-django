@@ -105,12 +105,9 @@
 {% block form_js %}
   <script type="text/javascript">
   "use strict";
-    let addressValid;
     const checkbox = document.getElementById('healthcheck_terms'),
       questionnairesForm = document.getElementById('questionnaires'),
-      entryForm = document.getElementById('login_form'),
-      addressField = document.getElementById('autocomplete'),
-      entrySubmit = document.getElementById('entrySubmit');
+      addressField = document.getElementById('autocomplete');
 
     document.addEventListener('DOMContentLoaded',function(e) {
       //Review & cleanup
@@ -135,20 +132,6 @@
           questionnairesForm.classList.remove('showing');
         }
       });
-
-    console.log(entrySubmit,entryForm,addressField)
-      entrySubmit.addEventListener('click', function (event) {
-        addressValid = addressField.checkValidity();
-        console.log(addressValid, e.target);
-        document.getElementById('locationField').classList.remove('address-error');
-        // if (addressValid) {
-        //   entryForm.submit();
-        //   addressField.classList.remove('address-error');
-        // } else {
-        // addressField.classList.add('address-error');
-        // }
-      });
-
     });
 
     /*----GOOGLE PLACES REVIEW----*/
