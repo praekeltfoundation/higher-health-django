@@ -41,7 +41,7 @@
                         {% if field|field_type != "HiddenInput" %}
                           {{field}}
                           <label for="{{ field.id_for_label }}" class="label">
-                            <a href="">{{field.label}}</a>
+                            <a href="">=={{field.label}}</a>
                           </label>
                           {{field.errors}}
                         {% endif %}
@@ -67,16 +67,16 @@
                 {% endif %}
                 <ul id="address" class="fieldset">
                   <li>
-                    <label for="street_number" class="label">Street address</label>
+                    <label for="street_number" class="label">Street address:</label>
                     <input class="field" id="street_number" disabled="true"/>
                     <input class="field" id="route" disabled="true"/>
                   </li>
                   <li>
-                    <label for="locality" class="label">City</label>
+                    <label for="locality" class="label">City:</label>
                     <input class="field" name="city" id="locality" disabled="true"/>
                   </li>
                   <li>
-                    <label for="country" class="label">Country</label>
+                    <label for="country" class="label">Country:</label>
                     <input class="field" id="country" disabled="true"/>
                   </li>
                 </ul>

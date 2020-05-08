@@ -21,7 +21,6 @@ def healthcheck_questionnaire(request):
         form = HealthCheckQuestionnaire()
         if "submitted" in request.GET:
             submitted = True
-
     return render(
         request,
         "healthcheck_questionnaire.html",
