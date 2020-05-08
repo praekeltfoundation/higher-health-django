@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-
+{% load temp_tags %}
 {% block content %}
   {% if submitted %}
     {% include "includes/receipt.html" %}
@@ -36,44 +36,59 @@
               <div class="login-form__screening">
                 <ul class="fieldset">
                   {% for field in form %}
+
                     {% if "symptoms_" not in field.name and "medical_" not in field.name %}
                       <li>
-                        {{field}}
-                        {{field.errors}}
-                        <label for="{{ field.id_for_label }}" class="label">
-                          <a href="">{{field.label}}</a>
-                        </label>
+                        {% if field|field_type != "HiddenInput" %}
+                          {{field}}
+                          <label for="{{ field.id_for_label }}" class="label">
+                            <a href="">{{field.label}}</a>
+                          </label>
+                          {{field.errors}}
+                        {% endif %}
                       </li>
                     {% endif %}
                   {% endfor %}
+                  <li>
+                    {% if form.latitude or form.longitude %}
+                      <p class="subtitle">Sharing your location data will help us to further accurately map cases of COVID-19</p>
+                      <div class="login-form__map">
+                        <div id="locationField">
+                          <input id="autocomplete"
+                            placeholder="Type your physical address"
+                            onFocus="geolocate()"
+                            type="text"
+                            required
+                            />
+                        </div>
+                        {{form.latitude}}
+                        {{form.longitude}}
+                        {% if form.latitude.errors or form.longitude.errors %}
+                            {{form.latitude.errors}}
+                        {% endif %}
+                        <ul id="address" class="fieldset">
+                          <li>
+                            <label for="street_number" class="label">Street address</label>
+                            <input class="field" id="street_number" disabled="true"/>
+                            <input class="field" id="route" disabled="true"/>
+                          </li>
+                          <li>
+                            <label for="locality" class="label">City</label>
+                            <input class="field" id="locality" disabled="true"/>
+                          </li>
+                          <li>
+                            <label for="country" class="label">Country</label>
+                            <input class="field" id="country" disabled="true"/>
+                          </li>
+                        </ul>
+                      </div>
+
+                    {% endif %}
+                  </li>
                 </ul>
               </div>
-              <p class="subtitle">Sharing your location data will help us to further accurately map cases of COVID-19</p>
-              <div class="login-form__map">
-                <div id="locationField">
-                  <input id="autocomplete"
-                    placeholder="Type your physical address"
-                    onFocus="geolocate()"
-                    type="text"
-                    required
-                    />
-                </div>
-                <ul id="address" class="fieldset">
-                  <li>
-                    <label for="street_number" class="label">Street address</label>
-                    <input class="field" id="street_number" disabled="true"/>
-                    <input class="field" id="route" disabled="true"/>
-                  </li>
-                  <li>
-                    <label for="locality" class="label">City</label>
-                    <input class="field" id="locality" disabled="true"/>
-                  </li>
-                  <li>
-                    <label for="country" class="label">Country</label>
-                    <input class="field" id="country" disabled="true"/>
-                  </li>
-                </ul>
-              </div>
+
+
             </div>
 
             <div class="login-form__medical">
