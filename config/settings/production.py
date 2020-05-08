@@ -18,3 +18,5 @@ if SENTRY_DSN:
     sentry_sdk.init(
         dsn=SENTRY_DSN, integrations=[DjangoIntegration()], send_default_pii=True
     )
+
+PLACES_API_KEY = env.str("GOOGLE_PLACES_API_KEY")
