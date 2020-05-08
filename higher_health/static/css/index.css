@@ -159,8 +159,6 @@ a:hover {
 .content-receipts {
   background: #dcdcdc;
   border-radius: 10px;
-  width: 720px;
-
   margin: 10px auto 2em;
   padding: 10px;
   /*background-color: rgba(95,95,95, 0.2);*/
@@ -531,6 +529,9 @@ input[type="checkbox"]#id_checkbox:disabled ~ label:after {
   */
   #content-receipts .heading-primary  {
     margin: 0;
+  }
+  .content-receipts {
+    width: 720px;
   }
 
   /*

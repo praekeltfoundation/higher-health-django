@@ -1,3 +1,4 @@
+import pycountry
 from django import forms
 from django.forms.widgets import TextInput
 from django.utils.translation import ugettext_lazy as _
@@ -9,6 +10,10 @@ class HealthCheckQuestionnaire(forms.Form):
     NOT_SURE = "not_sure"
     YES_NO = ((YES, "Yes"), (NO, "No"))
     YES_NO_NOT_SURE = ((YES, "Yes"), (NO, "No"), (NOT_SURE, "Not Sure"))
+
+    PROVINCE_CHOICES = sorted(
+        (s.code, s.name) for s in pycountry.subdivisions.get(country_code="ZA")
+    )
 
     age_range = forms.ChoiceField(
         label="How old are you?",
@@ -34,24 +39,14 @@ class HealthCheckQuestionnaire(forms.Form):
     )
     province = forms.ChoiceField(
         label="In which Province are you currently residing?",
-        choices=(
-            ("", _("Province")),
-            ("Eastern Cape", _("Eastern Cape")),
-            ("Free State", _("Free State")),
-            ("Gauteng", _("Gauteng")),
-            ("KwaZulu Natal", _("KwaZulu Natal")),
-            ("Limpopo", _("Limpopo")),
-            ("Mpumalanga", _("Mpumalanga")),
-            ("North West", _("North West")),
-            ("Northern Cape", _("Northern Cape")),
-            ("Western Cape", _("Western Cape")),
-        ),
+        choices=PROVINCE_CHOICES,
         required=True,
     )
     latitude = forms.CharField(widget=forms.HiddenInput())
     longitude = forms.CharField(widget=forms.HiddenInput())
+    city = forms.CharField()
 
-    symptoms_sweating = forms.ChoiceField(
+    symptoms_fever = forms.ChoiceField(
         label="Do you feel very hot or cold? Are you sweating or shivering? When you touch your forehead, does it feel hot?",
         choices=YES_NO,
         widget=forms.RadioSelect,
@@ -63,19 +58,13 @@ class HealthCheckQuestionnaire(forms.Form):
         widget=forms.RadioSelect,
         required=True,
     )
-    symptoms_sweating = forms.ChoiceField(
-        label="Do you feel very hot or cold? Are you sweating or shivering? When you touch your forehead, does it feel hot?",
-        choices=YES_NO,
-        widget=forms.RadioSelect,
-        required=True,
-    )
     symptoms_sore_throat = forms.ChoiceField(
         label="Do you have a sore throat or pain when swallowing?",
         choices=YES_NO,
         widget=forms.RadioSelect,
         required=True,
     )
-    symptoms_breathlessness = forms.ChoiceField(
+    symptoms_difficulty_breathing = forms.ChoiceField(
         label="Do you have breathlessness or a difficulty breathing, that you’ve noticed recently?",
         choices=YES_NO,
         widget=forms.RadioSelect,

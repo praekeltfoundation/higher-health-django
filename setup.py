@@ -15,6 +15,7 @@ setup(
         "psycopg2-binary>=2.8.3,<2.9",
         "sentry-sdk==0.14.3",
         "django-filter==2.0.0",
+        "pycountry==19.8.18",
     ],
     classifiers=[
         "Development Status :: 4 - Beta",
