@@ -14,23 +14,8 @@
           <span class="receipts-segment"></span>
           <span class="receipts-segment"></span>
         </div>
-
-        <h1>OR</h1>
         <div id="content-receipt-login">
-          <form method="POST" class="login-form">
-            {% csrf_token %}
-            <ul class="fieldset">
-              {% for field in form %}
-                <li>
-                  {{field}}
-                  <label for="{{ field.id_for_label }}">
-                    <a href="">{{field.label}}</a>
-                  </label>
-                </li>
-              {% endfor %}
-            </ul>
-            <button type="submit" class="cta cta-primary">Login</button>
-          </form>
+          -
         </div>
       </div>
       <div class="content-columns__inner content-inner">
