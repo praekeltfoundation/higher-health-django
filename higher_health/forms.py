@@ -53,61 +53,61 @@ class HealthCheckQuestionnaire(forms.Form):
     latitude = forms.CharField(widget=forms.HiddenInput())
     longitude = forms.CharField(widget=forms.HiddenInput())
 
-    medical_sweating = forms.ChoiceField(
+    symptoms_sweating = forms.ChoiceField(
         label="Do you feel very hot or cold? Are you sweating or shivering? When you touch your forehead, does it feel hot?",
         choices=YES_NO,
         widget=forms.RadioSelect,
         required=True,
     )
-    medical_cough = forms.ChoiceField(
+    symptoms_cough = forms.ChoiceField(
         label="Do you have a cough that recently started?",
         choices=YES_NO,
         widget=forms.RadioSelect,
         required=True,
     )
-    medical_sweating = forms.ChoiceField(
+    symptoms_sweating = forms.ChoiceField(
         label="Do you feel very hot or cold? Are you sweating or shivering? When you touch your forehead, does it feel hot?",
         choices=YES_NO,
         widget=forms.RadioSelect,
         required=True,
     )
-    medical_sore_throat = forms.ChoiceField(
+    symptoms_sore_throat = forms.ChoiceField(
         label="Do you have a sore throat or pain when swallowing?",
         choices=YES_NO,
         widget=forms.RadioSelect,
         required=True,
     )
-    medical_breathlessness = forms.ChoiceField(
+    symptoms_breathlessness = forms.ChoiceField(
         label="Do you have breathlessness or a difficulty breathing, that you’ve noticed recently?",
         choices=YES_NO,
         widget=forms.RadioSelect,
         required=True,
     )
-    medical_muscles_hurt = forms.ChoiceField(
+    symptoms_muscles_hurt = forms.ChoiceField(
         label="In the past couple of days, have you experienced pain in your body, especially your muscles hurting more than usual?",
         choices=YES_NO,
         widget=forms.RadioSelect,
         required=True,
     )
-    medical_taste = forms.ChoiceField(
+    symptoms_taste = forms.ChoiceField(
         label="Have you noticed any recent changes in your ability to taste or smell things?",
         choices=YES_NO,
         widget=forms.RadioSelect,
         required=True,
     )
-    medical_confirm_contact = forms.ChoiceField(
+    symptoms_confirm_contact = forms.ChoiceField(
         label="Have you been in close contact to someone confirmed to be infected with COVID19?",
         choices=YES_NO_NOT_SURE,
         widget=forms.RadioSelect,
         required=True,
     )
-    medical_pre_existing_condition = forms.ChoiceField(
+    symptoms_pre_existing_condition = forms.ChoiceField(
         label="Do you have a pre-existing medical condition we should be aware of? (Examples: lung disease, heart disease, diabetes with complications, TB, HIV)",
         choices=YES_NO_NOT_SURE,
         widget=forms.RadioSelect,
         required=True,
     )
-    medical_confirm_accuracy = forms.ChoiceField(
+    symptoms_confirm_accuracy = forms.ChoiceField(
         label="Please confirm that the information you shared is accurate to the best of your knowledge and that you give the National Department of Health permission to contact you if necessary?",
         choices=YES_NO,
         widget=forms.RadioSelect,
