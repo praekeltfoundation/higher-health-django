@@ -15,6 +15,8 @@ class HealthCheckQuestionnaire(forms.Form):
         (s.code, s.name) for s in pycountry.subdivisions.get(country_code="ZA")
     )
 
+    first_name = forms.CharField(label="Name", required=True)
+    last_name = forms.CharField(label="Surname", required=True)
     age_range = forms.ChoiceField(
         label="How old are you?",
         choices=(
