@@ -2,6 +2,7 @@ from django import forms
 from django.forms.widgets import TextInput
 from django.utils.translation import ugettext_lazy as _
 
+
 class HealthCheckQuestionnaire(forms.Form):
     YES = "yes"
     NO = "no"
