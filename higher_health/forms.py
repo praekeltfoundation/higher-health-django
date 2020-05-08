@@ -115,9 +115,11 @@ class HealthCheckQuestionnaire(forms.Form):
 class HealthCheckLogin(forms.Form):
     phone = forms.CharField(
         widget=TextInput(attrs={"placeholder": "Phone number"}),
-        required=True, max_length=100,
+        required=True,
+        max_length=100,
     )
     fullname = forms.CharField(
         widget=TextInput(attrs={"placeholder": "Last name"}),
-        required=True, max_length=100,
+        required=True,
+        max_length=100,
     )
