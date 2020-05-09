@@ -37,7 +37,7 @@
             <div class="login-form__location">
               <h2 class="heading-secondary">Personal Questionnaire</h2>
               <div class="login-form__screening">
-                
+
                 <ul class="fieldset">
                   {% with 'city address route country street_number' as field_list %}
                     {% for field in form %}
@@ -66,6 +66,10 @@
                     value="{{ form.address.value|default_if_none:"" }}"
                     name="address"/>
                 </div>
+                {% if form.address.errors  %}
+                      {{form.address.errors}}
+                  {% endif %}
+
                 {% if form.latitude or form.longitude %}
                   {{form.latitude}}
                   {{form.longitude}}
@@ -74,20 +78,16 @@
                   {% endif %}
                 {% endif %}
                 <div class="location-field-autoload">
-                  <p class="location-field-hint">The below physical address fields will be automatically populated from the address entered above. Otherwise please fill in the information.</p>
                   <ul id="address" class="address-list fieldset">
                     <li class="address-list__item">
-                      <input class="field" name="street_number" id="street_number" readonly value="{{ form.street_number.value|default_if_none:'' }}"/>
-                      <input class="field" name="route" id="route" readonly value="{{ form.route.value|default_if_none:'' }}"/>
-                      <label for="street_number" class="label">Street address:</label>
+                      <input type="hidden" class="field" name="street_number" id="street_number" readonly value="{{ form.street_number.value|default_if_none:'' }}"/>
+                      <input type="hidden" class="field" name="route" id="route" readonly value="{{ form.route.value|default_if_none:'' }}"/>
                     </li>
                     <li class="address-list__item">
-                      <input class="field" name="city" id="locality" readonly value="{{ form.city.value|default_if_none:'' }}"/>
-                      <label for="locality" class="label">City:</label>
+                      <input type="hidden" class="field" name="city" id="locality" readonly value="{{ form.city.value|default_if_none:'' }}"/>
                     </li>
                     <li class="address-list__item">
-                      <input class="field" name="country" id="country" readonly value="{{ form.country.value|default_if_none:'' }}"/>
-                      <label for="country" class="label">Country:</label>
+                      <input type="hidden" class="field" name="country" id="country" readonly value="{{ form.country.value|default_if_none:'' }}"/>
                     </li>
                   </ul>
                 </div>
