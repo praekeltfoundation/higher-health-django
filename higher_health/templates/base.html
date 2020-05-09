@@ -22,6 +22,17 @@
     <link rel="manifest" href="{% static 'manifest.json' %}">
     <link rel="stylesheet" type="text/css" href="{% static 'css/index.css' %}" media="all">
     <!-- TO DO: GOOGLE ANALYTICS -->
+
+    <!--[if !IE]><!-->
+    	<link rel="stylesheet" type="text/css" href="{% static 'css/except-ie.css' %}" />
+    <!--<![endif]-->
+    <noscript>
+      <p class="no-script-label">For full functionality of this site it is necessary to enable JavaScript on your browser.
+      Or use or install the chrome browser with JavaScript enabled.
+      <a href="https://www.google.com/chrome/">Install Chrome</a>
+      Here are the <a href="https://www.enable-javascript.com/">
+      instructions how to enable JavaScript in your web browser</a>.</p>
+    </noscript>
 </head>
 <body id="healthcheck">
   <section class="wrapper">
