@@ -38,19 +38,21 @@
               <h2 class="heading-secondary">Personal Questionnaire</h2>
               <div class="login-form__screening">
                 <ul class="fieldset">
-                  {% for field in form %}
-                    {% if "symptoms_" not in field.name and "medical_" not in field.name and field.name != "city" and field.name != "address" %}
-                      <li>
-                        {% if field|field_type != "HiddenInput" %}
-                          {{field}}
-                          <label for="{{ field.id_for_label }}" class="label">
-                            <a href="">=={{field.label}}</a>
-                          </label>
-                          {{field.errors}}
-                        {% endif %}
-                      </li>
-                    {% endif %}
-                  {% endfor %}
+                  {% with 'city address route country street_number' as field_list %}
+                    {% for field in form %}
+                      {% if "symptoms_" not in field.name and "medical_" not in field.name and field.name not in field_list.split %}
+                        <li>
+                          {% if field|field_type != "HiddenInput" %}
+                            {{field}}
+                            <label for="{{ field.id_for_label }}" class="label">
+                              <a href="">=={{field.label}}</a>
+                            </label>
+                            {{field.errors}}
+                          {% endif %}
+                        </li>
+                      {% endif %}
+                    {% endfor %}
+                  {% endwith %}
                 </ul>
               </div>
               <p class="subtitle">Sharing your location data will help us to further accurately map cases of COVID-19</p>
@@ -74,16 +76,16 @@
                   <p class="location-field-hint">The below physical address fields will be automatically populated from the address entered above. Otherwise please fill in the information.</p>
                   <ul id="address" class="address-list fieldset">
                     <li class="address-list__item">
-                      <input class="field" id="street_number" disabled="true"/>
-                      <input class="field" id="route" disabled="true"/>
+                      <input class="field" name="street_number" id="street_number" readonly value="{{ form.street_number.value|default_if_none:'' }}"/>
+                      <input class="field" name="route" id="route" readonly value="{{ form.route.value|default_if_none:'' }}"/>
                       <label for="street_number" class="label">Street address:</label>
                     </li>
                     <li class="address-list__item">
-                      <input class="field" name="city" id="locality" disabled="true"/>
+                      <input class="field" name="city" id="locality" readonly value="{{ form.city.value|default_if_none:'' }}"/>
                       <label for="locality" class="label">City:</label>
                     </li>
                     <li class="address-list__item">
-                      <input class="field" id="country" disabled="true"/>
+                      <input class="field" name="country" id="country" readonly value="{{ form.country.value|default_if_none:'' }}"/>
                       <label for="country" class="label">Country:</label>
                     </li>
                   </ul>
@@ -180,7 +182,6 @@
 
       for (let component in componentForm) {
         document.getElementById(component).value = '';
-        document.getElementById(component).disabled = false;
       }
 
       let location = cityInput.geometry.location;

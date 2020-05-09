@@ -53,10 +53,10 @@ class HealthCheckQuestionnaire(forms.Form):
         label="Please provide us with the gender you identify as",
         choices=(
             ("", _("Gender")),
-            ("Male", _("Male")),
-            ("Female", _("Female")),
-            ("Other", _("Other")),
-            ("Rather not say", _("Rather not say")),
+            ("male", _("Male")),
+            ("female", _("Female")),
+            ("other", _("Other")),
+            ("not_say", _("Rather not say")),
         ),
         required=True,
     )
@@ -69,6 +69,10 @@ class HealthCheckQuestionnaire(forms.Form):
     longitude = forms.CharField(widget=forms.HiddenInput())
     city = forms.CharField()
     address = forms.CharField(required=True)
+
+    street_number = forms.CharField(required=True)
+    route = forms.CharField(required=True)
+    country = forms.CharField(required=True)
 
     symptoms_fever = forms.ChoiceField(
         label="Do you feel very hot or cold? Are you sweating or shivering? When you touch your forehead, does it feel hot?",
@@ -129,14 +133,14 @@ class HealthCheckQuestionnaire(forms.Form):
         data = args[0] if args else kwargs.get("data", None)
         if data:
             data = data.copy()
-            if data["latitude"] == "" or data["longitude"] == "":
+            if data.get("latitude") == "" or data.get("longitude") == "":
                 querystring = urlencode(
                     {
                         "key": settings.PLACES_API_KEY,
                         "input": data["address"],
                         "inputtype": "textquery",
                         "language": "en",
-                        "fields": "formatted_address,geometry",
+                        "fields": "geometry",
                     }
                 )
                 response = requests.get(
