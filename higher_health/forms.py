@@ -134,29 +134,30 @@ class HealthCheckQuestionnaire(forms.Form):
         data = args[0] if args else kwargs.get("data", None)
         if data:
             data = data.copy()
-            if data.get("latitude") == "" or data.get("longitude") == "":
-                querystring = urlencode(
-                    {
-                        "key": settings.PLACES_API_KEY,
-                        "input": data["address"],
-                        "inputtype": "textquery",
-                        "language": "en",
-                        "fields": "geometry",
-                    }
-                )
-                response = requests.get(
-                    f"https://maps.googleapis.com/maps/api/place/findplacefromtext/json?{querystring}"
-                )
-                location = json.loads(response.content)
-                if location["candidates"]:
-                    data["latitude"] = location["candidates"][0]["geometry"][
-                        "location"
-                    ]["lat"]
-                    data["longitude"] = location["candidates"][0]["geometry"][
-                        "location"
-                    ]["lng"]
-                else:
-                    invalid_address = True
+            if data["address"]:
+                if data.get("latitude") == "" or data.get("longitude") == "":
+                    querystring = urlencode(
+                        {
+                            "key": settings.PLACES_API_KEY,
+                            "input": data["address"],
+                            "inputtype": "textquery",
+                            "language": "en",
+                            "fields": "geometry",
+                        }
+                    )
+                    response = requests.get(
+                        f"https://maps.googleapis.com/maps/api/place/findplacefromtext/json?{querystring}"
+                    )
+                    location = json.loads(response.content)
+                    if location["candidates"]:
+                        data["latitude"] = location["candidates"][0]["geometry"][
+                            "location"
+                        ]["lat"]
+                        data["longitude"] = location["candidates"][0]["geometry"][
+                            "location"
+                        ]["lng"]
+                    else:
+                        invalid_address = True
 
         super(HealthCheckQuestionnaire, self).__init__(data, *args, **kwargs)
 

@@ -72,9 +72,6 @@
                 {% if form.latitude or form.longitude %}
                   {{form.latitude}}
                   {{form.longitude}}
-                  {% if form.latitude.errors or form.longitude.errors %}
-                      {{form.latitude.errors}}
-                  {% endif %}
                 {% endif %}
                 <div class="location-field-autoload">
                   <p class="location-field-hint">The below physical address fields will be automatically populated from the address entered above. Otherwise please fill in the information.</p>
