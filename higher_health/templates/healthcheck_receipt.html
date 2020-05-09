@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
-{% load temp_tags %}
-{% load static %}
+{% load temp_tags static tz %}
+
 {% block content %}
 <div class="content">
   <div class="content-intro">
@@ -39,11 +39,11 @@
             </li>
             <li class="risk-cat__item">
               <h5 class="risk-cat__label">Date Issued:</h5>
-              <p class="risk-cat__val">{{timestamp}}</p>
+              <p class="risk-cat__val">{{timestamp|localtime}}</p>
             </li>
             <li class="risk-cat__item">
               <h5 class="risk-cat__label">Expiry date:</h5>
-              <p class="risk-cat__val">{% now "F jS Y" %}, 00:00 a.m. <span class="expiry-hint">(At the end of today)</span></p>
+              <p class="risk-cat__val">{% now "F jS Y" %}, 00:00 p.m. <span class="expiry-hint">(At the end of today)</span></p>
             </li>
           </ul>
         </div>
