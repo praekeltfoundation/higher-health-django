@@ -82,3 +82,7 @@ class Covid19Triage(models.Model):
     timestamp = models.DateTimeField(default=timezone.now, db_index=True)
     created_by = models.CharField(max_length=255, blank=True, default="")
     confirm_accuracy = models.BooleanField(null=True, blank=True, default=None)
+
+    @property
+    def hashed_msisdn(self):
+        return self.msisdn[:3] + "*" * 5 + self.msisdn[-4:]
