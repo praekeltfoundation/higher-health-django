@@ -360,6 +360,7 @@ label {
 .address-error {
   border: 1px solid red;
 }
+.error,
 .errorlist li {
   color: red;
 }
