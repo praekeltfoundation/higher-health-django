@@ -164,7 +164,7 @@ class HealthCheckQuestionnaire(forms.Form):
         if invalid_address:
             self.add_error("address", "Invalid address")
 
-        if data.get("medical_confirm_accuracy") != "yes":
+        if data.get("medical_confirm_accuracy") == "no":
             self.add_error(
                 "medical_confirm_accuracy",
                 "You need to confirm that this information is accurate",
