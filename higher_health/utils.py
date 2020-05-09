@@ -41,7 +41,7 @@ def get_location(data):
     return f"{lat}{lng}/"
 
 
-def save_data(data, risk_level):
+def save_data(data):
     return Covid19Triage.objects.create(
         **{
             "source": "WEB",
@@ -58,7 +58,7 @@ def save_data(data, risk_level):
             "muscle_pain": "yes" == data["symptoms_muscles_hurt"],
             "smell": "yes" == data["symptoms_taste"],
             "preexisting_condition": data["symptoms_pre_existing_condition"],
-            "risk": risk_level,
+            "risk": data["risk_level"],
             "location": get_location(data),
             "confirm_accuracy": "yes" == data["medical_confirm_accuracy"],
         }
