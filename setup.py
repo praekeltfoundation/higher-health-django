@@ -17,6 +17,7 @@ setup(
         "django-filter==2.0.0",
         "pycountry==19.8.18",
         "phonenumberslite==8.9.15",
+        "requests==2.22.0",
     ],
     classifiers=[
         "Development Status :: 4 - Beta",
