@@ -36,7 +36,7 @@
               <div class="login-form__screening">
                 <ul class="fieldset">
                   {% for field in form %}
-                    {% if "symptoms_" not in field.name and "medical_" not in field.name and field.name != "city" %}
+                    {% if "symptoms_" not in field.name and "medical_" not in field.name and field.name != "city" and field.name != "address" %}
                       <li>
                         {% if field|field_type != "HiddenInput" %}
                           {{field}}
@@ -56,7 +56,8 @@
                   <input id="autocomplete"
                     placeholder="Type your physical address"
                     onFocus="geolocate()"
-                    type="text"/>
+                    type="text"
+                    name="address"/>
                 </div>
                 {% if form.latitude or form.longitude %}
                   {{form.latitude}}
