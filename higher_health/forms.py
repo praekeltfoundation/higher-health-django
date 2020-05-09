@@ -3,6 +3,8 @@ from django import forms
 from django.forms.widgets import TextInput
 from django.utils.translation import ugettext_lazy as _
 
+from higher_health.validators import za_phone_number
+
 
 class HealthCheckQuestionnaire(forms.Form):
     YES = "yes"
@@ -15,14 +17,20 @@ class HealthCheckQuestionnaire(forms.Form):
         (s.code, s.name) for s in pycountry.subdivisions.get(country_code="ZA")
     )
 
+    msisdn = forms.CharField(
+        label="Mobile Number",
+        widget=TextInput(attrs={"placeholder": "Type your mobile number"}),
+        required=True,
+        validators=[za_phone_number],
+    )
     first_name = forms.CharField(
         label="Name",
-        widget=TextInput(attrs={"placeholder": "Type our name"}),
+        widget=TextInput(attrs={"placeholder": "Type your name"}),
         required=True,
     )
     last_name = forms.CharField(
         label="Surname",
-        widget=TextInput(attrs={"placeholder": "Type our surname"}),
+        widget=TextInput(attrs={"placeholder": "Type your surname"}),
         required=True,
     )
     age_range = forms.ChoiceField(
