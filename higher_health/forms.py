@@ -1,5 +1,10 @@
+import json
+from urllib.parse import urlencode
+
 import pycountry
+import requests
 from django import forms
+from django.conf import settings
 from django.forms.widgets import TextInput
 from django.utils.translation import ugettext_lazy as _
 
@@ -63,6 +68,7 @@ class HealthCheckQuestionnaire(forms.Form):
     latitude = forms.CharField(widget=forms.HiddenInput())
     longitude = forms.CharField(widget=forms.HiddenInput())
     city = forms.CharField()
+    address = forms.CharField(required=True)
 
     symptoms_fever = forms.ChoiceField(
         label="Do you feel very hot or cold? Are you sweating or shivering? When you touch your forehead, does it feel hot?",
@@ -118,6 +124,33 @@ class HealthCheckQuestionnaire(forms.Form):
         widget=forms.RadioSelect,
         required=True,
     )
+
+    def __init__(self, *args, **kwargs):
+        data = args[0] if args else kwargs.get("data", None)
+        if data:
+            data = data.copy()
+            if data["latitude"] == "" or data["longitude"] == "":
+                querystring = urlencode(
+                    {
+                        "key": settings.PLACES_API_KEY,
+                        "input": data["address"],
+                        "inputtype": "textquery",
+                        "language": "en",
+                        "fields": "formatted_address,geometry",
+                    }
+                )
+                response = requests.get(
+                    f"https://maps.googleapis.com/maps/api/place/findplacefromtext/json?{querystring}"
+                )
+                location = json.loads(response.content)
+                if location["candidates"]:
+                    data["latitude"] = location["candidates"][0]["geometry"][
+                        "location"
+                    ]["lat"]
+                    data["longitude"] = location["candidates"][0]["geometry"][
+                        "location"
+                    ]["lng"]
+        super(HealthCheckQuestionnaire, self).__init__(data, *args, **kwargs)
 
 
 class HealthCheckLogin(forms.Form):
