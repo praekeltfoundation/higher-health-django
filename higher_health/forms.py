@@ -130,6 +130,7 @@ class HealthCheckQuestionnaire(forms.Form):
     )
 
     def __init__(self, *args, **kwargs):
+        invalid_address = False
         data = args[0] if args else kwargs.get("data", None)
         if data:
             data = data.copy()
@@ -147,7 +148,6 @@ class HealthCheckQuestionnaire(forms.Form):
                     f"https://maps.googleapis.com/maps/api/place/findplacefromtext/json?{querystring}"
                 )
                 location = json.loads(response.content)
-                # TODO: Raise validation error for location not found
                 if location["candidates"]:
                     data["latitude"] = location["candidates"][0]["geometry"][
                         "location"
@@ -155,7 +155,13 @@ class HealthCheckQuestionnaire(forms.Form):
                     data["longitude"] = location["candidates"][0]["geometry"][
                         "location"
                     ]["lng"]
+                else:
+                    invalid_address = True
+
         super(HealthCheckQuestionnaire, self).__init__(data, *args, **kwargs)
+
+        if invalid_address:
+            self.add_error("address", "Invalid address")
 
 
 class HealthCheckLogin(forms.Form):
