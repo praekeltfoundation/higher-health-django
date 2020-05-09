@@ -70,7 +70,11 @@ a:hover {
   LAYOUT:
   HEADER + NAV
 */
-
+.no-script-label {
+  padding: 1em;
+  margin: 0 auto;
+  text-align: center;
+}
 .wrapper {
   position: relative;
 }
@@ -284,14 +288,7 @@ a:hover {
   font-size: 13px;
   text-transform: uppercase;
 }
-.showing {
-  display: block;
-  visibility: visible;
-}
-.hidden {
-  display: none;
-  visibility: hidden;
-}
+
 #questionnaires {
   transition: all ease-in-out 1s;
 }
@@ -318,10 +315,6 @@ a:hover {
 }
 .login-form__read-terms {
   margin: 0 auto 1em;
-}
-.login-form__screening .label {
-  display: none;
-  visibility: hidden;
 }
 
 .location-field-autoload {}
@@ -410,48 +403,6 @@ textarea {
   font-size: 1rem;
 }
 
-/* TERMS CHECKBOX */
-input[type="checkbox"] {
-  display: inline-block;
-}
-#read-terms input[type="checkbox"] {
-  visibility: hidden;
-  position: absolute;
-}
-input[type="checkbox"] ~ label {
-  font-size: 16px;
-  text-transform: uppercase;
-  visibility: visible;
-  display: inline-block;
-	cursor: pointer;
-	position: relative;
-}
-input[type="checkbox"] ~ label:after {
-	background: #fff;
-	border: 2px solid var(--soft-red);
-	content: "";
-	cursor: pointer;;
-	display: inline-block;
-	width: 25px;
-	height: 25px;
-	vertical-align: middle;
-	margin: 0 20px;
-	transition: all ease-in-out 0.2s;
-}
-input[type="checkbox"] + label,
-input[type="checkbox"]:checked + label {
-  background-image: none;
-}
-input[type="checkbox"]:checked + label:after {
-  background: var(--soft-red) url('/static/images/icons/check.png') 0 50%/25px no-repeat;;
-  opacity: 1;
-}
-input[type="checkbox"]#id_checkbox:disabled ~ label {
- 	color: var(--very-dark-gray);
-}
-input[type="checkbox"]#id_checkbox:disabled ~ label:after {
-	border-color: var(--very-dark-gray);
-}
 .cta-primary {
   background: var(--dark-moderate-cyan);
   border: 0;
@@ -498,7 +449,6 @@ input[type="checkbox"]#id_checkbox:disabled ~ label:after {
   text-transform: uppercase;
 }
 
-
 .footer-list__link {
   color: #fff;
 }
@@ -516,6 +466,10 @@ input[type="checkbox"]#id_checkbox:disabled ~ label:after {
   /*
     HEADER
   */
+  .no-script-label {
+    padding: 1em 15%;
+    margin: 0 auto;
+  }
   .header-inner {
     display: flex;
     padding: 1em 10%;
