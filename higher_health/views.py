@@ -16,7 +16,6 @@ def healthcheck_questionnaire(request):
             request.session["saved_data"] = data
             return HttpResponseRedirect("/receipt/")
         else:
-            # TODO: need to handle this
             print(form.errors)
     else:
         form = HealthCheckQuestionnaire()
@@ -28,14 +27,14 @@ def healthcheck_receipt(request):
     if "saved_data" in request.session:
         data = request.session.get("saved_data")
         del request.session["saved_data"]
-        return render(request, "includes/receipt.html", data)
+        return render(request, "healthcheck_receipt.html", data)
     else:
         return HttpResponseRedirect("/")
 
 
 def healthcheck_login(request):
     form = HealthCheckLogin()
-    return render(request, "includes/receipt.html", {"form": form})
+    return render(request, "healthcheck_receipt.html", {"form": form})
 
 
 def healthcheck_terms(request, extra_context=None, template=("healthcheck_terms.html")):

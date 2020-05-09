@@ -54,7 +54,6 @@ a {
   -webkit-transition: 0.5s ease;
 }
 a:hover {
-  cursor: grab;
   text-decoration: underline;
 }
 

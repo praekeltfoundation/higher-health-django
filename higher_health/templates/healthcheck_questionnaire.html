@@ -1,9 +1,13 @@
 {% extends 'base.html' %}
 {% load temp_tags %}
 {% block content %}
-  {% if submitted %}
-    {% include "includes/receipt.html" %}
-  {% else %}
+  {% comment %}
+    {% if submitted %}
+    <!-- IF THIS THEN STILL BEING USED? -->
+      {% include "healthcheck_receipt.html" %}
+    {% else %}
+    {% endif %}
+  {% endcomment %}
   <div class="content">
     <div class="content-intro">
       <div class="content-inner">
@@ -110,7 +114,6 @@
       </div>
     </div>
   </div>
-  {% endif %}
 {% endblock %}
 
 {% block form_js %}
