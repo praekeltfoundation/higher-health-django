@@ -57,6 +57,7 @@
                     placeholder="Type your physical address"
                     onFocus="geolocate()"
                     type="text"
+                    value="{{ form.address.value|default_if_none:"" }}"
                     name="address"/>
                 </div>
                 {% if form.latitude or form.longitude %}
