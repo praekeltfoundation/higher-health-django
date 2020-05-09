@@ -12,11 +12,15 @@
               <img class="header-brand__logo"  src="{% static 'images/hh-logo-small.png' %}" alt="Higherhealth Logo">
             </a>
           </li>
+          {% comment %}
+          <!--
           <li class="r-logo-list__item">
             <a class="logo-list__anchor" href="http://higherhealth.ac.za/">
               <img class="logo-list__image" src="{% static 'images/DHEAT-logo-black.png' %}" alt="Department of Higher Education and Training" width="160" height="60,53">
             </a>
           </li>
+          -->
+          {% endcomment %}
         </ul>
       </div>
 
@@ -28,7 +32,7 @@
           </h4>
         </div>
         <div class="risks">
-          <h2 class="">{{last_name}} - {{first_name}}</h2>
+          <h2 class="">{{last_name}} {{first_name}}</h2>
           <p class="risks-num">{{msisdn}}</p>
           <ul class="risk-cat">
             <li class="risk-cat__item">
@@ -43,7 +47,7 @@
             </li>
             <li class="risk-cat__item">
               <h5 class="risk-cat__label">Expiry date:</h5>
-              <p class="risk-cat__val">{% now "F jS Y" %}, 00:00 p.m. <span class="expiry-hint">(At the end of today)</span></p>
+              <p class="risk-cat__val">{% now "F j, Y" %}, 00:00 p.m. <span class="expiry-hint">(At the end of today)</span></p>
             </li>
           </ul>
         </div>
