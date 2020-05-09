@@ -45,6 +45,7 @@ def save_data(data):
     return Covid19Triage.objects.create(
         **{
             "source": "WEB",
+            "msisdn": data["msisdn"],
             "first_name": data["first_name"],
             "last_name": data["last_name"],
             "province": data["province"],

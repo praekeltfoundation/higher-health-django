@@ -16,6 +16,7 @@ setup(
         "sentry-sdk==0.14.3",
         "django-filter==2.0.0",
         "pycountry==19.8.18",
+        "phonenumberslite==8.9.15",
     ],
     classifiers=[
         "Development Status :: 4 - Beta",
