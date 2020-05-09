@@ -83,13 +83,13 @@ class HealthCheckQuestionnaire(forms.Form):
         required=True,
     )
     symptoms_difficulty_breathing = forms.ChoiceField(
-        label="Do you have breathlessness or a difficulty breathing, that you’ve noticed recently?",
+        label="Do you have breathlessness or difficulty in breathing, that you’ve noticed recently?",
         choices=YES_NO,
         widget=forms.RadioSelect,
         required=True,
     )
     symptoms_muscles_hurt = forms.ChoiceField(
-        label="In the past couple of days, have you experienced pain in your body, especially your muscles hurting more than usual?",
+        label="In the past couple of days have you experienced pain in your body, especially your muscles, more than usual?",
         choices=YES_NO,
         widget=forms.RadioSelect,
         required=True,
@@ -101,7 +101,7 @@ class HealthCheckQuestionnaire(forms.Form):
         required=True,
     )
     medical_exposure = forms.ChoiceField(
-        label="Have you been in close contact to someone confirmed to be infected with COVID19?",
+        label="Have you recently been in close contact to someone confirmed to be infected with COVID19?",
         choices=YES_NO_NOT_SURE,
         widget=forms.RadioSelect,
         required=True,
