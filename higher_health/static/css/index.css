@@ -100,7 +100,6 @@ a:hover {
 .header-brand__logo {
   max-width: 270px;
 }
-
 .header__menu {
   align-self: center;
   width: 100%;
@@ -361,14 +360,26 @@ label {
 #address input:enabled {
   border-color: rgba(68, 68, 68, 0.3);
 }
-
 .address-error {
   border: 1px solid red;
 }
 .errorlist li {
   color: red;
 }
-
+#id_symptoms_fever label {
+  cursor: pointer;
+}
+.radio-field {
+  position: relative;
+}
+.radio-value {
+  color: rgba(23, 47, 51, 1);
+}
+#medical input[type="radio"] {
+  margin: 10px;
+  height: auto;
+  width: auto;
+}
 
 input,
 textarea,
@@ -395,30 +406,10 @@ textarea {
   font-size: 1rem;
 }
 
-input[type="checkbox"]
-input[type="radio"] {
-  width: auto;
-  cursor: pointer;
-}
-
-.radio-field {
-  position: relative;
-}
-
-.radio-value {
-  color: rgba(23, 47, 51, 1);
-}
-
-#medical input[type="radio"] {
-  margin: 10px;
-  height: auto;
-  width: auto;
-}
-
+/* TERMS CHECKBOX */
 input[type="checkbox"] {
   display: inline-block;
 }
-
 #read-terms input[type="checkbox"] {
   visibility: hidden;
   position: absolute;
