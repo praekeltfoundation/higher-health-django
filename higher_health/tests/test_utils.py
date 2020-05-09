@@ -3,8 +3,7 @@ from django.test import TestCase
 from higher_health.utils import get_risk_level
 
 
-def get_data(symptoms=0, exposure=False, age="<18",
-             pre_existing_condition="not_sure"):
+def get_data(symptoms=0, exposure=False, age="<18", pre_existing_condition="not_sure"):
     return {
         "age_range": age,
         "symptoms_sweating": "yes" if symptoms >= 1 else "no",
