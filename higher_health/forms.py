@@ -67,12 +67,12 @@ class HealthCheckQuestionnaire(forms.Form):
     )
     latitude = forms.CharField(widget=forms.HiddenInput())
     longitude = forms.CharField(widget=forms.HiddenInput())
-    city = forms.CharField()
+    city = forms.CharField(required=False)
     address = forms.CharField(required=True)
 
-    street_number = forms.CharField(required=True)
-    route = forms.CharField(required=True)
-    country = forms.CharField(required=True)
+    street_number = forms.CharField(required=False)
+    route = forms.CharField(required=False)
+    country = forms.CharField(required=False)
 
     symptoms_fever = forms.ChoiceField(
         label="Do you feel very hot or cold? Are you sweating or shivering? When you touch your forehead, does it feel hot?",
