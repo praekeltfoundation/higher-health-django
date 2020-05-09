@@ -32,7 +32,7 @@
           </div>
           <div id="questionnaires">
             <div class="login-form__location">
-              <h2 class="heading-secondary">Personal Questionare</h2>
+              <h2 class="heading-secondary">Personal Questionnaire</h2>
               <div class="login-form__screening">
                 <ul class="fieldset">
                   {% for field in form %}
@@ -86,7 +86,7 @@
             </div>
 
             <div class="login-form__medical">
-              <h2 class="heading-secondary">Medical Questionare</h2>
+              <h2 class="heading-secondary">Medical Questionnaire</h2>
               <ul id="medical" class="fieldset">
                 {% for field in form %}
                   {% if "symptoms_" in field.name or "medical_" in field.name %}
