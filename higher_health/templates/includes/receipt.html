@@ -1,4 +1,7 @@
+{% extends 'base.html' %}
+{% load temp_tags %}
 {% load static %}
+{% block content %}
 <div class="content">
   <div class="content-intro">
     <div class="content-receipts">
@@ -16,11 +19,11 @@
           </li>
         </ul>
       </div>
-      <div class="receipts-results receipts-results--{% if request.GET.risk_level == "low" %}low{% elif request.GET.risk_level == "mid" %}mid{% elif request.GET.risk_level == "high" %}high{% endif %}
+      <div class="receipts-results receipts-results--{% if risk_level == "low" %}low{% elif risk_level == "mid" %}mid{% elif risk_level == "high" %}high{% endif %}
       ">
         <div class="receipts-headings">
           <h4 class="heading subtitle">HealthCheck Clearance
-          {% if request.GET.risk_level == "low" %}Granted{% elif request.GET.risk_level == "mid" or request.GET.risk_level == "high" %}Denied{% endif %}
+          {% if risk_level == "low" %}Granted{% elif risk_level == "mid" or risk_level == "high" %}Denied{% endif %}
           </h4>
         </div>
         <div class="risks">
@@ -29,7 +32,7 @@
             <li class="risk-cat__item">
               <h5 class="risk-cat__label">Risk Level: </h5>
               <p class="risk-cat__val">
-                {% if request.GET.risk_level == "low" %}Low{% elif request.GET.risk_level == "mid" %}Medium{% elif request.GET.risk_level == "high" %}High{% endif %}
+                {% if risk_level == "low" %}Low{% elif risk_level == "mid" %}Medium{% elif risk_level == "high" %}High{% endif %}
               </p>
             </li>
             <li class="risk-cat__item">
@@ -47,3 +50,4 @@
     </div>
   </div>
 </div>
+{% endblock %}
