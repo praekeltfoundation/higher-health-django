@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
-{% load temp_tags %}
-{% load static %}
+{% load temp_tags static tz %}
+
 {% block content %}
 <div class="content">
   <div class="content-intro">
@@ -19,9 +19,7 @@
           </li>
         </ul>
       </div>
-      {% for obj in form %}
-          {{obj}}
-      {% endfor %}
+
       <div class="receipts-results receipts-results--{% if risk_level == "low" %}low{% elif risk_level == "moderate" %}mid{% elif risk_level == "high" or risk_level == "critical" %}high{% endif %}
       ">
         <div class="receipts-headings">
@@ -30,7 +28,8 @@
           </h4>
         </div>
         <div class="risks">
-          <p class="risks-num">xxx xxx xx</p>
+          <h2 class="">{{last_name}} - {{first_name}}</h2>
+          <p class="risks-num">{{msisdn}}</p>
           <ul class="risk-cat">
             <li class="risk-cat__item">
               <h5 class="risk-cat__label">Risk Level: </h5>
@@ -39,12 +38,12 @@
               </p>
             </li>
             <li class="risk-cat__item">
-              <h5 class="risk-cat__label">Date Issues:</h5>
-              <p class="risk-cat__val">{% now "jS F Y H:i" %}</p>
+              <h5 class="risk-cat__label">Date Issued:</h5>
+              <p class="risk-cat__val">{{timestamp|localtime}}</p>
             </li>
             <li class="risk-cat__item">
               <h5 class="risk-cat__label">Expiry date:</h5>
-              <p class="risk-cat__val">-</p>
+              <p class="risk-cat__val">{% now "F jS Y" %}, 00:00 p.m. <span class="expiry-hint">(At the end of today)</span></p>
             </li>
           </ul>
         </div>
