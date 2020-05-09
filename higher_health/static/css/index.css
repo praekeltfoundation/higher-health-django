@@ -298,6 +298,7 @@ a:hover {
   border-radius: 5px;
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
   padding: 10px;
+  margin: 0 0 2em;
 }
 .login-form__screening {
   margin: 0 0 2em;
@@ -309,7 +310,7 @@ a:hover {
   margin: 0;
 }
 .login-form__read-terms {
-  margin: 0 auto;
+  margin: 0 auto 1em;
 }
 .login-form__screening .label {
   display: none;
@@ -335,15 +336,14 @@ label {
   color: var(--very-light-gray);
   display: inline-block;
   visibility: visible;
-  text-decoration: underline;
-  text-decoration-color: var(--very-light-gray);
-  text-underline-position: under;
   margin: 0 10px 0 0;
+  /*text-decoration: underline;
+  text-decoration-color: var(--very-light-gray);
+  text-underline-position: under;*/
 }
 
 #address input {
   height: auto;
-  width: 35%;
   margin: 20px 0 0;
 }
 
@@ -450,23 +450,19 @@ input[type="checkbox"]#id_checkbox:disabled ~ label:after {
 }
 
 .cta-primary {
-  position: absolute;
-  display: block;
-  height: 40px;
-  width: 250px;
-  left: 0;
-  right: 0;
-  margin: 0 auto;
+  background: var(--dark-moderate-cyan);
   border: 0;
   border-radius: 20px;
-  bottom: -20px;
-  background: var(--dark-moderate-cyan);
   color: white;
+  cursor: pointer;
+  display: block;
   font-size: 1.1rem;
   font-weight: 300;
+  height: 40px;
+  margin: 0 auto;
   outline: none;
-  cursor: pointer;
   transition: all 0.4s;
+  width: 250px;
 }
 
 
@@ -566,7 +562,18 @@ input[type="checkbox"]#id_checkbox:disabled ~ label:after {
     width: 450px;
   }
   .login-form__read-terms {
+      margin: 0 auto;
     width: 500px;
+  }
+  #address input {
+    width: 35%;
+  }
+
+  .cta-primary  {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: -20px;
   }
   /*
     FOOTER
