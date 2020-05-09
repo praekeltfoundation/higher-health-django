@@ -10,10 +10,10 @@ def healthcheck_questionnaire(request):
         form = HealthCheckQuestionnaire(request.POST)
         if form.is_valid():
             data = form.cleaned_data
-            risk_level = get_risk_level(data)
-            save_data(data, risk_level)
+            data["risk_level"] = get_risk_level(data)
+            save_data(data)
 
-            request.session["risk_level"] = risk_level
+            request.session["saved_data"] = data
             return HttpResponseRedirect("/receipt/")
         else:
             # TODO: need to handle this
@@ -25,10 +25,10 @@ def healthcheck_questionnaire(request):
 
 
 def healthcheck_receipt(request):
-    if "risk_level" in request.session:
-        risk_level = request.session.get("risk_level")
-        del request.session["risk_level"]
-        return render(request, "includes/receipt.html", {"risk_level": risk_level})
+    if "saved_data" in request.session:
+        data = request.session.get("saved_data")
+        del request.session["saved_data"]
+        return render(request, "includes/receipt.html", data)
     else:
         return HttpResponseRedirect("/")
 
