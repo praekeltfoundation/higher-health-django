@@ -317,7 +317,10 @@ a:hover {
   margin: 0 auto 1em;
 }
 
-.location-field-autoload {}
+.location-field-autoload {
+  display: none;
+  visibility: none;
+}
 .location-field-hint {
   margin: 1em 0 0;
   text-align: center;
