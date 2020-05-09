@@ -1,7 +1,10 @@
+from datetime import datetime
+
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
 
 from .forms import HealthCheckLogin, HealthCheckQuestionnaire
+from .models import Covid19Triage
 from .utils import get_risk_level, save_data
 
 
@@ -11,22 +14,32 @@ def healthcheck_questionnaire(request):
         if form.is_valid():
             data = form.cleaned_data
             data["risk_level"] = get_risk_level(data)
-            save_data(data)
+            triage = save_data(data)
 
-            request.session["saved_data"] = data
+            request.session["triage_id"] = str(triage.id)
             return HttpResponseRedirect("/receipt/")
         else:
             print(form.errors)
     else:
+        if "triage_id" in request.session:
+            triage = Covid19Triage.objects.get(id=request.session["triage_id"])
+            if triage.timestamp.date() == datetime.today().date():
+                return HttpResponseRedirect("/receipt/")
         form = HealthCheckQuestionnaire()
 
     return render(request, "healthcheck_questionnaire.html", {"form": form})
 
 
 def healthcheck_receipt(request):
-    if "saved_data" in request.session:
-        data = request.session.get("saved_data")
-        del request.session["saved_data"]
+    if "triage_id" in request.session:
+        triage = Covid19Triage.objects.get(id=request.session["triage_id"])
+        data = {
+            "risk_level": triage.risk,
+            "first_name": triage.first_name,
+            "last_name": triage.last_name,
+            "timestamp": triage.timestamp,
+            "msisdn": triage.hashed_msisdn,
+        }
         return render(request, "healthcheck_receipt.html", data)
     else:
         return HttpResponseRedirect("/")
