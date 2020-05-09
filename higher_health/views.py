@@ -13,7 +13,7 @@ def healthcheck_questionnaire(request):
             risk_level = get_risk_level(data)
             save_data(data, risk_level)
 
-            request.session['risk_level'] = risk_level
+            request.session["risk_level"] = risk_level
             return HttpResponseRedirect("/receipt/")
         else:
             # TODO: need to handle this
@@ -25,9 +25,9 @@ def healthcheck_questionnaire(request):
 
 
 def healthcheck_receipt(request):
-    if request.session.has_key('risk_level'):
-        risk_level = request.session.get('risk_level')
-        del request.session['risk_level']
+    if "risk_level" in request.session:
+        risk_level = request.session.get("risk_level")
+        del request.session["risk_level"]
         return render(request, "includes/receipt.html", {"risk_level": risk_level})
     else:
         return HttpResponseRedirect("/")
