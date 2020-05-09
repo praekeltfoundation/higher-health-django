@@ -77,20 +77,10 @@
                       {{form.latitude.errors}}
                   {% endif %}
                 {% endif %}
-                <div class="location-field-autoload">
-                  <ul id="address" class="address-list fieldset">
-                    <li class="address-list__item">
-                      <input type="hidden" class="field" name="street_number" id="street_number" readonly value="{{ form.street_number.value|default_if_none:'' }}"/>
-                      <input type="hidden" class="field" name="route" id="route" readonly value="{{ form.route.value|default_if_none:'' }}"/>
-                    </li>
-                    <li class="address-list__item">
-                      <input type="hidden" class="field" name="city" id="locality" readonly value="{{ form.city.value|default_if_none:'' }}"/>
-                    </li>
-                    <li class="address-list__item">
-                      <input type="hidden" class="field" name="country" id="country" readonly value="{{ form.country.value|default_if_none:'' }}"/>
-                    </li>
-                  </ul>
-                </div>
+                <input type="hidden" class="field" name="street_number" id="street_number" readonly value="{{ form.street_number.value|default_if_none:'' }}"/>
+                <input type="hidden" class="field" name="route" id="route" readonly value="{{ form.route.value|default_if_none:'' }}"/>
+                <input type="hidden" class="field" name="city" id="locality" readonly value="{{ form.city.value|default_if_none:'' }}"/>
+                <input type="hidden" class="field" name="country" id="country" readonly value="{{ form.country.value|default_if_none:'' }}"/>
               </div>
 
 
