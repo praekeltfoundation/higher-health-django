@@ -107,7 +107,7 @@ class HealthCheckQuestionnaire(forms.Form):
         required=True,
     )
     medical_exposure = forms.ChoiceField(
-        label="Have you recently been in close contact to someone confirmed to be infected with COVID19?",
+        label="Have you recently been in close contact to someone confirmed to be infected with COVID-19?",
         choices=YES_NO_NOT_SURE,
         widget=forms.RadioSelect,
         required=True,
