@@ -38,7 +38,7 @@
               <h2 class="heading-secondary">Personal Questionnaire</h2>
               <div class="login-form__screening">
                 {% if form.errors %}
-                  <p class="error">The form has errors</p>
+                  <p class="error">Please correct the errors below</p>
                 {% endif %}
                 <ul class="fieldset">
                   {% with 'city address route country street_number' as field_list %}
@@ -67,6 +67,7 @@
                     type="text"
                     value="{{ form.address.value|default_if_none:"" }}"
                     name="address"/>
+                    {% if form.address.errors  %}{{form.address.errors}}{% endif %}
                 </div>
                 {% if form.latitude or form.longitude %}
                   {{form.latitude}}
