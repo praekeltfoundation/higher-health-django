@@ -143,6 +143,7 @@ class HealthCheckQuestionnaire(forms.Form):
                     f"https://maps.googleapis.com/maps/api/place/findplacefromtext/json?{querystring}"
                 )
                 location = json.loads(response.content)
+                # TODO: Raise validation error for location not found
                 if location["candidates"]:
                     data["latitude"] = location["candidates"][0]["geometry"][
                         "location"

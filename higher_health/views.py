@@ -21,10 +21,7 @@ def healthcheck_questionnaire(request):
         else:
             print(form.errors)
     else:
-        if "triage_id" in request.session:
-            triage = Covid19Triage.objects.get(id=request.session["triage_id"])
-            if triage.timestamp.date() == datetime.today().date():
-                return HttpResponseRedirect("/receipt/")
+        # TODO: Prepopulate profile data if triage_id in session
         form = HealthCheckQuestionnaire()
 
     return render(request, "healthcheck_questionnaire.html", {"form": form})
