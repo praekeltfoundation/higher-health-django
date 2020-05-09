@@ -62,5 +62,10 @@ def save_data(data):
             "risk": data["risk_level"],
             "location": get_location(data),
             "confirm_accuracy": "yes" == data["medical_confirm_accuracy"],
+            "gender": data["gender"],
+            "address": data["address"],
+            "street_number": data["street_number"],
+            "route": data["route"],
+            "country": data["country"],
         }
     )

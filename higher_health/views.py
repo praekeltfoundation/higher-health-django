@@ -1,5 +1,3 @@
-from datetime import datetime
-
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
 
@@ -21,8 +19,25 @@ def healthcheck_questionnaire(request):
         else:
             print(form.errors)
     else:
-        # TODO: Prepopulate profile data if triage_id in session
-        form = HealthCheckQuestionnaire()
+        initial_data = {}
+        try:
+            if "triage_id" in request.session:
+                triage = Covid19Triage.objects.get(id=request.session["triage_id"])
+                initial_data["msisdn"] = triage.msisdn
+                initial_data["first_name"] = triage.first_name
+                initial_data["last_name"] = triage.last_name
+                initial_data["age_range"] = triage.age
+                initial_data["gender"] = triage.gender
+                initial_data["province"] = triage.province
+                initial_data["address"] = triage.address
+                initial_data["city"] = triage.city
+                initial_data["street_number"] = triage.street_number
+                initial_data["route"] = triage.route
+                initial_data["country"] = triage.country
+        except Covid19Triage.DoesNotExist:
+            pass
+
+        form = HealthCheckQuestionnaire(initial=initial_data)
 
     return render(request, "healthcheck_questionnaire.html", {"form": form})
 
