@@ -272,6 +272,12 @@ a:hover {
   FORM
 
 */
+
+.label-link {
+  display: block;
+  font-size: 13px;
+  text-transform: uppercase;
+}
 .showing {
   display: block;
   visibility: visible;
@@ -286,7 +292,6 @@ a:hover {
 .login-form {
   font-family: 'Lato', sans-serif;
   position: relative;
-
 }
 .login-form__location,
 .login-form__medical {
@@ -311,14 +316,50 @@ a:hover {
   display: none;
   visibility: hidden;
 }
-#address .label {
+
+.location-field-autoload {}
+.location-field-hint {
+  margin: 1em 0 0;
+  text-align: center;
+}
+
+label {
   color: rgba(68, 68, 68, 0.8);
+}
+.address-list__item {
+  display: flex;
+  flex-direction: row-reverse;
+  align-items: baseline;
+  justify-content: flex-end;
+}
+#address .label {
+  color: var(--very-light-gray);
   display: inline-block;
   visibility: visible;
-
   text-decoration: underline;
-  text-decoration-color: rgba(68, 68, 68, 0.3);
+  text-decoration-color: var(--very-light-gray);
   text-underline-position: under;
+  margin: 0 10px 0 0;
+}
+
+#address input {
+  height: auto;
+  width: 35%;
+  margin: 20px 0 0;
+}
+
+#address input:disabled ~ label {
+  color: var(--very-light-gray);
+}
+#address input:disabled {
+  cursor: not-allowed;
+  border-color: var(--very-light-gray);
+}
+#address input:enabled ~ label {
+  color: rgba(68, 68, 68, 0.8);
+}
+#address input:enabled {
+  border-color: rgba(68, 68, 68, 0.3);
 }
 
 .address-error {
@@ -328,15 +369,6 @@ a:hover {
   color: red;
 }
 
-label {
-  color: rgba(68, 68, 68, 0.8);
-  cursor: pointer;
-}
-
-#address input {
-  height: auto;
-  width: auto;
-}
 
 input,
 textarea,
@@ -366,6 +398,7 @@ textarea {
 input[type="checkbox"]
 input[type="radio"] {
   width: auto;
+  cursor: pointer;
 }
 
 .radio-field {
@@ -395,7 +428,6 @@ input[type="checkbox"] ~ label {
   text-transform: uppercase;
   visibility: visible;
   display: inline-block;
-	padding: 0 0 10px;
 	cursor: pointer;
 	position: relative;
 }
@@ -408,7 +440,7 @@ input[type="checkbox"] ~ label:after {
 	width: 25px;
 	height: 25px;
 	vertical-align: middle;
-	margin: 0 10px;
+	margin: 0 20px;
 	transition: all ease-in-out 0.2s;
 }
 input[type="checkbox"] + label,
@@ -452,8 +484,6 @@ input[type="checkbox"]#id_checkbox:disabled ~ label:after {
   background: var(--dark-moderate-cyan-2);
   transform: translateY(-3px);
 }
-
-
 
 /*
   FOOTER

@@ -24,15 +24,14 @@
             <ul id="read-terms" class="fieldset">
               <li>
                 <input type="checkbox" id="healthcheck_terms" name="healthcheck-terms" required>
-                <label for="healthcheck_terms" class="label">
-                  <a href="/terms">I accept the terms</a>
-                </label>
+                <label for="healthcheck_terms" class="label">I accept the terms</label>
+                <a href="/terms" class="label-link" target="_blank">Read terms and policy</a>
               </li>
             </ul>
           </div>
           <div id="questionnaires">
             <div class="login-form__location">
-              <h2 class="heading-secondary">Personal Questionare</h2>
+              <h2 class="heading-secondary">Personal Questionnaire</h2>
               <div class="login-form__screening">
                 <ul class="fieldset">
                   {% for field in form %}
@@ -65,28 +64,31 @@
                       {{form.latitude.errors}}
                   {% endif %}
                 {% endif %}
-                <ul id="address" class="fieldset">
-                  <li>
-                    <label for="street_number" class="label">Street address:</label>
-                    <input class="field" id="street_number" disabled="true"/>
-                    <input class="field" id="route" disabled="true"/>
-                  </li>
-                  <li>
-                    <label for="locality" class="label">City:</label>
-                    <input class="field" name="city" id="locality" disabled="true"/>
-                  </li>
-                  <li>
-                    <label for="country" class="label">Country:</label>
-                    <input class="field" id="country" disabled="true"/>
-                  </li>
-                </ul>
+                <div class="location-field-autoload">
+                  <p class="location-field-hint">The below physical address fields will be automatically populated from the address entered above. Otherwise please fill in the information.</p>
+                  <ul id="address" class="address-list fieldset">
+                    <li class="address-list__item">
+                      <input class="field" id="street_number" disabled="true"/>
+                      <input class="field" id="route" disabled="true"/>
+                      <label for="street_number" class="label">Street address:</label>
+                    </li>
+                    <li class="address-list__item">
+                      <input class="field" name="city" id="locality" disabled="true"/>
+                      <label for="locality" class="label">City:</label>
+                    </li>
+                    <li class="address-list__item">
+                      <input class="field" id="country" disabled="true"/>
+                      <label for="country" class="label">Country:</label>
+                    </li>
+                  </ul>
+                </div>
               </div>
 
 
             </div>
 
             <div class="login-form__medical">
-              <h2 class="heading-secondary">Medical Questionare</h2>
+              <h2 class="heading-secondary">Medical Questionnaire</h2>
               <ul id="medical" class="fieldset">
                 {% for field in form %}
                   {% if "symptoms_" in field.name or "medical_" in field.name %}
