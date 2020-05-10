@@ -3,7 +3,7 @@ from django.test import TestCase
 from higher_health.utils import get_risk_level
 
 
-def get_data(symptoms=0, exposure=False, age="<18"):
+def get_data(symptoms=0, exposure=False, age="<18", pre_existing_condition="not_sure"):
     return {
         "age_range": age,
         "symptoms_sweating": "yes" if symptoms >= 1 else "no",
@@ -13,7 +13,7 @@ def get_data(symptoms=0, exposure=False, age="<18"):
         "symptoms_muscles_hurt": "no",
         "symptoms_taste": "no",
         "medical_exposure": "yes" if exposure else "no",
-        "symptoms_pre_existing_condition": "not_sure",
+        "medical_pre_existing_condition": pre_existing_condition,
         "medical_confirm_accuracy": "yes",
         "latitude": "53.3913081",
         "longitude": "-2.109429099999999",
@@ -51,4 +51,8 @@ class RiskLevelTestCase(TestCase):
 
     def test_get_risk_level_0_symptoms_only(self):
         data = get_data(symptoms=0)
+        self.assertEqual(get_risk_level(data), "low")
+
+    def test_get_pre_existing_condition_yes_and_no_symptoms(self):
+        data = get_data(symptoms=0, pre_existing_condition="yes")
         self.assertEqual(get_risk_level(data), "low")

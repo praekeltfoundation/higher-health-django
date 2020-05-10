@@ -116,7 +116,7 @@ class HealthCheckQuestionnaire(forms.Form):
         widget=forms.RadioSelect,
         required=True,
     )
-    symptoms_pre_existing_condition = forms.ChoiceField(
+    medical_pre_existing_condition = forms.ChoiceField(
         label="Do you have a pre-existing medical condition we should be aware of? (Examples: lung disease, heart disease, diabetes with complications, TB, HIV)",
         choices=YES_NO_NOT_SURE,
         widget=forms.RadioSelect,

@@ -58,7 +58,7 @@ def save_data(data):
             "exposure": data["medical_exposure"],
             "muscle_pain": "yes" == data["symptoms_muscles_hurt"],
             "smell": "yes" == data["symptoms_taste"],
-            "preexisting_condition": data["symptoms_pre_existing_condition"],
+            "preexisting_condition": data["medical_pre_existing_condition"],
             "risk": data["risk_level"],
             "location": get_location(data),
             "confirm_accuracy": "yes" == data["medical_confirm_accuracy"],
