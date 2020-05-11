@@ -4,7 +4,8 @@ import responses
 from django.test import TestCase
 from django.urls import reverse
 
-from higher_health.utils import save_data
+from higher_health.models import Covid19Triage
+from higher_health.utils import get_location, save_data
 
 from .utils_test import get_data
 
@@ -116,9 +117,11 @@ class QuestionnaireTest(TestCase):
         data["longitude"] = ""
         data["address"] = "4 friend street woodstock"
 
+        places_url = "https://maps.googleapis.com/maps/api/place/findplacefromtext/json?key=TEST_API_KEY&input=4+friend+street+woodstock&inputtype=textquery&language=en&fields=geometry"
+
         responses.add(
             responses.GET,
-            "https://maps.googleapis.com/maps/api/place/findplacefromtext/json?key=TEST_API_KEY&input=4+friend+street+woodstock&inputtype=textquery&language=en&fields=geometry",
+            places_url,
             json={
                 "candidates": [
                     {"geometry": {"location": {"lat": "11.1", "lng": "22.2"}}}
@@ -131,6 +134,32 @@ class QuestionnaireTest(TestCase):
         response = self.client.post(reverse("healthcheck_questionnaire"), data)
 
         self.assertEqual(response.status_code, 302)
+
+        places_call = responses.calls[0]
+        self.assertEqual(places_call.request.method, "GET")
+        self.assertEqual(places_call.request.url, places_url)
+
+        [triage] = Covid19Triage.objects.all()
+
+        self.assertEqual(triage.age, "<18")
+        self.assertFalse(triage.fever)
+        self.assertFalse(triage.cough)
+        self.assertFalse(triage.sore_throat)
+        self.assertFalse(triage.difficulty_breathing)
+        self.assertFalse(triage.muscle_pain)
+        self.assertFalse(triage.smell)
+        self.assertEqual(triage.exposure, "no")
+        self.assertEqual(triage.preexisting_condition, "not_sure")
+        self.assertEqual(triage.msisdn, "+27831231234")
+        self.assertEqual(triage.first_name, "Jane")
+        self.assertEqual(triage.last_name, "Smith")
+        self.assertEqual(triage.province, "ZA-WC")
+        self.assertEqual(triage.city, "Cape Town")
+        self.assertEqual(triage.gender, "female")
+        self.assertEqual(triage.address, "4 friend street woodstock")
+        self.assertEqual(
+            triage.location, get_location({"latitude": "11.1", "longitude": "22.2"})
+        )
 
     @responses.activate
     def test_post_get_coordinates_from_invalid_address(self):
