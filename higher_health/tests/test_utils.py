@@ -2,22 +2,7 @@ from django.test import TestCase
 
 from higher_health.utils import get_risk_level
 
-
-def get_data(symptoms=0, exposure=False, age="<18", pre_existing_condition="not_sure"):
-    return {
-        "age_range": age,
-        "symptoms_sweating": "yes" if symptoms >= 1 else "no",
-        "symptoms_cough": "yes" if symptoms >= 2 else "no",
-        "symptoms_sore_throat": "yes" if symptoms >= 3 else "no",
-        "symptoms_difficulty_breathing": "no",
-        "symptoms_muscles_hurt": "no",
-        "symptoms_taste": "no",
-        "medical_exposure": "yes" if exposure else "no",
-        "medical_pre_existing_condition": pre_existing_condition,
-        "medical_confirm_accuracy": "yes",
-        "latitude": "53.3913081",
-        "longitude": "-2.109429099999999",
-    }
+from .utils_test import get_data
 
 
 class RiskLevelTestCase(TestCase):
