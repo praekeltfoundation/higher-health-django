@@ -43,18 +43,21 @@ def healthcheck_questionnaire(request):
 
 
 def healthcheck_receipt(request):
-    if "triage_id" in request.session:
-        triage = Covid19Triage.objects.get(id=request.session["triage_id"])
-        data = {
-            "risk_level": triage.risk,
-            "first_name": triage.first_name,
-            "last_name": triage.last_name,
-            "timestamp": triage.timestamp,
-            "msisdn": triage.hashed_msisdn,
-        }
-        return render(request, "healthcheck_receipt.html", data)
-    else:
-        return HttpResponseRedirect("/")
+    try:
+        if "triage_id" in request.session:
+            triage = Covid19Triage.objects.get(id=request.session["triage_id"])
+            data = {
+                "risk_level": triage.risk,
+                "first_name": triage.first_name,
+                "last_name": triage.last_name,
+                "timestamp": triage.timestamp,
+                "msisdn": triage.hashed_msisdn,
+            }
+            return render(request, "healthcheck_receipt.html", data)
+    except Covid19Triage.DoesNotExist:
+        pass
+
+    return HttpResponseRedirect("/")
 
 
 def healthcheck_login(request):
