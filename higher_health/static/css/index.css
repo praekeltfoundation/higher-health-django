@@ -183,6 +183,10 @@ a:hover {
 .receipts-results-message ul {
     margin-left: 0.5em
 }
+.receipts-results-message li:before {
+  content: "- ";
+  line-height: 2.5em;
+}
 
 .receipts-results {
   color: #fff;
