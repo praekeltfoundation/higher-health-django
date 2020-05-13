@@ -12,6 +12,42 @@
               <img class="header-brand__logo"  src="{% static 'images/hh-logo-small.png' %}" alt="Higherhealth Logo">
             </a>
           </li>
+          {% if risk_level == "low" %}
+          <li class="receipts-results-message">
+            <h3>Thank you for answering all questions.</h3>
+            <p>
+              Based on your responses, you are at low risk of having COVID-19.
+              If you start to feel ill or if you come into contact with someone infected with COVID-19, please take this risk assessment again.
+              This clearance is available for the next 24hours so please check in daily, with HealthCheck.
+            </p>
+          </li>
+          {% elif risk_level == "moderate" %}
+          <li class="receipts-results-message">
+            <h3>Based on your responses, we recommend that you self-isolate for the next 14 days and complete this HealthCheck every day to monitor your symptoms.</h3>
+            <p>If possible, stay and sleep alone in a room that has a window with good air flowing through.</p>
+            <ul>
+              <li>You can talk to other family members and go outside, but you should stay at least 2 meters away from everyone at all times.</li>
+              <li>You should not have visitors at your house during this time.</li>
+              <li>One family member should be assigned as your caregiver. This exposes less of your family and also ensures that you and this caregiver can develop good habits so that they do not catch the virus from you.</li>
+              <li>If these procedures are not possible, you should contact your health care worker or clinic for alternative options.</li>
+            </ul>
+          </li>
+          {% elif risk_level == "high" %}
+            <li class="receipts-results-message">
+              <h3>Based on your responses, we urge you to get tested to find out if you are infected with COVID-19.</h3>
+
+              <p>Go to your nearest testing center or call the <b>COVID-19 Hotline: 0800029999,</b> or your healthcare practitioner, for further information on what to do next, how and where to get tested.</p>
+              <p><b>Follow these important steps when seeking care:</b></p>
+              <ul>
+                <li>Avoid contact with other people in your community in your household and your community, if possible, stay in a separate room.</li>
+                <li>Put on a face mask before you enter the healthcare facility- if you have a cough.</li>
+              </ul>
+              <p>
+                If you have or start getting severe symptoms, seek medical care urgently.
+              </p>
+            </li>
+          {% endif %}
+
           {% comment %}
           <!--
           <li class="r-logo-list__item">

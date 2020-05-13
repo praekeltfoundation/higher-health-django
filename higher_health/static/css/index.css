@@ -177,6 +177,12 @@ a:hover {
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
 }
+.receipts-results-message {
+    text-align: left;
+}
+.receipts-results-message ul {
+    margin-left: 0.5em
+}
 
 .receipts-results {
   color: #fff;
