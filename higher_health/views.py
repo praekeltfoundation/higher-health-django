@@ -1,28 +1,32 @@
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
+from django.urls import reverse_lazy
+from django.views import generic
 
 from .forms import HealthCheckLogin, HealthCheckQuestionnaire
 from .models import Covid19Triage
 from .utils import get_risk_level, save_data
 
 
-def healthcheck_questionnaire(request):
-    if request.method == "POST":
-        form = HealthCheckQuestionnaire(request.POST)
-        if form.is_valid():
-            data = form.cleaned_data
-            data["risk_level"] = get_risk_level(data)
-            triage = save_data(data)
+class HealthCheckQuestionnaireView(generic.FormView):
+    form_class = HealthCheckQuestionnaire
+    template_name = "healthcheck_questionnaire.html"
+    success_url = reverse_lazy("healthcheck_receipt")
 
-            request.session["triage_id"] = str(triage.id)
-            return HttpResponseRedirect("/receipt/")
-        else:
-            print(form.errors)
-    else:
-        initial_data = {}
-        try:
-            if "triage_id" in request.session:
-                triage = Covid19Triage.objects.get(id=request.session["triage_id"])
+    def form_valid(self, form):
+        data = form.cleaned_data
+        data["risk_level"] = get_risk_level(data)
+        triage = save_data(data)
+        self.request.session["triage_id"] = str(triage.id)
+        return super().form_valid(form)
+
+    def get_initial(self):
+        initial_data = super().get_initial()
+        if self.request.session.get("triage_id"):
+            triage = Covid19Triage.objects.filter(
+                id=self.request.session["triage_id"]
+            ).first()
+            if triage:
                 initial_data["msisdn"] = triage.msisdn
                 initial_data["first_name"] = triage.first_name
                 initial_data["last_name"] = triage.last_name
@@ -34,12 +38,27 @@ def healthcheck_questionnaire(request):
                 initial_data["street_number"] = triage.street_number
                 initial_data["route"] = triage.route
                 initial_data["country"] = triage.country
-        except Covid19Triage.DoesNotExist:
-            pass
 
-        form = HealthCheckQuestionnaire(initial=initial_data)
+                initial_data["facility_destination"] = triage.facility_destination
+                initial_data[
+                    "facility_destination_province"
+                ] = triage.facility_destination_province
+                initial_data[
+                    "facility_destination_university"
+                ] = triage.facility_destination_university
+                initial_data[
+                    "facility_destination_campus"
+                ] = triage.facility_destination_campus
+                initial_data[
+                    "facility_destination_reason"
+                ] = triage.facility_destination_reason
 
-    return render(request, "healthcheck_questionnaire.html", {"form": form})
+                initial_data["history_obesity"] = triage.history_obesity
+                initial_data["history_diabetes"] = triage.history_diabetes
+                initial_data["history_hypertension"] = triage.history_hypertension
+                initial_data["history_cardiovascular"] = triage.history_cardiovascular
+                initial_data["history_other"] = triage.history_other
+        return initial_data
 
 
 def healthcheck_receipt(request):

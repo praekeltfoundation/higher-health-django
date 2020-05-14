@@ -22,4 +22,12 @@ def get_data(symptoms=0, exposure=False, age="<18", pre_existing_condition="not_
         "street_number": "",
         "route": "",
         "country": "",
+        "facility_destination": "office",
+        "facility_destination_province": "ZA-WC",
+        "facility_destination_reason": "staff",
+        "history_obesity": False,
+        "history_diabetes": False,
+        "history_hypertension": False,
+        "history_cardiovascular": False,
+        "history_other": 2,
     }

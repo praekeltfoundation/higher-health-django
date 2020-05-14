@@ -7,6 +7,7 @@ from django.urls import reverse
 from higher_health.models import Covid19Triage
 from higher_health.utils import get_location, save_data
 
+from . import factories
 from .utils_test import get_data
 
 
@@ -50,6 +51,28 @@ class QuestionnaireTest(TestCase):
         self.assertEqual(initial_data["street_number"], data["street_number"])
         self.assertEqual(initial_data["route"], data["route"])
         self.assertEqual(initial_data["country"], data["country"])
+
+        self.assertEqual(
+            initial_data["facility_destination"], data["facility_destination"]
+        )
+        self.assertEqual(
+            initial_data["facility_destination_province"],
+            data["facility_destination_province"],
+        )
+        self.assertEqual(
+            initial_data["facility_destination_reason"],
+            data["facility_destination_reason"],
+        )
+
+        self.assertEqual(initial_data["history_obesity"], data["history_obesity"])
+        self.assertEqual(initial_data["history_diabetes"], data["history_diabetes"])
+        self.assertEqual(
+            initial_data["history_hypertension"], data["history_hypertension"]
+        )
+        self.assertEqual(
+            initial_data["history_cardiovascular"], data["history_cardiovascular"]
+        )
+        self.assertEqual(initial_data["history_other"], data["history_other"])
 
     def test_get_with_invalid_triage_id_in_session(self):
         session = self.client.session
@@ -131,6 +154,103 @@ class QuestionnaireTest(TestCase):
             match_querystring=True,
         )
 
+        response = self.client.post(reverse("healthcheck_questionnaire"), data)
+
+        self.assertEqual(response.status_code, 302)
+
+        places_call = responses.calls[0]
+        self.assertEqual(places_call.request.method, "GET")
+        self.assertEqual(places_call.request.url, places_url)
+
+        [triage] = Covid19Triage.objects.all()
+
+        self.assertEqual(triage.age, "<18")
+        self.assertFalse(triage.fever)
+        self.assertFalse(triage.cough)
+        self.assertFalse(triage.sore_throat)
+        self.assertFalse(triage.difficulty_breathing)
+        self.assertFalse(triage.muscle_pain)
+        self.assertFalse(triage.smell)
+        self.assertEqual(triage.exposure, "no")
+        self.assertEqual(triage.preexisting_condition, "not_sure")
+        self.assertEqual(triage.msisdn, "+27831231234")
+        self.assertEqual(triage.first_name, "Jane")
+        self.assertEqual(triage.last_name, "Smith")
+        self.assertEqual(triage.province, "ZA-WC")
+        self.assertEqual(triage.city, "Cape Town")
+        self.assertEqual(triage.gender, "female")
+        self.assertEqual(triage.address, "4 friend street woodstock")
+        self.assertEqual(
+            triage.location, get_location({"latitude": "11.1", "longitude": "22.2"})
+        )
+
+    @responses.activate
+    def test_post_going_to_campus(self):
+        data = get_data()
+        data["facility_destination"] = "campus"
+        data["latitude"] = ""
+        data["latitude"] = ""
+        data["longitude"] = ""
+        data["address"] = "4 friend street woodstock"
+
+        places_url = "https://maps.googleapis.com/maps/api/place/findplacefromtext/json?key=TEST_API_KEY&input=4+friend+street+woodstock&inputtype=textquery&language=en&fields=geometry"
+
+        responses.add(
+            responses.GET,
+            places_url,
+            json={
+                "candidates": [
+                    {"geometry": {"location": {"lat": "11.1", "lng": "22.2"}}}
+                ]
+            },
+            status=200,
+            match_querystring=True,
+        )
+
+        response = self.client.post(reverse("healthcheck_questionnaire"), data)
+
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(
+            response.context["form"].errors,
+            {
+                "facility_destination_university": ["This field is required."],
+                "facility_destination_campus": ["This field is required."],
+            },
+        )
+
+        university = factories.UniversityFactory(province="ZA-WC")
+        campus = factories.CampusFactory(university=university)
+
+        university_ec = factories.UniversityFactory(province="ZA-EC")
+        campus_unknown = factories.CampusFactory(
+            university=factories.UniversityFactory(province="ZA-WC")
+        )
+        data.update(
+            {
+                "facility_destination_university": university_ec.pk,
+                "facility_destination_campus": campus_unknown.pk,
+            }
+        )
+        response = self.client.post(reverse("healthcheck_questionnaire"), data)
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(
+            response.context["form"].errors,
+            {
+                "facility_destination_university": [
+                    "Please select a university that is in ZA-WC."
+                ],
+                "facility_destination_campus": [
+                    "Please select a campus that is in University."
+                ],
+            },
+        )
+
+        data.update(
+            {
+                "facility_destination_university": university.pk,
+                "facility_destination_campus": campus.pk,
+            }
+        )
         response = self.client.post(reverse("healthcheck_questionnaire"), data)
 
         self.assertEqual(response.status_code, 302)

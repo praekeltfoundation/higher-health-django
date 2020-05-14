@@ -1,8 +1,34 @@
+import enum
 import uuid
 
 import pycountry
 from django.db import models
 from django.utils import timezone
+
+
+class Choice(enum.Enum):
+    @classmethod
+    def _choices(cls):
+        return [(i.value, i.name) for i in cls]
+
+
+class University(models.Model):
+    PROVINCE_CHOICES = sorted(
+        (s.code, s.name) for s in pycountry.subdivisions.get(country_code="ZA")
+    )
+    name = models.CharField(max_length=100)
+    province = models.CharField(choices=PROVINCE_CHOICES, max_length=100)
+
+    def __str__(self):
+        return self.name
+
+
+class Campus(models.Model):
+    name = models.CharField(max_length=100)
+    university = models.ForeignKey(University, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.name
 
 
 class Covid19Triage(models.Model):
@@ -52,6 +78,29 @@ class Covid19Triage(models.Model):
         (GENDER_NOT_SAY, "Rather not say"),
     )
 
+    class YesNoBoolChoice(Choice):
+        Yes = True
+        No = False
+
+    class HistoryOtherChoice(Choice):
+        """
+        Choices for FE field:
+        Do you have any other pre-existing medical conditions that we should be aware of?
+        """
+
+        YES = 1
+        NO = 2
+        MAYBE = 3
+
+    class FacilityDestinationChoice(Choice):
+        Office = "office"
+        Campus = "campus"
+
+    class FacilityDestinationReasonChoice(Choice):
+        Staff = "staff"
+        Student = "student"
+        Visitor = "visitor"
+
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     msisdn = models.CharField(max_length=255, blank=True, null=True)
     first_name = models.CharField(max_length=255, blank=True, null=True, default=None)
@@ -86,6 +135,35 @@ class Covid19Triage(models.Model):
     street_number = models.CharField(max_length=255, blank=True, default="")
     route = models.CharField(max_length=255, blank=True, default="")
     country = models.CharField(max_length=255, blank=True, default="")
+
+    facility_destination = models.CharField(
+        choices=FacilityDestinationChoice._choices(),
+        max_length=255,
+        blank=True,
+        default="",
+    )
+    facility_destination_province = models.CharField(
+        max_length=6, choices=PROVINCE_CHOICES, null=True, blank=True
+    )
+    facility_destination_university = models.ForeignKey(
+        University, null=True, blank=True, on_delete=models.CASCADE
+    )
+    facility_destination_campus = models.ForeignKey(
+        Campus, null=True, blank=True, on_delete=models.CASCADE
+    )
+    facility_destination_reason = models.CharField(
+        choices=FacilityDestinationReasonChoice._choices(),
+        max_length=255,
+        blank=True,
+        null=True,
+    )
+    history_obesity = models.BooleanField(default=False)
+    history_diabetes = models.BooleanField(default=False)
+    history_hypertension = models.BooleanField(default=False)
+    history_cardiovascular = models.BooleanField(default=False)
+    history_other = models.SmallIntegerField(
+        default=HistoryOtherChoice.NO.value, choices=HistoryOtherChoice._choices()
+    )
 
     @property
     def hashed_msisdn(self):
