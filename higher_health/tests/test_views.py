@@ -195,8 +195,25 @@ class QuestionnaireTest(TestCase):
             }
         )
 
-        university = factories.UniversityFactory()
+        university = factories.UniversityFactory(province='ZA-WC')
         campus = factories.CampusFactory(university=university)
+
+        university_ec = factories.UniversityFactory(province='ZA-EC')
+        campus_unknown = factories.CampusFactory(
+            university=factories.UniversityFactory(province='ZA-WC'))
+        data.update({
+            'facility_destination_university': university_ec.pk,
+            'facility_destination_campus': campus_unknown.pk
+        })
+        response = self.client.post(reverse("healthcheck_questionnaire"), data)
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(
+            response.context['form'].errors, {
+                "facility_destination_university": ['Please select a university that is in ZA-WC.'],
+                "facility_destination_campus": ['Please select a campus that is in University.'],
+            }
+        )
+
         data.update({
             'facility_destination_university': university.pk,
             'facility_destination_campus': campus.pk

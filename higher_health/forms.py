@@ -94,7 +94,7 @@ class HealthCheckQuestionnaire(forms.Form):
     )
     facility_destination_campus = forms.ModelChoiceField(
         label='Campus',
-        queryset=models.University.objects.all(),
+        queryset=models.Campus.objects.all(),
         required=False
     )
     facility_destination_reason = forms.ChoiceField(
@@ -231,15 +231,30 @@ class HealthCheckQuestionnaire(forms.Form):
 
         errors = dict()
         required = 'This field is required.'
+
         going_to_campus = cleaned_data.get('facility_destination') == 'campus'
         if going_to_campus:
             campus = cleaned_data.get('facility_destination_campus')
+            province = cleaned_data.get('facility_destination_province')
             university = cleaned_data.get('facility_destination_university')
 
             if not university:
                 errors.update({'facility_destination_university': required})
+
             if not campus:
                 errors.update({'facility_destination_campus': required})
+
+            if (province and university) and not province == university.province:
+                errors.update({
+                    'facility_destination_university':
+                        'Please select a university that is in {}.'.format(province)
+                })
+
+            if (university and campus) and not campus.university == university:
+                errors.update({
+                    'facility_destination_campus':
+                        'Please select a campus that is in {}.'.format(university)
+                })
 
         if errors:
             raise forms.ValidationError(errors)
