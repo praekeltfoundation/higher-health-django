@@ -43,7 +43,7 @@
                 <ul class="fieldset">
                   {% with 'city address route country street_number' as field_list %}
                     {% for field in form %}
-                      {% if "symptoms_" not in field.name and "medical_" not in field.name and field.name not in field_list.split %}
+                      {% if "history_" not in field.name and "facility_" not in field.name and "symptoms_" not in field.name and "medical_" not in field.name and field.name not in field_list.split %}
                         <li>
                           {% if field|field_type != "HiddenInput" %}
                             {{field}}
@@ -92,12 +92,52 @@
                   </ul>
                 </div>
               </div>
-
-
             </div>
 
             <div class="login-form__medical">
-              <h2 class="heading-secondary">Medical Questionnaire</h2>
+              <h2 class="heading-secondary">Where are you going today?</h2>
+              <ul id="medical" class="fieldset">
+                {% for field in form %}
+                  {% if "facility_" in field.name %}
+                    {% if field.name == "facility_destination" %}
+                      <h3 class="subheading">Where are you going today?</h3>
+                    {% elif field.name == "facility_destination_university" %}
+                      <h3 class="subheading">Educational institution information</h3>
+                    {% endif %}
+
+                    <li>
+                      <label for="{{ field.name }}" class="label">{{ field.label }}</label>
+                      {{field.errors}}
+                      {{ field }}
+                    </li>
+                  {% endif %}
+                {% endfor %}
+              </ul>
+            </div>
+
+            <div class="login-form__medical">
+              <h2 class="heading-secondary">Medical History</h2>
+              <ul id="medical" class="fieldset">
+                {% for field in form %}
+                  {% if "history_" in field.name %}
+                    {% if field.name == "facility_destination" %}
+                      <h3 class="subheading">Where are you going today?</h3>
+                    {% elif field.name == "facility_destination_university" %}
+                      <h3 class="subheading">Educational institution information</h3>
+                    {% endif %}
+
+                    <li>
+                      <label for="{{ field.name }}" class="label">{{ field.label }}</label>
+                      {{field.errors}}
+                      {{ field }}
+                    </li>
+                  {% endif %}
+                {% endfor %}
+              </ul>
+            </div>
+
+            <div class="login-form__medical">
+              <h2 class="heading-secondary">How are you feeling today?</h2>
               <ul id="medical" class="fieldset">
                 {% for field in form %}
                   {% if "symptoms_" in field.name or "medical_" in field.name %}
@@ -105,7 +145,7 @@
                       <h3 class="subheading">And finally</h3>
                     {% endif %}
                     <li>
-                      <label for="sweating" class="label">{{ field.label }}</label>
+                      <label for="{{ field.name }}" class="label">{{ field.label }}</label>
                       {{field.errors}}
                       {{ field }}
                     </li>

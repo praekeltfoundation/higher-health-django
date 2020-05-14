@@ -8,6 +8,7 @@ from django.conf import settings
 from django.forms.widgets import TextInput
 from django.utils.translation import ugettext_lazy as _
 
+from higher_health import models
 from higher_health.validators import za_phone_number
 
 
@@ -73,6 +74,62 @@ class HealthCheckQuestionnaire(forms.Form):
     street_number = forms.CharField(required=False)
     route = forms.CharField(required=False)
     country = forms.CharField(required=False)
+
+    DESTINATION_CHOICES = (('office', 'Office'), ('campus', 'Campus'))
+    REASON_CHOICES = (('student', 'Student'), ('staff', 'Staff'), ('visitor', 'Visitor'))
+    UNIVERSITY_CHOICES = ()
+    CAMPUS_CHOICES = ()
+
+    facility_destination = forms.ChoiceField(
+        label='Destination',
+        choices=DESTINATION_CHOICES,
+        widget=forms.RadioSelect,
+    )
+    facility_destination_province = forms.ChoiceField(
+        label='Province',
+        choices=PROVINCE_CHOICES
+    )
+    facility_destination_university = forms.ModelChoiceField(
+        label='University',
+        queryset=models.University.objects.all(),
+        required=False
+    )
+    facility_destination_campus = forms.ModelChoiceField(
+        label='Campus',
+        queryset=models.University.objects.all(),
+        required=False
+    )
+    facility_destination_reason = forms.ChoiceField(
+        label='Reason',
+        choices=REASON_CHOICES,
+        widget=forms.RadioSelect
+    )
+
+    history_obesity = forms.ChoiceField(
+        label='Has a doctor or other health professional diagnosed you with Obesity?',
+        widget=forms.RadioSelect,
+        choices=YES_NO
+    )
+    history_diabetes = forms.ChoiceField(
+        label='Has a doctor or other health professional diagnosed you with Diabetes?',
+        widget=forms.RadioSelect,
+        choices=YES_NO
+    )
+    history_hypertension = forms.ChoiceField(
+        label='Has a doctor or other health professional diagnosed you with Hypertension?',
+        widget=forms.RadioSelect,
+        choices=YES_NO
+    )
+    history_cardiovascular = forms.ChoiceField(
+        label='Has a doctor or other health professional diagnosed you with Cardiovascular Disease?',
+        widget=forms.RadioSelect,
+        choices=YES_NO
+    )
+    history_other = forms.ChoiceField(
+        label='Do you have any other pre-existing medical conditions that we should be aware of?',
+        widget=forms.RadioSelect,
+        choices=YES_NO_NOT_SURE
+    )
 
     symptoms_fever = forms.ChoiceField(
         label="Do you feel very hot or cold? Are you sweating or shivering? When you touch your forehead, does it feel hot?",
@@ -170,6 +227,23 @@ class HealthCheckQuestionnaire(forms.Form):
                     "medical_confirm_accuracy",
                     "You need to confirm that this information is accurate",
                 )
+
+    def clean(self):
+        cleaned_data = super(HealthCheckQuestionnaire, self).clean()
+
+        required = 'This field is required.'
+        going_to_campus = cleaned_data.get('facility_destination') == 'campus'
+
+        if going_to_campus:
+            campus = cleaned_data.get('facility_destination_campus')
+            university = cleaned_data.get('facility_destination_university')
+
+            if not university:
+                raise forms.ValidationError({'facility_destination_university', required})
+            if not campus:
+                raise forms.ValidationError({'facility_destination_campus', required})
+
+        return cleaned_data
 
 
 class HealthCheckLogin(forms.Form):

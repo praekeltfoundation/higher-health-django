@@ -90,3 +90,16 @@ class Covid19Triage(models.Model):
     @property
     def hashed_msisdn(self):
         return self.msisdn[:3] + "*" * 5 + self.msisdn[-4:]
+
+
+class University(models.Model):
+    PROVINCE_CHOICES = sorted(
+        (s.code, s.name) for s in pycountry.subdivisions.get(country_code="ZA")
+    )
+    name = models.CharField(max_length=100)
+    province = models.CharField(choices=PROVINCE_CHOICES, max_length=100)
+
+
+class Campus(models.Model):
+    name = models.CharField(max_length=100)
+    university = models.ForeignKey(University, on_delete=models.CASCADE)
