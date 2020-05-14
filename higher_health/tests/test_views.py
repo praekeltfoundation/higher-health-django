@@ -189,35 +189,46 @@ class QuestionnaireTest(TestCase):
 
         self.assertEqual(response.status_code, 200)
         self.assertEqual(
-            response.context['form'].errors, {
-                "facility_destination_university": ['This field is required.'],
-                "facility_destination_campus": ['This field is required.']
-            }
+            response.context["form"].errors,
+            {
+                "facility_destination_university": ["This field is required."],
+                "facility_destination_campus": ["This field is required."],
+            },
         )
 
-        university = factories.UniversityFactory(province='ZA-WC')
+        university = factories.UniversityFactory(province="ZA-WC")
         campus = factories.CampusFactory(university=university)
 
-        university_ec = factories.UniversityFactory(province='ZA-EC')
+        university_ec = factories.UniversityFactory(province="ZA-EC")
         campus_unknown = factories.CampusFactory(
-            university=factories.UniversityFactory(province='ZA-WC'))
-        data.update({
-            'facility_destination_university': university_ec.pk,
-            'facility_destination_campus': campus_unknown.pk
-        })
+            university=factories.UniversityFactory(province="ZA-WC")
+        )
+        data.update(
+            {
+                "facility_destination_university": university_ec.pk,
+                "facility_destination_campus": campus_unknown.pk,
+            }
+        )
         response = self.client.post(reverse("healthcheck_questionnaire"), data)
         self.assertEqual(response.status_code, 200)
         self.assertEqual(
-            response.context['form'].errors, {
-                "facility_destination_university": ['Please select a university that is in ZA-WC.'],
-                "facility_destination_campus": ['Please select a campus that is in University.'],
-            }
+            response.context["form"].errors,
+            {
+                "facility_destination_university": [
+                    "Please select a university that is in ZA-WC."
+                ],
+                "facility_destination_campus": [
+                    "Please select a campus that is in University."
+                ],
+            },
         )
 
-        data.update({
-            'facility_destination_university': university.pk,
-            'facility_destination_campus': campus.pk
-        })
+        data.update(
+            {
+                "facility_destination_university": university.pk,
+                "facility_destination_campus": campus.pk,
+            }
+        )
         response = self.client.post(reverse("healthcheck_questionnaire"), data)
 
         self.assertEqual(response.status_code, 302)

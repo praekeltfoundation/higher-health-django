@@ -75,58 +75,53 @@ class HealthCheckQuestionnaire(forms.Form):
     route = forms.CharField(required=False)
     country = forms.CharField(required=False)
 
-    DESTINATION_CHOICES = (('office', 'Office'), ('campus', 'Campus'))
-    REASON_CHOICES = (('student', 'Student'), ('staff', 'Staff'), ('visitor', 'Visitor'))
+    DESTINATION_CHOICES = (("office", "Office"), ("campus", "Campus"))
+    REASON_CHOICES = (
+        ("student", "Student"),
+        ("staff", "Staff"),
+        ("visitor", "Visitor"),
+    )
 
     facility_destination = forms.ChoiceField(
-        label='Destination',
-        choices=DESTINATION_CHOICES,
-        widget=forms.RadioSelect,
+        label="Destination", choices=DESTINATION_CHOICES, widget=forms.RadioSelect
     )
     facility_destination_province = forms.ChoiceField(
-        label='Province',
-        choices=PROVINCE_CHOICES
+        label="Province", choices=PROVINCE_CHOICES
     )
     facility_destination_university = forms.ModelChoiceField(
-        label='University',
-        queryset=models.University.objects.all(),
-        required=False
+        label="University", queryset=models.University.objects.all(), required=False
     )
     facility_destination_campus = forms.ModelChoiceField(
-        label='Campus',
-        queryset=models.Campus.objects.all(),
-        required=False
+        label="Campus", queryset=models.Campus.objects.all(), required=False
     )
     facility_destination_reason = forms.ChoiceField(
-        label='Reason',
-        choices=REASON_CHOICES,
-        widget=forms.RadioSelect
+        label="Reason", choices=REASON_CHOICES, widget=forms.RadioSelect
     )
 
     history_obesity = forms.ChoiceField(
-        label='Has a doctor or other health professional diagnosed you with Obesity?',
+        label="Has a doctor or other health professional diagnosed you with Obesity?",
         widget=forms.RadioSelect,
-        choices=YES_NO
+        choices=YES_NO,
     )
     history_diabetes = forms.ChoiceField(
-        label='Has a doctor or other health professional diagnosed you with Diabetes?',
+        label="Has a doctor or other health professional diagnosed you with Diabetes?",
         widget=forms.RadioSelect,
-        choices=YES_NO
+        choices=YES_NO,
     )
     history_hypertension = forms.ChoiceField(
-        label='Has a doctor or other health professional diagnosed you with Hypertension?',
+        label="Has a doctor or other health professional diagnosed you with Hypertension?",
         widget=forms.RadioSelect,
-        choices=YES_NO
+        choices=YES_NO,
     )
     history_cardiovascular = forms.ChoiceField(
-        label='Has a doctor or other health professional diagnosed you with Cardiovascular Disease?',
+        label="Has a doctor or other health professional diagnosed you with Cardiovascular Disease?",
         widget=forms.RadioSelect,
-        choices=YES_NO
+        choices=YES_NO,
     )
     history_other = forms.ChoiceField(
-        label='Do you have any other pre-existing medical conditions that we should be aware of?',
+        label="Do you have any other pre-existing medical conditions that we should be aware of?",
         widget=forms.RadioSelect,
-        choices=YES_NO_NOT_SURE
+        choices=YES_NO_NOT_SURE,
     )
 
     symptoms_fever = forms.ChoiceField(
@@ -230,31 +225,37 @@ class HealthCheckQuestionnaire(forms.Form):
         cleaned_data = super(HealthCheckQuestionnaire, self).clean()
 
         errors = dict()
-        required = 'This field is required.'
+        required = "This field is required."
 
-        going_to_campus = cleaned_data.get('facility_destination') == 'campus'
+        going_to_campus = cleaned_data.get("facility_destination") == "campus"
         if going_to_campus:
-            campus = cleaned_data.get('facility_destination_campus')
-            province = cleaned_data.get('facility_destination_province')
-            university = cleaned_data.get('facility_destination_university')
+            campus = cleaned_data.get("facility_destination_campus")
+            province = cleaned_data.get("facility_destination_province")
+            university = cleaned_data.get("facility_destination_university")
 
             if not university:
-                errors.update({'facility_destination_university': required})
+                errors.update({"facility_destination_university": required})
 
             if not campus:
-                errors.update({'facility_destination_campus': required})
+                errors.update({"facility_destination_campus": required})
 
             if (province and university) and not province == university.province:
-                errors.update({
-                    'facility_destination_university':
-                        'Please select a university that is in {}.'.format(province)
-                })
+                errors.update(
+                    {
+                        "facility_destination_university": "Please select a university that is in {}.".format(
+                            province
+                        )
+                    }
+                )
 
             if (university and campus) and not campus.university == university:
-                errors.update({
-                    'facility_destination_campus':
-                        'Please select a campus that is in {}.'.format(university)
-                })
+                errors.update(
+                    {
+                        "facility_destination_campus": "Please select a campus that is in {}.".format(
+                            university
+                        )
+                    }
+                )
 
         if errors:
             raise forms.ValidationError(errors)
