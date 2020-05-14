@@ -1,5 +1,5 @@
-import uuid
 import enum
+import uuid
 
 import pycountry
 from django.db import models
@@ -10,7 +10,6 @@ class Choice(enum.Enum):
     @classmethod
     def _choices(cls):
         return [(i.value, i.name) for i in cls]
-
 
 
 class University(models.Model):
@@ -88,18 +87,19 @@ class Covid19Triage(models.Model):
         Choices for FE field:
         Do you have any other pre-existing medical conditions that we should be aware of?
         """
+
         YES = 1
         NO = 2
         MAYBE = 3
 
     class FacilityDestinationChoice(Choice):
-        Office = 'office'
-        Campus = 'campus'
+        Office = "office"
+        Campus = "campus"
 
     class FacilityDestinationReasonChoice(Choice):
-        Staff = 'staff'
-        Student = 'student'
-        Visitor = 'visitor'
+        Staff = "staff"
+        Student = "student"
+        Visitor = "visitor"
 
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     msisdn = models.CharField(max_length=255, blank=True, null=True)
@@ -138,7 +138,9 @@ class Covid19Triage(models.Model):
 
     facility_destination = models.CharField(
         choices=FacilityDestinationChoice._choices(),
-        max_length=255, blank=True, default=""
+        max_length=255,
+        blank=True,
+        default="",
     )
     facility_destination_province = models.CharField(
         max_length=6, choices=PROVINCE_CHOICES, null=True, blank=True
@@ -151,15 +153,16 @@ class Covid19Triage(models.Model):
     )
     facility_destination_reason = models.CharField(
         choices=FacilityDestinationReasonChoice._choices(),
-        max_length=255, blank=True, null=True
+        max_length=255,
+        blank=True,
+        null=True,
     )
     history_obesity = models.BooleanField(default=False)
     history_diabetes = models.BooleanField(default=False)
     history_hypertension = models.BooleanField(default=False)
     history_cardiovascular = models.BooleanField(default=False)
     history_other = models.SmallIntegerField(
-        default=HistoryOtherChoice.NO.value,
-        choices=HistoryOtherChoice._choices(),
+        default=HistoryOtherChoice.NO.value, choices=HistoryOtherChoice._choices()
     )
 
     @property

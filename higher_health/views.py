@@ -1,7 +1,7 @@
 from django.http import HttpResponseRedirect
-from django.views import generic
 from django.shortcuts import render
 from django.urls import reverse_lazy
+from django.views import generic
 
 from .forms import HealthCheckLogin, HealthCheckQuestionnaire
 from .models import Covid19Triage
@@ -11,7 +11,7 @@ from .utils import get_risk_level, save_data
 class HealthCheckQuestionnaireView(generic.FormView):
     form_class = HealthCheckQuestionnaire
     template_name = "healthcheck_questionnaire.html"
-    success_url = reverse_lazy('healthcheck_receipt')
+    success_url = reverse_lazy("healthcheck_receipt")
 
     def form_valid(self, form):
         data = form.cleaned_data
@@ -23,7 +23,9 @@ class HealthCheckQuestionnaireView(generic.FormView):
     def get_initial(self):
         initial_data = super().get_initial()
         if self.request.session.get("triage_id"):
-            triage = Covid19Triage.objects.filter(id=self.request.session["triage_id"]).first()
+            triage = Covid19Triage.objects.filter(
+                id=self.request.session["triage_id"]
+            ).first()
             if triage:
                 initial_data["msisdn"] = triage.msisdn
                 initial_data["first_name"] = triage.first_name
@@ -38,10 +40,18 @@ class HealthCheckQuestionnaireView(generic.FormView):
                 initial_data["country"] = triage.country
 
                 initial_data["facility_destination"] = triage.facility_destination
-                initial_data["facility_destination_province"] = triage.facility_destination_province
-                initial_data["facility_destination_university"] = triage.facility_destination_university
-                initial_data["facility_destination_campus"] = triage.facility_destination_campus
-                initial_data["facility_destination_reason"] = triage.facility_destination_reason
+                initial_data[
+                    "facility_destination_province"
+                ] = triage.facility_destination_province
+                initial_data[
+                    "facility_destination_university"
+                ] = triage.facility_destination_university
+                initial_data[
+                    "facility_destination_campus"
+                ] = triage.facility_destination_campus
+                initial_data[
+                    "facility_destination_reason"
+                ] = triage.facility_destination_reason
 
                 initial_data["history_obesity"] = triage.history_obesity
                 initial_data["history_diabetes"] = triage.history_diabetes
