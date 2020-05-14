@@ -1,6 +1,6 @@
 from django.http import HttpResponseRedirect
 from django.views import generic
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render
 from django.urls import reverse_lazy
 
 from .forms import HealthCheckLogin, HealthCheckQuestionnaire
@@ -23,31 +23,31 @@ class HealthCheckQuestionnaireView(generic.FormView):
     def get_initial(self):
         initial_data = super().get_initial()
         if self.request.session.get("triage_id"):
-            triage = get_object_or_404(Covid19Triage, id=self.request.session["triage_id"])
+            triage = Covid19Triage.objects.filter(id=self.request.session["triage_id"]).first()
+            if triage:
+                initial_data["msisdn"] = triage.msisdn
+                initial_data["first_name"] = triage.first_name
+                initial_data["last_name"] = triage.last_name
+                initial_data["age_range"] = triage.age
+                initial_data["gender"] = triage.gender
+                initial_data["province"] = triage.province
+                initial_data["address"] = triage.address
+                initial_data["city"] = triage.city
+                initial_data["street_number"] = triage.street_number
+                initial_data["route"] = triage.route
+                initial_data["country"] = triage.country
 
-            initial_data["msisdn"] = triage.msisdn
-            initial_data["first_name"] = triage.first_name
-            initial_data["last_name"] = triage.last_name
-            initial_data["age_range"] = triage.age
-            initial_data["gender"] = triage.gender
-            initial_data["province"] = triage.province
-            initial_data["address"] = triage.address
-            initial_data["city"] = triage.city
-            initial_data["street_number"] = triage.street_number
-            initial_data["route"] = triage.route
-            initial_data["country"] = triage.country
+                initial_data["facility_destination"] = triage.facility_destination
+                initial_data["facility_destination_province"] = triage.facility_destination_province
+                initial_data["facility_destination_university"] = triage.facility_destination_university
+                initial_data["facility_destination_campus"] = triage.facility_destination_campus
+                initial_data["facility_destination_reason"] = triage.facility_destination_reason
 
-            initial_data["facility_destination"] = triage.facility_destination
-            initial_data["facility_destination_province"] = triage.facility_destination_province
-            initial_data["facility_destination_university"] = triage.facility_destination_university
-            initial_data["facility_destination_campus"] = triage.facility_destination_campus
-            initial_data["facility_destination_reason"] = triage.facility_destination_reason
-
-            initial_data["history_obesity"] = triage.history_obesity
-            initial_data["history_diabetes"] = triage.history_diabetes
-            initial_data["history_hypertension"] = triage.history_hypertension
-            initial_data["history_cardiovascular"] = triage.history_cardiovascular
-            initial_data["history_other"] = triage.history_other
+                initial_data["history_obesity"] = triage.history_obesity
+                initial_data["history_diabetes"] = triage.history_diabetes
+                initial_data["history_hypertension"] = triage.history_hypertension
+                initial_data["history_cardiovascular"] = triage.history_cardiovascular
+                initial_data["history_other"] = triage.history_other
         return initial_data
 
 
