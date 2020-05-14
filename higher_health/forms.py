@@ -101,27 +101,27 @@ class HealthCheckQuestionnaire(forms.Form):
     history_obesity = forms.ChoiceField(
         label="Has a doctor or other health professional diagnosed you with Obesity?",
         widget=forms.RadioSelect,
-        choices=YES_NO,
+        choices=models.Covid19Triage.YesNoBoolChoice._choices(),
     )
     history_diabetes = forms.ChoiceField(
         label="Has a doctor or other health professional diagnosed you with Diabetes?",
         widget=forms.RadioSelect,
-        choices=YES_NO,
+        choices=models.Covid19Triage.YesNoBoolChoice._choices(),
     )
     history_hypertension = forms.ChoiceField(
         label="Has a doctor or other health professional diagnosed you with Hypertension?",
         widget=forms.RadioSelect,
-        choices=YES_NO,
+        choices=models.Covid19Triage.YesNoBoolChoice._choices(),
     )
     history_cardiovascular = forms.ChoiceField(
         label="Has a doctor or other health professional diagnosed you with Cardiovascular Disease?",
         widget=forms.RadioSelect,
-        choices=YES_NO,
+        choices=models.Covid19Triage.YesNoBoolChoice._choices(),
     )
     history_other = forms.ChoiceField(
         label="Do you have any other pre-existing medical conditions that we should be aware of?",
         widget=forms.RadioSelect,
-        choices=YES_NO_NOT_SURE,
+        choices=models.Covid19Triage.HistoryOtherChoice._choices(),
     )
 
     symptoms_fever = forms.ChoiceField(
@@ -208,8 +208,8 @@ class HealthCheckQuestionnaire(forms.Form):
                         ]["lng"]
                     else:
                         invalid_address = True
-
-        super(HealthCheckQuestionnaire, self).__init__(data, *args, **kwargs)
+            kwargs.update({"data": data})
+        super(HealthCheckQuestionnaire, self).__init__(*args, **kwargs)
 
         if invalid_address:
             self.add_error("address", "Invalid address")

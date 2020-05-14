@@ -52,6 +52,25 @@ class QuestionnaireTest(TestCase):
         self.assertEqual(initial_data["route"], data["route"])
         self.assertEqual(initial_data["country"], data["country"])
 
+        self.assertEqual(
+            initial_data["facility_destination"],
+            data['facility_destination']
+        )
+        self.assertEqual(
+            initial_data["facility_destination_province"],
+            data['facility_destination_province']
+        )
+        self.assertEqual(
+            initial_data["facility_destination_reason"],
+            data['facility_destination_reason']
+        )
+
+        self.assertEqual(initial_data["history_obesity"], data['history_obesity'])
+        self.assertEqual(initial_data["history_diabetes"], data['history_diabetes'])
+        self.assertEqual(initial_data["history_hypertension"], data['history_hypertension'])
+        self.assertEqual(initial_data["history_cardiovascular"], data['history_cardiovascular'])
+        self.assertEqual(initial_data["history_other"], data['history_other'])
+
     def test_get_with_invalid_triage_id_in_session(self):
         session = self.client.session
         session["triage_id"] = str(uuid.uuid4())

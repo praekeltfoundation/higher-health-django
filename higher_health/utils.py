@@ -42,6 +42,7 @@ def get_location(data):
 
 
 def save_data(data):
+
     return Covid19Triage.objects.create(
         **{
             "source": "WEB",
@@ -67,5 +68,17 @@ def save_data(data):
             "street_number": data["street_number"],
             "route": data["route"],
             "country": data["country"],
+
+            "facility_destination": data.get("facility_destination"),
+            "facility_destination_province": data.get("facility_destination_province"),
+            "facility_destination_university": data.get("facility_destination_university"),
+            "facility_destination_campus": data.get("facility_destination_campus"),
+            "facility_destination_reason": data.get("facility_destination_reason"),
+
+            "history_obesity": data.get("history_obesity"),
+            "history_diabetes": data.get("history_diabetes"),
+            "history_hypertension": data.get("history_hypertension"),
+            "history_cardiovascular": data.get("history_cardiovascular"),
+            "history_other": data.get("history_other"),
         }
     )
