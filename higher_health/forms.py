@@ -77,8 +77,6 @@ class HealthCheckQuestionnaire(forms.Form):
 
     DESTINATION_CHOICES = (('office', 'Office'), ('campus', 'Campus'))
     REASON_CHOICES = (('student', 'Student'), ('staff', 'Staff'), ('visitor', 'Visitor'))
-    UNIVERSITY_CHOICES = ()
-    CAMPUS_CHOICES = ()
 
     facility_destination = forms.ChoiceField(
         label='Destination',
@@ -231,18 +229,20 @@ class HealthCheckQuestionnaire(forms.Form):
     def clean(self):
         cleaned_data = super(HealthCheckQuestionnaire, self).clean()
 
+        errors = dict()
         required = 'This field is required.'
         going_to_campus = cleaned_data.get('facility_destination') == 'campus'
-
         if going_to_campus:
             campus = cleaned_data.get('facility_destination_campus')
             university = cleaned_data.get('facility_destination_university')
 
             if not university:
-                raise forms.ValidationError({'facility_destination_university', required})
+                errors.update({'facility_destination_university': required})
             if not campus:
-                raise forms.ValidationError({'facility_destination_campus', required})
+                errors.update({'facility_destination_campus': required})
 
+        if errors:
+            raise forms.ValidationError(errors)
         return cleaned_data
 
 
