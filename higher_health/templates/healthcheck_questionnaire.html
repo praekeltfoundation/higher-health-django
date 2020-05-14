@@ -99,9 +99,7 @@
               <ul id="medical" class="fieldset">
                 {% for field in form %}
                   {% if "facility_" in field.name %}
-                    {% if field.name == "facility_destination" %}
-                      <h3 class="subheading">Where are you going today?</h3>
-                    {% elif field.name == "facility_destination_university" %}
+                    {% if field.name == "facility_destination_university" %}
                       <h3 class="subheading">Educational institution information</h3>
                     {% endif %}
 
