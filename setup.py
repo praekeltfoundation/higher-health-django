@@ -18,7 +18,6 @@ setup(
         "pycountry==19.8.18",
         "phonenumberslite==8.9.15",
         "requests==2.22.0",
-        "factory-boy~=2.12.0",
     ],
     classifiers=[
         "Development Status :: 4 - Beta",
