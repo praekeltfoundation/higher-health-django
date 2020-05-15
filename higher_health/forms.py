@@ -94,10 +94,11 @@ class HealthCheckQuestionnaire(forms.Form):
     facility_destination_reason = forms.ChoiceField(
         label="", choices=REASON_CHOICES, widget=forms.RadioSelect
     )
-    history_other = forms.ChoiceField(
+    history_pre_existing_condition = forms.ChoiceField(
         label="Do you have any other pre-existing medical conditions that we should be aware of?",
         widget=forms.RadioSelect,
-        choices=models.Covid19Triage.HistoryOtherChoice._choices(),
+        choices=models.Covid19Triage.EXPOSURE_CHOICES,
+        required=True
     )
     history_obesity = forms.ChoiceField(
         label="Has a doctor or other health professional diagnosed you with Obesity?",
@@ -158,12 +159,6 @@ class HealthCheckQuestionnaire(forms.Form):
     )
     medical_exposure = forms.ChoiceField(
         label="Have you recently been in close contact to someone confirmed to be infected with COVID-19?",
-        choices=YES_NO_NOT_SURE,
-        widget=forms.RadioSelect,
-        required=True,
-    )
-    medical_pre_existing_condition = forms.ChoiceField(
-        label="Do you have a pre-existing medical condition we should be aware of? (Examples: lung disease, heart disease, diabetes with complications, TB, HIV)",
         choices=YES_NO_NOT_SURE,
         widget=forms.RadioSelect,
         required=True,

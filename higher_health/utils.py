@@ -59,7 +59,7 @@ def save_data(data):
             "exposure": data["medical_exposure"],
             "muscle_pain": "yes" == data["symptoms_muscles_hurt"],
             "smell": "yes" == data["symptoms_taste"],
-            "preexisting_condition": data["medical_pre_existing_condition"],
+            "preexisting_condition": data["history_pre_existing_condition"],
             "risk": data["risk_level"],
             "location": get_location(data),
             "confirm_accuracy": "yes" == data["medical_confirm_accuracy"],
@@ -77,7 +77,6 @@ def save_data(data):
             "history_obesity": data.get("history_obesity"),
             "history_diabetes": data.get("history_diabetes"),
             "history_hypertension": data.get("history_hypertension"),
-            "history_cardiovascular": data.get("history_cardiovascular"),
-            "history_other": data.get("history_other"),
+            "history_cardiovascular": data.get("history_cardiovascular")
         }
     )

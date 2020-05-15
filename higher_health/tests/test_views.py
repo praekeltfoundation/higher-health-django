@@ -71,7 +71,6 @@ class QuestionnaireTest(TestCase):
         self.assertEqual(
             initial_data["history_cardiovascular"], data["history_cardiovascular"]
         )
-        self.assertEqual(initial_data["history_other"], data["history_other"])
 
     def test_get_with_invalid_triage_id_in_session(self):
         session = self.client.session
@@ -112,7 +111,7 @@ class QuestionnaireTest(TestCase):
         self.assertEqual(errors["symptoms_taste"], ["This field is required."])
         self.assertEqual(errors["medical_exposure"], ["This field is required."])
         self.assertEqual(
-            errors["medical_pre_existing_condition"], ["This field is required."]
+            errors["history_pre_existing_condition"], ["This field is required."]
         )
         self.assertEqual(
             errors["medical_confirm_accuracy"], ["This field is required."]
@@ -153,7 +152,7 @@ class QuestionnaireTest(TestCase):
         )
 
         response = self.client.post(reverse("healthcheck_questionnaire"), data)
-
+        print(response.content)
         self.assertEqual(response.status_code, 302)
 
         places_call = responses.calls[0]
