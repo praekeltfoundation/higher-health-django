@@ -1,8 +1,7 @@
 from django.contrib import admin
 from import_export.admin import ImportExportActionModelAdmin
 
-from . import models
-from . import resources
+from . import models, resources
 
 
 @admin.register(models.University)
