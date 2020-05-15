@@ -142,9 +142,6 @@ class Covid19Triage(models.Model):
         blank=True,
         default="",
     )
-    facility_destination_province = models.CharField(
-        max_length=6, choices=PROVINCE_CHOICES, null=True, blank=True
-    )
     facility_destination_university = models.ForeignKey(
         University, null=True, blank=True, on_delete=models.CASCADE
     )
