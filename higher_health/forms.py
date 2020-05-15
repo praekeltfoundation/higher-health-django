@@ -61,11 +61,7 @@ class HealthCheckQuestionnaire(forms.Form):
         ),
         required=True,
     )
-    province = forms.ChoiceField(
-        label="In which Province are you currently residing?",
-        choices=PROVINCE_CHOICES,
-        required=True,
-    )
+
     latitude = forms.CharField(widget=forms.HiddenInput())
     longitude = forms.CharField(widget=forms.HiddenInput())
     city = forms.CharField(required=False)
