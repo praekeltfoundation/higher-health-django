@@ -71,7 +71,11 @@ class HealthCheckQuestionnaire(forms.Form):
     route = forms.CharField(required=False)
     country = forms.CharField(required=False)
 
-    DESTINATION_CHOICES = (("office", "Office"), ("campus", "Campus (Student/Staff)"))
+    DESTINATION_CHOICES = (
+        ("campus", "Campus (Student/Staff)"),
+        ("office", "Office")
+    )
+
     REASON_CHOICES = (
         ("student", "Student"),
         ("staff", "Staff"),
@@ -79,10 +83,10 @@ class HealthCheckQuestionnaire(forms.Form):
     )
 
     facility_destination = forms.ChoiceField(
-        label="Destination", choices=DESTINATION_CHOICES, widget=forms.RadioSelect
+        label="", choices=DESTINATION_CHOICES, widget=forms.RadioSelect
     )
     facility_destination_province = forms.ChoiceField(
-        label="Province", choices=PROVINCE_CHOICES
+        label="", choices=PROVINCE_CHOICES
     )
     facility_destination_university = forms.ModelChoiceField(
         label="University", queryset=models.University.objects.all(), required=False
@@ -93,7 +97,11 @@ class HealthCheckQuestionnaire(forms.Form):
     facility_destination_reason = forms.ChoiceField(
         label="", choices=REASON_CHOICES, widget=forms.RadioSelect
     )
-
+    history_other = forms.ChoiceField(
+        label="Do you have any other pre-existing medical conditions that we should be aware of?",
+        widget=forms.RadioSelect,
+        choices=models.Covid19Triage.HistoryOtherChoice._choices(),
+    )
     history_obesity = forms.ChoiceField(
         label="Has a doctor or other health professional diagnosed you with Obesity?",
         widget=forms.RadioSelect,
@@ -113,11 +121,6 @@ class HealthCheckQuestionnaire(forms.Form):
         label="Has a doctor or other health professional diagnosed you with Cardiovascular Disease?",
         widget=forms.RadioSelect,
         choices=models.Covid19Triage.YesNoBoolChoice._choices(),
-    )
-    history_other = forms.ChoiceField(
-        label="Do you have any other pre-existing medical conditions that we should be aware of?",
-        widget=forms.RadioSelect,
-        choices=models.Covid19Triage.HistoryOtherChoice._choices(),
     )
 
     symptoms_fever = forms.ChoiceField(
