@@ -247,6 +247,44 @@
         });
       }
     }
+
+    var province_selector = document.getElementById("id_facility_destination_province");
+    var university_selector = document.getElementById("id_facility_destination_university");
+
+    province_selector.addEventListener(
+     'change',
+       function() { getUniversities(this.val); },
+       false
+    );
+
+    university_selector.addEventListener(
+     'change',
+       function() { getCampuses(this.val); },
+       false
+    );
+
+    function getUniversities(prov){
+      var url = "{% url 'ajax_load_universities' %}" +'?province='+ prov;
+      var xhttp = new XMLHttpRequest();
+      xhttp.onreadystatechange = function() {
+          if (this.readyState == 4 && this.status == 200) {
+             document.getElementById("id_facility_destination_university").innerHTML = xhttp.responseText;
+          }
+      };
+      xhttp.open("GET", url, true);
+    }
+
+    function getCampuses(uni){
+      var url = "{% url 'ajax_load_campuses' %}" +'?university='+ uni;
+      var xhttp = new XMLHttpRequest();
+      xhttp.onreadystatechange = function() {
+          if (this.readyState == 4 && this.status == 200) {
+             document.getElementById("id_facility_destination_campus").innerHTML = xhttp.responseText;
+          }
+      };
+      xhttp.open("GET", url, true);
+    }
+
   </script>
   <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key={{PLACES_API_KEY}}&libraries=places&callback=initAutocomplete"
       async defer></script>
