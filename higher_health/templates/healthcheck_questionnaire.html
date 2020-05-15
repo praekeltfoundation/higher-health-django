@@ -162,6 +162,58 @@
 {% block form_js %}
   <script type="text/javascript">
   "use strict";
+
+    let universities = {
+      {% for uni in form.fields.facility_destination_university.choices.queryset %}
+         "{{ uni.pk }}": "{{ uni.province }}" {% if not forloop.last %},{% endif %}
+      {% endfor %}
+    };
+
+    let campuses = {
+      {% for camp in form.fields.facility_destination_campus.choices.queryset %}
+         "{{ camp.pk }}": "{{ camp.university.pk }}" {% if not forloop.last %},{% endif %}
+      {% endfor %}
+    };
+
+    let prov = document.getElementById('id_facility_destination_province');
+    let camp = document.getElementById('id_facility_destination_campus');
+    let uni = document.getElementById('id_facility_destination_university');
+
+    let selected_province = uni.options[prov.selectedIndex];
+    let selected_university = uni.options[uni.selectedIndex];
+    if(selected_province.value !== '') showProvinceUniversities(selected_province.value);
+    if(selected_university.value !== '') showUniversityCampuses(selected_university.value);
+
+    prov.addEventListener('change', function(){
+      showProvinceUniversities(this.value);
+    });
+
+    uni.addEventListener('change', function(){
+      showUniversityCampuses(this.value);
+    });
+
+    function showProvinceUniversities(province){
+      for(let i=0; i < uni.options.length; i++){
+        if(universities[uni.options[i].value] !== province) {
+          uni.options[i].classList.add('hidden');
+        }
+        else {
+          uni.options[i].classList.remove('hidden');
+        }
+      }
+    }
+
+    function showUniversityCampuses(university){
+      for(let i=0; i < camp.options.length; i++){
+        if(campuses[camp.options[i].value] !== university) {
+          camp.options[i].classList.add('hidden');
+        }
+        else {
+          camp.options[i].classList.remove('hidden');
+        }
+      }
+    }
+
     const checkbox = document.getElementById('healthcheck_terms'),
       questionnairesForm = document.getElementById('questionnaires'),
       addressField = document.getElementById('autocomplete'),
