@@ -20,7 +20,7 @@ class University(models.Model):
     province = models.CharField(choices=PROVINCE_CHOICES, max_length=100)
 
     def __str__(self):
-        return self.name
+        return "{0} ({1})".format(self.name, self.get_province_display())
 
 
 class Campus(models.Model):
@@ -28,7 +28,7 @@ class Campus(models.Model):
     university = models.ForeignKey(University, on_delete=models.CASCADE)
 
     def __str__(self):
-        return self.name
+        return "{0} ({1})".format(self.name, self.university.name)
 
 
 class Covid19Triage(models.Model):

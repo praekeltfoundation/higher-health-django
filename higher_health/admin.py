@@ -1,17 +1,20 @@
 from django.contrib import admin
+from import_export.admin import ImportExportActionModelAdmin
 
-from . import models
+from . import models, resources
 
 
 @admin.register(models.University)
-class UniversityAdmin(admin.ModelAdmin):
+class UniversityAdmin(ImportExportActionModelAdmin, admin.ModelAdmin):
+    resource_class = resources.UniversityResource
     list_display = ["name", "province"]
     list_filter = ["province"]
     search_fields = ["name"]
 
 
 @admin.register(models.Campus)
-class CampusAdmin(admin.ModelAdmin):
+class CampusAdmin(ImportExportActionModelAdmin, admin.ModelAdmin):
+    resource_class = resources.CampusResource
     list_display = ["name", "university"]
     list_filter = ["university"]
     search_fields = ["name"]
