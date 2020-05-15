@@ -27,5 +27,5 @@ def get_data(symptoms=0, exposure=False, age="<18", pre_existing_condition="not_
         "history_obesity": False,
         "history_diabetes": False,
         "history_hypertension": False,
-        "history_cardiovascular": False
+        "history_cardiovascular": False,
     }

@@ -77,6 +77,6 @@ def save_data(data):
             "history_obesity": data.get("history_obesity"),
             "history_diabetes": data.get("history_diabetes"),
             "history_hypertension": data.get("history_hypertension"),
-            "history_cardiovascular": data.get("history_cardiovascular")
+            "history_cardiovascular": data.get("history_cardiovascular"),
         }
     )

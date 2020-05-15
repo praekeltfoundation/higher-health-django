@@ -98,27 +98,31 @@ class HealthCheckQuestionnaire(forms.Form):
         label="Do you have any other pre-existing medical conditions that we should be aware of?",
         widget=forms.RadioSelect,
         choices=models.Covid19Triage.EXPOSURE_CHOICES,
-        required=True
+        required=True,
     )
     history_obesity = forms.ChoiceField(
         label="Has a doctor or other health professional diagnosed you with Obesity?",
         widget=forms.RadioSelect,
         choices=models.Covid19Triage.YesNoBoolChoice._choices(),
+        required=False,
     )
     history_diabetes = forms.ChoiceField(
         label="Has a doctor or other health professional diagnosed you with Diabetes?",
         widget=forms.RadioSelect,
         choices=models.Covid19Triage.YesNoBoolChoice._choices(),
+        required=False,
     )
     history_hypertension = forms.ChoiceField(
         label="Has a doctor or other health professional diagnosed you with Hypertension?",
         widget=forms.RadioSelect,
         choices=models.Covid19Triage.YesNoBoolChoice._choices(),
+        required=False,
     )
     history_cardiovascular = forms.ChoiceField(
         label="Has a doctor or other health professional diagnosed you with Cardiovascular Disease?",
         widget=forms.RadioSelect,
         choices=models.Covid19Triage.YesNoBoolChoice._choices(),
+        required=False,
     )
 
     symptoms_fever = forms.ChoiceField(
@@ -247,6 +251,28 @@ class HealthCheckQuestionnaire(forms.Form):
                         )
                     }
                 )
+
+        has_pre_existing_conditions = (
+            cleaned_data.get("history_pre_existing_condition") == "yes"
+        )
+
+        if has_pre_existing_conditions:
+            cardiovascular = cleaned_data.get("history_cardiovascular")
+            obesity = cleaned_data.get("history_obesity")
+            diabetes = cleaned_data.get("history_diabetes")
+            hypertension = cleaned_data.get("history_hypertension")
+
+            if not cardiovascular:
+                errors.update({"history_cardiovascular": required})
+
+            if not obesity:
+                errors.update({"history_obesity": required})
+
+            if not diabetes:
+                errors.update({"history_diabetes": required})
+
+            if not hypertension:
+                errors.update({"history_hypertension": required})
 
         if errors:
             raise forms.ValidationError(errors)
