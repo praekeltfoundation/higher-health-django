@@ -82,16 +82,6 @@ class Covid19Triage(models.Model):
         Yes = True
         No = False
 
-    class HistoryOtherChoice(Choice):
-        """
-        Choices for FE field:
-        Do you have any other pre-existing medical conditions that we should be aware of?
-        """
-
-        Yes = 1
-        No = 2
-        Maybe = 3
-
     class FacilityDestinationChoice(Choice):
         Office = "office"
         Campus = "campus"
@@ -158,9 +148,6 @@ class Covid19Triage(models.Model):
     history_diabetes = models.BooleanField(default=False)
     history_hypertension = models.BooleanField(default=False)
     history_cardiovascular = models.BooleanField(default=False)
-    history_other = models.SmallIntegerField(
-        default=HistoryOtherChoice.No.value, choices=HistoryOtherChoice._choices()
-    )
 
     @property
     def hashed_msisdn(self):

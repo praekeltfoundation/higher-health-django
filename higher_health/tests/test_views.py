@@ -71,7 +71,6 @@ class QuestionnaireTest(TestCase):
         self.assertEqual(
             initial_data["history_cardiovascular"], data["history_cardiovascular"]
         )
-        self.assertEqual(initial_data["history_other"], data["history_other"])
 
     def test_get_with_invalid_triage_id_in_session(self):
         session = self.client.session
@@ -112,7 +111,7 @@ class QuestionnaireTest(TestCase):
         self.assertEqual(errors["symptoms_taste"], ["This field is required."])
         self.assertEqual(errors["medical_exposure"], ["This field is required."])
         self.assertEqual(
-            errors["medical_pre_existing_condition"], ["This field is required."]
+            errors["history_pre_existing_condition"], ["This field is required."]
         )
         self.assertEqual(
             errors["medical_confirm_accuracy"], ["This field is required."]
@@ -278,6 +277,89 @@ class QuestionnaireTest(TestCase):
         self.assertEqual(
             triage.location, get_location({"latitude": "11.1", "longitude": "22.2"})
         )
+
+    @responses.activate
+    def test_post_pre_existing_conditions(self):
+        data = get_data()
+        data["facility_destination"] = "office"
+        data["latitude"] = ""
+        data["latitude"] = ""
+        data["longitude"] = ""
+        data["address"] = "4 friend street woodstock"
+        data["history_pre_existing_condition"] = "yes"
+        data["history_cardiovascular"] = ""
+        data["history_hypertension"] = ""
+        data["history_diabetes"] = ""
+        data["history_obesity"] = ""
+
+        places_url = "https://maps.googleapis.com/maps/api/place/findplacefromtext/json?key=TEST_API_KEY&input=4+friend+street+woodstock&inputtype=textquery&language=en&fields=geometry"
+
+        responses.add(
+            responses.GET,
+            places_url,
+            json={
+                "candidates": [
+                    {"geometry": {"location": {"lat": "11.1", "lng": "22.2"}}}
+                ]
+            },
+            status=200,
+            match_querystring=True,
+        )
+
+        response = self.client.post(reverse("healthcheck_questionnaire"), data)
+
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(
+            response.context["form"].errors,
+            {
+                "history_cardiovascular": ["This field is required."],
+                "history_hypertension": ["This field is required."],
+                "history_diabetes": ["This field is required."],
+                "history_obesity": ["This field is required."],
+            },
+        )
+
+        data.update(
+            {
+                "history_cardiovascular": "True",
+                "history_hypertension": "True",
+                "history_diabetes": "False",
+                "history_obesity": "False",
+            }
+        )
+
+        response = self.client.post(reverse("healthcheck_questionnaire"), data)
+        self.assertEqual(response.status_code, 302)
+
+        places_call = responses.calls[0]
+        self.assertEqual(places_call.request.method, "GET")
+        self.assertEqual(places_call.request.url, places_url)
+
+        [triage] = Covid19Triage.objects.all()
+
+        self.assertEqual(triage.age, "<18")
+        self.assertFalse(triage.fever)
+        self.assertFalse(triage.cough)
+        self.assertFalse(triage.sore_throat)
+        self.assertFalse(triage.difficulty_breathing)
+        self.assertFalse(triage.muscle_pain)
+        self.assertFalse(triage.smell)
+        self.assertEqual(triage.exposure, "no")
+        self.assertEqual(triage.msisdn, "+27831231234")
+        self.assertEqual(triage.first_name, "Jane")
+        self.assertEqual(triage.last_name, "Smith")
+        self.assertEqual(triage.province, "ZA-WC")
+        self.assertEqual(triage.city, "Cape Town")
+        self.assertEqual(triage.gender, "female")
+        self.assertEqual(triage.address, "4 friend street woodstock")
+        self.assertEqual(
+            triage.location, get_location({"latitude": "11.1", "longitude": "22.2"})
+        )
+        self.assertEqual(triage.preexisting_condition, "yes")
+        self.assertTrue(triage.history_cardiovascular)
+        self.assertTrue(triage.history_hypertension)
+        self.assertFalse(triage.history_diabetes)
+        self.assertFalse(triage.history_obesity)
 
     @responses.activate
     def test_post_get_coordinates_from_invalid_address(self):

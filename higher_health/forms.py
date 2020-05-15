@@ -86,7 +86,9 @@ class HealthCheckQuestionnaire(forms.Form):
         label="", choices=PROVINCE_CHOICES
     )
     facility_destination_university = forms.ModelChoiceField(
-        label="University", queryset=models.University.objects.all(), required=False
+        label="University / TVET",
+        queryset=models.University.objects.all(),
+        required=False,
     )
     facility_destination_campus = forms.ModelChoiceField(
         label="Campus", queryset=models.Campus.objects.all(), required=False
@@ -94,30 +96,35 @@ class HealthCheckQuestionnaire(forms.Form):
     facility_destination_reason = forms.ChoiceField(
         label="", choices=REASON_CHOICES, widget=forms.RadioSelect
     )
-    history_other = forms.ChoiceField(
+    history_pre_existing_condition = forms.ChoiceField(
         label="Do you have any other pre-existing medical conditions that we should be aware of?",
         widget=forms.RadioSelect,
-        choices=models.Covid19Triage.HistoryOtherChoice._choices(),
+        choices=models.Covid19Triage.EXPOSURE_CHOICES,
+        required=True,
     )
     history_obesity = forms.ChoiceField(
         label="Has a doctor or other health professional diagnosed you with Obesity?",
         widget=forms.RadioSelect,
         choices=models.Covid19Triage.YesNoBoolChoice._choices(),
+        required=False,
     )
     history_diabetes = forms.ChoiceField(
         label="Has a doctor or other health professional diagnosed you with Diabetes?",
         widget=forms.RadioSelect,
         choices=models.Covid19Triage.YesNoBoolChoice._choices(),
+        required=False,
     )
     history_hypertension = forms.ChoiceField(
         label="Has a doctor or other health professional diagnosed you with Hypertension?",
         widget=forms.RadioSelect,
         choices=models.Covid19Triage.YesNoBoolChoice._choices(),
+        required=False,
     )
     history_cardiovascular = forms.ChoiceField(
         label="Has a doctor or other health professional diagnosed you with Cardiovascular Disease?",
         widget=forms.RadioSelect,
         choices=models.Covid19Triage.YesNoBoolChoice._choices(),
+        required=False,
     )
 
     symptoms_fever = forms.ChoiceField(
@@ -133,7 +140,7 @@ class HealthCheckQuestionnaire(forms.Form):
         required=True,
     )
     symptoms_sore_throat = forms.ChoiceField(
-        label="Do you have a sore throat or pain when swallowing?",
+        label="Do you have a sore throat or pain when swallowing that recently started?",
         choices=YES_NO,
         widget=forms.RadioSelect,
         required=True,
@@ -162,14 +169,8 @@ class HealthCheckQuestionnaire(forms.Form):
         widget=forms.RadioSelect,
         required=True,
     )
-    medical_pre_existing_condition = forms.ChoiceField(
-        label="Do you have a pre-existing medical condition we should be aware of? (Examples: lung disease, heart disease, diabetes with complications, TB, HIV)",
-        choices=YES_NO_NOT_SURE,
-        widget=forms.RadioSelect,
-        required=True,
-    )
     medical_confirm_accuracy = forms.ChoiceField(
-        label="Please confirm that the information you shared is accurate to the best of your knowledge and that you give the National Department of Health permission to contact you if necessary?",
+        label="Please confirm that the information you shared is accurate to the best of your knowledge. Once you click the SUBMIT button, you will be unable to complete another HealthCheck for the next 24hours. Please note that the National Department of Health may contact you if necessary based on your responses?",
         choices=YES_NO,
         widget=forms.RadioSelect,
         required=True,
@@ -252,6 +253,28 @@ class HealthCheckQuestionnaire(forms.Form):
                         )
                     }
                 )
+
+        has_pre_existing_conditions = (
+            cleaned_data.get("history_pre_existing_condition") == "yes"
+        )
+
+        if has_pre_existing_conditions:
+            cardiovascular = cleaned_data.get("history_cardiovascular")
+            obesity = cleaned_data.get("history_obesity")
+            diabetes = cleaned_data.get("history_diabetes")
+            hypertension = cleaned_data.get("history_hypertension")
+
+            if not cardiovascular:
+                errors.update({"history_cardiovascular": required})
+
+            if not obesity:
+                errors.update({"history_obesity": required})
+
+            if not diabetes:
+                errors.update({"history_diabetes": required})
+
+            if not hypertension:
+                errors.update({"history_hypertension": required})
 
         if errors:
             raise forms.ValidationError(errors)

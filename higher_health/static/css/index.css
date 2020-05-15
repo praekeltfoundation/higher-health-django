@@ -307,6 +307,7 @@ a:hover {
   position: relative;
 }
 .login-form__location,
+.login-form__preexistingconditionsForm,
 .login-form__medical {
   background: #fff;
   border-radius: 5px;
@@ -386,7 +387,8 @@ label {
 .radio-value {
   color: var(--very-dark-desaturated-cyan);
 }
-#medical input[type="radio"] {
+#medical input[type="radio"],
+.login-form__medical input[type="radio"]{
   margin: 10px;
   height: auto;
   width: auto;
@@ -539,6 +541,7 @@ textarea {
     FORM
   */
   .login-form__location,
+  .login-form__preexistingconditionsForm,
   .login-form__medical {
     margin: 2em auto 1em;
     padding: 2em;

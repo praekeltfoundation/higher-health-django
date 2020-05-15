@@ -8,7 +8,6 @@ def get_data(symptoms=0, exposure=False, age="<18", pre_existing_condition="not_
         "symptoms_muscles_hurt": "no",
         "symptoms_taste": "no",
         "medical_exposure": "yes" if exposure else "no",
-        "medical_pre_existing_condition": pre_existing_condition,
         "medical_confirm_accuracy": "yes",
         "latitude": "53.3913081",
         "longitude": "-2.109429099999999",
@@ -24,9 +23,9 @@ def get_data(symptoms=0, exposure=False, age="<18", pre_existing_condition="not_
         "facility_destination": "office",
         "facility_destination_province": "ZA-WC",
         "facility_destination_reason": "staff",
+        "history_pre_existing_condition": pre_existing_condition,
         "history_obesity": False,
         "history_diabetes": False,
         "history_hypertension": False,
         "history_cardiovascular": False,
-        "history_other": 2,
     }

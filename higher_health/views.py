@@ -54,7 +54,9 @@ class HealthCheckQuestionnaireView(generic.FormView):
                 initial_data["history_diabetes"] = triage.history_diabetes
                 initial_data["history_hypertension"] = triage.history_hypertension
                 initial_data["history_cardiovascular"] = triage.history_cardiovascular
-                initial_data["history_other"] = triage.history_other
+                initial_data[
+                    "history_pre_existing_condition"
+                ] = triage.preexisting_condition
         return initial_data
 
 
