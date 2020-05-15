@@ -240,7 +240,7 @@ class QuestionnaireTest(TestCase):
                     "Please select a university that is in ZA-WC."
                 ],
                 "facility_destination_campus": [
-                    "Please select a campus that is in University."
+                    "Please select a campus that is in University (Eastern Cape)."
                 ],
             },
         )
