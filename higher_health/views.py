@@ -32,7 +32,6 @@ class HealthCheckQuestionnaireView(generic.FormView):
                 initial_data["last_name"] = triage.last_name
                 initial_data["age_range"] = triage.age
                 initial_data["gender"] = triage.gender
-                initial_data["province"] = triage.province
                 initial_data["address"] = triage.address
                 initial_data["city"] = triage.city
                 initial_data["street_number"] = triage.street_number
@@ -40,9 +39,7 @@ class HealthCheckQuestionnaireView(generic.FormView):
                 initial_data["country"] = triage.country
 
                 initial_data["facility_destination"] = triage.facility_destination
-                initial_data[
-                    "facility_destination_province"
-                ] = triage.facility_destination_province
+                initial_data["facility_destination_province"] = triage.province
                 initial_data[
                     "facility_destination_university"
                 ] = triage.facility_destination_university

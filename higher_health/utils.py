@@ -49,7 +49,7 @@ def save_data(data):
             "msisdn": data["msisdn"],
             "first_name": data["first_name"],
             "last_name": data["last_name"],
-            "province": data["province"],
+            "province": data["facility_destination_province"],
             "city": data["city"],
             "age": data["age_range"],
             "fever": "yes" == data["symptoms_fever"],
@@ -69,7 +69,6 @@ def save_data(data):
             "route": data["route"],
             "country": data["country"],
             "facility_destination": data.get("facility_destination"),
-            "facility_destination_province": data.get("facility_destination_province"),
             "facility_destination_university": data.get(
                 "facility_destination_university"
             ),

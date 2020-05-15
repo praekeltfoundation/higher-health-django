@@ -61,11 +61,7 @@ class HealthCheckQuestionnaire(forms.Form):
         ),
         required=True,
     )
-    province = forms.ChoiceField(
-        label="In which Province are you currently residing?",
-        choices=PROVINCE_CHOICES,
-        required=True,
-    )
+
     latitude = forms.CharField(widget=forms.HiddenInput())
     longitude = forms.CharField(widget=forms.HiddenInput())
     city = forms.CharField(required=False)
@@ -95,7 +91,7 @@ class HealthCheckQuestionnaire(forms.Form):
         label="Campus", queryset=models.Campus.objects.all(), required=False
     )
     facility_destination_reason = forms.ChoiceField(
-        label="Reason", choices=REASON_CHOICES, widget=forms.RadioSelect
+        label="", choices=REASON_CHOICES, widget=forms.RadioSelect
     )
 
     history_obesity = forms.ChoiceField(

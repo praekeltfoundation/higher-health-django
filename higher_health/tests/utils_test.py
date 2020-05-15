@@ -15,7 +15,6 @@ def get_data(symptoms=0, exposure=False, age="<18", pre_existing_condition="not_
         "msisdn": "+27831231234",
         "first_name": "Jane",
         "last_name": "Smith",
-        "province": "ZA-WC",
         "city": "Cape Town",
         "gender": "female",
         "address": "",
