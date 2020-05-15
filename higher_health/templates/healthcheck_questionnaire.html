@@ -115,9 +115,16 @@
 
             <div class="login-form__medical">
               <h2 class="heading-secondary">Medical History</h2>
-              <ul id="medical" class="fieldset">
+              <ul class="fieldset">
+                <li>
+                  <label for="{{ form.history_pre_existing_condition.name }}" class="label">{{ form.history_pre_existing_condition.label }}</label>
+                  {{form.history_pre_existing_condition.errors}}
+                  {{ form.history_pre_existing_condition }}
+                </li>
+              </ul>
+              <ul id="preexistingconditionsForm" class="fieldset">
                 {% for field in form %}
-                  {% if "history_" in field.name %}
+                  {% if "history_" in field.name and field.name != 'history_pre_existing_condition' %}
                     <li>
                       <label for="{{ field.name }}" class="label">{{ field.label }}</label>
                       {{field.errors}}
@@ -158,7 +165,10 @@
   "use strict";
     const checkbox = document.getElementById('healthcheck_terms'),
       questionnairesForm = document.getElementById('questionnaires'),
-      addressField = document.getElementById('autocomplete');
+      addressField = document.getElementById('autocomplete'),
+      preexistingconditionsYes= document.getElementById('id_history_pre_existing_condition_0'),
+      preexistingconditionsNo= document.getElementById('id_history_pre_existing_condition_1'),
+      preexistingconditionsNotsure= document.getElementById('id_history_pre_existing_condition_2');
 
     document.addEventListener('DOMContentLoaded',function(e) {
       //Review & cleanup
@@ -181,6 +191,44 @@
           sessionStorage.setItem('checkbox', 'false');
           questionnairesForm.classList.add('hidden');
           questionnairesForm.classList.remove('showing');
+        }
+      });
+
+      //Pre-existing conditions Yes & cleanup
+      let preexistingRadioKey = sessionStorage.getItem('preexistingRadio');
+      if(preexistingRadioKey === 'true') {
+        preexistingconditionsYes.checked = true;
+        preexistingconditionsForm.classList.add('showing');
+        preexistingconditionsForm.classList.remove('hidden');
+      } else {
+        preexistingconditionsYes.checked = false;
+        preexistingconditionsForm.classList.add('hidden');
+        preexistingconditionsForm.classList.remove('showing');
+      }
+      preexistingconditionsYes.addEventListener('change', function(e){
+        if (e.target.checked) {
+          sessionStorage.setItem('preexistingRadio', 'true');
+          preexistingconditionsForm.classList.add('showing');
+          preexistingconditionsForm.classList.remove('hidden');
+        } else {
+          sessionStorage.setItem('preexistingRadio', 'false');
+          preexistingconditionsForm.classList.add('hidden');
+          preexistingconditionsForm.classList.remove('showing');
+        }
+      });
+
+      preexistingconditionsNo.addEventListener('change', function(e){
+        if (e.target.checked) {
+          sessionStorage.setItem('preexistingRadio', 'false');
+          preexistingconditionsForm.classList.add('hidden');
+          preexistingconditionsForm.classList.remove('showing');
+        }
+      });
+      preexistingconditionsNotsure.addEventListener('change', function(e){
+        if (e.target.checked) {
+          sessionStorage.setItem('preexistingRadio', 'false');
+          preexistingconditionsForm.classList.add('hidden');
+          preexistingconditionsForm.classList.remove('showing');
         }
       });
     });
