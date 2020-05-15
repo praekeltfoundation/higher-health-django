@@ -11,6 +11,27 @@ from . import factories
 from .utils_test import get_data
 
 
+class TestLoadUniversities(TestCase):
+
+    def test_view(self):
+        university = factories.UniversityFactory()
+        url = reverse('ajax_load_universities')
+        responce = self.client.get(url + "?province=ZA-WC")
+        self.assertEqual(responce.status_code, 200)
+        self.assertIn(university.name, str(responce.content))
+
+
+class TestLoadCampuses(TestCase):
+
+    def test_view(self):
+        university = factories.UniversityFactory()
+        campus = factories.CampusFactory(university=university)
+        url = reverse('ajax_load_campuses')
+        responce = self.client.get(url + "?university=" + str(university.pk))
+        self.assertEqual(responce.status_code, 200)
+        self.assertIn(campus.name, str(responce.content))
+
+
 class QuestionnaireTest(TestCase):
     def test_get_with_empty_session(self):
         response = self.client.get(reverse("healthcheck_questionnaire"))

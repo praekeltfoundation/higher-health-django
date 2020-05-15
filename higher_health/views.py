@@ -4,7 +4,7 @@ from django.urls import reverse_lazy
 from django.views import generic
 
 from .forms import HealthCheckLogin, HealthCheckQuestionnaire
-from .models import Covid19Triage
+from .models import Covid19Triage, Campus, University
 from .utils import get_risk_level, save_data
 
 
@@ -87,3 +87,25 @@ def healthcheck_login(request):
 def healthcheck_terms(request, extra_context=None, template=("healthcheck_terms.html")):
     locale_code = request.GET.get("locale")
     return render(request, template, {"locale_code": locale_code})
+
+
+def load_universities(request):
+    province = request.GET.get('province')
+    objects = University.objects.filter(
+        province=province).order_by('name')
+    return render(
+        request,
+        'partials/dropdown_list_options.html',
+        {'object_list': objects}
+    )
+
+
+def load_campuses(request):
+    university = request.GET.get('university')
+    objects = Campus.objects.filter(
+        university_id=university).order_by('name')
+    return render(
+        request,
+        'partials/dropdown_list_options.html',
+        {'object_list': objects}
+    )
