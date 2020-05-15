@@ -71,10 +71,7 @@ class HealthCheckQuestionnaire(forms.Form):
     route = forms.CharField(required=False)
     country = forms.CharField(required=False)
 
-    DESTINATION_CHOICES = (
-        ("campus", "Campus (Student/Staff)"),
-        ("office", "Office")
-    )
+    DESTINATION_CHOICES = (("campus", "Campus (Student/Staff)"), ("office", "Office"))
 
     REASON_CHOICES = (
         ("student", "Student"),
