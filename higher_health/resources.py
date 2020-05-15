@@ -1,4 +1,5 @@
-from import_export import resources
+from import_export import resources, fields
+from import_export.widgets import ForeignKeyWidget
 
 from higher_health import models
 
@@ -10,22 +11,20 @@ class UniversityResource(resources.ModelResource):
         fields = ('id', 'name', 'province')
 
 
+class UniversityForeignKeyWidget(ForeignKeyWidget):
+    def get_queryset(self, value, row):
+        return self.model.objects.filter(
+            name__iexact=row["university"],
+            province__iexact=row["university_province"]
+        )
+
+
 class CampusResource(resources.ModelResource):
+    university = fields.Field(
+        column_name='university',
+        attribute='university',
+        widget=UniversityForeignKeyWidget(models.University, 'name'))
 
     class Meta:
         model = models.Campus
-        fields = ('id', 'name', 'university__name', 'university_id')
-
-    def before_import(self, dataset, *args, **kwargs):
-        if 'id' not in dataset.headers:
-            dataset.insert_col('', lambda row: "", header='id')
-
-        if 'university_id' not in dataset.headers:
-            dataset.insert_col('', lambda row: "", header='university_id')
-
-        uni = models.University.objects.all()
-
-        for row in dataset.rows:
-            row['university_id'] = uni.filter(name=row['name']).first().pk
-
-
+        fields = ('id', 'name', 'university', 'university_province')
