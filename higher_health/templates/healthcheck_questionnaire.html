@@ -99,7 +99,7 @@
                 {% for field in form %}
                   {% if "facility_" in field.name %}
                     {% if field.name == "facility_destination_university" %}
-                      <h3 class="subheading">Educational institution information</h3>
+                      <h2 class="subheading">Educational institution information</h2>
                     {% endif %}
 
                     <li>
@@ -140,7 +140,7 @@
                 {% for field in form %}
                   {% if "symptoms_" in field.name or "medical_" in field.name %}
                     {% if field.name == "medical_confirm_accuracy" %}
-                      <h3 class="subheading">Confirmation</h3>
+                      <h2 class="subheading">Confirmation</h2>
                     {% endif %}
                     <li>
                       <label for="{{ field.name }}" class="label">{{ field.label }}</label>
