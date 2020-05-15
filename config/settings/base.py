@@ -48,8 +48,7 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "higher_health",
-
-    'import_export',
+    "import_export",
 ]
 
 MIDDLEWARE = [

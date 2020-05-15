@@ -25,4 +25,3 @@ class CampusAdmin(ImportExportActionModelAdmin, admin.ModelAdmin):
 
     # def get_import_form(self):
     #     return resources.CampusImportForm
-

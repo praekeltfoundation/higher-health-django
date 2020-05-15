@@ -5,26 +5,25 @@ from higher_health import models
 
 
 class UniversityResource(resources.ModelResource):
-
     class Meta:
         model = models.University
-        fields = ('id', 'name', 'province')
+        fields = ("id", "name", "province")
 
 
 class UniversityForeignKeyWidget(ForeignKeyWidget):
     def get_queryset(self, value, row):
         return self.model.objects.filter(
-            name__iexact=row["university"],
-            province__iexact=row["university_province"]
+            name__iexact=row["university"], province__iexact=row["university_province"]
         )
 
 
 class CampusResource(resources.ModelResource):
     university = fields.Field(
-        column_name='university',
-        attribute='university',
-        widget=UniversityForeignKeyWidget(models.University, 'name'))
+        column_name="university",
+        attribute="university",
+        widget=UniversityForeignKeyWidget(models.University, "name"),
+    )
 
     class Meta:
         model = models.Campus
-        fields = ('id', 'name', 'university', 'university_province')
+        fields = ("id", "name", "university", "university_province")
