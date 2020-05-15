@@ -86,7 +86,9 @@ class HealthCheckQuestionnaire(forms.Form):
         label="", choices=PROVINCE_CHOICES
     )
     facility_destination_university = forms.ModelChoiceField(
-        label="University", queryset=models.University.objects.all(), required=False
+        label="University / TVET",
+        queryset=models.University.objects.all(),
+        required=False,
     )
     facility_destination_campus = forms.ModelChoiceField(
         label="Campus", queryset=models.Campus.objects.all(), required=False
@@ -138,7 +140,7 @@ class HealthCheckQuestionnaire(forms.Form):
         required=True,
     )
     symptoms_sore_throat = forms.ChoiceField(
-        label="Do you have a sore throat or pain when swallowing?",
+        label="Do you have a sore throat or pain when swallowing that recently started?",
         choices=YES_NO,
         widget=forms.RadioSelect,
         required=True,
