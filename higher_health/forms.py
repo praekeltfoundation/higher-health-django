@@ -91,7 +91,7 @@ class HealthCheckQuestionnaire(forms.Form):
         label="Campus", queryset=models.Campus.objects.all(), required=False
     )
     facility_destination_reason = forms.ChoiceField(
-        label="Reason", choices=REASON_CHOICES, widget=forms.RadioSelect
+        label="", choices=REASON_CHOICES, widget=forms.RadioSelect
     )
 
     history_obesity = forms.ChoiceField(
