@@ -11,9 +11,6 @@ class UniversityAdmin(ImportExportActionModelAdmin, admin.ModelAdmin):
     list_filter = ["province"]
     search_fields = ["name"]
 
-    # def get_import_form(self):
-    #     return resources.UniversityImportForm
-
 
 @admin.register(models.Campus)
 class CampusAdmin(ImportExportActionModelAdmin, admin.ModelAdmin):
@@ -21,6 +18,3 @@ class CampusAdmin(ImportExportActionModelAdmin, admin.ModelAdmin):
     list_display = ["name", "university"]
     list_filter = ["university"]
     search_fields = ["name"]
-
-    # def get_import_form(self):
-    #     return resources.CampusImportForm
