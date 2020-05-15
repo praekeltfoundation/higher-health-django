@@ -141,7 +141,7 @@
                 {% for field in form %}
                   {% if "symptoms_" in field.name or "medical_" in field.name %}
                     {% if field.name == "medical_confirm_accuracy" %}
-                      <h3 class="subheading">And finally</h3>
+                      <h3 class="subheading">Confirmation</h3>
                     {% endif %}
                     <li>
                       <label for="{{ field.name }}" class="label">{{ field.label }}</label>
@@ -152,7 +152,7 @@
                 {% endfor %}
               </ul>
             </div>
-            <button id="entrySubmit" type="submit" class="cta cta-primary">Check</button>
+            <button id="entrySubmit" type="submit" class="cta cta-primary">Submit</button>
           </div>
         </form>
       </div>
