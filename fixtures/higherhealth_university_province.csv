@@ -1,0 +1,90 @@
+province,name,id
+ZA-WC,Cape Peninsula University of Technology (CPUT),1
+ZA-FS,Central University of Technology (CUT),2
+ZA-NL,Durban University of Technology (DUT),3
+ZA-NL,Mangosuthu University of Technology (MUT),4
+ZA-EC,Nelson Mandela University (NMU),5
+ZA-WC,Nelson Mandela University (NMU),6
+ZA-NW,North West University (NWU),7
+ZA-GT,North West University (NWU),8
+ZA-EC,Rhodes University (RU),9
+ZA-GT,Sefako Makgatho Health Sciences University (SMU),10
+ZA-NC,Sol Plaatje University (SPU),11
+ZA-WC,Stellenbosch University (SU),12
+ZA-LP,Tshwane University of Technology (TUT),13
+ZA-MP ,Tshwane University of Technology (TUT),14
+ZA-GT,Tshwane University of Technology (TUT),15
+ZA-FS,UNISA,16
+ZA-NL,UNISA,17
+ZA-EC,UNISA,18
+ZA-GT,UNISA,19
+ZA-WC,UNISA,20
+ZA-LP,UNISA,21
+ZA-NC,UNISA,22
+ZA-NW,UNISA,23
+ZA-MP,UNISA,24
+ZA-WC,University of Cape Town (UCT),25
+ZA-EC,University of Fort Hare (UFH),26
+ZA-GT,University of Johannesburg (UJ),27
+ZA-NL,University of Kwazulu Natal (UKZN),28
+ZA-LP,University of Limpopo (UL),29
+ZA-MP,University of Mpumalanga (UMP),30
+ZA-GT,University of Pretoria (UP),31
+ZA-FS,University of the Free State (UFS),32
+ZA-GT,University of the Witwatersrand (WITS),33
+ZA-LP,University of Venda (UNIVEN),34
+ZA-WC,University of Western Cape (UWC),35
+ZA-NL,University of Zululand (UNIZULU),36
+ZA-GT,Vaal University of Technology (VUT),37
+ZA-MP,Vaal University of Technology (VUT),38
+ZA-EC,Walter Sisulu University (WSU),39
+ZA-EC,Buffalo City,40
+ZA-EC,Eastcape Midlands,41
+ZA-EC,Ikhala,42
+ZA-EC,Ingwe,43
+ZA-EC,King Hintsa,44
+ZA-EC,King Sabata Dalindyebo (KSD),45
+ZA-EC,Lovedale,46
+ZA-EC,Port Elizabeth,47
+ZA-FS,Flavius Mareka ,48
+ZA-FS,Goldfields ,49
+ZA-FS,Maluti ,50
+ZA-FS,Motheo ,51
+ZA-GT,Central Johannesburg,52
+ZA-GT,Ekurhuleni East,53
+ZA-GT,Ekurhuleni West,54
+ZA-GT,Sedibeng,55
+ZA-GT,South West Gauteng ,56
+ZA-GT,Tshwane North,57
+ZA-GT,Tshwane South,58
+ZA-GT,Western,59
+ZA-NL,Coastal,60
+ZA-NL,Elangeni,61
+ZA-NL,Esayidi,62
+ZA-NL,Majuba,63
+ZA-NL,Mnambithi ,64
+ZA-NL,Mthashana,65
+ZA-NL,Thekwini,66
+ZA-NL,Umfolozi,67
+ZA-NL,Umgungundlovu ,68
+ZA-LP,Capricorn,69
+ZA-LP,Lephalale,70
+ZA-LP,Letaba,71
+ZA-LP,Mopani,72
+ZA-LP,Sekhukhune,73
+ZA-LP,Vhembe,74
+ZA-LP,Waterberg,75
+ZA-MP,Ehlanzeni,76
+ZA-MP,Gert Sibande,77
+ZA-MP,Nkangala,78
+ZA-NC,Northern Cape Rural,79
+ZA-NC,Northern Cape Urban,80
+ZA-NW,Orbit,81
+ZA-NW,Taletso,82
+ZA-NW,Vuselela,83
+ZA-WC,Boland,84
+ZA-WC,College of Cape Town,85
+ZA-WC,False Bay,86
+ZA-WC,Northlink,87
+ZA-WC,South Cape,88
+ZA-WC,West Coast,89
