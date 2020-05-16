@@ -179,17 +179,20 @@
     let camp = document.getElementById('id_facility_destination_campus');
     let uni = document.getElementById('id_facility_destination_university');
 
-    let selected_province = uni.options[prov.selectedIndex];
+    let selected_province = prov.options[prov.selectedIndex];
     let selected_university = uni.options[uni.selectedIndex];
     if(selected_province.value !== '') showProvinceUniversities(selected_province.value);
     if(selected_university.value !== '') showUniversityCampuses(selected_university.value);
 
     prov.addEventListener('change', function(){
       showProvinceUniversities(this.value);
+      clearUniversity();
+      clearCampus();
     });
 
     uni.addEventListener('change', function(){
       showUniversityCampuses(this.value);
+      clearCampus();
     });
 
     function showProvinceUniversities(province){
@@ -212,6 +215,14 @@
           camp.options[i].classList.remove('hidden');
         }
       }
+    }
+
+    function clearUniversity(){
+      uni.value = null;
+    }
+
+    function clearCampus(){
+      camp.value = null;
     }
 
     const checkbox = document.getElementById('healthcheck_terms'),
