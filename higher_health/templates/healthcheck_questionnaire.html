@@ -186,10 +186,13 @@
 
     prov.addEventListener('change', function(){
       showProvinceUniversities(this.value);
+      clearUniversity();
+      clearCampus();
     });
 
     uni.addEventListener('change', function(){
       showUniversityCampuses(this.value);
+      clearCampus();
     });
 
     function showProvinceUniversities(province){
@@ -212,6 +215,14 @@
           camp.options[i].classList.remove('hidden');
         }
       }
+    }
+
+    function clearUniversity(){
+      uni.value = null;
+    }
+
+    function clearCampus(){
+      camp.value = null;
     }
 
     const checkbox = document.getElementById('healthcheck_terms'),
