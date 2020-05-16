@@ -179,7 +179,7 @@
     let camp = document.getElementById('id_facility_destination_campus');
     let uni = document.getElementById('id_facility_destination_university');
 
-    let selected_province = uni.options[prov.selectedIndex];
+    let selected_province = prov.options[prov.selectedIndex];
     let selected_university = uni.options[uni.selectedIndex];
     if(selected_province.value !== '') showProvinceUniversities(selected_province.value);
     if(selected_university.value !== '') showUniversityCampuses(selected_university.value);
