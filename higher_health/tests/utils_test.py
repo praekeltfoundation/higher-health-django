@@ -24,8 +24,8 @@ def get_data(symptoms=0, exposure=False, age="<18", pre_existing_condition="not_
         "facility_destination_province": "ZA-WC",
         "facility_destination_reason": "staff",
         "history_pre_existing_condition": pre_existing_condition,
-        "history_obesity": False,
-        "history_diabetes": False,
-        "history_hypertension": False,
-        "history_cardiovascular": False,
+        "history_obesity": '',
+        "history_diabetes": '',
+        "history_hypertension": '',
+        "history_cardiovascular": '',
     }

@@ -74,9 +74,9 @@ def save_data(data):
             ),
             "facility_destination_campus": data.get("facility_destination_campus"),
             "facility_destination_reason": data.get("facility_destination_reason"),
-            "history_obesity": data.get("history_obesity"),
-            "history_diabetes": data.get("history_diabetes"),
-            "history_hypertension": data.get("history_hypertension"),
-            "history_cardiovascular": data.get("history_cardiovascular"),
+            "history_obesity": data.get("history_obesity") or False,
+            "history_diabetes": data.get("history_diabetes") or False,
+            "history_hypertension": data.get("history_hypertension") or False,
+            "history_cardiovascular": data.get("history_cardiovascular") or False,
         }
     )
