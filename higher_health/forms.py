@@ -275,6 +275,11 @@ class HealthCheckQuestionnaire(forms.Form):
 
             if not hypertension:
                 errors.update({"history_hypertension": required})
+        else:
+            cleaned_data["history_cardiovascular"] = False
+            cleaned_data["history_obesity"] = False
+            cleaned_data["history_diabetes"] = False
+            cleaned_data["history_hypertension"] = False
 
         if errors:
             raise forms.ValidationError(errors)

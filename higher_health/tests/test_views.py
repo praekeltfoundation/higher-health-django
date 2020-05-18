@@ -361,6 +361,32 @@ class QuestionnaireTest(TestCase):
         self.assertFalse(triage.history_diabetes)
         self.assertFalse(triage.history_obesity)
 
+        data.update(
+            {
+                "msisdn": "+27831231111",
+                "history_pre_existing_condition": "no",
+                "history_cardiovascular": "True",
+                "history_hypertension": "True",
+                "history_diabetes": "True",
+                "history_obesity": "True",
+            }
+        )
+
+        response = self.client.post(reverse("healthcheck_questionnaire"), data)
+        self.assertEqual(response.status_code, 302)
+
+        places_call = responses.calls[0]
+        self.assertEqual(places_call.request.method, "GET")
+        self.assertEqual(places_call.request.url, places_url)
+
+        triage = Covid19Triage.objects.get(msisdn="+27831231111")
+
+        self.assertEqual(triage.preexisting_condition, "no")
+        self.assertFalse(triage.history_cardiovascular)
+        self.assertFalse(triage.history_hypertension)
+        self.assertFalse(triage.history_diabetes)
+        self.assertFalse(triage.history_obesity)
+
     @responses.activate
     def test_post_get_coordinates_from_invalid_address(self):
         data = get_data()
