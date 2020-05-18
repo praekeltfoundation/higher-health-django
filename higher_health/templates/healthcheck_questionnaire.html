@@ -258,7 +258,7 @@
 
       //Pre-existing conditions Yes & cleanup
       let preexistingRadioKey = sessionStorage.getItem('preexistingRadio');
-      if(preexistingRadioKey === 'true') {
+      if(preexistingRadioKey === 'true' || preexistingRadioKey === 'not_sure') {
         preexistingconditionsYes.checked = true;
         preexistingconditionsForm.classList.add('showing');
         preexistingconditionsForm.classList.remove('hidden');
@@ -288,6 +288,10 @@
       });
       preexistingconditionsNotsure.addEventListener('change', function(e){
         if (e.target.checked) {
+          sessionStorage.setItem('preexistingRadio', 'true');
+          preexistingconditionsForm.classList.add('showing');
+          preexistingconditionsForm.classList.remove('hidden');
+        } else {
           sessionStorage.setItem('preexistingRadio', 'false');
           preexistingconditionsForm.classList.add('hidden');
           preexistingconditionsForm.classList.remove('showing');
