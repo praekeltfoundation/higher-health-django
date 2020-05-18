@@ -57,6 +57,17 @@ class HealthCheckQuestionnaireView(generic.FormView):
                 initial_data[
                     "history_pre_existing_condition"
                 ] = triage.preexisting_condition
+
+                initial_data["symptoms_fever"] = triage.symptoms_fever
+                initial_data["symptoms_cough"] = triage.symptoms_cough
+                initial_data["symptoms_sore_throat"] = triage.symptoms_sore_throat
+                initial_data[
+                    "symptoms_difficulty_breathing"
+                ] = triage.symptoms_difficulty_breathing
+                initial_data["symptoms_muscles_hurt"] = triage.symptoms_muscles_hurt
+                initial_data["symptoms_taste"] = triage.symptoms_taste
+                initial_data["medical_exposure"] = triage.medical_exposure
+
         return initial_data
 
 
