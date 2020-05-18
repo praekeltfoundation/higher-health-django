@@ -162,6 +162,7 @@ class QuestionnaireTest(TestCase):
         [triage] = Covid19Triage.objects.all()
 
         self.assertEqual(triage.age, "<18")
+        self.assertFalse(triage.taste)
         self.assertFalse(triage.fever)
         self.assertFalse(triage.cough)
         self.assertFalse(triage.sore_throat)
@@ -260,6 +261,7 @@ class QuestionnaireTest(TestCase):
 
         self.assertEqual(triage.age, "<18")
         self.assertFalse(triage.fever)
+        self.assertFalse(triage.taste)
         self.assertFalse(triage.cough)
         self.assertFalse(triage.sore_throat)
         self.assertFalse(triage.difficulty_breathing)
@@ -339,6 +341,7 @@ class QuestionnaireTest(TestCase):
 
         self.assertEqual(triage.age, "<18")
         self.assertFalse(triage.fever)
+        self.assertFalse(triage.taste)
         self.assertFalse(triage.cough)
         self.assertFalse(triage.sore_throat)
         self.assertFalse(triage.difficulty_breathing)

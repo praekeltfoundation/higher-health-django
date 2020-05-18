@@ -111,6 +111,7 @@ class Covid19Triage(models.Model):
     )
     location = models.CharField(max_length=255, blank=True, default="")
     muscle_pain = models.BooleanField(null=True, blank=True, default=None)
+    taste = models.BooleanField(null=True, blank=True, default=None)
     smell = models.BooleanField(null=True, blank=True, default=None)
     preexisting_condition = models.CharField(
         max_length=9, choices=EXPOSURE_CHOICES, blank=True, default=""
