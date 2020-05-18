@@ -65,7 +65,7 @@ class HealthCheckQuestionnaireView(generic.FormView):
                     "symptoms_difficulty_breathing"
                 ] = triage.difficulty_breathing
                 initial_data["symptoms_muscles_hurt"] = triage.muscle_pain
-                initial_data["symptoms_taste"] = triage.taste
+                initial_data["symptoms_taste"] = 'yes' if triage.taste else 'no'
                 initial_data["medical_exposure"] = triage.exposure
 
         return initial_data

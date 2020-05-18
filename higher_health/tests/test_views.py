@@ -50,6 +50,7 @@ class QuestionnaireTest(TestCase):
         self.assertEqual(initial_data["street_number"], data["street_number"])
         self.assertEqual(initial_data["route"], data["route"])
         self.assertEqual(initial_data["country"], data["country"])
+        self.assertEqual(initial_data["symptoms_taste"], data["symptoms_taste"])
 
         self.assertEqual(
             initial_data["facility_destination"], data["facility_destination"]
