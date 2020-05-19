@@ -181,7 +181,7 @@ class HealthCheckQuestionnaire(forms.Form):
         data = args[0] if args else kwargs.get("data", None)
         if data:
             data = data.copy()
-            if data["address"]:
+            if data.get("address"):
                 if data.get("latitude") == "" or data.get("longitude") == "":
                     querystring = urlencode(
                         {
