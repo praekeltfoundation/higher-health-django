@@ -57,7 +57,6 @@ def save_data(data):
             "sore_throat": "yes" == data["symptoms_sore_throat"],
             "difficulty_breathing": "yes" == data["symptoms_difficulty_breathing"],
             "exposure": data["medical_exposure"],
-            "muscle_pain": "yes" == data["symptoms_muscles_hurt"],
             "smell": "yes" == data["symptoms_taste"],
             "preexisting_condition": data["history_pre_existing_condition"],
             "risk": data["risk_level"],

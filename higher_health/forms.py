@@ -151,12 +151,6 @@ class HealthCheckQuestionnaire(forms.Form):
         widget=forms.RadioSelect,
         required=True,
     )
-    symptoms_muscles_hurt = forms.ChoiceField(
-        label="In the past couple of days have you experienced pain in your body, especially your muscles, more than usual?",
-        choices=YES_NO,
-        widget=forms.RadioSelect,
-        required=True,
-    )
     symptoms_taste = forms.ChoiceField(
         label="Have you noticed any recent changes in your ability to taste or smell things?",
         choices=YES_NO,

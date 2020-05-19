@@ -103,7 +103,6 @@ class QuestionnaireTest(TestCase):
         self.assertEqual(
             errors["symptoms_difficulty_breathing"], ["This field is required."]
         )
-        self.assertEqual(errors["symptoms_muscles_hurt"], ["This field is required."])
         self.assertEqual(errors["symptoms_taste"], ["This field is required."])
         self.assertEqual(errors["medical_exposure"], ["This field is required."])
         self.assertEqual(
@@ -162,7 +161,6 @@ class QuestionnaireTest(TestCase):
         self.assertFalse(triage.cough)
         self.assertFalse(triage.sore_throat)
         self.assertFalse(triage.difficulty_breathing)
-        self.assertFalse(triage.muscle_pain)
         self.assertFalse(triage.smell)
         self.assertEqual(triage.exposure, "no")
         self.assertEqual(triage.preexisting_condition, "not_sure")
@@ -259,7 +257,6 @@ class QuestionnaireTest(TestCase):
         self.assertFalse(triage.cough)
         self.assertFalse(triage.sore_throat)
         self.assertFalse(triage.difficulty_breathing)
-        self.assertFalse(triage.muscle_pain)
         self.assertFalse(triage.smell)
         self.assertEqual(triage.exposure, "no")
         self.assertEqual(triage.preexisting_condition, "not_sure")
@@ -338,7 +335,6 @@ class QuestionnaireTest(TestCase):
         self.assertFalse(triage.cough)
         self.assertFalse(triage.sore_throat)
         self.assertFalse(triage.difficulty_breathing)
-        self.assertFalse(triage.muscle_pain)
         self.assertFalse(triage.smell)
         self.assertEqual(triage.exposure, "no")
         self.assertEqual(triage.msisdn, "+27831231234")
