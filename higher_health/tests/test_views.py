@@ -63,14 +63,10 @@ class QuestionnaireTest(TestCase):
             data["facility_destination_reason"],
         )
 
-        self.assertEqual(initial_data["history_obesity"], data["history_obesity"])
-        self.assertEqual(initial_data["history_diabetes"], data["history_diabetes"])
-        self.assertEqual(
-            initial_data["history_hypertension"], data["history_hypertension"]
-        )
-        self.assertEqual(
-            initial_data["history_cardiovascular"], data["history_cardiovascular"]
-        )
+        self.assertFalse(initial_data["history_obesity"])
+        self.assertFalse(initial_data["history_diabetes"])
+        self.assertFalse(initial_data["history_hypertension"])
+        self.assertFalse(initial_data["history_cardiovascular"])
 
     def test_get_with_invalid_triage_id_in_session(self):
         session = self.client.session
