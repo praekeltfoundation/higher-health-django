@@ -179,14 +179,16 @@
     let camp = document.getElementById('id_facility_destination_campus');
     let uni = document.getElementById('id_facility_destination_university');
 
-    if(camp.previousElementSibling.nodeName !== 'UL'){
-      camp.parentElement.classList.add('hidden');
-    }
-
     let selected_province = prov.options[prov.selectedIndex];
     let selected_university = uni.options[uni.selectedIndex];
     if(selected_province.value !== '') showProvinceUniversities(selected_province.value);
-    if(selected_university.value !== '') showUniversityCampuses(selected_university.value);
+
+    if(selected_university.value !== '') {
+      showUniversityCampuses(selected_university.value);
+    }
+    else if(camp.previousElementSibling.nodeName !== 'UL'){
+      camp.parentElement.classList.add('hidden');
+    }
 
     prov.addEventListener('change', function(){
       showProvinceUniversities(this.value);
