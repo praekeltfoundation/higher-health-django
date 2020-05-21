@@ -86,9 +86,7 @@ class HealthCheckQuestionnaire(forms.Form):
         label="", choices=PROVINCE_CHOICES
     )
     facility_destination_university = forms.ModelChoiceField(
-        label="University / TVET",
-        queryset=models.University.objects.all(),
-        required=False,
+        label="Institution", queryset=models.University.objects.all(), required=False
     )
     facility_destination_campus = forms.ModelChoiceField(
         label="Campus", queryset=models.Campus.objects.all(), required=False

@@ -7,3 +7,8 @@ SECRET_KEY = env.str("SECRET_KEY", "dev_secret_key")
 
 ENV_HOSTS = [host for host in env.str("ALLOWED_HOSTS", "").split(",") if host]
 ALLOWED_HOSTS = ENV_HOSTS + ["localhost", ".localhost", "127.0.0.1", "0.0.0.0"]
+
+
+DATABASES = {
+    "default": {"ENGINE": "django.db.backends.sqlite3", "NAME": "higherhealth"}
+}
