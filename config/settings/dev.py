@@ -10,8 +10,5 @@ ALLOWED_HOSTS = ENV_HOSTS + ["localhost", ".localhost", "127.0.0.1", "0.0.0.0"]
 
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': 'higherhealth',
-    }
+    "default": {"ENGINE": "django.db.backends.sqlite3", "NAME": "higherhealth"}
 }
