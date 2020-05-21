@@ -30,7 +30,7 @@ class Campus(models.Model):
     university = models.ForeignKey(University, on_delete=models.CASCADE)
 
     def __str__(self):
-        if self.university.name.lower() == 'other':
+        if self.university.name.lower() == "other":
             return "{0}".format(self.name)
         return "{0} ({1})".format(self.name, self.university.name)
 
@@ -139,13 +139,13 @@ class Covid19Triage(models.Model):
         University, null=True, blank=True, on_delete=models.CASCADE
     )
     facility_destination_university_other = models.CharField(
-        max_length=255, null=True, blank=True,
+        max_length=255, null=True, blank=True
     )
     facility_destination_campus = models.ForeignKey(
         Campus, null=True, blank=True, on_delete=models.CASCADE
     )
     facility_destination_campus_other = models.CharField(
-        max_length=255, null=True, blank=True,
+        max_length=255, null=True, blank=True
     )
     facility_destination_reason = models.CharField(
         choices=FacilityDestinationReasonChoice._choices(),
