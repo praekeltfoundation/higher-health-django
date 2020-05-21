@@ -20,6 +20,8 @@ class University(models.Model):
     province = models.CharField(choices=PROVINCE_CHOICES, max_length=100)
 
     def __str__(self):
+        if not self.province:
+            return "{0}".format(self.name)
         return "{0} ({1})".format(self.name, self.get_province_display())
 
 
@@ -28,6 +30,8 @@ class Campus(models.Model):
     university = models.ForeignKey(University, on_delete=models.CASCADE)
 
     def __str__(self):
+        if self.university.name.lower() == 'other':
+            return "{0}".format(self.name)
         return "{0} ({1})".format(self.name, self.university.name)
 
 
@@ -134,8 +138,14 @@ class Covid19Triage(models.Model):
     facility_destination_university = models.ForeignKey(
         University, null=True, blank=True, on_delete=models.CASCADE
     )
+    facility_destination_university_other = models.CharField(
+        max_length=255, null=True, blank=True,
+    )
     facility_destination_campus = models.ForeignKey(
         Campus, null=True, blank=True, on_delete=models.CASCADE
+    )
+    facility_destination_campus_other = models.CharField(
+        max_length=255, null=True, blank=True,
     )
     facility_destination_reason = models.CharField(
         choices=FacilityDestinationReasonChoice._choices(),

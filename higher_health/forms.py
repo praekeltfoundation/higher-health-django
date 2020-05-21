@@ -88,8 +88,14 @@ class HealthCheckQuestionnaire(forms.Form):
     facility_destination_university = forms.ModelChoiceField(
         label="Institution", queryset=models.University.objects.all(), required=False
     )
+    facility_destination_university_other = forms.CharField(
+        label="Other", required=False
+    )
     facility_destination_campus = forms.ModelChoiceField(
         label="Campus", queryset=models.Campus.objects.all(), required=False
+    )
+    facility_destination_campus_other = forms.CharField(
+        label="Other", required=False
     )
     facility_destination_reason = forms.ChoiceField(
         label="", choices=REASON_CHOICES, widget=forms.RadioSelect
@@ -219,16 +225,28 @@ class HealthCheckQuestionnaire(forms.Form):
         going_to_campus = cleaned_data.get("facility_destination") == "campus"
         if going_to_campus:
             campus = cleaned_data.get("facility_destination_campus")
+            campus_other = cleaned_data.get("facility_destination_campus_other")
             province = cleaned_data.get("facility_destination_province")
             university = cleaned_data.get("facility_destination_university")
+            university_other = cleaned_data.get("facility_destination_university_other")
 
-            if not university:
+            if not university and not university_other:
                 errors.update({"facility_destination_university": required})
 
-            if not campus:
+            if not campus and not campus_other:
                 errors.update({"facility_destination_campus": required})
 
-            if (province and university) and not province == university.province:
+            if university.name.lower() == 'other' and not university_other:
+                errors.update({
+                    'facility_destination_university_other': required
+                })
+
+            if campus.name.lower() == 'other' and not campus_other:
+                errors.update({
+                    'facility_destination_campus_other': required
+                })
+
+            if (province and university) and (not province == university.province and university.province):
                 errors.update(
                     {
                         "facility_destination_university": "Please select a university that is in {}.".format(

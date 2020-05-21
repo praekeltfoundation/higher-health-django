@@ -175,6 +175,11 @@
       {% endfor %}
     };
 
+    let other_varsity = '999999';
+    let other_campus = null;
+    let other_uni_input = document.getElementById('id_facility_destination_university_other');
+    let other_campus_input = document.getElementById('id_facility_destination_campus_other');
+
     let prov = document.getElementById('id_facility_destination_province');
     let camp = document.getElementById('id_facility_destination_campus');
     let uni = document.getElementById('id_facility_destination_university');
@@ -190,6 +195,14 @@
       camp.parentElement.classList.add('hidden');
     }
 
+    if(other_campus_input.value === '' ){
+      showOtherUniversityInput(uni.value);
+    }
+
+    if (other_uni_input.value === '' ){
+      showOtherCampusInput(camp.value);
+    }
+
     prov.addEventListener('change', function(){
       showProvinceUniversities(this.value);
       clearUniversity();
@@ -197,13 +210,18 @@
 
     uni.addEventListener('change', function(){
       showUniversityCampuses(this.value);
+      showOtherUniversityInput(this.value);
       clearCampus();
       camp.parentElement.classList.remove('hidden');
     });
 
+    camp.addEventListener('change', function(){
+      showOtherCampusInput(this.value);
+    });
+
     function showProvinceUniversities(province){
       for(let i=0; i < uni.options.length; i++){
-        if(universities[uni.options[i].value] !== province) {
+        if(universities[uni.options[i].value] !== province && universities[uni.options[i].value] !== "") {
           uni.options[i].classList.add('hidden');
         }
         else {
@@ -214,12 +232,13 @@
 
     function showUniversityCampuses(university){
       for(let i=0; i < camp.options.length; i++){
-        if(campuses[camp.options[i].value] !== university) {
+        if(campuses[camp.options[i].value] !== university && campuses[camp.options[i].value] !== other_varsity) {
           camp.options[i].classList.add('hidden');
         }
         else {
           camp.options[i].classList.remove('hidden');
         }
+        if (other_campus == null && campuses[camp.options[i].value] === other_varsity) other_campus = camp.options[i].value;
       }
     }
 
@@ -231,6 +250,15 @@
 
     function clearCampus(){
       camp.value = null;
+    }
+
+    function showOtherUniversityInput(uni){
+      if(uni==other_varsity) other_uni_input.parentElement.classList.remove('hidden');
+      else other_uni_input.parentElement.classList.add('hidden');
+    }
+    function showOtherCampusInput(campus){
+      if(campus==other_campus) other_campus_input.parentElement.classList.remove('hidden');
+      else other_campus_input.parentElement.classList.add('hidden');
     }
 
     const checkbox = document.getElementById('healthcheck_terms'),
