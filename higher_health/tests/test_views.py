@@ -294,8 +294,12 @@ class QuestionnaireTest(TestCase):
             match_querystring=True,
         )
 
-        university_other = factories.UniversityFactory(id=999999, name='other', province="")
-        campus_other = factories.CampusFactory(name='other', university=university_other)
+        university_other = factories.UniversityFactory(
+            id=999999, name="other", province=""
+        )
+        campus_other = factories.CampusFactory(
+            name="other", university=university_other
+        )
 
         data.update(
             {
@@ -308,12 +312,8 @@ class QuestionnaireTest(TestCase):
         self.assertEqual(
             response.context["form"].errors,
             {
-                "facility_destination_university_other": [
-                    "This field is required."
-                ],
-                "facility_destination_campus_other": [
-                    "This field is required."
-                ],
+                "facility_destination_university_other": ["This field is required."],
+                "facility_destination_campus_other": ["This field is required."],
             },
         )
 
@@ -334,7 +334,9 @@ class QuestionnaireTest(TestCase):
         [triage] = Covid19Triage.objects.all()
 
         self.assertEqual(triage.facility_destination_university_other, "Unisa-abroad")
-        self.assertEqual(triage.facility_destination_campus_other, "Unisa-atlantic-ocean")
+        self.assertEqual(
+            triage.facility_destination_campus_other, "Unisa-atlantic-ocean"
+        )
 
     @responses.activate
     def test_post_pre_existing_conditions(self):
