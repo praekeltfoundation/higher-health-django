@@ -234,10 +234,10 @@ class HealthCheckQuestionnaire(forms.Form):
             if not campus and not campus_other:
                 errors.update({"facility_destination_campus": required})
 
-            if university.name.lower() == "other" and not university_other:
+            if university and university.name.lower() == "other" and not university_other:
                 errors.update({"facility_destination_university_other": required})
 
-            if campus.name.lower() == "other" and not campus_other:
+            if campus and campus.name.lower() == "other" and not campus_other:
                 errors.update({"facility_destination_campus_other": required})
 
             if (province and university) and (
