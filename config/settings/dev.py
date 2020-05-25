@@ -10,8 +10,5 @@ ALLOWED_HOSTS = ENV_HOSTS + ["localhost", ".localhost", "127.0.0.1", "0.0.0.0"]
 
 
 DATABASES = {
-    "default": env.db(
-        "HIGHER_HEALTH_DATABASE",
-        default="sqlite:///higherhealth",
-    )
+    "default": env.db("HIGHER_HEALTH_DATABASE", default="sqlite:///higherhealth")
 }
