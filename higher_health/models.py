@@ -23,7 +23,7 @@ class University(models.Model):
         return "{0} ({1})".format(self.name, self.get_province_display())
 
     class Meta:
-        verbose_name_plural = 'Universities'
+        verbose_name_plural = "Universities"
 
 
 class Campus(models.Model):
@@ -34,7 +34,7 @@ class Campus(models.Model):
         return "{0} ({1})".format(self.name, self.university.name)
 
     class Meta:
-        verbose_name_plural = 'Campuses'
+        verbose_name_plural = "Campuses"
 
 
 class Covid19Triage(models.Model):
