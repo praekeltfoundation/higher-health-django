@@ -1,13 +1,3 @@
-
-.showing {
-  display: block;
-  visibility: visible;
-}
-.hidden {
-  display: none;
-  visibility: hidden;
-}
-
 .login-form__screening .label {
   display: none;
   visibility: hidden;
