@@ -98,6 +98,10 @@ a:hover {
 }
 .wrapper {
   position: relative;
+  overflow: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 .header {
@@ -109,7 +113,7 @@ a:hover {
   position: fixed;
   top: 0;
   z-index: 9999;
-  transform: translate3d(0, -10%, 0);
+  transform: translate3d(0, -10%, 10px);
   width: 100%;
 }
 
@@ -161,6 +165,7 @@ a:hover {
   animation: shrink 10s infinite alternate;
   height: 100%;
   position: relative;
+  transition: all 1s ease-in-out;
 }
 @keyframes shrink {
   0% {
@@ -267,6 +272,9 @@ a:hover {
   font-size: 18px;
   margin: 0;
 }
+.heading-subtitle--edu-label {
+  padding: 15px 0 10px;
+}
 .heading.subtitle {
   font-size: 18px;
   font-weight: bold;
@@ -317,6 +325,17 @@ a:hover {
   FORM
 
 */
+
+.fieldset {}
+.fieldset__item {
+  margin: 10px auto;
+}
+.fieldset__item:first-child {
+  margin: 20px auto 0;
+}
+.fieldset__medical {
+  margin: 20px auto 0;
+}
 
 .label-link {
   display: block;
@@ -402,7 +421,10 @@ a:hover {
   margin: 0 0 10px;
 }
 
-#id_symptoms_fever label {
+#destination label,
+#preexistingconditionsForm label,
+#medical-history label,
+#medical label {
   cursor: pointer;
 }
 .radio-field {
@@ -425,7 +447,7 @@ a:hover {
   margin: 0;
 }
 #id_facility_destination {
-  margin: 20px auto 20px;
+  margin: 20px auto 0;
 }
 #id_facility_destination_reason li,
 #id_facility_destination li {
@@ -457,6 +479,7 @@ select {
 
 select {
   appearance:none;
+  cursor: pointer;
   -webkit-appearance:none;
   position: relative;
 }

@@ -19,35 +19,31 @@
         </div>
         <form action="" method="POST" id="login_form" class="login-form" novalidate>
         {% csrf_token %}
-          <!-- TERMS FORM -->
           <div class="login-form__read-terms">
             <ul id="read-terms" class="fieldset">
-              <li>
+              <li class="fieldset__item">
                 <input type="checkbox" id="healthcheck_terms" name="healthcheck-terms" required>
                 <label for="healthcheck_terms" class="label">I accept the terms</label>
                 <a href="/terms" class="label-link" target="_blank">Read terms and policy</a>
               </li>
             </ul>
           </div>
-
-          <!-- USER FORM -->
           <div id="questionnaires">
-            <!-- REGISTRATION -->
             <div class="login-form__location">
               <h2 class="heading-secondary">Registration</h2>
               <div class="login-form__screening">
                 {% if form.errors %}
                   <p class="error">Please correct the errors below</p>
                 {% endif %}
-                <ul class="fieldset">
+                <ul id="registration" class="fieldset">
                   {% with 'city address route country street_number' as field_list %}
                     {% for field in form %}
                       {% if "history_" not in field.name and "facility_" not in field.name and "symptoms_" not in field.name and "medical_" not in field.name and field.name not in field_list.split %}
-                        <li>
+                        <li class="fieldset__item">
                           {% if field|field_type != "HiddenInput" %}
                             {{field}}
                             <label for="{{ field.id_for_label }}" class="label">
-                              <a href="">=={{field.label}}</a>
+                              {{field.label}}
                             </label>
                             {{field.errors}}
                           {% endif %}
@@ -92,64 +88,59 @@
                 </div>
               </div>
             </div>
-
-            <!-- MEDICAL 1 -->
             <div class="login-form__medical">
               <h2 class="heading-secondary">Where are you going today?</h2>
               <ul id="destination" class="fieldset">
                 {% for field in form %}
                   {% if "facility_" in field.name %}
                     {% if field.name == "facility_destination_university" %}
-                      <h2 class="heading-secondary">Educational institution information</h2>
+                      <h3 class="heading-subtitle heading-subtitle--edu-label">Educational institution information</h3>
                     {% endif %}
-                    <li>
+                    <li class="fieldset__item">
                       <label for="{{ field.name }}" class="label">{{ field.label }}</label>
-                      {{field.errors}}
+
                       {{ field }}
+                      {{field.errors}}
                     </li>
                   {% endif %}
                 {% endfor %}
               </ul>
             </div>
 
-            <!-- MEDICAL 2 -->
             <div class="login-form__medical">
               <h2 class="heading-secondary">Medical History</h2>
-
-              <ul class="fieldset">
-                <li>
+              <ul id="medical-history" class="fieldset">
+                <li class="fieldset__medical">
                   <label for="{{ form.history_pre_existing_condition.name }}" class="label">{{ form.history_pre_existing_condition.label }}</label>
-                  {{form.history_pre_existing_condition.errors}}
                   {{ form.history_pre_existing_condition }}
+                  {{form.history_pre_existing_condition.errors}}
                 </li>
               </ul>
-
               <ul id="preexistingconditionsForm" class="fieldset">
                 {% for field in form %}
                   {% if "history_" in field.name and field.name != 'history_pre_existing_condition' %}
-                    <li>
+                  <li class="fieldset__medical">
                       <label for="{{ field.name }}" class="label">{{ field.label }}</label>
-                      {{field.errors}}
                       {{ field }}
+                      {{field.errors}}
                     </li>
                   {% endif %}
                 {% endfor %}
               </ul>
             </div>
 
-            <!-- MEDICAL 3 -->
             <div class="login-form__medical">
               <h2 class="heading-secondary">How are you feeling today?</h2>
               <ul id="medical" class="fieldset">
                 {% for field in form %}
                   {% if "symptoms_" in field.name or "medical_" in field.name %}
                     {% if field.name == "medical_confirm_accuracy" %}
-                      <h2 class="subheading">Confirmation</h2>
+                      <h3 class="heading-subtitle heading-subtitle--edu-label">Confirmation</h3>
                     {% endif %}
-                    <li>
+                    <li class="fieldset__item">
                       <label for="{{ field.name }}" class="label">{{ field.label }}</label>
-                      {{field.errors}}
                       {{ field }}
+                      {{field.errors}}
                     </li>
                   {% endif %}
                 {% endfor %}
@@ -166,7 +157,6 @@
 {% block form_js %}
   <script type="text/javascript">
   "use strict";
-
     let universities = {
       {% for uni in form.fields.facility_destination_university.choices.queryset %}
          "{{ uni.pk }}": "{{ uni.province }}" {% if not forloop.last %},{% endif %}
