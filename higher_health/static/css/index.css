@@ -16,6 +16,19 @@
   --dark-moderate-cyan-3: #367b6e;
 }
 
+input:matches([type="button"],
+[type="submit"],
+[type="reset"]):disabled,
+input[type="file"]:disabled::-webkit-file-upload-button,
+button:disabled,
+select:disabled,
+keygen:disabled,
+optgroup:disabled,
+option:disabled,
+select[disabled] > option {
+  display: none;
+}
+
 
 /*----------- RESETS ----------*/
 * {
@@ -64,6 +77,14 @@ a:hover {
   text-decoration: underline;
 }
 
+.showing {
+  display: block;
+  visibility: visible;
+}
+.hidden {
+  display: none;
+  visibility: hidden;
+}
 
 /*----------- WEB PAGE ----------*/
 /*
@@ -77,6 +98,10 @@ a:hover {
 }
 .wrapper {
   position: relative;
+  overflow: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 .header {
@@ -88,7 +113,7 @@ a:hover {
   position: fixed;
   top: 0;
   z-index: 9999;
-  transform: translate3d(0, -10%, 0);
+  transform: translate3d(0, -10%, 10px);
   width: 100%;
 }
 
@@ -140,6 +165,7 @@ a:hover {
   animation: shrink 10s infinite alternate;
   height: 100%;
   position: relative;
+  transition: all 1s ease-in-out;
 }
 @keyframes shrink {
   0% {
@@ -153,41 +179,57 @@ a:hover {
 
 .content-intro {
   position: relative;
-  padding: 0 5%;
+  padding: 0 1em;
   margin: 0 auto;
 }
 .content-inner {
   color: rgba(23, 47, 51, 1);
   margin: 10px auto 2em;
-  padding: 10px;
+  padding: 10px 5px;
 }
 .content-receipts {
   background: var(--very-light-gray-2);
   border-radius: 10px;
   margin: 10px auto 2em;
   padding: 10px;
-  /*background-color: rgba(95,95,95, 0.2);*/
-  /*background-color: rgba(24, 48, 51, 0.8);*/
 }
-.content-receipts__logo {
+.content-receipts__block {
   background: #fff;
   margin: 0 auto;
-  text-align: center;
-  padding: 1em;
+  padding: 10px;
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
 }
-.receipts-results-message {
-    text-align: left;
-}
-.receipts-results-message ul {
-    margin-left: 0.5em
-}
-.receipts-results-message li:before {
-  content: "- ";
-  line-height: 2.5em;
+.content-receipts__logo {
+  position: relative;
+  text-align: center;
 }
 
+.content-receipts__logo:after {
+  content: "";
+  display: block;
+  border-bottom: var(--very-light-gray) 1px solid;
+  width: 35%;
+  margin: 15px auto;
+}
+
+.receipts-results-message p {
+  margin: 0;
+  display: inline;
+}
+
+.receipts-results-message-list {
+  text-align: left;
+  padding: 0 1em;
+}
+.receipts-results-message li {
+  margin: 15px 0;
+}
+.receipts-results-message li:before {
+  content: "\2022";
+  display: inline-block;
+  margin: 0 5px 0 0;
+}
 .receipts-results {
   color: #fff;
   border-bottom-left-radius: 10px;
@@ -220,6 +262,11 @@ a:hover {
   background-size: 100%;
   background-repeat: no-repeat;
 }
+
+.terms__content {
+  margin: 1em 5%;
+}
+
 .heading-container {
   text-align: center;
 }
@@ -229,31 +276,46 @@ a:hover {
 .heading-primary {
   color: #000;
   font-family: "Varela Round", sans-serif;
-  font-size: 28px;
+  font-size: 27px;
+  margin: 10px 0;
 }
 .heading-secondary {
   font-family: 'Lato', sans-serif;
-  font-size: 22px;
+  font-size: 21px;
   font-weight: 400;
+  margin: 0;
 }
 .heading-label {
   font-weight: 500;
   margin: 0;
   text-transform: uppercase;
 }
-.heading.subtitle {
+.heading-subtitle {
+  font-size: 18px;
   margin: 0;
-  font-size: 23px;
+}
+.heading-subtitle--edu-label {
+  padding: 15px 0 10px;
+}
+.heading-subtitle--receipt {
+  margin: 1em 0;
+  font-weight: 300;
+  text-align: center;
+  font-size: 22px;
+}
+.heading.subtitle {
+  font-size: 18px;
   font-weight: bold;
+  margin: 0;
 }
 .heading.subheading {
-  font-size: 17px;
-  display: inline;
+  font-size: 16px;
+  margin: 0;
+}
+.highlighter {
+  font-weight: 600;
 }
 
-.terms__content {
-  margin: 1em 5%;
-}
 
 
 /*
@@ -261,30 +323,33 @@ a:hover {
 */
 .risks {
   position: relative;
+  margin: 10px 0 0;
+}
+.risks .heading-secondary {
+  margin: 15px 0 10px;
 }
 .risks-num {
-  font-size: 22px;
+  font-size: 16px;
   margin-bottom: 5px;
   font-weight: 300;
 }
-.risk-cat {
-  font-size: 22px;
-}
 .risk-cat__item {
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
+  display: inline-block;
 }
 .risk-cat__label {
+  display: inline-block;
   margin: 0 5px 0 0;
+  font-size: 16px;
   font-weight: 400;
 }
 .risk-cat__val {
+  display: inline-block;
   margin: 0;
+  font-size: 16px;
   font-weight: 100;
 }
 .expiry-hint {
-  font-size: 17px;
+  font-size: 12px;
   font-style: italic;
 }
 
@@ -292,6 +357,17 @@ a:hover {
   FORM
 
 */
+
+.fieldset {}
+.fieldset__item {
+  margin: 10px auto;
+}
+.fieldset__item:first-child {
+  margin: 20px auto 0;
+}
+.fieldset__medical {
+  margin: 20px auto 0;
+}
 
 .label-link {
   display: block;
@@ -337,9 +413,6 @@ a:hover {
   text-align: center;
 }
 
-label {
-  color: rgba(68, 68, 68, 0.8);
-}
 .address-list__item {
   display: flex;
   flex-direction: row-reverse;
@@ -377,8 +450,13 @@ label {
 .error,
 .errorlist li {
   color: red;
+  margin: 0 0 10px;
 }
-#id_symptoms_fever label {
+
+#destination label,
+#preexistingconditionsForm label,
+#medical-history label,
+#medical label {
   cursor: pointer;
 }
 .radio-field {
@@ -394,25 +472,48 @@ label {
   width: auto;
 }
 
-#destination select{
-   margin: 20px auto 20px !important;
+#destination li {
+  margin: 10px 0 20px;
+}
+#destination select {
+  margin: 0;
+}
+#id_facility_destination {
+  margin: 20px auto 0;
+}
+#id_facility_destination_reason li,
+#id_facility_destination li {
+  margin: 0;
 }
 
 input,
 textarea,
 select {
+  -moz-box-sizing:    border-box;
+ -webkit-box-sizing: border-box;
+  box-sizing:        border-box;
+
   background: white;
   border: 0;
   border-radius: 5px;
+  border-bottom: 1px solid rgba(68, 68, 68, 0.3);
+  color: rgba(68, 68, 68, 0.8);
   display: inline-block;
   margin: 20px auto 0;
 
-  border-bottom: 1px solid rgba(68, 68, 68, 0.3);
-  color: rgba(68, 68, 68, 0.8);
   font-size: 1rem;
   height: 40px;
   outline: 0;
+  word-wrap: break-word;
+  word-break: break-all;
   width: 100%;
+}
+
+select {
+  appearance:none;
+  cursor: pointer;
+  -webkit-appearance:none;
+  position: relative;
 }
 
 textarea {
@@ -455,7 +556,9 @@ textarea {
   padding: 20px 10px;
   text-align: center;
 }
-
+.footer__copyright {
+  margin: 0;
+}
 .footer-inner {}
 .footer-powered-by {
   position: relative;
@@ -534,8 +637,15 @@ textarea {
   #content-receipts .heading-primary  {
     margin: 0;
   }
+  .heading-subtitle--receipt {
+    margin: 1em;
+    padding: 10px 40px;
+  }
   .content-receipts {
     width: 720px;
+  }
+  .content-receipts__block {
+    padding: 1em;
   }
   .receipts-results {
     padding: 2em;
@@ -544,6 +654,11 @@ textarea {
   /*
     FORM
   */
+  input,
+  textarea,
+  select {
+    width: 100%;
+  }
   .login-form__location,
   .login-form__preexistingconditionsForm,
   .login-form__medical {
@@ -564,11 +679,36 @@ textarea {
     left: 0;
     right: 0;
   }
+
+  /*
+    RESULTS
+  */
+  .risk-cat__label,
+  .risk-cat__val,
+  .risks-num {
+    font-size: 22px;
+  }
+  .risk-cat__item {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+  }
+  .expiry-hint {
+    font-size: 17px;
+  }
+
+
   /*
     FOOTER
   */
   .footer {
     padding: 20px 10%;
+  }
+  .footer-content {
+    display: flex;
+    flex-direction: row-reverse;
+    align-items: center;
+    justify-content: flex-end;
   }
   .footer-inner {
     display: flex;
