@@ -220,7 +220,7 @@ a:hover {
 
 .receipts-results-message-list {
   text-align: left;
-  padding: 0 1em;
+  padding: 0;
 }
 .receipts-results-message li {
   margin: 15px 0;
@@ -301,7 +301,7 @@ a:hover {
   margin: 1em 0;
   font-weight: 300;
   text-align: center;
-  font-size: 22px;
+  font-size: 20px;
 }
 .heading.subtitle {
   font-size: 18px;
@@ -639,6 +639,7 @@ textarea {
   }
   .heading-subtitle--receipt {
     margin: 1em;
+    font-size: 22px;
     padding: 10px 40px;
   }
   .content-receipts {
@@ -649,6 +650,23 @@ textarea {
   }
   .receipts-results {
     padding: 2em;
+  }
+
+  .receipts-results-message-list {
+    padding: 0 1em;
+  }
+  .risk-cat__label,
+  .risk-cat__val,
+  .risks-num {
+    font-size: 22px;
+  }
+  .risk-cat__item {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+  }
+  .expiry-hint {
+    font-size: 17px;
   }
 
   /*
@@ -678,23 +696,6 @@ textarea {
     position: absolute;
     left: 0;
     right: 0;
-  }
-
-  /*
-    RESULTS
-  */
-  .risk-cat__label,
-  .risk-cat__val,
-  .risks-num {
-    font-size: 22px;
-  }
-  .risk-cat__item {
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-  }
-  .expiry-hint {
-    font-size: 17px;
   }
 
 
