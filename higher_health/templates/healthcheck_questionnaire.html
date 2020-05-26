@@ -183,7 +183,6 @@
     camp = document.getElementById('id_facility_destination_campus'),
     campClone = camp.cloneNode(true);
 
-    //console.log(campuses, uni);
 
     let selected_province = prov.options[prov.selectedIndex],
       selected_university = uni.options[uni.selectedIndex];
@@ -206,7 +205,6 @@
     } else if(camp.previousElementSibling.nodeName !== 'ul') {
       camp.parentElement.classList.add('hidden');
     };
-
 
     function showHiddenInputs(elem, clonedElems, selectInputs, csvInputElem) {
       selectInputs.options.length = 0;
