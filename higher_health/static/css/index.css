@@ -98,6 +98,10 @@ a:hover {
 }
 .wrapper {
   position: relative;
+  overflow: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 .header {
@@ -109,7 +113,7 @@ a:hover {
   position: fixed;
   top: 0;
   z-index: 9999;
-  transform: translate3d(0, -10%, 0);
+  transform: translate3d(0, -10%, 10px);
   width: 100%;
 }
 
@@ -161,6 +165,7 @@ a:hover {
   animation: shrink 10s infinite alternate;
   height: 100%;
   position: relative;
+  transition: all 1s ease-in-out;
 }
 @keyframes shrink {
   0% {
@@ -267,6 +272,9 @@ a:hover {
   font-size: 18px;
   margin: 0;
 }
+.heading-subtitle--edu-label {
+  padding: 15px 0 10px;
+}
 .heading.subtitle {
   font-size: 18px;
   font-weight: bold;
@@ -286,30 +294,33 @@ a:hover {
 */
 .risks {
   position: relative;
+  margin: 10px 0 0;
+}
+.risks .heading-secondary {
+  margin: 15px 0 10px;
 }
 .risks-num {
-  font-size: 22px;
+  font-size: 16px;
   margin-bottom: 5px;
   font-weight: 300;
 }
-.risk-cat {
-  font-size: 22px;
-}
 .risk-cat__item {
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
+  display: inline-block;
 }
 .risk-cat__label {
+  display: inline-block;
   margin: 0 5px 0 0;
+  font-size: 16px;
   font-weight: 400;
 }
 .risk-cat__val {
+  display: inline-block;
   margin: 0;
+  font-size: 16px;
   font-weight: 100;
 }
 .expiry-hint {
-  font-size: 17px;
+  font-size: 12px;
   font-style: italic;
 }
 
@@ -317,6 +328,17 @@ a:hover {
   FORM
 
 */
+
+.fieldset {}
+.fieldset__item {
+  margin: 10px auto;
+}
+.fieldset__item:first-child {
+  margin: 20px auto 0;
+}
+.fieldset__medical {
+  margin: 20px auto 0;
+}
 
 .label-link {
   display: block;
@@ -402,7 +424,10 @@ a:hover {
   margin: 0 0 10px;
 }
 
-#id_symptoms_fever label {
+#destination label,
+#preexistingconditionsForm label,
+#medical-history label,
+#medical label {
   cursor: pointer;
 }
 .radio-field {
@@ -425,7 +450,7 @@ a:hover {
   margin: 0;
 }
 #id_facility_destination {
-  margin: 20px auto 20px;
+  margin: 20px auto 0;
 }
 #id_facility_destination_reason li,
 #id_facility_destination li {
@@ -457,6 +482,7 @@ select {
 
 select {
   appearance:none;
+  cursor: pointer;
   -webkit-appearance:none;
   position: relative;
 }
@@ -501,7 +527,9 @@ textarea {
   padding: 20px 10px;
   text-align: center;
 }
-
+.footer__copyright {
+  margin: 0;
+}
 .footer-inner {}
 .footer-powered-by {
   position: relative;
@@ -615,11 +643,36 @@ textarea {
     left: 0;
     right: 0;
   }
+
+  /*
+    RESULTS
+  */
+  .risk-cat__label,
+  .risk-cat__val,
+  .risks-num {
+    font-size: 22px;
+  }
+  .risk-cat__item {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+  }
+  .expiry-hint {
+    font-size: 17px;
+  }
+
+
   /*
     FOOTER
   */
   .footer {
     padding: 20px 10%;
+  }
+  .footer-content {
+    display: flex;
+    flex-direction: row-reverse;
+    align-items: center;
+    justify-content: flex-end;
   }
   .footer-inner {
     display: flex;

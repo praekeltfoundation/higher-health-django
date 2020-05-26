@@ -55,48 +55,50 @@
       </header>
     {% endblock %}
     {% block content %}{% endblock %}
+
+    <footer class="footer">
+      <div class="footer-inner">
+        <div class="footer-content">
+          <ul class="footer-list">
+            <li class="footer-list__item">
+              <a href="/" class="footer-list__link">Home</a>
+            </li>
+            <li class="footer-list__item">
+              <a href="/terms" class="footer-list__link">Terms</a>
+            </li>
+            <li class="footer-list__item">
+              <a href="https://sacoronavirus.co.za/" target="_blank" class="footer-list__link">COVID-19 Portal</a>
+            </li>
+          </ul>
+          <p class="footer__copyright">HigherHealth &copy; {% now "Y" %}</p>
+        </div>
+        <div class="footer-powered-by">
+          <ul class="logo-list">
+            <li class="logo-list__item">
+              <a class="logo-list__anchor" href="http://higherhealth.ac.za/">
+                <img class="logo-list__image" src="{% static 'images/footer-logo.png' %}" alt="Higherhealth Footer Logo" width="120" height="26,34">
+              </a>
+            </li>
+            <li class="logo-list__item">
+              <a class="logo-list__anchor" href="http://www.dhet.gov.za/">
+                <img class="logo-list__image" src="{% static 'images/DHEAT-logo-white.png' %}" alt="Department of Higher Education and Training" width="120" height="46,88">
+              </a>
+            </li>
+            <li class="logo-list__item">
+              <a class="logo-list__anchor" href="http://praekelt.org">
+                <img class="logo-list__image" src="{% static 'images/prk-logo.png' %}" alt="Praekelt" width="120" height="36,56">
+              </a>
+            </li>
+            <li class="logo-list__item">
+              <a class="logo-list__anchor" href="http://turn.io">
+                <img class="logo-list__image" src="{% static 'images/turn-logo-white.png' %}" alt="Turn" width="78" height="31,65">
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </footer>
   </section>
-  <footer class="footer">
-
-    <div class="footer-inner">
-      <div class="footer-content">
-        <p class="footer__copyright">HigherHealth &copy; {% now "Y" %}</p>
-        <ul class="footer-list">
-          <li class="footer-list__item">
-            <a href="/" class="footer-list__link">Home</a>
-          </li>
-          <li class="footer-list__item">
-            <a href="https://sacoronavirus.co.za/" target="_blank" class="footer-list__link">COVID-19 Portal</a>
-          </li>
-
-        </ul>
-      </div>
-      <div class="footer-powered-by">
-        <ul class="logo-list">
-          <li class="logo-list__item">
-            <a class="logo-list__anchor" href="http://higherhealth.ac.za/">
-              <img class="logo-list__image" src="{% static 'images/footer-logo.png' %}" alt="Higherhealth Footer Logo" width="120" height="26,34">
-            </a>
-          </li>
-          <li class="logo-list__item">
-            <a class="logo-list__anchor" href="http://www.dhet.gov.za/">
-              <img class="logo-list__image" src="{% static 'images/DHEAT-logo-white.png' %}" alt="Department of Higher Education and Training" width="120" height="46,88">
-            </a>
-          </li>
-          <li class="logo-list__item">
-            <a class="logo-list__anchor" href="http://praekelt.org">
-              <img class="logo-list__image" src="{% static 'images/prk-logo.png' %}" alt="Praekelt" width="120" height="36,56">
-            </a>
-          </li>
-          <li class="logo-list__item">
-            <a class="logo-list__anchor" href="http://turn.io">
-              <img class="logo-list__image" src="{% static 'images/turn-logo-white.png' %}" alt="Turn" width="78" height="31,65">
-            </a>
-          </li>
-        </ul>
-      </div>
-    </div>
-  </footer>
 
   <script type="text/javascript">
   "use strict";
