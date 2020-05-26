@@ -33,9 +33,9 @@ ZA-NC,Sol Plaatje University (SPU),Kimberley
 ZA-WC,Stellenbosch University (SU),Stellenbosch
 ZA-WC,Stellenbosch University (SU),Tygerberg
 ZA-LP,Tshwane University of Technology (TUT),Polokwane
-ZA-MP ,Tshwane University of Technology (TUT),eMalahleni
+ZA-MP,Tshwane University of Technology (TUT),eMalahleni
 ZA-GT,Tshwane University of Technology (TUT),Ga-Rankuwa
-ZA-MP ,Tshwane University of Technology (TUT),Mbombela
+ZA-MP,Tshwane University of Technology (TUT),Mbombela
 ZA-GT,Tshwane University of Technology (TUT),Pretoria West
 ZA-GT,Tshwane University of Technology (TUT),Soshanguve
 ZA-FS,UNISA,Bloemfontein
@@ -135,25 +135,25 @@ ZA-EC,Lovedale,Zwelitsha
 ZA-EC,Port Elizabeth,Dower
 ZA-EC,Port Elizabeth,Iqhayiya
 ZA-EC,Port Elizabeth,Russell Road
-ZA-FS,Flavius Mareka ,Kroonstad
-ZA-FS,Flavius Mareka ,Mphohadi
-ZA-FS,Flavius Mareka ,Sasolburg
-ZA-FS,Goldfields ,Tosa
-ZA-FS,Goldfields ,Welkom
-ZA-FS,Maluti ,Bethlehem
-ZA-FS,Maluti ,Bonamelo
-ZA-FS,Maluti ,Harrismith
-ZA-FS,Maluti ,Itemoheleng
-ZA-FS,Maluti ,Kwetlisong
-ZA-FS,Maluti ,Lere La Tshepe
-ZA-FS,Maluti ,Main Campus
-ZA-FS,Maluti ,Sefikeng
-ZA-FS,Motheo ,Bloemfontein
-ZA-FS,Motheo ,Botshabelo
-ZA-FS,Motheo ,Hillside View
-ZA-FS,Motheo ,Koffiefontein
-ZA-FS,Motheo ,Thaba 'Nchu
-ZA-FS,Motheo ,Zastron
+ZA-FS,Flavius Mareka,Kroonstad
+ZA-FS,Flavius Mareka,Mphohadi
+ZA-FS,Flavius Mareka,Sasolburg
+ZA-FS,Goldfields,Tosa
+ZA-FS,Goldfields,Welkom
+ZA-FS,Maluti,Bethlehem
+ZA-FS,Maluti,Bonamelo
+ZA-FS,Maluti,Harrismith
+ZA-FS,Maluti,Itemoheleng
+ZA-FS,Maluti,Kwetlisong
+ZA-FS,Maluti,Lere La Tshepe
+ZA-FS,Maluti,Main Campus
+ZA-FS,Maluti,Sefikeng
+ZA-FS,Motheo,Bloemfontein
+ZA-FS,Motheo,Botshabelo
+ZA-FS,Motheo,Hillside View
+ZA-FS,Motheo,Koffiefontein
+ZA-FS,Motheo,Thaba 'Nchu
+ZA-FS,Motheo,Zastron
 ZA-GT,Central Johannesburg,Alexandra
 ZA-GT,Central Johannesburg,Crown Mines
 ZA-GT,Central Johannesburg,Ellis Park
@@ -177,13 +177,13 @@ ZA-GT,Sedibeng,Heidelberg
 ZA-GT,Sedibeng,Sebokeng
 ZA-GT,Sedibeng,Vanderbijlpark
 ZA-GT,Sedibeng,Vereeniging
-ZA-GT,South West Gauteng ,Dobsonville
-ZA-GT,South West Gauteng ,George Tabor
-ZA-GT,South West Gauteng ,Land is Wealth Farm
-ZA-GT,South West Gauteng ,Molapo
-ZA-GT,South West Gauteng ,Roodepoort
-ZA-GT,South West Gauteng ,Roodepoort West
-ZA-GT,South West Gauteng ,Technisa
+ZA-GT,South West Gauteng,Dobsonville
+ZA-GT,South West Gauteng,George Tabor
+ZA-GT,South West Gauteng,Land is Wealth Farm
+ZA-GT,South West Gauteng,Molapo
+ZA-GT,South West Gauteng,Roodepoort
+ZA-GT,South West Gauteng,Roodepoort West
+ZA-GT,South West Gauteng,Technisa
 ZA-GT,Tshwane North,Mamelodi
 ZA-GT,Tshwane North,Pretoria
 ZA-GT,Tshwane North,Rosslyn
@@ -225,10 +225,10 @@ ZA-NL,Majuba,Dundee
 ZA-NL,Majuba,IT&B
 ZA-NL,Majuba,MTC
 ZA-NL,Majuba,Newtech
-ZA-NL,Mnambithi ,Estcourt
-ZA-NL,Mnambithi ,Ezakheni A
-ZA-NL,Mnambithi ,Ezakheni E
-ZA-NL,Mnambithi ,Ladysmith
+ZA-NL,Mnambithi,Estcourt
+ZA-NL,Mnambithi,Ezakheni A
+ZA-NL,Mnambithi,Ezakheni E
+ZA-NL,Mnambithi,Ladysmith
 ZA-NL,Mthashana,Emandleni
 ZA-NL,Mthashana,Kwa-Gqikazi
 ZA-NL,Mthashana,Maputa
@@ -249,11 +249,11 @@ ZA-NL,Umfolozi,Mandeni
 ZA-NL,Umfolozi,Nkandla
 ZA-NL,Umfolozi,Richards Bay
 ZA-NL,Umfolozi,Sundumbili
-ZA-NL,Umgungundlovu ,Edendale
-ZA-NL,Umgungundlovu ,Midlands
-ZA-NL,Umgungundlovu ,Msunduzi
-ZA-NL,Umgungundlovu ,Northdale
-ZA-NL,Umgungundlovu ,Plessislaer
+ZA-NL,Umgungundlovu,Edendale
+ZA-NL,Umgungundlovu,Midlands
+ZA-NL,Umgungundlovu,Msunduzi
+ZA-NL,Umgungundlovu,Northdale
+ZA-NL,Umgungundlovu,Plessislaer
 ZA-LP,Capricorn,Polokwane
 ZA-LP,Capricorn,Ramokgopa
 ZA-LP,Capricorn,Senwabarwana
