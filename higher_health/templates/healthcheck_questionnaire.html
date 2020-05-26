@@ -179,13 +179,12 @@
     },
     prov = document.getElementById('id_facility_destination_province'),
     uni = document.getElementById('id_facility_destination_university'),
-    uniClone = uni.cloneNode(true),
     camp = document.getElementById('id_facility_destination_campus'),
+    uniClone = uni.cloneNode(true),
     campClone = camp.cloneNode(true);
 
-
     let selected_province = prov.options[prov.selectedIndex],
-      selected_university = uni.options[uni.selectedIndex];
+        selected_university = uni.options[uni.selectedIndex];
 
     if(selected_province.value !== '') {
       showHiddenInputs(selected_province.value, uniClone, uni, universities);
