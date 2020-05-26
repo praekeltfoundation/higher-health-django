@@ -183,28 +183,20 @@
     uniClone = uni.cloneNode(true),
     campClone = camp.cloneNode(true);
 
-    let selected_province = prov.options[prov.selectedIndex],
-        selected_university = uni.options[uni.selectedIndex];
-
+    let selected_province = prov.options[prov.selectedIndex];
     if(selected_province.value !== '') {
       showHiddenInputs(selected_province.value, uniClone, uni, universities);
-      prov.addEventListener('change', function(){
-        showHiddenInputs(this.value, uniClone, uni, universities);
-      });
-      clearUniversity();
-    };
+      showHiddenInputs(uni.options[uni.selectedIndex].value, campClone, camp, campuses);
 
-    if(selected_university.value !== '') {
-      showHiddenInputs(selected_university.value, campClone, camp, campuses);
-      uni.addEventListener('change', function(){
+      prov.addEventListener('change', function() {
+        showHiddenInputs(this.value, uniClone, uni, universities);
+        clearCampus();
+      });
+      uni.addEventListener('change', function() {
         showHiddenInputs(this.value, campClone, camp, campuses);
         camp.parentElement.classList.remove('hidden');
       });
-      clearCampus();
-    } else if(camp.previousElementSibling.nodeName !== 'ul') {
-      camp.parentElement.classList.add('hidden');
     };
-
     function showHiddenInputs(elem, clonedElems, selectInputs, csvInputElem) {
       selectInputs.options.length = 0;
       for(let i = 0; i < clonedElems.options.length; i++) {
@@ -215,16 +207,12 @@
           }
         }
       }
-    }
-
-    function clearUniversity() {
-      clearCampus();
+    };
+    function clearCampus() {
+      uni.value = null;
+      camp.value = null;
       camp.parentElement.classList.add('hidden');
     }
-    function clearCampus() {
-      camp.value = null;
-    }
-
 
   /* MEDICAL */
   const checkbox = document.getElementById('healthcheck_terms'),
