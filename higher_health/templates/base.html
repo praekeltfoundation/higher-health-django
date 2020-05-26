@@ -99,13 +99,13 @@
       </div>
     </footer>
   </section>
-
+  {% block extra_js %}
   <script type="text/javascript">
   "use strict";
     const bodyBlock = document.getElementById('healthcheck');
   	document.addEventListener('DOMContentLoaded',function(e) {
       bodyBlock.addEventListener('scroll',function(e) {
-				if(e.target.scrollTop > 325) {
+				if(e.target.scrollTop > 360) {
           bodyBlock.classList.add('sticky');
 				} else {
 					bodyBlock.classList.remove('sticky');
@@ -113,6 +113,7 @@
 			});
     });
   </script>
+  {% endblock %}
   {% block form_js %}{% endblock %}
 </body>
 </html>
