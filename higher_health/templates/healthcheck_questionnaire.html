@@ -60,10 +60,11 @@
                     placeholder="Type your physical address"
                     onFocus="geolocate()"
                     type="text"
-                    value="{{ form.address.value|default_if_none:"" }}"
+                    value="{{ form.address.value|default_if_none:'' }}"
                     name="address"/>
                     {% if form.address.errors  %}{{form.address.errors}}{% endif %}
                 </div>
+
                 {% if form.latitude or form.longitude %}
                   {{form.latitude}}
                   {{form.longitude}}
@@ -98,7 +99,6 @@
                     {% endif %}
                     <li class="fieldset__item">
                       <label for="{{ field.name }}" class="label">{{ field.label }}</label>
-
                       {{ field }}
                       {{field.errors}}
                     </li>
@@ -286,6 +286,12 @@
     locality: 'long_name',
     country: 'long_name'
   };
+  function id_latitude() {
+    return sessionStorage.getItem('id_latitude')
+  }
+  function id_longitude() {
+    return sessionStorage.getItem('id_longitude')
+  }
 
   function initAutocomplete() {
     // Create the autocomplete object, restricting the search predictions to
@@ -300,6 +306,7 @@
     // When the user selects an address from the drop-down, populate the
     // address fields in the form.
     autocomplete.addListener('place_changed', fillInAddress);
+
   }
   function fillInAddress() {
     // Get the place details from the autocomplete object.
@@ -313,6 +320,9 @@
     document.getElementById('id_latitude').value = location.lat();
     document.getElementById('id_longitude').value = location.lng();
 
+    sessionStorage.setItem('id_latitude', location.lat());
+    sessionStorage.setItem('id_longitude', location.lng());
+
     // Get each component of the address from the place details,
     // and then fill-in the corresponding field on the form.
     for (let i = 0; i < cityInput.address_components.length; i++) {
@@ -320,6 +330,7 @@
       if (componentForm[addressType]) {
         let val = cityInput.address_components[i][componentForm[addressType]];
         document.getElementById(addressType).value = val;
+
       }
     }
   }
