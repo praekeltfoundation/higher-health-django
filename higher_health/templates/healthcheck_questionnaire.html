@@ -61,10 +61,11 @@
                     placeholder="Type your physical address"
                     onFocus="geolocate()"
                     type="text"
-                    value="{{ form.address.value|default_if_none:"" }}"
+                    value="{{ form.address.value|default_if_none:'' }}"
                     name="address"/>
                     {% if form.address.errors  %}{{form.address.errors}}{% endif %}
                 </div>
+
                 {% if form.latitude or form.longitude %}
                   {{form.latitude}}
                   {{form.longitude}}
@@ -99,7 +100,6 @@
                     {% endif %}
                     <li class="fieldset__item">
                       <label for="{{ field.name }}" class="label">{{ field.label }}</label>
-
                       {{ field }}
                       {{field.errors}}
                     </li>
