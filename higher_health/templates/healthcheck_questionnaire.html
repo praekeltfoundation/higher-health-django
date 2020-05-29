@@ -237,7 +237,7 @@
 
       // When the user selects an address from the drop-down, populate the
       // address fields in the form.
-      addressInput.addEventListener('change',function(e){
+      addressInput.addEventListener('keyup',function(e){
         e.target.value = this.value;
         latInput.value = '';
         lngInput.value = '';
