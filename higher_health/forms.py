@@ -83,13 +83,17 @@ class HealthCheckQuestionnaire(forms.Form):
         label="", choices=DESTINATION_CHOICES, widget=forms.RadioSelect
     )
     facility_destination_province = forms.ChoiceField(
-        label="Please select a province", choices=[('', '---')] + PROVINCE_CHOICES,
+        label="Please select a province", choices=[("", "---")] + PROVINCE_CHOICES
     )
     facility_destination_university = forms.ModelChoiceField(
-        label="Please select an institution", queryset=models.University.objects.all(), required=False
+        label="Please select an institution",
+        queryset=models.University.objects.all(),
+        required=False,
     )
     facility_destination_campus = forms.ModelChoiceField(
-        label="Please select a campus", queryset=models.Campus.objects.all(), required=False
+        label="Please select a campus",
+        queryset=models.Campus.objects.all(),
+        required=False,
     )
     facility_destination_reason = forms.ChoiceField(
         label="Are you a:", choices=REASON_CHOICES, widget=forms.RadioSelect
