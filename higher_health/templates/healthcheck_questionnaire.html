@@ -359,10 +359,10 @@
           scrollTop = window.pageYOffset || document.documentElement.scrollTop;
           return { top: rect.top + scrollTop, left: rect.left + scrollLeft }
       }
+
       formSubmit.addEventListener('submit',function(e) {
         let itemOffset = offset(ErrorList[0]);
         document.getElementById('healthcheck').scrollTo(0, itemOffset.top);
-
       });
     });
   </script>
