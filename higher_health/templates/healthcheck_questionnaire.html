@@ -314,8 +314,12 @@
       //Pre-existing conditions Yes & cleanup
       let preexistingRadioKey = sessionStorage.getItem('preexistingRadio');
       if(preexistingRadioKey === 'yes' || preexistingRadioKey === 'not_sure') {
-        if(preexistingRadioKey === 'yes')preexistingconditionsYes.checked = true;
-        else preexistingconditionsNotsure.checked = true;
+        if(preexistingRadioKey === 'yes') {
+          preexistingconditionsYes.checked = true;
+        }
+        else {
+          preexistingconditionsNotsure.checked = true;
+        }
 
         preexistingconditionsForm.classList.add('showing');
         preexistingconditionsForm.classList.remove('hidden');
