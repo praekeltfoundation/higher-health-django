@@ -72,4 +72,5 @@ target/
 logs/*.log
 *.pid
 local_settings.py
+node_modules/*
 .DS_Store

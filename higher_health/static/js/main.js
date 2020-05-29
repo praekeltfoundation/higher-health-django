@@ -1,5 +1,4 @@
 "use strict";
-
   let prov = document.getElementById('id_facility_destination_province'),
     uni = document.getElementById('id_facility_destination_university'),
     camp = document.getElementById('id_facility_destination_campus'),
