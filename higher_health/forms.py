@@ -178,36 +178,35 @@ class HealthCheckQuestionnaire(forms.Form):
         if data:
             data = data.copy()
             if data.get("address"):
-                if data.get("latitude") == "" or data.get("longitude") == "":
+                querystring = urlencode(
+                    {
+                        "key": settings.SERVER_PLACES_API_KEY,
+                        "input": data["address"],
+                        "language": "en",
+                        "components": "country:za",
+                    }
+                )
+                response = requests.get(
+                    f"https://maps.googleapis.com/maps/api/place/autocomplete/json?{querystring}"
+                )
+                location = response.json()
+                if location["predictions"]:
                     querystring = urlencode(
                         {
                             "key": settings.SERVER_PLACES_API_KEY,
-                            "input": data["address"],
+                            "place_id": location["predictions"][0]["place_id"],
                             "language": "en",
-                            "components": "country:za",
+                            "fields": "geometry",
                         }
                     )
                     response = requests.get(
-                        f"https://maps.googleapis.com/maps/api/place/autocomplete/json?{querystring}"
+                        f"https://maps.googleapis.com/maps/api/place/details/json?{querystring}"
                     )
-                    location = response.json()
-                    if location["predictions"]:
-                        querystring = urlencode(
-                            {
-                                "key": settings.SERVER_PLACES_API_KEY,
-                                "place_id": location["predictions"][0]["place_id"],
-                                "language": "en",
-                                "fields": "geometry",
-                            }
-                        )
-                        response = requests.get(
-                            f"https://maps.googleapis.com/maps/api/place/details/json?{querystring}"
-                        )
-                        geometry = response.json()["result"]["geometry"]["location"]
-                        data["latitude"] = geometry["lat"]
-                        data["longitude"] = geometry["lng"]
-                    else:
-                        invalid_address = True
+                    geometry = response.json()["result"]["geometry"]["location"]
+                    data["latitude"] = geometry["lat"]
+                    data["longitude"] = geometry["lng"]
+                else:
+                    invalid_address = True
             kwargs.update({"data": data})
         super(HealthCheckQuestionnaire, self).__init__(*args, **kwargs)
 
