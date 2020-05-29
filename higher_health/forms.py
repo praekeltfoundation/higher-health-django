@@ -1,4 +1,3 @@
-import json
 from urllib.parse import urlencode
 
 import pycountry
@@ -179,22 +178,29 @@ class HealthCheckQuestionnaire(forms.Form):
                         {
                             "key": settings.PLACES_API_KEY,
                             "input": data["address"],
-                            "inputtype": "textquery",
                             "language": "en",
-                            "fields": "geometry",
+                            "components": "country:za",
                         }
                     )
                     response = requests.get(
-                        f"https://maps.googleapis.com/maps/api/place/findplacefromtext/json?{querystring}"
+                        f"https://maps.googleapis.com/maps/api/place/autocomplete/json?{querystring}"
                     )
-                    location = json.loads(response.content)
-                    if location["candidates"]:
-                        data["latitude"] = location["candidates"][0]["geometry"][
-                            "location"
-                        ]["lat"]
-                        data["longitude"] = location["candidates"][0]["geometry"][
-                            "location"
-                        ]["lng"]
+                    location = response.json()
+                    if location["predictions"]:
+                        querystring = urlencode(
+                            {
+                                "key": settings.PLACES_API_KEY,
+                                "place_id": location["predictions"][0]["place_id"],
+                                "language": "en",
+                                "fields": "geometry",
+                            }
+                        )
+                        response = requests.get(
+                            f"https://maps.googleapis.com/maps/api/place/details/json?{querystring}"
+                        )
+                        geometry = response.json()["result"]["geometry"]["location"]
+                        data["latitude"] = geometry["lat"]
+                        data["longitude"] = geometry["lng"]
                     else:
                         invalid_address = True
             kwargs.update({"data": data})
