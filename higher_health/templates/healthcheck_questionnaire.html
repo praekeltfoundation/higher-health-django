@@ -186,7 +186,6 @@
     showHiddenInputs(uni.options[uni.selectedIndex].value, campClone, camp, campuses);
     clearCampus();
     prov.addEventListener('change', function() {
-      console.log('clicked',prov);
       showHiddenInputs(this.value, uniClone, uni, universities);
       clearCampus();
     });
@@ -352,22 +351,18 @@
           preexistingconditionsForm.classList.remove('showing');
         }
       });
+      let ErrorList = document.querySelectorAll('.errorlist');
+      function offset(el) {
+          var rect = el.getBoundingClientRect(),
+          scrollLeft = window.pageXOffset || document.documentElement.scrollLeft,
+          scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+          return { top: rect.top + scrollTop, left: rect.left + scrollLeft }
+      }
+      formSubmit.addEventListener('submit',function(e) {
+        let itemOffset = offset(ErrorList[0]);
+        document.getElementById('healthcheck').scrollTo(0, itemOffset.top);
 
-      // let generalError = document.querySelector('.error');
-      // function offset(el) {
-      //     var rect = el.getBoundingClientRect(),
-      //     scrollLeft = window.pageXOffset || document.documentElement.scrollLeft,
-      //     scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-      //     return { top: rect.top + scrollTop, left: rect.left + scrollLeft }
-      // }
-      //
-      // formSubmit.addEventListener('submit',function(e) {
-      //   if(generalError) {
-      //     e.preventDefault();
-      //     let itemOffset = offset(generalError);
-      //     document.getElementById('healthcheck').scrollTo(0, itemOffset.top);
-      //   }
-      // });
+      });
     });
   </script>
 
