@@ -10,7 +10,7 @@ setup(
     packages=find_packages(),
     include_package_data=True,
     install_requires=[
-        "Django>=2.2.2,<2.3",
+        "Django~=3.0.0",
         "django-environ>=0.4.5,<0.5",
         "psycopg2-binary>=2.8.3,<2.9",
         "sentry-sdk==0.14.3",
