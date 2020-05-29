@@ -1,6 +1,6 @@
-import json
 from urllib.parse import urlencode
 
+import phonenumbers
 import pycountry
 import requests
 from django import forms
@@ -24,19 +24,19 @@ class HealthCheckQuestionnaire(forms.Form):
     )
 
     msisdn = forms.CharField(
-        label="Mobile Number",
-        widget=TextInput(attrs={"placeholder": "Type your mobile number"}),
+        label="Enter your mobile number",
+        widget=TextInput(attrs={"placeholder": "Mobile number"}),
         required=True,
         validators=[za_phone_number],
     )
     first_name = forms.CharField(
-        label="Name",
-        widget=TextInput(attrs={"placeholder": "Type your name"}),
+        label="Enter your name",
+        widget=TextInput(attrs={"placeholder": "Name"}),
         required=True,
     )
     last_name = forms.CharField(
-        label="Surname",
-        widget=TextInput(attrs={"placeholder": "Type your surname"}),
+        label="Enter your surname",
+        widget=TextInput(attrs={"placeholder": "Surname"}),
         required=True,
     )
     age_range = forms.ChoiceField(
@@ -83,20 +83,24 @@ class HealthCheckQuestionnaire(forms.Form):
         label="", choices=DESTINATION_CHOICES, widget=forms.RadioSelect
     )
     facility_destination_province = forms.ChoiceField(
-        label="Province", choices=PROVINCE_CHOICES
+        label="Please select a province", choices=[("", "--------")] + PROVINCE_CHOICES
     )
     facility_destination_university = forms.ModelChoiceField(
-        label="Institution", queryset=models.University.objects.all(), required=False
+        label="Please select an institution",
+        queryset=models.University.objects.all(),
+        required=False,
     )
     facility_destination_university_other = forms.CharField(
         label="Other", required=False
     )
     facility_destination_campus = forms.ModelChoiceField(
-        label="Campus", queryset=models.Campus.objects.all(), required=False
+        label="Please select a campus",
+        queryset=models.Campus.objects.all(),
+        required=False,
     )
     facility_destination_campus_other = forms.CharField(label="Other", required=False)
     facility_destination_reason = forms.ChoiceField(
-        label="", choices=REASON_CHOICES, widget=forms.RadioSelect
+        label="Are you a:", choices=REASON_CHOICES, widget=forms.RadioSelect
     )
     history_pre_existing_condition = forms.ChoiceField(
         label="Do you have any other pre-existing medical conditions that we should be aware of?",
@@ -181,24 +185,31 @@ class HealthCheckQuestionnaire(forms.Form):
                 if data.get("latitude") == "" or data.get("longitude") == "":
                     querystring = urlencode(
                         {
-                            "key": settings.PLACES_API_KEY,
+                            "key": settings.SERVER_PLACES_API_KEY,
                             "input": data["address"],
-                            "inputtype": "textquery",
                             "language": "en",
-                            "fields": "geometry",
+                            "components": "country:za",
                         }
                     )
                     response = requests.get(
-                        f"https://maps.googleapis.com/maps/api/place/findplacefromtext/json?{querystring}"
+                        f"https://maps.googleapis.com/maps/api/place/autocomplete/json?{querystring}"
                     )
-                    location = json.loads(response.content)
-                    if location["candidates"]:
-                        data["latitude"] = location["candidates"][0]["geometry"][
-                            "location"
-                        ]["lat"]
-                        data["longitude"] = location["candidates"][0]["geometry"][
-                            "location"
-                        ]["lng"]
+                    location = response.json()
+                    if location["predictions"]:
+                        querystring = urlencode(
+                            {
+                                "key": settings.SERVER_PLACES_API_KEY,
+                                "place_id": location["predictions"][0]["place_id"],
+                                "language": "en",
+                                "fields": "geometry",
+                            }
+                        )
+                        response = requests.get(
+                            f"https://maps.googleapis.com/maps/api/place/details/json?{querystring}"
+                        )
+                        geometry = response.json()["result"]["geometry"]["location"]
+                        data["latitude"] = geometry["lat"]
+                        data["longitude"] = geometry["lng"]
                     else:
                         invalid_address = True
             kwargs.update({"data": data})
@@ -213,6 +224,10 @@ class HealthCheckQuestionnaire(forms.Form):
                     "medical_confirm_accuracy",
                     "You need to confirm that this information is accurate",
                 )
+
+    def clean_msisdn(self):
+        number = phonenumbers.parse(self.cleaned_data["msisdn"], "ZA")
+        return phonenumbers.format_number(number, phonenumbers.PhoneNumberFormat.E164)
 
     def clean(self):
         cleaned_data = super(HealthCheckQuestionnaire, self).clean()
@@ -264,9 +279,9 @@ class HealthCheckQuestionnaire(forms.Form):
                     }
                 )
 
-        has_pre_existing_conditions = (
-            cleaned_data.get("history_pre_existing_condition") == "yes"
-        )
+        has_pre_existing_conditions = cleaned_data.get(
+            "history_pre_existing_condition"
+        ) in ["yes", "not_sure"]
 
         if has_pre_existing_conditions:
             cardiovascular = cleaned_data.get("history_cardiovascular")

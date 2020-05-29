@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-{% load temp_tags static %}
+{% load temp_tags static compress %}
 {% block content %}
   <div class="content">
     <div class="content-intro">
@@ -30,6 +30,7 @@
           </div>
           <div id="questionnaires">
             <div class="login-form__location">
+              <p class="pagination-ux">Step 1 of 4</p>
               <h2 class="heading-secondary">Registration</h2>
               <div class="login-form__screening">
                 {% if form.errors %}
@@ -41,10 +42,11 @@
                       {% if "history_" not in field.name and "facility_" not in field.name and "symptoms_" not in field.name and "medical_" not in field.name and field.name not in field_list.split %}
                         <li class="fieldset__item">
                           {% if field|field_type != "HiddenInput" %}
-                            {{field}}
+
                             <label for="{{ field.id_for_label }}" class="label">
                               {{field.label}}
                             </label>
+                            {{field}}
                             {{field.errors}}
                           {% endif %}
                         </li>
@@ -55,7 +57,6 @@
               </div>
               <p class="subtitle">Sharing your location data will help us to further accurately map cases of COVID-19</p>
               <div class="login-form__map">
-
                 <div id="locationField">
                   <input id="autocomplete"
                     placeholder="Type your physical address"
@@ -65,7 +66,6 @@
                     name="address"/>
                     {% if form.address.errors  %}{{form.address.errors}}{% endif %}
                 </div>
-
                 {% if form.latitude or form.longitude %}
                   {{form.latitude}}
                   {{form.longitude}}
@@ -91,6 +91,7 @@
               </div>
             </div>
             <div class="login-form__medical">
+              <p class="pagination-ux">Step 2 of 4</p>
               <h2 class="heading-secondary">Where are you going today?</h2>
               <ul id="destination" class="fieldset">
                 {% for field in form %}
@@ -109,6 +110,7 @@
             </div>
 
             <div class="login-form__medical">
+              <p class="pagination-ux">Step 3 of 4</p>
               <h2 class="heading-secondary">Medical History</h2>
               <ul id="medical-history" class="fieldset">
                 <li class="fieldset__medical">
@@ -131,6 +133,7 @@
             </div>
 
             <div class="login-form__medical">
+              <p class="pagination-ux">Step 4 of 4</p>
               <h2 class="heading-secondary">How are you feeling today?</h2>
               <ul id="medical" class="fieldset">
                 {% for field in form %}
@@ -156,58 +159,50 @@
 {% endblock %}
 
 {% block form_js %}
+{% compress js inline %}
   <script type="text/javascript">
   "use strict";
-    let universities = {
-      {% for uni in form.fields.facility_destination_university.choices.queryset %}
-         "{{ uni.pk }}": "{% if uni.province %}{{ uni.province }}{% else %}Other{% endif %}" {% if not forloop.last %},{% endif %}
-      {% endfor %}
-    },
-    campuses = {
-      {% for camp in form.fields.facility_destination_campus.choices.queryset %}
-         "{{ camp.pk }}": "{% if camp.university.name|lower != 'other' %}{{ camp.university.pk }}{% else %}Other{% endif %}" {% if not forloop.last %},{% endif %}
-      {% endfor %}
-    },
-    prov = document.getElementById('id_facility_destination_province'),
-    uni = document.getElementById('id_facility_destination_university'),
-    uni_other = document.getElementById('id_facility_destination_university_other'),
-    camp = document.getElementById('id_facility_destination_campus'),
-    camp_other = document.getElementById('id_facility_destination_campus_other'),
-    uniClone = uni.cloneNode(true),
-    campClone = camp.cloneNode(true),
-    formSubmit = document.getElementById('login_form'),
-    addressInput = document.getElementById('autocomplete'),
-    latInput = document.getElementById('id_latitude'),
-    lngInput = document.getElementById('id_longitude');
 
+  let universities = {
+    {% for uni in form.fields.facility_destination_university.choices.queryset %}
+      "{{ uni.pk }}": "{{ uni.province }}" {% if not forloop.last %},{% endif %}
+    {% endfor %}
+  },
+  campuses = {
+    {% for camp in form.fields.facility_destination_campus.choices.queryset %}
+      "{{ camp.pk }}": "{{ camp.university.pk }}" {% if not forloop.last %},{% endif %}
+    {% endfor %}
+  };
+    let prov = document.getElementById('id_facility_destination_province'),
+      uni = document.getElementById('id_facility_destination_university'),
+      camp = document.getElementById('id_facility_destination_campus'),
+      uniClone = uni.cloneNode(true),
+      campClone = camp.cloneNode(true),
+      formSubmit = document.getElementById('login_form'),
+      addressInput = document.getElementById('autocomplete'),
+      latInput = document.getElementById('id_latitude'),
+      lngInput = document.getElementById('id_longitude');
 
     let selected_province = prov.options[prov.selectedIndex];
-    if(selected_province.value !== '') {
-      showHiddenInputs(selected_province.value, uniClone, uni, universities);
-      showHiddenInputs(uni.options[uni.selectedIndex].value, campClone, camp, campuses);
-      showOther(uni.options[uni.selectedIndex].value, universities, uni_other);
-      showOther(camp.options[camp.selectedIndex].value, campuses, camp_other);
-      
-      prov.addEventListener('change', function() {
-        showHiddenInputs(this.value, uniClone, uni, universities);
-        showOther(this.value, universities, uni_other);
-        clearCampus();
-      });
+    showHiddenInputs(selected_province.value, uniClone, uni, universities);
+    showHiddenInputs(uni.options[uni.selectedIndex].value, campClone, camp, campuses);
+    clearCampus();
+    prov.addEventListener('change', function() {
+      showHiddenInputs(this.value, uniClone, uni, universities);
+      clearCampus();
+    });
+    uni.addEventListener('change', function() {
+      showHiddenInputs(this.value, campClone, camp, campuses);
+      camp.parentElement.classList.remove('hidden');
+    });
 
-      uni.addEventListener('change', function() {
-        showHiddenInputs(this.value, campClone, camp, campuses);
-        showOther(this.value, campuses, camp_other);
-        camp.parentElement.classList.remove('hidden');
-      });
-    };
     function showHiddenInputs(elem, clonedElems, selectInputs, csvInputElem) {
       selectInputs.options.length = 0;
+
       for(let i = 0; i < clonedElems.options.length; i++) {
         let uniChild = clonedElems.options[i];
-        if(csvInputElem[uniChild.value] !== undefined) {
-          if(csvInputElem[uniChild.value] == elem || csvInputElem[uniChild.value] == 'Other') {
-            selectInputs.appendChild(uniChild);
-          }
+        if(csvInputElem[uniChild.value] == elem || csvInputElem[uniChild.value] == undefined) {
+          selectInputs.appendChild(uniChild);
         }
       }
     };
@@ -218,8 +213,8 @@
     }
 
     function clearCampus() {
-      uni.value = null;
-      camp.value = null;
+      uni.value = '';
+      camp.value = '';
       camp.parentElement.classList.add('hidden');
     }
 
@@ -233,34 +228,15 @@
       country: 'long_name'
     };
 
-
-    function fillInAddress() {
-      // Get the place details from the autocomplete object.
-      let cityInput = autocomplete.getPlace();
-
-      for (let component in componentForm) {
-        document.getElementById(component).value = '';
-      }
-
-      let location = cityInput.geometry.location;
-      latInput.value = location.lat();
-      lngInput.value = location.lng();
-
-      // Get each component of the address from the place details,
-      // and then fill-in the corresponding field on the form.
-      for (let i = 0; i < cityInput.address_components.length; i++) {
-        let addressType = cityInput.address_components[i].types[0];
-        if (componentForm[addressType]) {
-          let val = cityInput.address_components[i][componentForm[addressType]];
-          document.getElementById(addressType).value = val;
-        }
-      }
-    }
     function initAutocomplete() {
       // Create the autocomplete object, restricting the search predictions to
       // geographical location types.
       autocomplete = new google.maps.places.Autocomplete(
-        document.getElementById('autocomplete'), {types: ['geocode']});
+        document.getElementById('autocomplete'), {
+          strictbounds: true,
+          types: ['geocode'],
+          componentRestrictions: { country: "ZA" }
+        });
 
       // Avoid paying for data that you don't need by restricting the set of
       // place fields that are returned to just the address components.
@@ -268,7 +244,31 @@
 
       // When the user selects an address from the drop-down, populate the
       // address fields in the form.
-      autocomplete.addListener('place_changed', fillInAddress);
+      autocomplete.addListener('place_changed', function(){
+        let thisPlace = this.getPlace();
+        let cityInput = autocomplete.getPlace();
+
+        for (let component in componentForm) {
+          document.getElementById(component).value = '';
+        }
+
+        let location = cityInput.geometry.location;
+        latInput.value = location.lat();
+        lngInput.value = location.lng();
+
+        // Get each component of the address from the place details,
+        // and then fill-in the corresponding field on the form.
+        for (let i = 0; i < cityInput.address_components.length; i++) {
+          let addressType = cityInput.address_components[i].types[0];
+          if (componentForm[addressType]) {
+
+            let val = cityInput.address_components[i][componentForm[addressType]];
+            console.log(componentForm[addressType], val);
+
+            document.getElementById(addressType).value = val;
+          }
+        }
+      });
     }
 
     // Bias the autocomplete object to the user's geographical location,
@@ -287,89 +287,87 @@
       }
     }
 
-  /* MEDICAL */
-  const checkbox = document.getElementById('healthcheck_terms'),
+    /* MEDICAL */
+    const checkbox = document.getElementById('healthcheck_terms'),
     questionnairesForm = document.getElementById('questionnaires'),
     addressField = document.getElementById('autocomplete'),
     preexistingconditionsYes= document.getElementById('id_history_pre_existing_condition_0'),
     preexistingconditionsNo= document.getElementById('id_history_pre_existing_condition_1'),
     preexistingconditionsNotsure= document.getElementById('id_history_pre_existing_condition_2');
-  document.addEventListener('DOMContentLoaded',function(e) {
-    //Review & cleanup
-    let checkboxKey = sessionStorage.getItem('checkbox');
-    if(checkboxKey === 'true') {
-      checkbox.checked = true;
-      questionnairesForm.classList.add('showing');
-      questionnairesForm.classList.remove('hidden');
-    } else {
-      checkbox.checked = false;
-      questionnairesForm.classList.add('hidden');
-      questionnairesForm.classList.remove('showing');
-    }
 
-    checkbox.addEventListener('change', function(e){
-      if (e.target.checked) {
-        sessionStorage.setItem('checkbox', 'true');
+    document.addEventListener('DOMContentLoaded',function(e) {
+      //Review & cleanup
+      let checkboxKey = sessionStorage.getItem('checkbox');
+      if(checkboxKey === 'true') {
+        checkbox.checked = true;
         questionnairesForm.classList.add('showing');
         questionnairesForm.classList.remove('hidden');
       } else {
-        sessionStorage.setItem('checkbox', 'false');
+        checkbox.checked = false;
         questionnairesForm.classList.add('hidden');
         questionnairesForm.classList.remove('showing');
       }
-    });
+      checkbox.addEventListener('change', function(e){
+        if (e.target.checked) {
+          sessionStorage.setItem('checkbox', 'true');
+          questionnairesForm.classList.add('showing');
+          questionnairesForm.classList.remove('hidden');
+        } else {
+          sessionStorage.setItem('checkbox', 'false');
+          questionnairesForm.classList.add('hidden');
+          questionnairesForm.classList.remove('showing');
+        }
+      });
 
-    //Pre-existing conditions Yes & cleanup
-    let preexistingRadioKey = sessionStorage.getItem('preexistingRadio');
-    if(preexistingRadioKey === 'true' || preexistingRadioKey === 'not_sure') {
-      preexistingconditionsYes.checked = true;
-      preexistingconditionsForm.classList.add('showing');
-      preexistingconditionsForm.classList.remove('hidden');
-    } else {
-      preexistingconditionsYes.checked = false;
-      preexistingconditionsForm.classList.add('hidden');
-      preexistingconditionsForm.classList.remove('showing');
-    }
-    preexistingconditionsYes.addEventListener('change', function(e){
-      if (e.target.checked) {
-        sessionStorage.setItem('preexistingRadio', 'true');
+      //Pre-existing conditions Yes & cleanup
+      let preexistingRadioKey = sessionStorage.getItem('preexistingRadio');
+      if(preexistingRadioKey === 'true' || preexistingRadioKey === 'not_sure') {
+        preexistingconditionsYes.checked = true;
         preexistingconditionsForm.classList.add('showing');
         preexistingconditionsForm.classList.remove('hidden');
       } else {
-        sessionStorage.setItem('preexistingRadio', 'false');
+        preexistingconditionsYes.checked = false;
         preexistingconditionsForm.classList.add('hidden');
         preexistingconditionsForm.classList.remove('showing');
       }
-    });
+      preexistingconditionsYes.addEventListener('change', function(e){
+        if (e.target.checked) {
+          sessionStorage.setItem('preexistingRadio', 'true');
+          preexistingconditionsForm.classList.add('showing');
+          preexistingconditionsForm.classList.remove('hidden');
+        } else {
+          sessionStorage.setItem('preexistingRadio', 'false');
+          preexistingconditionsForm.classList.add('hidden');
+          preexistingconditionsForm.classList.remove('showing');
+        }
+      });
 
-    preexistingconditionsNo.addEventListener('change', function(e){
-      if (e.target.checked) {
-        sessionStorage.setItem('preexistingRadio', 'false');
-        preexistingconditionsForm.classList.add('hidden');
-        preexistingconditionsForm.classList.remove('showing');
-      }
+      preexistingconditionsNo.addEventListener('change', function(e){
+        if (e.target.checked) {
+          sessionStorage.setItem('preexistingRadio', 'false');
+          preexistingconditionsForm.classList.add('hidden');
+          preexistingconditionsForm.classList.remove('showing');
+        }
+      });
+      preexistingconditionsNotsure.addEventListener('change', function(e){
+        if (e.target.checked) {
+          sessionStorage.setItem('preexistingRadio', 'true');
+          preexistingconditionsForm.classList.add('showing');
+          preexistingconditionsForm.classList.remove('hidden');
+        } else {
+          sessionStorage.setItem('preexistingRadio', 'false');
+          preexistingconditionsForm.classList.add('hidden');
+          preexistingconditionsForm.classList.remove('showing');
+        }
+      });
+
+      let inputs = document.getElementsByTagName('input');
+      let ErrorList = document.querySelectorAll('.errorlist');
+      ErrorList[0].scrollIntoView();
+      
     });
-    preexistingconditionsNotsure.addEventListener('change', function(e){
-      if (e.target.checked) {
-        sessionStorage.setItem('preexistingRadio', 'true');
-        preexistingconditionsForm.classList.add('showing');
-        preexistingconditionsForm.classList.remove('hidden');
-      } else {
-        sessionStorage.setItem('preexistingRadio', 'false');
-        preexistingconditionsForm.classList.add('hidden');
-        preexistingconditionsForm.classList.remove('showing');
-      }
-    });
-    latInput.value = sessionStorage.getItem('lat');
-    lngInput.value = sessionStorage.getItem('lng');
-    formSubmit.addEventListener('submit',function(e) {
-      if(latInput.value !== '' || lngInput.value !== '') {
-        sessionStorage.setItem('lat',latInput.value);
-        sessionStorage.setItem('lng',lngInput.value);
-      }
-    });
-  });
   </script>
+{% endcompress %}
   <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key={{PLACES_API_KEY}}&libraries=places&callback=initAutocomplete"
       async defer></script>
 {% endblock %}

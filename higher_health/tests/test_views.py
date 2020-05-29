@@ -132,16 +132,21 @@ class QuestionnaireTest(TestCase):
         data["longitude"] = ""
         data["address"] = "4 friend street woodstock"
 
-        places_url = "https://maps.googleapis.com/maps/api/place/findplacefromtext/json?key=TEST_API_KEY&input=4+friend+street+woodstock&inputtype=textquery&language=en&fields=geometry"
+        places_url = "https://maps.googleapis.com/maps/api/place/autocomplete/json?key=TEST_API_KEY&input=4+friend+street+woodstock&language=en&components=country%3Aza"
 
         responses.add(
             responses.GET,
             places_url,
-            json={
-                "candidates": [
-                    {"geometry": {"location": {"lat": "11.1", "lng": "22.2"}}}
-                ]
-            },
+            json={"predictions": [{"place_id": "resultplaceid"}]},
+            status=200,
+            match_querystring=True,
+        )
+
+        places_detail_url = "https://maps.googleapis.com/maps/api/place/details/json?key=TEST_API_KEY&place_id=resultplaceid&language=en&fields=geometry"
+        responses.add(
+            responses.GET,
+            places_detail_url,
+            json={"result": {"geometry": {"location": {"lat": 11.1, "lng": 22.2}}}},
             status=200,
             match_querystring=True,
         )
@@ -150,9 +155,12 @@ class QuestionnaireTest(TestCase):
 
         self.assertEqual(response.status_code, 302)
 
-        places_call = responses.calls[0]
+        places_call, places_detail_call = responses.calls
         self.assertEqual(places_call.request.method, "GET")
         self.assertEqual(places_call.request.url, places_url)
+
+        self.assertEqual(places_detail_call.request.method, "GET")
+        self.assertEqual(places_detail_call.request.url, places_detail_url)
 
         [triage] = Covid19Triage.objects.all()
 
@@ -163,7 +171,7 @@ class QuestionnaireTest(TestCase):
         self.assertFalse(triage.difficulty_breathing)
         self.assertFalse(triage.smell)
         self.assertEqual(triage.exposure, "no")
-        self.assertEqual(triage.preexisting_condition, "not_sure")
+        self.assertEqual(triage.preexisting_condition, "no")
         self.assertEqual(triage.msisdn, "+27831231234")
         self.assertEqual(triage.first_name, "Jane")
         self.assertEqual(triage.last_name, "Smith")
@@ -184,16 +192,21 @@ class QuestionnaireTest(TestCase):
         data["longitude"] = ""
         data["address"] = "4 friend street woodstock"
 
-        places_url = "https://maps.googleapis.com/maps/api/place/findplacefromtext/json?key=TEST_API_KEY&input=4+friend+street+woodstock&inputtype=textquery&language=en&fields=geometry"
+        places_url = "https://maps.googleapis.com/maps/api/place/autocomplete/json?key=TEST_API_KEY&input=4+friend+street+woodstock&language=en&components=country%3Aza"
 
         responses.add(
             responses.GET,
             places_url,
-            json={
-                "candidates": [
-                    {"geometry": {"location": {"lat": "11.1", "lng": "22.2"}}}
-                ]
-            },
+            json={"predictions": [{"place_id": "resultplaceid"}]},
+            status=200,
+            match_querystring=True,
+        )
+
+        places_detail_url = "https://maps.googleapis.com/maps/api/place/details/json?key=TEST_API_KEY&place_id=resultplaceid&language=en&fields=geometry"
+        responses.add(
+            responses.GET,
+            places_detail_url,
+            json={"result": {"geometry": {"location": {"lat": 11.1, "lng": 22.2}}}},
             status=200,
             match_querystring=True,
         )
@@ -246,9 +259,12 @@ class QuestionnaireTest(TestCase):
 
         self.assertEqual(response.status_code, 302)
 
-        places_call = responses.calls[0]
+        places_call, places_detail_call = responses.calls[:2]  # just check first
         self.assertEqual(places_call.request.method, "GET")
         self.assertEqual(places_call.request.url, places_url)
+
+        self.assertEqual(places_detail_call.request.method, "GET")
+        self.assertEqual(places_detail_call.request.url, places_detail_url)
 
         [triage] = Covid19Triage.objects.all()
 
@@ -259,7 +275,7 @@ class QuestionnaireTest(TestCase):
         self.assertFalse(triage.difficulty_breathing)
         self.assertFalse(triage.smell)
         self.assertEqual(triage.exposure, "no")
-        self.assertEqual(triage.preexisting_condition, "not_sure")
+        self.assertEqual(triage.preexisting_condition, "no")
         self.assertEqual(triage.msisdn, "+27831231234")
         self.assertEqual(triage.first_name, "Jane")
         self.assertEqual(triage.last_name, "Smith")
@@ -352,16 +368,21 @@ class QuestionnaireTest(TestCase):
         data["history_diabetes"] = ""
         data["history_obesity"] = ""
 
-        places_url = "https://maps.googleapis.com/maps/api/place/findplacefromtext/json?key=TEST_API_KEY&input=4+friend+street+woodstock&inputtype=textquery&language=en&fields=geometry"
+        places_url = "https://maps.googleapis.com/maps/api/place/autocomplete/json?key=TEST_API_KEY&input=4+friend+street+woodstock&language=en&components=country%3Aza"
 
         responses.add(
             responses.GET,
             places_url,
-            json={
-                "candidates": [
-                    {"geometry": {"location": {"lat": "11.1", "lng": "22.2"}}}
-                ]
-            },
+            json={"predictions": [{"place_id": "resultplaceid"}]},
+            status=200,
+            match_querystring=True,
+        )
+
+        places_detail_url = "https://maps.googleapis.com/maps/api/place/details/json?key=TEST_API_KEY&place_id=resultplaceid&language=en&fields=geometry"
+        responses.add(
+            responses.GET,
+            places_detail_url,
+            json={"result": {"geometry": {"location": {"lat": 11.1, "lng": 22.2}}}},
             status=200,
             match_querystring=True,
         )
@@ -391,9 +412,12 @@ class QuestionnaireTest(TestCase):
         response = self.client.post(reverse("healthcheck_questionnaire"), data)
         self.assertEqual(response.status_code, 302)
 
-        places_call = responses.calls[0]
+        places_call, places_detail_call = responses.calls[:2]  # just check first
         self.assertEqual(places_call.request.method, "GET")
         self.assertEqual(places_call.request.url, places_url)
+
+        self.assertEqual(places_detail_call.request.method, "GET")
+        self.assertEqual(places_detail_call.request.url, places_detail_url)
 
         [triage] = Covid19Triage.objects.all()
 
@@ -453,10 +477,12 @@ class QuestionnaireTest(TestCase):
         data["longitude"] = ""
         data["address"] = "area 51"
 
+        places_url = "https://maps.googleapis.com/maps/api/place/autocomplete/json?key=TEST_API_KEY&input=area+51&language=en&components=country%3Aza"
+
         responses.add(
             responses.GET,
-            "https://maps.googleapis.com/maps/api/place/findplacefromtext/json?key=TEST_API_KEY&input=area+51&inputtype=textquery&language=en&fields=geometry",
-            json={"candidates": []},
+            places_url,
+            json={"predictions": []},
             status=200,
             match_querystring=True,
         )
