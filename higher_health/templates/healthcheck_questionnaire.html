@@ -270,6 +270,7 @@
           let circle = new google.maps.Circle(
             {center: geolocation, radius: position.coords.accuracy});
           autocomplete.setBounds(circle.getBounds());
+          console.log(circle);
         });
       }
     }
@@ -346,13 +347,26 @@
           preexistingconditionsForm.classList.remove('showing');
         }
       });
-      latInput.value = sessionStorage.getItem('lat');
-      lngInput.value = sessionStorage.getItem('lng');
+
+      let generalError = document.querySelector('.error');
+      let generalErrorList = document.querySelectorAll('.errorlist');
+
+      function offset(el) {
+          var rect = el.getBoundingClientRect(),
+          scrollLeft = window.pageXOffset || document.documentElement.scrollLeft,
+          scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+          return { top: rect.top + scrollTop, left: rect.left + scrollLeft }
+      }
+
       formSubmit.addEventListener('submit',function(e) {
-        if(latInput.value !== '' || lngInput.value !== '') {
-          sessionStorage.setItem('lat',latInput.value);
-          sessionStorage.setItem('lng',lngInput.value);
+
+        if(generalError) {
+          e.preventDefault();
+          let itemOffset = offset(generalError);
+            console.log(e.target, itemOffset.top, itemOffset.left);
+            window.scrollTo(0, itemOffset.top);
         }
+
       });
     });
   </script>
