@@ -237,7 +237,7 @@
 
       // When the user selects an address from the drop-down, populate the
       // address fields in the form.
-      addressInput.addEventListener('change',function(e){
+      addressInput.addEventListener('keyup',function(e){
         e.target.value = this.value;
         latInput.value = '';
         lngInput.value = '';
@@ -358,10 +358,12 @@
         }
       });
       let ErrorList = document.querySelectorAll('.errorlist');
-      ErrorList[0].parentElement.scrollIntoView({
-        bahavior: "smooth",
-        block: "start"
-      });
+      if(ErrorList.length > 0) {
+        ErrorList[0].parentElement.scrollIntoView({
+          bahavior: "smooth",
+          block: "start"
+        });
+      }
     });
   </script>
 {% endcompress %}
