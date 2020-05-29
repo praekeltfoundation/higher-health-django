@@ -237,6 +237,11 @@
 
       // When the user selects an address from the drop-down, populate the
       // address fields in the form.
+      addressInput.addEventListener('change',function(e){
+        e.target.value = this.value;
+        latInput.value = '';
+        lngInput.value = '';
+      });
       autocomplete.addListener('place_changed', function(){
         let thisPlace = this.getPlace();
         let cityInput = autocomplete.getPlace();
@@ -353,8 +358,7 @@
         }
       });
       let ErrorList = document.querySelectorAll('.errorlist');
-      ErrorList[0].scrollIntoView();
-
+      ErrorList[0].parentElement.scrollIntoView();
     });
   </script>
 {% endcompress %}
