@@ -266,7 +266,13 @@ a:hover {
 .terms__content {
   margin: 1em 5%;
 }
-
+.terms-list {
+  padding: 5px 0 0 15px;
+}
+.terms-list__item {
+  list-style: disc;
+  list-style-position: inside;
+}
 .heading-container {
   text-align: center;
 }
@@ -285,8 +291,14 @@ a:hover {
   font-weight: 400;
   margin: 0;
 }
+.heading--terms {
+ font-weight: 600;
+ text-align: center;
+ padding: 0 0 15px;
+}
 .heading-label {
-  font-weight: 500;
+  font-weight: 600;
+  font-size: 16px;
   margin: 0;
   text-transform: uppercase;
 }
@@ -626,6 +638,9 @@ textarea {
 
   .terms__content {
     padding: 2em 20% 2em 10%;
+  }
+  .terms-list {
+    padding: 5px 0 0 20px;
   }
   .heading-primary {
     font-size: 35px;
