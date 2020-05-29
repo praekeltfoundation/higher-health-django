@@ -121,7 +121,8 @@ USE_L10N = True
 
 USE_TZ = True
 
-PLACES_API_KEY = env.str("GOOGLE_PLACES_API_KEY", "REPLACE_ME")
+CLIENT_PLACES_API_KEY = env.str("GOOGLE_PLACES_CLIENT_API_KEY", "REPLACE_ME")
+SERVER_PLACES_API_KEY = env.str("GOOGLE_PLACES_SERVER_API_KEY", "REPLACE_ME")
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
