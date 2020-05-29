@@ -160,17 +160,19 @@
   "use strict";
     let universities = {
       {% for uni in form.fields.facility_destination_university.choices.queryset %}
-         "{{ uni.pk }}": "{{ uni.province }}" {% if not forloop.last %},{% endif %}
+         "{{ uni.pk }}": "{% if uni.province %}{{ uni.province }}{% else %}Other{% endif %}" {% if not forloop.last %},{% endif %}
       {% endfor %}
     },
     campuses = {
       {% for camp in form.fields.facility_destination_campus.choices.queryset %}
-         "{{ camp.pk }}": "{{ camp.university.pk }}" {% if not forloop.last %},{% endif %}
+         "{{ camp.pk }}": "{% if camp.university.name != 'Other' %}{{ camp.university.pk }}{% else %}Other{% endif %}" {% if not forloop.last %},{% endif %}
       {% endfor %}
     },
     prov = document.getElementById('id_facility_destination_province'),
     uni = document.getElementById('id_facility_destination_university'),
+    uni_other = document.getElementById('id_facility_destination_university_other'),
     camp = document.getElementById('id_facility_destination_campus'),
+    camp_other = document.getElementById('id_facility_destination_campus_other'),
     uniClone = uni.cloneNode(true),
     campClone = camp.cloneNode(true),
     formSubmit = document.getElementById('login_form'),
@@ -183,14 +185,18 @@
     if(selected_province.value !== '') {
       showHiddenInputs(selected_province.value, uniClone, uni, universities);
       showHiddenInputs(uni.options[uni.selectedIndex].value, campClone, camp, campuses);
-
+      showOther(uni.options[uni.selectedIndex].value, universities, uni_other);
+      showOther(camp.options[camp.selectedIndex].value, campuses, camp_other);
+      
       prov.addEventListener('change', function() {
         showHiddenInputs(this.value, uniClone, uni, universities);
+        showOther(this.value, universities, uni_other);
         clearCampus();
       });
 
       uni.addEventListener('change', function() {
         showHiddenInputs(this.value, campClone, camp, campuses);
+        showOther(this.value, campuses, camp_other);
         camp.parentElement.classList.remove('hidden');
       });
     };
@@ -199,12 +205,17 @@
       for(let i = 0; i < clonedElems.options.length; i++) {
         let uniChild = clonedElems.options[i];
         if(csvInputElem[uniChild.value] !== undefined) {
-          if(csvInputElem[uniChild.value] == elem) {
+          if(csvInputElem[uniChild.value] == elem || csvInputElem[uniChild.value] == 'Other') {
             selectInputs.appendChild(uniChild);
           }
         }
       }
     };
+
+    function showOther(val, list, other){
+      if(list[val] == 'Other') other.parentElement.classList.remove('hidden');
+      else other.parentElement.classList.add('hidden');
+    }
 
     function clearCampus() {
       uni.value = null;
