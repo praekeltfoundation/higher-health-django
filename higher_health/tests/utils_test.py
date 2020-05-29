@@ -1,4 +1,4 @@
-def get_data(symptoms=0, exposure=False, age="<18", pre_existing_condition="not_sure"):
+def get_data(symptoms=0, exposure=False, age="<18", pre_existing_condition="no"):
     return {
         "age_range": age,
         "symptoms_fever": "yes" if symptoms >= 1 else "no",
