@@ -41,10 +41,11 @@
                       {% if "history_" not in field.name and "facility_" not in field.name and "symptoms_" not in field.name and "medical_" not in field.name and field.name not in field_list.split %}
                         <li class="fieldset__item">
                           {% if field|field_type != "HiddenInput" %}
-                            {{field}}
+
                             <label for="{{ field.id_for_label }}" class="label">
                               {{field.label}}
                             </label>
+                            {{field}}
                             {{field.errors}}
                           {% endif %}
                         </li>

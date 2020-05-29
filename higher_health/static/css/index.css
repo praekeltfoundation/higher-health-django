@@ -373,7 +373,6 @@ a:hover {
 
 */
 
-.fieldset {}
 .fieldset__item {
   margin: 10px auto;
 }
@@ -507,15 +506,13 @@ select {
   -moz-box-sizing:    border-box;
  -webkit-box-sizing: border-box;
   box-sizing:        border-box;
-
   background: white;
   border: 0;
   border-radius: 5px;
   border-bottom: 1px solid rgba(68, 68, 68, 0.3);
   color: rgba(68, 68, 68, 0.8);
   display: inline-block;
-  margin: 20px auto 0;
-
+  margin: 0 auto 10px;
   font-size: 1rem;
   height: 40px;
   outline: 0;

@@ -24,19 +24,19 @@ class HealthCheckQuestionnaire(forms.Form):
     )
 
     msisdn = forms.CharField(
-        label="Mobile Number",
-        widget=TextInput(attrs={"placeholder": "Type your mobile number"}),
+        label="Enter your mobile number",
+        widget=TextInput(attrs={"placeholder": "Enter your mobile number"}),
         required=True,
         validators=[za_phone_number],
     )
     first_name = forms.CharField(
-        label="Name",
-        widget=TextInput(attrs={"placeholder": "Type your name"}),
+        label="Enter your name",
+        widget=TextInput(attrs={"placeholder": "Enter your name"}),
         required=True,
     )
     last_name = forms.CharField(
-        label="Surname",
-        widget=TextInput(attrs={"placeholder": "Type your surname"}),
+        label="Enter your surname",
+        widget=TextInput(attrs={"placeholder": "Enter your surname"}),
         required=True,
     )
     age_range = forms.ChoiceField(
