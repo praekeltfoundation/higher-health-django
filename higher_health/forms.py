@@ -83,16 +83,16 @@ class HealthCheckQuestionnaire(forms.Form):
         label="", choices=DESTINATION_CHOICES, widget=forms.RadioSelect
     )
     facility_destination_province = forms.ChoiceField(
-        label="Province", choices=[('', 'Please select a province')] + PROVINCE_CHOICES,
+        label="Please select a province", choices=[('', '---')] + PROVINCE_CHOICES,
     )
     facility_destination_university = forms.ModelChoiceField(
-        label="Institution", queryset=models.University.objects.all(), required=False
+        label="Please select an institution", queryset=models.University.objects.all(), required=False
     )
     facility_destination_campus = forms.ModelChoiceField(
-        label="Campus", queryset=models.Campus.objects.all(), required=False
+        label="Please select a campus", queryset=models.Campus.objects.all(), required=False
     )
     facility_destination_reason = forms.ChoiceField(
-        label="", choices=REASON_CHOICES, widget=forms.RadioSelect
+        label="Are you a:", choices=REASON_CHOICES, widget=forms.RadioSelect
     )
     history_pre_existing_condition = forms.ChoiceField(
         label="Do you have any other pre-existing medical conditions that we should be aware of?",
