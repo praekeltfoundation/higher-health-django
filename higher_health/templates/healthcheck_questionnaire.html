@@ -208,8 +208,12 @@
     };
 
     function showOther(val, list, other){
-      if(list[val] == 'Other') other.parentElement.classList.remove('hidden');
-      else other.parentElement.classList.add('hidden');
+      if(list[val] == 'Other') {
+        other.parentElement.classList.remove('hidden');
+      }
+      else {
+        other.parentElement.classList.add('hidden');
+      }
     }
 
     function clearCampus() {
