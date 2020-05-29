@@ -250,9 +250,9 @@ class HealthCheckQuestionnaire(forms.Form):
                     }
                 )
 
-        has_pre_existing_conditions = (
-            cleaned_data.get("history_pre_existing_condition") in ["yes", "not_sure"]
-        )
+        has_pre_existing_conditions = cleaned_data.get(
+            "history_pre_existing_condition"
+        ) in ["yes", "not_sure"]
 
         if has_pre_existing_conditions:
             cardiovascular = cleaned_data.get("history_cardiovascular")
