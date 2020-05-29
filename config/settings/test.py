@@ -13,4 +13,5 @@ PASSWORD_HASHERS = ("django.contrib.auth.hashers.MD5PasswordHasher",)
 ENV_HOSTS = [host for host in env.str("ALLOWED_HOSTS", "").split(",") if host]
 ALLOWED_HOSTS = ENV_HOSTS + ["localhost", ".localhost", "127.0.0.1", "0.0.0.0"]
 
-PLACES_API_KEY = "TEST_API_KEY"
+CLIENT_PLACES_API_KEY = "TEST_API_KEY"
+SERVER_PLACES_API_KEY = "TEST_API_KEY"
