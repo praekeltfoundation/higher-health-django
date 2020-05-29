@@ -491,7 +491,12 @@ class QuestionnaireTest(TestCase):
 
         self.assertEqual(response.status_code, 200)
         errors = response.context["form"].errors
-        self.assertEqual(errors["address"], ["Invalid address"])
+        self.assertEqual(
+            errors["address"],
+            [
+                "If you have typed your address incorrectly, please try again. If you are unable to provide your address, please TYPE the name of your Suburb, Township, Town or Village (or nearest)"
+            ],
+        )
 
 
 class ReceiptTest(TestCase):

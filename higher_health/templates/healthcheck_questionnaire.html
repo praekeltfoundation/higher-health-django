@@ -248,6 +248,11 @@
 
       // When the user selects an address from the drop-down, populate the
       // address fields in the form.
+      addressInput.addEventListener('keyup',function(e){
+        e.target.value = this.value;
+        latInput.value = '';
+        lngInput.value = '';
+      });
       autocomplete.addListener('place_changed', function(){
         let thisPlace = this.getPlace();
         let cityInput = autocomplete.getPlace();
@@ -325,8 +330,14 @@
 
       //Pre-existing conditions Yes & cleanup
       let preexistingRadioKey = sessionStorage.getItem('preexistingRadio');
-      if(preexistingRadioKey === 'true' || preexistingRadioKey === 'not_sure') {
-        preexistingconditionsYes.checked = true;
+      if(preexistingRadioKey === 'yes' || preexistingRadioKey === 'not_sure') {
+        if(preexistingRadioKey === 'yes') {
+          preexistingconditionsYes.checked = true;
+        }
+        else {
+          preexistingconditionsNotsure.checked = true;
+        }
+
         preexistingconditionsForm.classList.add('showing');
         preexistingconditionsForm.classList.remove('hidden');
       } else {
@@ -336,11 +347,11 @@
       }
       preexistingconditionsYes.addEventListener('change', function(e){
         if (e.target.checked) {
-          sessionStorage.setItem('preexistingRadio', 'true');
+          sessionStorage.setItem('preexistingRadio', 'yes');
           preexistingconditionsForm.classList.add('showing');
           preexistingconditionsForm.classList.remove('hidden');
         } else {
-          sessionStorage.setItem('preexistingRadio', 'false');
+          sessionStorage.setItem('preexistingRadio', 'no');
           preexistingconditionsForm.classList.add('hidden');
           preexistingconditionsForm.classList.remove('showing');
         }
@@ -348,27 +359,29 @@
 
       preexistingconditionsNo.addEventListener('change', function(e){
         if (e.target.checked) {
-          sessionStorage.setItem('preexistingRadio', 'false');
+          sessionStorage.setItem('preexistingRadio', 'no');
           preexistingconditionsForm.classList.add('hidden');
           preexistingconditionsForm.classList.remove('showing');
         }
       });
       preexistingconditionsNotsure.addEventListener('change', function(e){
         if (e.target.checked) {
-          sessionStorage.setItem('preexistingRadio', 'true');
+          sessionStorage.setItem('preexistingRadio', 'not_sure');
           preexistingconditionsForm.classList.add('showing');
           preexistingconditionsForm.classList.remove('hidden');
         } else {
-          sessionStorage.setItem('preexistingRadio', 'false');
+          sessionStorage.setItem('preexistingRadio', 'no');
           preexistingconditionsForm.classList.add('hidden');
           preexistingconditionsForm.classList.remove('showing');
         }
       });
-
-      let inputs = document.getElementsByTagName('input');
       let ErrorList = document.querySelectorAll('.errorlist');
-      ErrorList[0].scrollIntoView();
-      
+      if(ErrorList.length > 0) {
+        ErrorList[0].parentElement.scrollIntoView({
+          bahavior: "smooth",
+          block: "start"
+        });
+      }
     });
   </script>
 {% endcompress %}
