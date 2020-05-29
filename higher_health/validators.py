@@ -1,18 +1,19 @@
-import functools
-
 import phonenumbers
 from django.forms import ValidationError
 
 
-def _phone_number(value, country):
+def za_phone_number(value):
+    error_msg = "Please enter a valid 10-digit phone number"
     try:
-        number = phonenumbers.parse(value, country)
+        number = phonenumbers.parse(value, "ZA")
     except phonenumbers.NumberParseException as e:
-        raise ValidationError(str(e))
+        raise ValidationError(error_msg)
     if not phonenumbers.is_possible_number(number):
-        raise ValidationError("Not a possible phone number")
+        raise ValidationError(error_msg)
     if not phonenumbers.is_valid_number(number):
-        raise ValidationError("Not a valid phone number")
+        raise ValidationError(error_msg)
 
-
-za_phone_number = functools.partial(_phone_number, country="ZA")
+    if str(number.country_code) != "27":
+        raise ValidationError("Only South African numbers are allowed")
+    if len(str(number.national_number)) != 9:
+        raise ValidationError(error_msg)

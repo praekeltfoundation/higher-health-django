@@ -1,5 +1,6 @@
 from urllib.parse import urlencode
 
+import phonenumbers
 import pycountry
 import requests
 from django import forms
@@ -180,7 +181,7 @@ class HealthCheckQuestionnaire(forms.Form):
                 if data.get("latitude") == "" or data.get("longitude") == "":
                     querystring = urlencode(
                         {
-                            "key": settings.PLACES_API_KEY,
+                            "key": settings.SERVER_PLACES_API_KEY,
                             "input": data["address"],
                             "language": "en",
                             "components": "country:za",
@@ -193,7 +194,7 @@ class HealthCheckQuestionnaire(forms.Form):
                     if location["predictions"]:
                         querystring = urlencode(
                             {
-                                "key": settings.PLACES_API_KEY,
+                                "key": settings.SERVER_PLACES_API_KEY,
                                 "place_id": location["predictions"][0]["place_id"],
                                 "language": "en",
                                 "fields": "geometry",
@@ -211,7 +212,10 @@ class HealthCheckQuestionnaire(forms.Form):
         super(HealthCheckQuestionnaire, self).__init__(*args, **kwargs)
 
         if invalid_address:
-            self.add_error("address", "Invalid address")
+            self.add_error(
+                "address",
+                "If you have typed your address incorrectly, please try again. If you are unable to provide your address, please TYPE the name of your Suburb, Township, Town or Village (or nearest)",
+            )
 
         if data:
             if data.get("medical_confirm_accuracy") == "no":
@@ -219,6 +223,10 @@ class HealthCheckQuestionnaire(forms.Form):
                     "medical_confirm_accuracy",
                     "You need to confirm that this information is accurate",
                 )
+
+    def clean_msisdn(self):
+        number = phonenumbers.parse(self.cleaned_data["msisdn"], "ZA")
+        return phonenumbers.format_number(number, phonenumbers.PhoneNumberFormat.E164)
 
     def clean(self):
         cleaned_data = super(HealthCheckQuestionnaire, self).clean()
