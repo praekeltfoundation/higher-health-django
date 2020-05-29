@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-{% load temp_tags static %}
+{% load temp_tags static compress %}
 {% block content %}
   <div class="content">
     <div class="content-intro">
@@ -159,6 +159,7 @@
 {% endblock %}
 
 {% block form_js %}
+  {% compress js inline %}
   <script type="text/javascript">
   "use strict";
     let universities = {
@@ -359,17 +360,18 @@
       }
 
       formSubmit.addEventListener('submit',function(e) {
-
         if(generalError) {
           e.preventDefault();
           let itemOffset = offset(generalError);
-            console.log(e.target, itemOffset.top, itemOffset.left);
-            window.scrollTo(0, itemOffset.top);
+          document.getElementById('healthcheck').scrollTo(0, itemOffset.top);
         }
-
+        // for(let i = 0; i < generalErrorList.length; i++) {
+        //   console.log(generalErrorList[i]);
+        // }
       });
     });
   </script>
+  {% endcompress %}
   <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key={{PLACES_API_KEY}}&libraries=places&callback=initAutocomplete"
       async defer></script>
 {% endblock %}

@@ -49,6 +49,7 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "higher_health",
     "import_export",
+    "compressor"
 ]
 
 MIDDLEWARE = [
@@ -128,6 +129,7 @@ PLACES_API_KEY = env.str("GOOGLE_PLACES_API_KEY", "REPLACE_ME")
 STATICFILES_FINDERS = (
     "django.contrib.staticfiles.finders.AppDirectoriesFinder",
     "django.contrib.staticfiles.finders.FileSystemFinder",
+    'compressor.finders.CompressorFinder',
 )
 
 
