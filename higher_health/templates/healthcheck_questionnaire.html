@@ -55,7 +55,6 @@
               </div>
               <p class="subtitle">Sharing your location data will help us to further accurately map cases of COVID-19</p>
               <div class="login-form__map">
-
                 <div id="locationField">
                   <input id="autocomplete"
                     placeholder="Type your physical address"
@@ -65,7 +64,6 @@
                     name="address"/>
                     {% if form.address.errors  %}{{form.address.errors}}{% endif %}
                 </div>
-
                 {% if form.latitude or form.longitude %}
                   {{form.latitude}}
                   {{form.longitude}}
@@ -178,12 +176,16 @@
     latInput = document.getElementById('id_latitude'),
     lngInput = document.getElementById('id_longitude');
 
-
     let selected_province = prov.options[prov.selectedIndex];
+    let option = document.createElement("option");
+    option.text = "------";
+    option.value = "";
+    option.selected = "selected"; //Needs to be django to retain selected on refresh
+
     if(selected_province.value !== '') {
       showHiddenInputs(selected_province.value, uniClone, uni, universities);
       showHiddenInputs(uni.options[uni.selectedIndex].value, campClone, camp, campuses);
-
+      clearCampus();
       prov.addEventListener('change', function() {
         showHiddenInputs(this.value, uniClone, uni, universities);
         clearCampus();
@@ -195,18 +197,16 @@
     };
     function showHiddenInputs(elem, clonedElems, selectInputs, csvInputElem) {
       selectInputs.options.length = 0;
+
       for(let i = 0; i < clonedElems.options.length; i++) {
         let uniChild = clonedElems.options[i];
-        if(csvInputElem[uniChild.value] !== undefined) {
-          if(csvInputElem[uniChild.value] == elem) {
-            selectInputs.appendChild(uniChild);
-          }
+        if(csvInputElem[uniChild.value] == elem || csvInputElem[uniChild.value] == undefined) {
+          selectInputs.insertBefore(option, selectInputs.firstChild);
+          selectInputs.appendChild(uniChild);
         }
       }
     };
     function clearCampus() {
-      uni.value = null;
-      camp.value = null;
       camp.parentElement.classList.add('hidden');
     }
 

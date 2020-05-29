@@ -96,7 +96,7 @@ class Covid19Triage(models.Model):
     first_name = models.CharField(max_length=255, blank=True, null=True, default=None)
     last_name = models.CharField(max_length=255, blank=True, null=True, default=None)
     source = models.CharField(max_length=255)
-    province = models.CharField(max_length=6, choices=PROVINCE_CHOICES)
+    province = models.CharField(max_length=10, choices=PROVINCE_CHOICES)
     city = models.CharField(max_length=255)
     age = models.CharField(max_length=5, choices=AGE_CHOICES)
     date_of_birth = models.DateField(blank=True, null=True, default=None)

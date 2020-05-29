@@ -513,6 +513,8 @@ select {
 }
 
 select {
+  background: url(/static/images/icons/dropdown.png) 98% 50%/20px no-repeat;
+  padding: 10px 30px 10px 5px;
   appearance:none;
   cursor: pointer;
   -webkit-appearance:none;
