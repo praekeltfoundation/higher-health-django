@@ -212,7 +212,10 @@ class HealthCheckQuestionnaire(forms.Form):
         super(HealthCheckQuestionnaire, self).__init__(*args, **kwargs)
 
         if invalid_address:
-            self.add_error("address", "Invalid address")
+            self.add_error(
+                "address",
+                "If you have typed your address incorrectly, please try again. If you are unable to provide your address, please TYPE the name of your Suburb, Township, Town or Village (or nearest)",
+            )
 
         if data:
             if data.get("medical_confirm_accuracy") == "no":
