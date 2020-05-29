@@ -165,7 +165,7 @@
     },
     campuses = {
       {% for camp in form.fields.facility_destination_campus.choices.queryset %}
-         "{{ camp.pk }}": "{% if camp.university.name != 'Other' %}{{ camp.university.pk }}{% else %}Other{% endif %}" {% if not forloop.last %},{% endif %}
+         "{{ camp.pk }}": "{% if camp.university.name|lower != 'other' %}{{ camp.university.pk }}{% else %}Other{% endif %}" {% if not forloop.last %},{% endif %}
       {% endfor %}
     },
     prov = document.getElementById('id_facility_destination_province'),
