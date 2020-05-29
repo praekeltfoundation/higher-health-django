@@ -217,7 +217,6 @@ a:hover {
   margin: 0;
   display: inline;
 }
-
 .receipts-results-message-list {
   text-align: left;
   padding: 0;
@@ -328,6 +327,13 @@ a:hover {
   font-weight: 600;
 }
 
+
+.pagination-ux {
+  color: rgba(68, 68, 68, 0.8);
+  font-size: 12px;
+  text-transform: uppercase;
+  text-decoration: underline;
+}
 
 
 /*
@@ -701,7 +707,7 @@ textarea {
   .login-form__preexistingconditionsForm,
   .login-form__medical {
     margin: 2em auto 1em;
-    padding: 2em;
+    padding: 15px 2em 2em;
     width: 450px;
   }
   .login-form__read-terms {
