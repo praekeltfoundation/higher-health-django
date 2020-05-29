@@ -272,7 +272,6 @@
             lat: position.coords.latitude,
             lng: position.coords.longitude
           };
-
           let circle = new google.maps.Circle(
             {center: geolocation, radius: position.coords.accuracy});
           autocomplete.setBounds(circle.getBounds());
