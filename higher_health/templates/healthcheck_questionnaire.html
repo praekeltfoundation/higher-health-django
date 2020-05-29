@@ -358,7 +358,10 @@
         }
       });
       let ErrorList = document.querySelectorAll('.errorlist');
-      ErrorList[0].parentElement.scrollIntoView();
+      ErrorList[0].parentElement.scrollIntoView({
+        bahavior: "smooth",
+        block: "start"
+      });
     });
   </script>
 {% endcompress %}
