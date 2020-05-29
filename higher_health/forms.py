@@ -5,7 +5,7 @@ import requests
 from django import forms
 from django.conf import settings
 from django.forms.widgets import TextInput
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy as _
 
 from higher_health import models
 from higher_health.validators import za_phone_number
