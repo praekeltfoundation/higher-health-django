@@ -1,5 +1,6 @@
 from urllib.parse import urlencode
 
+import phonenumbers
 import pycountry
 import requests
 from django import forms
@@ -219,6 +220,10 @@ class HealthCheckQuestionnaire(forms.Form):
                     "medical_confirm_accuracy",
                     "You need to confirm that this information is accurate",
                 )
+
+    def clean_msisdn(self):
+        number = phonenumbers.parse(self.cleaned_data["msisdn"], "ZA")
+        return phonenumbers.format_number(number, phonenumbers.PhoneNumberFormat.E164)
 
     def clean(self):
         cleaned_data = super(HealthCheckQuestionnaire, self).clean()
