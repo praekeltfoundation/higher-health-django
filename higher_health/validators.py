@@ -3,7 +3,7 @@ from django.forms import ValidationError
 
 
 def za_phone_number(value):
-    error_msg = "Only South African numbers are allowed"
+    error_msg = "Please enter a valid 10-digit phone number"
     try:
         number = phonenumbers.parse(value, "ZA")
     except phonenumbers.NumberParseException as e:
