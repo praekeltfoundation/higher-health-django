@@ -1,5 +1,6 @@
 "use strict";
 
+  console.log(campuses)
   let prov = document.getElementById('id_facility_destination_province'),
     uni = document.getElementById('id_facility_destination_university'),
     camp = document.getElementById('id_facility_destination_campus'),
@@ -11,11 +12,6 @@
     lngInput = document.getElementById('id_longitude');
 
   let selected_province = prov.options[prov.selectedIndex];
-  let option = document.createElement("option");
-    option.text = "------";
-    option.value = "";
-    option.selected = "selected"; //Needs to be django to retain selected on refresh
-
   if(selected_province.value !== '') {
     showHiddenInputs(selected_province.value, uniClone, uni, universities);
     showHiddenInputs(uni.options[uni.selectedIndex].value, campClone, camp, campuses);
@@ -35,12 +31,13 @@
     for(let i = 0; i < clonedElems.options.length; i++) {
       let uniChild = clonedElems.options[i];
       if(csvInputElem[uniChild.value] == elem || csvInputElem[uniChild.value] == undefined) {
-        //selectInputs.insertBefore(option, selectInputs.firstChild);
         selectInputs.appendChild(uniChild);
       }
     }
   };
   function clearCampus() {
+    uni.value = '';
+    camp.value = '';
     camp.parentElement.classList.add('hidden');
   }
 

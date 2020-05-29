@@ -83,7 +83,7 @@ class HealthCheckQuestionnaire(forms.Form):
         label="", choices=DESTINATION_CHOICES, widget=forms.RadioSelect
     )
     facility_destination_province = forms.ChoiceField(
-        label="Please select a province", choices=[("", "---")] + PROVINCE_CHOICES
+        label="Please select a province", choices=[("", "--------")] + PROVINCE_CHOICES
     )
     facility_destination_university = forms.ModelChoiceField(
         label="Please select an institution",
