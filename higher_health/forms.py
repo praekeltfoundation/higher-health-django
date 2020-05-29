@@ -24,19 +24,19 @@ class HealthCheckQuestionnaire(forms.Form):
     )
 
     msisdn = forms.CharField(
-        label="Mobile Number",
-        widget=TextInput(attrs={"placeholder": "Type your mobile number"}),
+        label="Enter your mobile number",
+        widget=TextInput(attrs={"placeholder": "Enter your mobile number"}),
         required=True,
         validators=[za_phone_number],
     )
     first_name = forms.CharField(
-        label="Name",
-        widget=TextInput(attrs={"placeholder": "Type your name"}),
+        label="Enter your name",
+        widget=TextInput(attrs={"placeholder": "Enter your name"}),
         required=True,
     )
     last_name = forms.CharField(
-        label="Surname",
-        widget=TextInput(attrs={"placeholder": "Type your surname"}),
+        label="Enter your surname",
+        widget=TextInput(attrs={"placeholder": "Enter your surname"}),
         required=True,
     )
     age_range = forms.ChoiceField(
@@ -83,16 +83,20 @@ class HealthCheckQuestionnaire(forms.Form):
         label="", choices=DESTINATION_CHOICES, widget=forms.RadioSelect
     )
     facility_destination_province = forms.ChoiceField(
-        label="Province", choices=PROVINCE_CHOICES
+        label="Please select a province", choices=[("", "--------")] + PROVINCE_CHOICES
     )
     facility_destination_university = forms.ModelChoiceField(
-        label="Institution", queryset=models.University.objects.all(), required=False
+        label="Please select an institution",
+        queryset=models.University.objects.all(),
+        required=False,
     )
     facility_destination_campus = forms.ModelChoiceField(
-        label="Campus", queryset=models.Campus.objects.all(), required=False
+        label="Please select a campus",
+        queryset=models.Campus.objects.all(),
+        required=False,
     )
     facility_destination_reason = forms.ChoiceField(
-        label="", choices=REASON_CHOICES, widget=forms.RadioSelect
+        label="Are you a:", choices=REASON_CHOICES, widget=forms.RadioSelect
     )
     history_pre_existing_condition = forms.ChoiceField(
         label="Do you have any other pre-existing medical conditions that we should be aware of?",

@@ -217,7 +217,6 @@ a:hover {
   margin: 0;
   display: inline;
 }
-
 .receipts-results-message-list {
   text-align: left;
   padding: 0;
@@ -266,7 +265,13 @@ a:hover {
 .terms__content {
   margin: 1em 5%;
 }
-
+.terms-list {
+  padding: 5px 0 0 15px;
+}
+.terms-list__item {
+  list-style: disc;
+  list-style-position: inside;
+}
 .heading-container {
   text-align: center;
 }
@@ -285,8 +290,14 @@ a:hover {
   font-weight: 400;
   margin: 0;
 }
+.heading--terms {
+ font-weight: 600;
+ text-align: center;
+ padding: 0 0 15px;
+}
 .heading-label {
-  font-weight: 500;
+  font-weight: 600;
+  font-size: 16px;
   margin: 0;
   text-transform: uppercase;
 }
@@ -316,6 +327,13 @@ a:hover {
   font-weight: 600;
 }
 
+
+.pagination-ux {
+  color: rgba(68, 68, 68, 0.8);
+  font-size: 12px;
+  text-transform: uppercase;
+  text-decoration: underline;
+}
 
 
 /*
@@ -361,7 +379,6 @@ a:hover {
 
 */
 
-.fieldset {}
 .fieldset__item {
   margin: 10px auto;
 }
@@ -476,13 +493,13 @@ a:hover {
 }
 
 #destination li {
-  margin: 10px 0 20px;
+  margin: 10px 0 15px;
 }
 #destination select {
   margin: 0;
 }
 #id_facility_destination {
-  margin: 20px auto 0;
+  margin: 0 auto 15px;
 }
 #id_facility_destination_reason li,
 #id_facility_destination li {
@@ -495,15 +512,13 @@ select {
   -moz-box-sizing:    border-box;
  -webkit-box-sizing: border-box;
   box-sizing:        border-box;
-
   background: white;
   border: 0;
   border-radius: 5px;
   border-bottom: 1px solid rgba(68, 68, 68, 0.3);
   color: rgba(68, 68, 68, 0.8);
   display: inline-block;
-  margin: 20px auto 0;
-
+  margin: 0 auto 10px;
   font-size: 1rem;
   height: 40px;
   outline: 0;
@@ -513,6 +528,8 @@ select {
 }
 
 select {
+  background: url(/static/images/icons/dropdown.png) 98% 50%/20px no-repeat;
+  padding: 10px 30px 10px 5px;
   appearance:none;
   cursor: pointer;
   -webkit-appearance:none;
@@ -625,6 +642,9 @@ textarea {
   .terms__content {
     padding: 2em 20% 2em 10%;
   }
+  .terms-list {
+    padding: 5px 0 0 20px;
+  }
   .heading-primary {
     font-size: 35px;
     margin: 0;
@@ -687,7 +707,7 @@ textarea {
   .login-form__preexistingconditionsForm,
   .login-form__medical {
     margin: 2em auto 1em;
-    padding: 2em;
+    padding: 15px 2em 2em;
     width: 450px;
   }
   .login-form__read-terms {
