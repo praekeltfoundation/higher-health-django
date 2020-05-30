@@ -99,7 +99,7 @@
                     {% if field.name == "facility_destination_university" %}
                       <h3 class="heading-subtitle heading-subtitle--edu-label">Educational institution information</h3>
                     {% endif %}
-                    <li class="fieldset__item">
+                    <li class="fieldset__item {% if field|field_type == 'Select' %}select_inputs{% endif %}">
                       <label for="{{ field.name }}" class="label">{{ field.label }}</label>
                       {{ field }}
                       {{field.errors}}
@@ -162,16 +162,16 @@
 {% compress js inline %}
   <script type="text/javascript">
   "use strict";
-  let universities = {
-    {% for uni in form.fields.facility_destination_university.choices.queryset %}
-      "{{ uni.pk }}": "{{ uni.province }}" {% if not forloop.last %},{% endif %}
-    {% endfor %}
-  },
-  campuses = {
-    {% for camp in form.fields.facility_destination_campus.choices.queryset %}
-      "{{ camp.pk }}": "{{ camp.university.pk }}" {% if not forloop.last %},{% endif %}
-    {% endfor %}
-  };
+    let universities = {
+      {% for uni in form.fields.facility_destination_university.choices.queryset %}
+        "{{ uni.pk }}": "{{ uni.province }}" {% if not forloop.last %},{% endif %}
+      {% endfor %}
+    },
+    campuses = {
+      {% for camp in form.fields.facility_destination_campus.choices.queryset %}
+        "{{ camp.pk }}": "{{ camp.university.pk }}" {% if not forloop.last %},{% endif %}
+      {% endfor %}
+    };
     let prov = document.getElementById('id_facility_destination_province'),
       uni = document.getElementById('id_facility_destination_university'),
       camp = document.getElementById('id_facility_destination_campus'),
@@ -182,34 +182,46 @@
       latInput = document.getElementById('id_latitude'),
       lngInput = document.getElementById('id_longitude');
 
-    let selected_province = prov.options[prov.selectedIndex];
-    showHiddenInputs(selected_province.value, uniClone, uni, universities);
-    showHiddenInputs(uni.options[uni.selectedIndex].value, campClone, camp, campuses);
-    clearCampus();
-    prov.addEventListener('change', function() {
-      showHiddenInputs(this.value, uniClone, uni, universities);
-      clearCampus();
-    });
-    uni.addEventListener('change', function() {
-      showHiddenInputs(this.value, campClone, camp, campuses);
-      camp.parentElement.classList.remove('hidden');
-    });
+    dynamicDependantSelector(prov,uniClone,universities);
+    dynamicDependantSelector(uni,campClone,campuses);
+    dynamicDependantSelector(camp);
 
-    function showHiddenInputs(elem, clonedElems, selectInputs, csvInputElem) {
-      selectInputs.options.length = 0;
-
-      for(let i = 0; i < clonedElems.options.length; i++) {
-        let uniChild = clonedElems.options[i];
-        if(csvInputElem[uniChild.value] == elem || csvInputElem[uniChild.value] == undefined) {
-          selectInputs.appendChild(uniChild);
+    function dynamicDependantSelector(currentInputElem,nextClonedUnfilteredInputElem, arrayQuery) {
+      let currentInputElemCollection = currentInputElem.options;
+      currentInputElem.addEventListener('change',function(e){
+        let headingElem = currentInputElem.parentNode.nextElementSibling,
+          nextInputElem,
+          selectedElemOption = currentInputElemCollection[currentInputElem.selectedIndex],
+          dependantFilter = currentInputElem.value;
+        if(headingElem.nodeName == "H3") {
+          if(headingElem.nextElementSibling.classList.contains('select_inputs')) {
+            nextInputElem = document.getElementById(headingElem.nextElementSibling.children[1].getAttribute('id'));
+            console.log(headingElem.nextElementSibling.children);
+          }
+        } else {
+          if (headingElem.classList.contains('select_inputs')) {
+            nextInputElem = document.getElementById(headingElem.children[1].getAttribute('id'));
+            console.log(nextInputElem);
+          }
+        };
+        nextInputElem.options.length = 0;
+        if(!isPageLoad) {
+          nextInputElem.appendChild(new Option("---------", ""));
         }
-      }
+
+        for(let i = 0; i < nextClonedUnfilteredInputElem.length; i++) {
+          let arrayQueryValue = arrayQuery[i];
+          if(currentInputElemCollection[i] != undefined){
+            currentInputElemCollection[i].removeAttribute('selected');
+            selectedElemOption.setAttribute('selected','selected');
+          }
+          if(arrayQueryValue === dependantFilter) {
+            let clonedInputElemFilteredIndexes = nextClonedUnfilteredInputElem.options[i];
+            nextInputElem.children[0].after(clonedInputElemFilteredIndexes);
+          }
+        }
+      });
     };
-    function clearCampus() {
-      uni.value = '';
-      camp.value = '';
-      camp.parentElement.classList.add('hidden');
-    }
 
 
     /* GOOGLE PLACES API: AUTOCOMPLETE */
