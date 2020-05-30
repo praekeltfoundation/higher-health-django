@@ -22,8 +22,13 @@ class HealthCheckQuestionnaireView(generic.FormView):
 
     def get_context_data(self, **kwargs):
         ctx = super(HealthCheckQuestionnaireView, self).get_context_data(**kwargs)
-        ctx["campuses"] = {str(c.pk):str(c.university.pk) for c in Campus.objects.filter().select_related('university')}
-        ctx["universities"] = {str(u.pk):u.province for u in University.objects.filter()}
+        ctx["campuses"] = {
+            str(c.pk): str(c.university.pk)
+            for c in Campus.objects.filter().select_related("university")
+        }
+        ctx["universities"] = {
+            str(u.pk): u.province for u in University.objects.filter()
+        }
         return ctx
 
     def get_initial(self):
