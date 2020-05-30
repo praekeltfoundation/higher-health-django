@@ -28,7 +28,7 @@ class Campus(models.Model):
     university = models.ForeignKey(University, on_delete=models.CASCADE)
 
     def __str__(self):
-        return "{0} ({1})".format(self.name, self.university.name)
+        return self.name
 
 
 class Covid19Triage(models.Model):
