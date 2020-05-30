@@ -159,19 +159,16 @@
 {% endblock %}
 
 {% block form_js %}
+
+  {{ universities|json_script:"universities-data" }}
+
+  {{ campuses|json_script:"campus-data" }}
+
 {% compress js inline %}
   <script type="text/javascript">
   "use strict";
-  let universities = {
-    {% for uni in form.fields.facility_destination_university.choices.queryset %}
-      "{{ uni.pk }}": "{{ uni.province }}" {% if not forloop.last %},{% endif %}
-    {% endfor %}
-  },
-  campuses = {
-    {% for camp in form.fields.facility_destination_campus.choices.queryset %}
-      "{{ camp.pk }}": "{{ camp.university.pk }}" {% if not forloop.last %},{% endif %}
-    {% endfor %}
-  };
+  let universities = JSON.parse(document.getElementById('universities-data').textContent),
+  campuses = JSON.parse(document.getElementById('campus-data').textContent);
     let prov = document.getElementById('id_facility_destination_province'),
       uni = document.getElementById('id_facility_destination_university'),
       camp = document.getElementById('id_facility_destination_campus'),
