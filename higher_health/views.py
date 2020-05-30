@@ -4,7 +4,7 @@ from django.urls import reverse_lazy
 from django.views import generic
 
 from .forms import HealthCheckLogin, HealthCheckQuestionnaire
-from .models import Covid19Triage, Campus, University
+from .models import Campus, Covid19Triage, University
 from .utils import get_risk_level, save_data
 
 
