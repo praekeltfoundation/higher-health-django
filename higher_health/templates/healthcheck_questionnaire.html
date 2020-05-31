@@ -97,7 +97,11 @@
                 {% for field in form %}
                   {% if "facility_" in field.name %}
                     {% if field.name == "facility_destination_university" %}
-                      <h3 class="heading-subtitle heading-subtitle--edu-label">Educational institution information</h3>
+                    <li class="skip-me">
+                      <h3 class="heading-subtitle heading-subtitle--edu-label">
+                        Educational institution information
+                      </h3>
+                    </li>
                     {% endif %}
                     <li class="fieldset__item {% if field|field_type == 'Select' %}select_inputs{% endif %}">
                       <label for="{{ field.name }}" class="label">{{ field.label }}</label>
@@ -180,45 +184,75 @@
       formSubmit = document.getElementById('login_form'),
       addressInput = document.getElementById('autocomplete'),
       latInput = document.getElementById('id_latitude'),
-      lngInput = document.getElementById('id_longitude');
+      lngInput = document.getElementById('id_longitude'),
+      isPageLoad = true;
 
     dynamicDependantSelector(prov,uniClone,universities);
     dynamicDependantSelector(uni,campClone,campuses);
     dynamicDependantSelector(camp);
 
+    const getNextSibling = function (elem, selector) {
+    	let sibling = elem.nextElementSibling;
+
+    	// If the sibling matches our selector, use it
+    	// If not, jump to the next sibling and continue the loop
+    	while (sibling) {
+    		if (sibling.matches(selector)) {
+          return sibling;
+        }
+    		sibling = sibling.nextElementSibling
+    	}
+    };
     function dynamicDependantSelector(currentInputElem,nextClonedUnfilteredInputElem, arrayQuery) {
+      isPageLoad = false;
+
       let currentInputElemCollection = currentInputElem.options;
+
       currentInputElem.addEventListener('change',function(e){
-        let headingElem = currentInputElem.parentNode.nextElementSibling,
-          nextInputElem,
+        let nextInputElem = getNextSibling(currentInputElem.parentNode, ":not(.skip-me"),
+
           selectedElemOption = currentInputElemCollection[currentInputElem.selectedIndex],
           dependantFilter = currentInputElem.value;
-        if(headingElem.nodeName == "H3") {
-          if(headingElem.nextElementSibling.classList.contains('select_inputs')) {
-            nextInputElem = document.getElementById(headingElem.nextElementSibling.children[1].getAttribute('id'));
-            console.log(headingElem.nextElementSibling.children);
-          }
-        } else {
-          if (headingElem.classList.contains('select_inputs')) {
-            nextInputElem = document.getElementById(headingElem.children[1].getAttribute('id'));
-            console.log(nextInputElem);
-          }
-        };
-        nextInputElem.options.length = 0;
-        if(!isPageLoad) {
-          nextInputElem.appendChild(new Option("---------", ""));
-        }
 
-        for(let i = 0; i < nextClonedUnfilteredInputElem.length; i++) {
-          let arrayQueryValue = arrayQuery[i];
-          if(currentInputElemCollection[i] != undefined){
-            currentInputElemCollection[i].removeAttribute('selected');
-            selectedElemOption.setAttribute('selected','selected');
+        if(nextInputElem.classList.contains('select_inputs')) {
+          let nextElemOptions = nextInputElem.children[1];
+          let followingElemOptions = nextInputElem.nextElementSibling.children[1];
+
+          console.log(nextElemOptions);
+          for(let i = 0; i < nextClonedUnfilteredInputElem.length; i++) {
+            let arrayQueryValue = arrayQuery[i];
+            if(currentInputElemCollection[i] != undefined) {
+              currentInputElemCollection[i].removeAttribute('selected');
+              selectedElemOption.setAttribute('selected','selected');
+            }
+
+            if(followingElemOptions.nodeName === "SELECT") {
+              nextElemOptions.options.length = 0;
+              if(!isPageLoad) {
+                nextElemOptions.appendChild(new Option("---------", " "));
+              }
+              if(arrayQueryValue === dependantFilter) {
+                let clonedInputElemFilteredIndexes = nextClonedUnfilteredInputElem.options[i];
+                nextElemOptions.children[0].after(clonedInputElemFilteredIndexes);
+              }
+            }
+
+
+            // else if(followingElemOptions.nodeName !== "SELECT") {
+            //   nextElemOptions.options.length = 0;
+            //   if(!isPageLoad) {
+            //     nextElemOptions.appendChild(new Option("---------", ""));
+            //   }
+            //   if(arrayQueryValue === dependantFilter) {
+            //     let clonedInputElemFilteredIndexes = nextClonedUnfilteredInputElem.options[i];
+            //       console.log(clonedInputElemFilteredIndexes);
+            //     nextElemOptions.children[0].after(clonedInputElemFilteredIndexes);
+            //   }
+            // }
+
+
           }
-          if(arrayQueryValue === dependantFilter) {
-            let clonedInputElemFilteredIndexes = nextClonedUnfilteredInputElem.options[i];
-            nextInputElem.children[0].after(clonedInputElemFilteredIndexes);
-          }
+
         }
       });
     };
