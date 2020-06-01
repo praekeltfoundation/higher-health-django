@@ -137,5 +137,6 @@ STATICFILES_FINDERS = (
 STATIC_ROOT = join(ROOT_DIR, "staticfiles")
 STATIC_URL = "/static/"
 COMPRESS_ENABLED = True
+STATICFILES_STORAGE = "django.contrib.staticfiles.storage.ManifestStaticFilesStorage"
 
 CACHES = {"default": env.cache("CACHE_URL", default="locmemcache://")}
