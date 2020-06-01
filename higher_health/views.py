@@ -1,6 +1,7 @@
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from django.urls import reverse_lazy
+from django.utils.functional import lazy
 from django.views import generic
 
 from .forms import HealthCheckLogin, HealthCheckQuestionnaire
@@ -22,8 +23,10 @@ class HealthCheckQuestionnaireView(generic.FormView):
 
     def get_context_data(self, **kwargs):
         ctx = super(HealthCheckQuestionnaireView, self).get_context_data(**kwargs)
-        ctx["campuses"] = dict(Campus.objects.values_list("id", "university_id"))
-        ctx["universities"] = dict(University.objects.values_list("id", "province"))
+        ctx["campuses"] = lazy(dict)(Campus.objects.values_list("id", "university_id"))
+        ctx["universities"] = lazy(dict)(
+            University.objects.values_list("id", "province")
+        )
         return ctx
 
     def get_initial(self):

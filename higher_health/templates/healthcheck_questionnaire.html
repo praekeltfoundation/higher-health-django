@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-{% load temp_tags static compress %}
+{% load temp_tags static compress cache %}
 {% block content %}
   <div class="content">
     <div class="content-intro">
@@ -160,9 +160,11 @@
 
 {% block form_js %}
 
+{% cache 300 json_data %}
   {{ universities|json_script:"universities-data" }}
 
   {{ campuses|json_script:"campus-data" }}
+{% endcache %}
 
 {% compress js inline %}
   <script type="text/javascript">
