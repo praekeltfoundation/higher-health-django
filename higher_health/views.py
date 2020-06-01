@@ -4,7 +4,7 @@ from django.urls import reverse_lazy
 from django.views import generic
 
 from .forms import HealthCheckLogin, HealthCheckQuestionnaire
-from .models import Covid19Triage
+from .models import Campus, Covid19Triage, University
 from .utils import get_risk_level, save_data
 
 
@@ -19,6 +19,12 @@ class HealthCheckQuestionnaireView(generic.FormView):
         triage = save_data(data)
         self.request.session["triage_id"] = str(triage.id)
         return super().form_valid(form)
+
+    def get_context_data(self, **kwargs):
+        ctx = super(HealthCheckQuestionnaireView, self).get_context_data(**kwargs)
+        ctx["campuses"] = dict(Campus.objects.values_list("id", "university_id"))
+        ctx["universities"] = dict(University.objects.values_list("id", "province"))
+        return ctx
 
     def get_initial(self):
         initial_data = super().get_initial()
