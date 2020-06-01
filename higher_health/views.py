@@ -28,7 +28,7 @@ class HealthCheckQuestionnaireView(generic.FormView):
 
     def get_initial(self):
         initial_data = super().get_initial()
-        if self.request.session.get("triage_id"):
+        if self.request.method == "GET" and self.request.session.get("triage_id"):
             triage = Covid19Triage.objects.filter(
                 id=self.request.session["triage_id"]
             ).first()
@@ -48,10 +48,10 @@ class HealthCheckQuestionnaireView(generic.FormView):
                 initial_data["facility_destination_province"] = triage.province
                 initial_data[
                     "facility_destination_university"
-                ] = triage.facility_destination_university
+                ] = triage.facility_destination_university_id
                 initial_data[
                     "facility_destination_campus"
-                ] = triage.facility_destination_campus
+                ] = triage.facility_destination_campus_id
                 initial_data[
                     "facility_destination_reason"
                 ] = triage.facility_destination_reason
