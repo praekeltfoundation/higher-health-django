@@ -177,6 +177,7 @@
     clearCampus();
     prov.addEventListener('change', function() {
       showHiddenInputs(this.value, uniClone, uni, universities);
+      showHiddenInputs(uni.value, campClone, camp, campuses);
       clearCampus();
     });
     uni.addEventListener('change', function() {
