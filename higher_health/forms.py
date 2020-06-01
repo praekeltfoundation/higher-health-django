@@ -294,6 +294,43 @@ class HealthCheckQuestionnaire(forms.Form):
             raise forms.ValidationError(errors)
         return cleaned_data
 
+    def registration_fields(self):
+        return [
+            self["msisdn"],
+            self["first_name"],
+            self["last_name"],
+            self["age_range"],
+            self["gender"],
+        ]
+
+    def destination_fields(self):
+        return [
+            self["facility_destination"],
+            self["facility_destination_province"],
+            self["facility_destination_university"],
+            self["facility_destination_campus"],
+            self["facility_destination_reason"],
+        ]
+
+    def history_fields(self):
+        return [
+            self["history_obesity"],
+            self["history_diabetes"],
+            self["history_hypertension"],
+            self["history_cardiovascular"],
+        ]
+
+    def medical_fields(self):
+        return [
+            self["symptoms_fever"],
+            self["symptoms_cough"],
+            self["symptoms_sore_throat"],
+            self["symptoms_difficulty_breathing"],
+            self["symptoms_taste"],
+            self["medical_exposure"],
+            self["medical_confirm_accuracy"],
+        ]
+
 
 class HealthCheckLogin(forms.Form):
     phone = forms.CharField(
