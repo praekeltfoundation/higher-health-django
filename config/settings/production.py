@@ -21,3 +21,5 @@ if SENTRY_DSN:
 
 CLIENT_PLACES_API_KEY = env.str("GOOGLE_PLACES_CLIENT_API_KEY")
 SERVER_PLACES_API_KEY = env.str("GOOGLE_PLACES_SERVER_API_KEY")
+
+STATICFILES_STORAGE = "django.contrib.staticfiles.storage.ManifestStaticFilesStorage"

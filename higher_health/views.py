@@ -1,3 +1,5 @@
+from functools import partial
+
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from django.urls import reverse_lazy
@@ -26,14 +28,14 @@ class HealthCheckQuestionnaireView(generic.FormView):
         campuses = Campus.objects.values_list("id", "university_id")
         other = universities.filter(name__iexact="other").first()
 
-        ctx["campuses"] = dict(campuses)
-        ctx["universities"] = dict(universities)
+        ctx["campuses"] = partial(dict, campuses)
+        ctx["universities"] = partial(dict, universities)
         ctx["other_university"] = other[0] if other else None
         return ctx
 
     def get_initial(self):
         initial_data = super().get_initial()
-        if self.request.session.get("triage_id"):
+        if self.request.method == "GET" and self.request.session.get("triage_id"):
             triage = Covid19Triage.objects.filter(
                 id=self.request.session["triage_id"]
             ).first()
@@ -53,10 +55,10 @@ class HealthCheckQuestionnaireView(generic.FormView):
                 initial_data["facility_destination_province"] = triage.province
                 initial_data[
                     "facility_destination_university"
-                ] = triage.facility_destination_university
+                ] = triage.facility_destination_university_id
                 initial_data[
                     "facility_destination_campus"
-                ] = triage.facility_destination_campus
+                ] = triage.facility_destination_campus_id
                 initial_data[
                     "facility_destination_reason"
                 ] = triage.facility_destination_reason
