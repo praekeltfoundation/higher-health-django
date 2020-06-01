@@ -28,7 +28,7 @@ class HealthCheckQuestionnaireView(generic.FormView):
 
     def get_initial(self):
         initial_data = super().get_initial()
-        if self.request.session.get("triage_id"):
+        if self.request.method == "GET" and self.request.session.get("triage_id"):
             triage = Covid19Triage.objects.filter(
                 id=self.request.session["triage_id"]
             ).first()
