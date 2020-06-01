@@ -254,7 +254,7 @@ class HealthCheckQuestionnaire(forms.Form):
                     }
                 )
 
-            if (university and campus) and not campus.university == university:
+            if (university and campus) and not campus.university_id == university.id:
                 errors.update(
                     {
                         "facility_destination_campus": "Please select a campus that is in {}.".format(
