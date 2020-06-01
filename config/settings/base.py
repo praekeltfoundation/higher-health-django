@@ -137,3 +137,5 @@ STATICFILES_FINDERS = (
 STATIC_ROOT = join(ROOT_DIR, "staticfiles")
 STATIC_URL = "/static/"
 COMPRESS_ENABLED = True
+
+CACHES = {"default": env.cache("CACHE_URL", default="locmemcache://")}
