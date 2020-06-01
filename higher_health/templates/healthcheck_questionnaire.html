@@ -183,7 +183,8 @@
       formSubmit = document.getElementById('login_form'),
       addressInput = document.getElementById('autocomplete'),
       latInput = document.getElementById('id_latitude'),
-      lngInput = document.getElementById('id_longitude');
+      lngInput = document.getElementById('id_longitude'),
+      isPageLoad=true;
 
     let selected_province = prov.options[prov.selectedIndex];
     showHiddenInputs(selected_province.value, uniClone, uni, universities);
@@ -200,7 +201,6 @@
       showHiddenInputs(this.value, campClone, camp, campuses);
       camp.parentElement.classList.remove('hidden');
       showOther(this.value, universities, uni_other);
-
     });
     camp.addEventListener('change', function() {
       showOther(this.value, campuses, camp_other);
@@ -208,6 +208,9 @@
 
     function showHiddenInputs(elem, clonedElems, selectInputs, csvInputElem) {
       selectInputs.options.length = 0;
+      if(!isPageLoad){
+        selectInputs.appendChild(new Option("---------", ""));
+      }
 
       for(let i = 0; i < clonedElems.options.length; i++) {
         let uniChild = clonedElems.options[i];
@@ -229,9 +232,10 @@
     }
 
     function clearCampus() {
-      uni.value = '';
-      camp.value = '';
-      camp.parentElement.classList.add('hidden');
+      if(!isPageLoad){
+        uni.value = '';
+        camp.value = '';
+      }
     }
 
     /* GOOGLE PLACES API: AUTOCOMPLETE */
@@ -394,6 +398,7 @@
         });
       }
     });
+    isPageLoad = false;
   </script>
 {% endcompress %}
   <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key={{PLACES_API_KEY}}&libraries=places&callback=initAutocomplete"
