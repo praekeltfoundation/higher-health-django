@@ -205,7 +205,6 @@
     };
     function dynamicDependantSelector(currentInputElem,nextClonedUnfilteredInputElem, arrayQuery) {
       isPageLoad = false;
-      //console.log(arrayQuery);
 
       currentInputElem.addEventListener('change',function(e){
         let nextInputElem = getNextSibling(currentInputElem.parentNode, ":not(.skip-me"),
@@ -222,7 +221,7 @@
               console.log(arrayQuery[i],this.value);
               console.log('=>',nextClonedUnfilteredInputElem.options[i].text);
               //Faulty => Repaint option filter gets all messed up.
-              //selectDropdown.appendChild(nextClonedUnfilteredInputElem.options[i]);
+              selectDropdown.appendChild(nextClonedUnfilteredInputElem.options[i]);
             }
             if(currentInputElem.options[i] != undefined) {
               currentInputElem.options[i].removeAttribute('selected');
