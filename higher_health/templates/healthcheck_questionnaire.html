@@ -165,17 +165,19 @@
 
   let universities = {
     {% for uni in form.fields.facility_destination_university.choices.queryset %}
-      "{{ uni.pk }}": "{{ uni.province }}" {% if not forloop.last %},{% endif %}
+      "{{ uni.pk }}": "{% if uni.province %}{{ uni.province }}{% else %}Other{% endif %}" {% if not forloop.last %},{% endif %}
     {% endfor %}
   },
   campuses = {
     {% for camp in form.fields.facility_destination_campus.choices.queryset %}
-      "{{ camp.pk }}": "{{ camp.university.pk }}" {% if not forloop.last %},{% endif %}
+      "{{ camp.pk }}": "{% if camp.university.name|lower == 'other' %}{{ camp.university.pk }}{% else %}Other{% endif %}" {% if not forloop.last %},{% endif %}
     {% endfor %}
   };
     let prov = document.getElementById('id_facility_destination_province'),
       uni = document.getElementById('id_facility_destination_university'),
+      uni_other = document.getElementById('id_facility_destination_university_other'),
       camp = document.getElementById('id_facility_destination_campus'),
+      camp_other = document.getElementById('id_facility_destination_campus_other'),
       uniClone = uni.cloneNode(true),
       campClone = camp.cloneNode(true),
       formSubmit = document.getElementById('login_form'),
@@ -187,6 +189,9 @@
     showHiddenInputs(selected_province.value, uniClone, uni, universities);
     showHiddenInputs(uni.options[uni.selectedIndex].value, campClone, camp, campuses);
     clearCampus();
+    showOther(selected_province.value, universities, uni_other);
+    showOther(uni.options[uni.selectedIndex].value, campuses, camp_other);
+
     prov.addEventListener('change', function() {
       showHiddenInputs(this.value, uniClone, uni, universities);
       clearCampus();
@@ -194,6 +199,11 @@
     uni.addEventListener('change', function() {
       showHiddenInputs(this.value, campClone, camp, campuses);
       camp.parentElement.classList.remove('hidden');
+      showOther(this.value, universities, uni_other);
+
+    });
+    camp.addEventListener('change', function() {
+      showOther(this.value, campuses, camp_other);
     });
 
     function showHiddenInputs(elem, clonedElems, selectInputs, csvInputElem) {
@@ -201,7 +211,9 @@
 
       for(let i = 0; i < clonedElems.options.length; i++) {
         let uniChild = clonedElems.options[i];
-        if(csvInputElem[uniChild.value] == elem || csvInputElem[uniChild.value] == undefined) {
+        if(csvInputElem[uniChild.value] == elem ||
+         csvInputElem[uniChild.value] == undefined ||
+          csvInputElem[uniChild.value] == 'Other') {
           selectInputs.appendChild(uniChild);
         }
       }
@@ -221,7 +233,6 @@
       camp.value = '';
       camp.parentElement.classList.add('hidden');
     }
-
 
     /* GOOGLE PLACES API: AUTOCOMPLETE */
     let placeSearch, autocomplete;
