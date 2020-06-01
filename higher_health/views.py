@@ -24,7 +24,7 @@ class HealthCheckQuestionnaireView(generic.FormView):
         ctx = super(HealthCheckQuestionnaireView, self).get_context_data(**kwargs)
         universities = University.objects.values_list("id", "province")
         campuses = Campus.objects.values_list("id", "university_id")
-        other = universities.filter(name__iexact='other').first()
+        other = universities.filter(name__iexact="other").first()
 
         ctx["campuses"] = dict(campuses)
         ctx["universities"] = dict(universities)
