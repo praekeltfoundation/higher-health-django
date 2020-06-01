@@ -326,7 +326,9 @@ class HealthCheckQuestionnaire(forms.Form):
             self["facility_destination"],
             self["facility_destination_province"],
             self["facility_destination_university"],
+            self["facility_destination_university_other"],
             self["facility_destination_campus"],
+            self["facility_destination_campus_other"],
             self["facility_destination_reason"],
         ]
 
