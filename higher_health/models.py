@@ -22,6 +22,9 @@ class University(models.Model):
     def __str__(self):
         return "{0} ({1})".format(self.name, self.get_province_display())
 
+    class Meta:
+        verbose_name_plural = "Universities"
+
 
 class Campus(models.Model):
     name = models.CharField(max_length=100)
@@ -29,6 +32,9 @@ class Campus(models.Model):
 
     def __str__(self):
         return self.name
+
+    class Meta:
+        verbose_name_plural = "Campuses"
 
 
 class Covid19Triage(models.Model):
