@@ -169,7 +169,8 @@
   "use strict";
 
   let universities = JSON.parse(document.getElementById('universities-data').textContent),
-  campuses = JSON.parse(document.getElementById('campus-data').textContent);
+  campuses = JSON.parse(document.getElementById('campus-data').textContent),
+  other_university = "{{ other_university }}";
 
     let prov = document.getElementById('id_facility_destination_province'),
       uni = document.getElementById('id_facility_destination_university'),
@@ -214,14 +215,15 @@
         let uniChild = clonedElems.options[i];
         if(csvInputElem[uniChild.value] == elem ||
          csvInputElem[uniChild.value] == undefined ||
-          csvInputElem[uniChild.value] == 'Other') {
+          (uniChild.value == other_university && csvInputElem[uniChild.value] == '') ||
+          csvInputElem[uniChild.value] == other_university) {
           selectInputs.appendChild(uniChild);
         }
       }
     };
 
     function showOther(val, list, other){
-      if(list[val] == 'Other') {
+      if(val === other_university || String(list[val]) === other_university) {
         other.parentElement.classList.remove('hidden');
       }
       else {
@@ -233,6 +235,8 @@
       if(!isPageLoad){
         uni.value = '';
         camp.value = '';
+        uni_other.value = '';
+        camp_other.value = '';
       }
     }
 
