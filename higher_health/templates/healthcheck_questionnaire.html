@@ -185,14 +185,11 @@
 
     function showHiddenInputs(elem, clonedElems, selectInputs, csvInputElem) {
       selectInputs.options.length = 0;
-      if(!isPageLoad){
-        selectInputs.appendChild(new Option("---------", ""));
-      }
 
       for(let i = 0; i < clonedElems.options.length; i++) {
         let uniChild = clonedElems.options[i];
         if(csvInputElem[uniChild.value] == elem || csvInputElem[uniChild.value] == undefined) {
-          selectInputs.appendChild(uniChild);
+          selectInputs.appendChild(uniChild.cloneNode(true));
         }
       }
     };
