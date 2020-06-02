@@ -155,13 +155,16 @@
   {{ campuses|json_script:"campus-data" }}
 {% endcache %}
 
+  <script type="text/javascript">
+    let other_university = "{{ other_university }}";
+  </script>
+
 {% compress js inline %}
   <script type="text/javascript">
   "use strict";
 
   let universities = JSON.parse(document.getElementById('universities-data').textContent),
-  campuses = JSON.parse(document.getElementById('campus-data').textContent),
-  other_university = "{{ other_university }}";
+  campuses = JSON.parse(document.getElementById('campus-data').textContent);
 
     let prov = document.getElementById('id_facility_destination_province'),
       uni = document.getElementById('id_facility_destination_university'),
