@@ -1,14 +1,16 @@
 university_province,university,name
 ZA-WC,Cape Peninsula University of Technology (CPUT),Athlone
 ZA-WC,Cape Peninsula University of Technology (CPUT),Bellville
-ZA-WC,Cape Peninsula University of Technology (CPUT),Cape Town
-ZA-WC,Cape Peninsula University of Technology (CPUT),George
 ZA-WC,Cape Peninsula University of Technology (CPUT),Granger Bay
-ZA-WC,Cape Peninsula University of Technology (CPUT),Groote Schuur
 ZA-WC,Cape Peninsula University of Technology (CPUT),Mowbray
 ZA-WC,Cape Peninsula University of Technology (CPUT),Tygerberg
 ZA-WC,Cape Peninsula University of Technology (CPUT),Wellington
 ZA-WC,Cape Peninsula University of Technology (CPUT),Worcester
+ZA-WC,Cape Peninsula University of Technology (CPUT),District Six
+ZA-WC,Cape Peninsula University of Technology (CPUT),Optical Dispensing
+ZA-WC,Cape Peninsula University of Technology (CPUT),Roeland Street
+ZA-WC,Cape Peninsula University of Technology (CPUT),Media City
+ZA-WC,Cape Peninsula University of Technology (CPUT),George
 ZA-FS,Central University of Technology (CUT),Bloemfontein
 ZA-FS,Central University of Technology (CUT),Welkom
 ZA-NL,Durban University of Technology (DUT),Steve Biko
@@ -38,6 +40,8 @@ ZA-GT,Tshwane University of Technology (TUT),Ga-Rankuwa
 ZA-MP ,Tshwane University of Technology (TUT),Mbombela
 ZA-GT,Tshwane University of Technology (TUT),Pretoria West
 ZA-GT,Tshwane University of Technology (TUT),Soshanguve
+ZA-GT,Tshwane University of Technology (TUT),Arts
+ZA-GT,Tshwane University of Technology (TUT),Arcadia
 ZA-FS,UNISA,Bloemfontein
 ZA-NL,UNISA,Durban
 ZA-EC,UNISA,East London
@@ -140,6 +144,8 @@ ZA-FS,Flavius Mareka ,Mphohadi
 ZA-FS,Flavius Mareka ,Sasolburg
 ZA-FS,Goldfields ,Tosa
 ZA-FS,Goldfields ,Welkom
+ZA-FS,Goldfields ,Virginia
+ZA-FS,Goldfields ,Muruti House
 ZA-FS,Maluti ,Bethlehem
 ZA-FS,Maluti ,Bonamelo
 ZA-FS,Maluti ,Harrismith
@@ -225,6 +231,9 @@ ZA-NL,Majuba,Dundee
 ZA-NL,Majuba,IT&B
 ZA-NL,Majuba,MTC
 ZA-NL,Majuba,Newtech
+ZA-NL,Majuba,Newcastle Training Centre (NTC)
+ZA-NL,Majuba,Occupational Learning Unit
+ZA-NL,Majuba,Open Learning Unit (OPU)
 ZA-NL,Mnambithi ,Estcourt
 ZA-NL,Mnambithi ,Ezakheni A
 ZA-NL,Mnambithi ,Ezakheni E
@@ -249,6 +258,7 @@ ZA-NL,Umfolozi,Mandeni
 ZA-NL,Umfolozi,Nkandla
 ZA-NL,Umfolozi,Richards Bay
 ZA-NL,Umfolozi,Sundumbili
+ZA-NL,Umfolozi,Bambanana
 ZA-NL,Umgungundlovu ,Edendale
 ZA-NL,Umgungundlovu ,Midlands
 ZA-NL,Umgungundlovu ,Msunduzi
@@ -274,6 +284,7 @@ ZA-LP,Vhembe,Mavhoi
 ZA-LP,Vhembe,Shingwedzi
 ZA-LP,Vhembe,Thengwe
 ZA-LP,Vhembe,Tshisimani
+ZA-LP,Vhembe,Musina
 ZA-LP,Waterberg,Business
 ZA-LP,Waterberg,Engineering
 ZA-LP,Waterberg,IT&C
@@ -314,6 +325,8 @@ ZA-NW,Vuselela,Jouberton
 ZA-NW,Vuselela,Klerksdorp
 ZA-NW,Vuselela,Potchefstroom
 ZA-NW,Vuselela,Taung
+ZA-NW,Vuselela,Matlosana
+ZA-WC,Boland,Head Office
 ZA-WC,Boland,Caledon
 ZA-WC,Boland,Paarl
 ZA-WC,Boland,Stellenbosch
@@ -326,6 +339,7 @@ ZA-WC,College of Cape Town,Guguletu
 ZA-WC,College of Cape Town,Pinelands
 ZA-WC,College of Cape Town,Thornton
 ZA-WC,College of Cape Town,Wynberg
+ZA-WC,College of Cape Town,Gardens
 ZA-WC,False Bay,Fish Hoek
 ZA-WC,False Bay,Khayelitsha
 ZA-WC,False Bay,Mitchell's Plain
