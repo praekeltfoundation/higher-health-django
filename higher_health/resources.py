@@ -26,6 +26,6 @@ class CampusResource(resources.ModelResource):
 
     class Meta:
         model = models.Campus
-        import_id_fields = ('name', 'university')
+        import_id_fields = ("name", "university")
         skip_unchanged = True
         fields = ("id", "name", "university", "university_province")
