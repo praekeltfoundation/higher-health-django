@@ -121,7 +121,6 @@
               </ul>
             </div>
 
-            {% cache 300 symptoms %}
             <div class="login-form__medical">
               <p class="pagination-ux">Step 4 of 4</p>
               <h2 class="heading-secondary">How are you feeling today?</h2>
@@ -138,7 +137,6 @@
                 {% endfor %}
               </ul>
             </div>
-            {% endcache %}
             <button id="entrySubmit" type="submit" class="cta cta-primary">Submit</button>
           </div>
         </form>
