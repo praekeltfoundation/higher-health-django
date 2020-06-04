@@ -1,10 +1,9 @@
 import enum
 import uuid
 
+import pycountry
 from django.db import models
 from django.utils import timezone
-
-import pycountry
 
 
 class Choice(enum.Enum):
