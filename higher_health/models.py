@@ -1,9 +1,10 @@
 import enum
 import uuid
 
-import pycountry
 from django.db import models
 from django.utils import timezone
+
+import pycountry
 
 
 class Choice(enum.Enum):
@@ -24,6 +25,7 @@ class University(models.Model):
 
     class Meta:
         verbose_name_plural = "Universities"
+        ordering = ("name",)
 
 
 class Campus(models.Model):
@@ -35,6 +37,7 @@ class Campus(models.Model):
 
     class Meta:
         verbose_name_plural = "Campuses"
+        ordering = ("name",)
 
 
 class Covid19Triage(models.Model):
