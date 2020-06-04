@@ -24,6 +24,7 @@ class University(models.Model):
 
     class Meta:
         verbose_name_plural = "Universities"
+        ordering = ("name",)
 
 
 class Campus(models.Model):
@@ -35,6 +36,7 @@ class Campus(models.Model):
 
     class Meta:
         verbose_name_plural = "Campuses"
+        ordering = ("name",)
 
 
 class Covid19Triage(models.Model):
