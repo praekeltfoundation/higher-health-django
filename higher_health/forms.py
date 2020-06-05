@@ -202,7 +202,8 @@ class HealthCheckQuestionnaire(forms.Form):
                     response = requests.get(
                         f"https://maps.googleapis.com/maps/api/place/details/json?{querystring}"
                     )
-                    geometry = response.json()["result"]["geometry"]["location"]
+                    place_details = response.json()
+                    geometry = place_details["result"]["geometry"]["location"]
                     data["latitude"] = geometry["lat"]
                     data["longitude"] = geometry["lng"]
                 else:
