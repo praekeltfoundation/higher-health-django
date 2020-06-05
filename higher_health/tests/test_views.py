@@ -431,6 +431,30 @@ class QuestionnaireTest(TestCase):
             ],
         )
 
+    @responses.activate
+    def test_post_google_places_lookup_error(self):
+        data = get_data()
+        data["latitude"] = ""
+        data["longitude"] = ""
+        data["address"] = "area 51"
+
+        places_url = "https://maps.googleapis.com/maps/api/place/autocomplete/json?key=TEST_API_KEY&input=area+51&language=en&components=country%3Aza"
+
+        responses.add(
+            responses.GET, places_url, json={}, status=200, match_querystring=True
+        )
+
+        response = self.client.post(reverse("healthcheck_questionnaire"), data)
+
+        self.assertEqual(response.status_code, 200)
+        errors = response.context["form"].errors
+        self.assertEqual(
+            errors["address"],
+            [
+                "Sorry, we had a temporary error trying to validate this address, please try again"
+            ],
+        )
+
 
 class ReceiptTest(TestCase):
     def test_get_with_empty_session(self):

@@ -1,3 +1,4 @@
+import logging
 from urllib.parse import urlencode
 
 import phonenumbers
@@ -10,6 +11,8 @@ from django.utils.translation import ugettext_lazy as _
 
 from higher_health import models
 from higher_health.validators import za_phone_number
+
+logger = logging.getLogger(__name__)
 
 
 class HealthCheckQuestionnaire(forms.Form):
@@ -174,40 +177,45 @@ class HealthCheckQuestionnaire(forms.Form):
 
     def __init__(self, *args, **kwargs):
         invalid_address = False
+        address_lookup_error = False
         data = args[0] if args else kwargs.get("data", None)
         if data:
             data = data.copy()
             if data.get("address"):
-                querystring = urlencode(
-                    {
-                        "key": settings.SERVER_PLACES_API_KEY,
-                        "input": data["address"],
-                        "language": "en",
-                        "components": "country:za",
-                    }
-                )
-                response = requests.get(
-                    f"https://maps.googleapis.com/maps/api/place/autocomplete/json?{querystring}"
-                )
-                location = response.json()
-                if location["predictions"]:
+                try:
                     querystring = urlencode(
                         {
                             "key": settings.SERVER_PLACES_API_KEY,
-                            "place_id": location["predictions"][0]["place_id"],
+                            "input": data["address"],
                             "language": "en",
-                            "fields": "geometry",
+                            "components": "country:za",
                         }
                     )
                     response = requests.get(
-                        f"https://maps.googleapis.com/maps/api/place/details/json?{querystring}"
+                        f"https://maps.googleapis.com/maps/api/place/autocomplete/json?{querystring}"
                     )
-                    place_details = response.json()
-                    geometry = place_details["result"]["geometry"]["location"]
-                    data["latitude"] = geometry["lat"]
-                    data["longitude"] = geometry["lng"]
-                else:
-                    invalid_address = True
+                    location = response.json()
+                    if location["predictions"]:
+                        querystring = urlencode(
+                            {
+                                "key": settings.SERVER_PLACES_API_KEY,
+                                "place_id": location["predictions"][0]["place_id"],
+                                "language": "en",
+                                "fields": "geometry",
+                            }
+                        )
+                        response = requests.get(
+                            f"https://maps.googleapis.com/maps/api/place/details/json?{querystring}"
+                        )
+                        place_details = response.json()
+                        geometry = place_details["result"]["geometry"]["location"]
+                        data["latitude"] = geometry["lat"]
+                        data["longitude"] = geometry["lng"]
+                    else:
+                        invalid_address = True
+                except (KeyError, requests.RequestException) as e:
+                    logger.exception("Google Places lookup error")
+                    address_lookup_error = True
             kwargs.update({"data": data})
         super(HealthCheckQuestionnaire, self).__init__(*args, **kwargs)
 
@@ -215,6 +223,11 @@ class HealthCheckQuestionnaire(forms.Form):
             self.add_error(
                 "address",
                 "If you have typed your address incorrectly, please try again. If you are unable to provide your address, please TYPE the name of your Suburb, Township, Town or Village (or nearest)",
+            )
+        if address_lookup_error:
+            self.add_error(
+                "address",
+                "Sorry, we had a temporary error trying to validate this address, please try again",
             )
 
         if data:
