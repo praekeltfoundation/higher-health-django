@@ -155,7 +155,13 @@ class Covid19Triage(models.Model):
     history_diabetes = models.BooleanField(default=False)
     history_hypertension = models.BooleanField(default=False)
     history_cardiovascular = models.BooleanField(default=False)
+    user = models.ForeignKey(
+        "auth.User", null=True, blank=True, on_delete=models.SET_NULL
+    )
 
     @property
     def hashed_msisdn(self):
         return self.msisdn[:3] + "*" * 5 + self.msisdn[-4:]
+
+    class Meta:
+        ordering = ("timestamp",)
