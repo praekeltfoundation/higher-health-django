@@ -1,3 +1,8 @@
+import pyotp
+from django.contrib.auth.models import User
+from django.urls import reverse
+
+
 def get_data(symptoms=0, exposure=False, age="<18", pre_existing_condition="no"):
     return {
         "age_range": age,
@@ -28,3 +33,10 @@ def get_data(symptoms=0, exposure=False, age="<18", pre_existing_condition="no")
         "history_hypertension": "",
         "history_cardiovascular": "",
     }
+
+
+def login_with_otp(client, msisdn):
+    client.post(reverse("healthcheck_login"), {"msisdn": "+27831231234"})
+    hotp = pyotp.HOTP(client.session.get("base32"))
+    otp = hotp.at(User.objects.get(username="+27831231234").pk)
+    client.post(reverse("healthcheck_otp"), {"otp": otp})
