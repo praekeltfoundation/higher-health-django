@@ -3,10 +3,12 @@ from urllib.parse import urlencode
 
 import phonenumbers
 import pycountry
+import pyotp
 import requests
 from django import forms
 from django.conf import settings
-from django.forms.widgets import TextInput
+from django.contrib.auth.models import User
+from django.forms.widgets import NumberInput, TextInput
 from django.utils.translation import ugettext_lazy as _
 
 from higher_health import models
@@ -26,12 +28,6 @@ class HealthCheckQuestionnaire(forms.Form):
         (s.code, s.name) for s in pycountry.subdivisions.get(country_code="ZA")
     )
 
-    msisdn = forms.CharField(
-        label="Enter your mobile number",
-        widget=TextInput(attrs={"placeholder": "Mobile number"}),
-        required=True,
-        validators=[za_phone_number],
-    )
     first_name = forms.CharField(
         label="Enter your name",
         widget=TextInput(attrs={"placeholder": "Name"}),
@@ -213,7 +209,7 @@ class HealthCheckQuestionnaire(forms.Form):
                         data["longitude"] = geometry["lng"]
                     else:
                         invalid_address = True
-                except (KeyError, requests.RequestException) as e:
+                except (KeyError, requests.RequestException):
                     logger.exception("Google Places lookup error")
                     address_lookup_error = True
             kwargs.update({"data": data})
@@ -236,10 +232,6 @@ class HealthCheckQuestionnaire(forms.Form):
                     "medical_confirm_accuracy",
                     "You need to confirm that this information is accurate",
                 )
-
-    def clean_msisdn(self):
-        number = phonenumbers.parse(self.cleaned_data["msisdn"], "ZA")
-        return phonenumbers.format_number(number, phonenumbers.PhoneNumberFormat.E164)
 
     def clean(self):
         cleaned_data = super(HealthCheckQuestionnaire, self).clean()
@@ -310,7 +302,6 @@ class HealthCheckQuestionnaire(forms.Form):
 
     def registration_fields(self):
         return [
-            self["msisdn"],
             self["first_name"],
             self["last_name"],
             self["age_range"],
@@ -347,13 +338,45 @@ class HealthCheckQuestionnaire(forms.Form):
 
 
 class HealthCheckLogin(forms.Form):
-    phone = forms.CharField(
-        widget=TextInput(attrs={"placeholder": "Phone number"}),
+    msisdn = forms.CharField(
+        label="Enter your mobile number",
+        widget=TextInput(attrs={"placeholder": "Mobile number"}),
         required=True,
-        max_length=100,
+        validators=[za_phone_number],
     )
-    fullname = forms.CharField(
-        widget=TextInput(attrs={"placeholder": "Last name"}),
+
+    def clean_msisdn(self):
+        number = phonenumbers.parse(self.cleaned_data["msisdn"], "ZA")
+        return phonenumbers.format_number(number, phonenumbers.PhoneNumberFormat.E164)
+
+
+class HealthCheckOTP(forms.Form):
+    otp = forms.CharField(
+        label="Enter 6 digit pin sent via SMS",
+        widget=NumberInput(attrs={"placeholder": "One Time Pin"}),
         required=True,
-        max_length=100,
+        min_length=6,
+        max_length=6,
     )
+
+    def __init__(self, *args, **kwargs):
+        self.request = kwargs.pop("request")
+        super().__init__(*args, **kwargs)
+
+    def verify_otp(self, otp):
+        msisdn = self.request.session.get("msisdn")
+        base32 = self.request.session.get("base32")
+        try:
+            user = User.objects.get(username=msisdn)
+        except User.DoesNotExist:
+            return False
+
+        if msisdn and base32:
+            totp = pyotp.HOTP(base32)
+            if totp.verify(otp, user.pk):
+                return True
+        return False
+
+    def clean_otp(self):
+        if not self.verify_otp(self.cleaned_data["otp"]):
+            self.add_error("otp", "The OTP you have entered is incorrect.")

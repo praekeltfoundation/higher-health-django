@@ -41,12 +41,13 @@ def get_location(data):
     return f"{lat}{lng}/"
 
 
-def save_data(data):
+def save_data(data, user):
 
     return Covid19Triage.objects.create(
         **{
             "source": "WEB",
-            "msisdn": data["msisdn"],
+            "user": user,
+            "msisdn": user.username,
             "first_name": data["first_name"],
             "last_name": data["last_name"],
             "province": data["facility_destination_province"],
