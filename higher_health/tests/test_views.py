@@ -24,7 +24,7 @@ class QuestionnaireTest(TestCase):
         )
         self.assertIn("form", response.context)
 
-    def test_get_with_triage_id_in_session(self):
+    def test_get_with_existing_triage(self):
         login_with_otp(self.client, "+27831231234")
 
         data = get_data()
@@ -69,7 +69,7 @@ class QuestionnaireTest(TestCase):
         self.assertFalse(initial_data["history_hypertension"])
         self.assertFalse(initial_data["history_cardiovascular"])
 
-    def test_get_with_invalid_triage_id_in_session(self):
+    def test_get_with_no_triage_completed(self):
         response = self.client.get(reverse("healthcheck_questionnaire"))
 
         self.assertEqual(response.status_code, 302)
@@ -475,16 +475,12 @@ class ReceiptTest(TestCase):
 
         self.assertEqual(response.status_code, 302)
 
-    def test_get_with_triage_id_in_session(self):
+    def test_get_with_existing_triage_id(self):
         login_with_otp(self.client, "+27831231234")
 
         data = get_data()
         data["risk_level"] = "high"
         triage = save_data(data, User.objects.get(username="+27831231234"))
-
-        session = self.client.session
-        session["triage_id"] = str(triage.id)
-        session.save()
 
         response = self.client.get(reverse("healthcheck_receipt"))
 
@@ -498,8 +494,14 @@ class ReceiptTest(TestCase):
         self.assertEqual(response.context["timestamp"], triage.timestamp)
         self.assertEqual(response.context["msisdn"], triage.hashed_msisdn)
 
-    def test_get_with_invalid_triage_id_in_session(self):
+    def test_get_with_no_triage_completed(self):
         response = self.client.get(reverse("healthcheck_receipt"))
 
         self.assertEqual(response.status_code, 302)
         self.assertRedirects(response, "/login/?next=/receipt/")
+
+        login_with_otp(self.client, "+27831231234")
+
+        response = self.client.get(reverse("healthcheck_receipt"))
+        self.assertEqual(response.status_code, 302)
+        self.assertRedirects(response, "/")
