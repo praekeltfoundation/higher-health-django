@@ -107,6 +107,8 @@ AUTH_PASSWORD_VALIDATORS = [
     {"NAME": "django.contrib.auth.password_validation.NumericPasswordValidator"},
 ]
 
+LOGIN_URL = "/login/"
+
 
 # Internationalization
 # https://docs.djangoproject.com/en/2.2/topics/i18n/
@@ -123,6 +125,10 @@ USE_TZ = True
 
 CLIENT_PLACES_API_KEY = env.str("GOOGLE_PLACES_CLIENT_API_KEY", "REPLACE_ME")
 SERVER_PLACES_API_KEY = env.str("GOOGLE_PLACES_SERVER_API_KEY", "REPLACE_ME")
+
+RAPIDPRO_TOKEN = env.str("RAPIDPRO_TOKEN", "REPLACE_ME")
+RAPIDPRO_URL = env.str("RAPIDPRO_URL", "REPLACE_ME")
+RAPIDPRO_SEND_OTP_SMS_FLOW = env.str("RAPIDPRO_SEND_OTP_SMS_FLOW", "REPLACE_ME")
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.2/howto/static-files/

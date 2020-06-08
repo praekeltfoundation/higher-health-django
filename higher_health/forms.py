@@ -1,15 +1,22 @@
+import base64
+import hmac
 import logging
+from hashlib import sha256
 from urllib.parse import urlencode
 
 import phonenumbers
 import pycountry
 import requests
+import secrets
+import string
 from django import forms
 from django.conf import settings
-from django.forms.widgets import TextInput
+from django.forms.widgets import NumberInput, TextInput
 from django.utils.translation import ugettext_lazy as _
+from temba_client.exceptions import TembaException
 
 from higher_health import models
+from higher_health.utils import rapidpro
 from higher_health.validators import za_phone_number
 
 logger = logging.getLogger(__name__)
@@ -26,12 +33,6 @@ class HealthCheckQuestionnaire(forms.Form):
         (s.code, s.name) for s in pycountry.subdivisions.get(country_code="ZA")
     )
 
-    msisdn = forms.CharField(
-        label="Enter your mobile number",
-        widget=TextInput(attrs={"placeholder": "Mobile number"}),
-        required=True,
-        validators=[za_phone_number],
-    )
     first_name = forms.CharField(
         label="Enter your name",
         widget=TextInput(attrs={"placeholder": "Name"}),
@@ -213,7 +214,7 @@ class HealthCheckQuestionnaire(forms.Form):
                         data["longitude"] = geometry["lng"]
                     else:
                         invalid_address = True
-                except (KeyError, requests.RequestException) as e:
+                except (KeyError, requests.RequestException):
                     logger.exception("Google Places lookup error")
                     address_lookup_error = True
             kwargs.update({"data": data})
@@ -236,10 +237,6 @@ class HealthCheckQuestionnaire(forms.Form):
                     "medical_confirm_accuracy",
                     "You need to confirm that this information is accurate",
                 )
-
-    def clean_msisdn(self):
-        number = phonenumbers.parse(self.cleaned_data["msisdn"], "ZA")
-        return phonenumbers.format_number(number, phonenumbers.PhoneNumberFormat.E164)
 
     def clean(self):
         cleaned_data = super(HealthCheckQuestionnaire, self).clean()
@@ -310,7 +307,6 @@ class HealthCheckQuestionnaire(forms.Form):
 
     def registration_fields(self):
         return [
-            self["msisdn"],
             self["first_name"],
             self["last_name"],
             self["age_range"],
@@ -347,13 +343,70 @@ class HealthCheckQuestionnaire(forms.Form):
 
 
 class HealthCheckLogin(forms.Form):
-    phone = forms.CharField(
-        widget=TextInput(attrs={"placeholder": "Phone number"}),
+    msisdn = forms.CharField(
+        label="Enter your mobile number",
+        widget=TextInput(attrs={"placeholder": "Mobile number"}),
         required=True,
-        max_length=100,
+        validators=[za_phone_number],
     )
-    fullname = forms.CharField(
-        widget=TextInput(attrs={"placeholder": "Last name"}),
+
+    def __init__(self, *args, **kwargs):
+        self.request = kwargs.pop("request")
+        super().__init__(*args, **kwargs)
+
+    def clean_msisdn(self):
+        number = phonenumbers.parse(self.cleaned_data["msisdn"], "ZA")
+        return phonenumbers.format_number(number, phonenumbers.PhoneNumberFormat.E164)
+
+    def send_otp_sms(self, msisdn):
+        otp = "".join(secrets.choice(string.digits) for _ in range(6))
+        h = hmac.new(settings.SECRET_KEY.encode(), otp.encode(), digestmod=sha256)
+        otp_hash = base64.b64encode(h.digest()).decode()
+        self.request.session["otp_hash"] = otp_hash
+
+        if rapidpro:
+            try:
+                rapidpro.create_flow_start(
+                    params={"otp": otp},
+                    flow=settings.RAPIDPRO_SEND_OTP_SMS_FLOW,
+                    urns=[f"tel:{msisdn}"],
+                )
+            except TembaException:
+                self.add_error(
+                    "msisdn",
+                    "We're unable to send you an OTP at this time. Please try again.",
+                )
+
+    def clean(self):
+        cleaned_data = super().clean()
+        msisdn = cleaned_data.get("msisdn")
+        if msisdn:
+            self.send_otp_sms(msisdn)
+
+
+class HealthCheckOTP(forms.Form):
+    otp = forms.CharField(
+        label="Enter 6 digit pin sent via SMS",
+        widget=NumberInput(attrs={"placeholder": "One Time Pin"}),
         required=True,
-        max_length=100,
+        min_length=6,
+        max_length=6,
     )
+
+    def __init__(self, *args, **kwargs):
+        self.request = kwargs.pop("request")
+        super().__init__(*args, **kwargs)
+
+    def verify_otp(self, otp):
+        try:
+            session_otp = self.request.session["otp_hash"]
+            h = hmac.new(settings.SECRET_KEY.encode(), otp.encode(), digestmod=sha256)
+            if hmac.compare_digest(base64.b64encode(h.digest()).decode(), session_otp):
+                self.request.session.pop("otp_hash")
+                return True
+        except KeyError:
+            return False
+
+    def clean_otp(self):
+        if not self.verify_otp(self.cleaned_data["otp"]):
+            self.add_error("otp", "The OTP you have entered is incorrect.")

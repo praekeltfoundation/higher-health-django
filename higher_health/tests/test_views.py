@@ -1,6 +1,5 @@
-import uuid
-
 import responses
+from django.contrib.auth.models import User
 from django.test import TestCase
 from django.urls import reverse
 
@@ -8,27 +7,36 @@ from higher_health.models import Covid19Triage
 from higher_health.utils import get_location, save_data
 
 from . import factories
-from .utils_test import get_data
+from .utils_test import get_data, login_with_otp
 
 
 class QuestionnaireTest(TestCase):
+    def test_otp_only_used_once_per_session(self):
+        login_with_otp(self.client, "+27831231234")
+        response = self.client.post(reverse("healthcheck_otp"), {"otp": "111111"})
+        self.assertEqual(response.status_code, 200)
+        errors = response.context["form"].errors
+        self.assertEqual(errors["otp"], ["The OTP you have entered is incorrect."])
+
     def test_get_with_empty_session(self):
         response = self.client.get(reverse("healthcheck_questionnaire"))
+        self.assertRedirects(response, "/login/?next=%2F")
 
+        login_with_otp(self.client, "+27831231234")
+
+        response = self.client.get(reverse("healthcheck_questionnaire"))
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(
             response=response, template_name="healthcheck_questionnaire.html"
         )
         self.assertIn("form", response.context)
 
-    def test_get_with_triage_id_in_session(self):
+    def test_get_with_existing_triage(self):
+        login_with_otp(self.client, "+27831231234")
+
         data = get_data()
         data["risk_level"] = "high"
-        triage = save_data(data)
-
-        session = self.client.session
-        session["triage_id"] = str(triage.id)
-        session.save()
+        save_data(data, User.objects.get(username="+27831231234"))
 
         response = self.client.get(reverse("healthcheck_questionnaire"))
 
@@ -68,13 +76,15 @@ class QuestionnaireTest(TestCase):
         self.assertFalse(initial_data["history_hypertension"])
         self.assertFalse(initial_data["history_cardiovascular"])
 
-    def test_get_with_invalid_triage_id_in_session(self):
-        session = self.client.session
-        session["triage_id"] = str(uuid.uuid4())
-        session.save()
-
+    def test_get_with_no_triage_completed(self):
         response = self.client.get(reverse("healthcheck_questionnaire"))
 
+        self.assertEqual(response.status_code, 302)
+        self.assertRedirects(response, "/login/?next=/")
+
+        login_with_otp(self.client, "+27831231234")
+
+        response = self.client.get(reverse("healthcheck_questionnaire"))
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(
             response=response, template_name="healthcheck_questionnaire.html"
@@ -84,12 +94,13 @@ class QuestionnaireTest(TestCase):
         self.assertEqual(response.context["form"].initial, {})
 
     def test_post_with_invalid_data(self):
+        login_with_otp(self.client, "+27831231234")
+
         response = self.client.post(reverse("healthcheck_questionnaire"), {})
 
         self.assertEqual(response.status_code, 200)
 
         errors = response.context["form"].errors
-        self.assertEqual(errors["msisdn"], ["This field is required."])
         self.assertEqual(errors["first_name"], ["This field is required."])
         self.assertEqual(errors["last_name"], ["This field is required."])
         self.assertEqual(errors["age_range"], ["This field is required."])
@@ -113,6 +124,8 @@ class QuestionnaireTest(TestCase):
         )
 
     def test_post_with_invalid_accuracy(self):
+        login_with_otp(self.client, "+27831231234")
+
         data = get_data()
         data["medical_confirm_accuracy"] = "no"
         response = self.client.post(reverse("healthcheck_questionnaire"), data)
@@ -127,6 +140,8 @@ class QuestionnaireTest(TestCase):
 
     @responses.activate
     def test_post_get_coordinates_from_address(self):
+        login_with_otp(self.client, "+27831231234")
+
         data = get_data()
         data["latitude"] = ""
         data["longitude"] = ""
@@ -185,6 +200,8 @@ class QuestionnaireTest(TestCase):
 
     @responses.activate
     def test_post_going_to_campus(self):
+        login_with_otp(self.client, "+27831231234")
+
         data = get_data()
         data["facility_destination"] = "campus"
         data["latitude"] = ""
@@ -289,6 +306,8 @@ class QuestionnaireTest(TestCase):
 
     @responses.activate
     def test_post_pre_existing_conditions(self):
+        login_with_otp(self.client, "+27831231234")
+
         data = get_data()
         data["facility_destination"] = "office"
         data["latitude"] = ""
@@ -379,7 +398,6 @@ class QuestionnaireTest(TestCase):
 
         data.update(
             {
-                "msisdn": "+27831231111",
                 "history_pre_existing_condition": "no",
                 "history_cardiovascular": "True",
                 "history_hypertension": "True",
@@ -395,7 +413,7 @@ class QuestionnaireTest(TestCase):
         self.assertEqual(places_call.request.method, "GET")
         self.assertEqual(places_call.request.url, places_url)
 
-        triage = Covid19Triage.objects.get(msisdn="+27831231111")
+        triage = Covid19Triage.objects.filter(msisdn="+27831231234").last()
 
         self.assertEqual(triage.preexisting_condition, "no")
         self.assertFalse(triage.history_cardiovascular)
@@ -420,6 +438,7 @@ class QuestionnaireTest(TestCase):
             match_querystring=True,
         )
 
+        login_with_otp(self.client, "+27831231234")
         response = self.client.post(reverse("healthcheck_questionnaire"), data)
 
         self.assertEqual(response.status_code, 200)
@@ -444,6 +463,7 @@ class QuestionnaireTest(TestCase):
             responses.GET, places_url, json={}, status=200, match_querystring=True
         )
 
+        login_with_otp(self.client, "+27831231234")
         response = self.client.post(reverse("healthcheck_questionnaire"), data)
 
         self.assertEqual(response.status_code, 200)
@@ -462,14 +482,12 @@ class ReceiptTest(TestCase):
 
         self.assertEqual(response.status_code, 302)
 
-    def test_get_with_triage_id_in_session(self):
+    def test_get_with_existing_triage_id(self):
+        login_with_otp(self.client, "+27831231234")
+
         data = get_data()
         data["risk_level"] = "high"
-        triage = save_data(data)
-
-        session = self.client.session
-        session["triage_id"] = str(triage.id)
-        session.save()
+        triage = save_data(data, User.objects.get(username="+27831231234"))
 
         response = self.client.get(reverse("healthcheck_receipt"))
 
@@ -483,11 +501,14 @@ class ReceiptTest(TestCase):
         self.assertEqual(response.context["timestamp"], triage.timestamp)
         self.assertEqual(response.context["msisdn"], triage.hashed_msisdn)
 
-    def test_get_with_invalid_triage_id_in_session(self):
-        session = self.client.session
-        session["triage_id"] = str(uuid.uuid4())
-        session.save()
-
+    def test_get_with_no_triage_completed(self):
         response = self.client.get(reverse("healthcheck_receipt"))
 
         self.assertEqual(response.status_code, 302)
+        self.assertRedirects(response, "/login/?next=/receipt/")
+
+        login_with_otp(self.client, "+27831231234")
+
+        response = self.client.get(reverse("healthcheck_receipt"))
+        self.assertEqual(response.status_code, 302)
+        self.assertRedirects(response, "/")
