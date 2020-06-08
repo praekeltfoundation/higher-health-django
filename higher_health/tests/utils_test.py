@@ -1,5 +1,7 @@
-import pyotp
-from django.contrib.auth.models import User
+import base64
+import hmac
+from hashlib import sha256
+
 from django.urls import reverse
 
 
@@ -35,8 +37,11 @@ def get_data(symptoms=0, exposure=False, age="<18", pre_existing_condition="no")
     }
 
 
-def login_with_otp(client, msisdn):
+def login_with_otp(client, msisdn, otp="111111"):
     client.post(reverse("healthcheck_login"), {"msisdn": "+27831231234"})
-    hotp = pyotp.HOTP(client.session.get("base32"))
-    otp = hotp.at(User.objects.get(username="+27831231234").pk)
+    h = hmac.new(otp.encode(), digestmod=sha256)
+    fake_otp_hash = base64.b64encode(h.digest()).decode()
+    session = client.session
+    session["otp_hash"] = fake_otp_hash
+    session.save()
     client.post(reverse("healthcheck_otp"), {"otp": otp})

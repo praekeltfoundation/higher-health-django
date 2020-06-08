@@ -20,7 +20,6 @@ setup(
         "requests==2.22.0",
         "django-import-export==2.1.0",
         "django-compressor==2.4",
-        "pyotp==2.3.0",
     ],
     classifiers=[
         "Development Status :: 4 - Beta",

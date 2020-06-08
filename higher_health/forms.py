@@ -1,13 +1,14 @@
+import base64
+import hmac
 import logging
+from hashlib import sha256
 from urllib.parse import urlencode
 
 import phonenumbers
 import pycountry
-import pyotp
 import requests
 from django import forms
 from django.conf import settings
-from django.contrib.auth.models import User
 from django.forms.widgets import NumberInput, TextInput
 from django.utils.translation import ugettext_lazy as _
 
@@ -364,18 +365,10 @@ class HealthCheckOTP(forms.Form):
         super().__init__(*args, **kwargs)
 
     def verify_otp(self, otp):
-        msisdn = self.request.session.get("msisdn")
-        base32 = self.request.session.get("base32")
-        try:
-            user = User.objects.get(username=msisdn)
-        except User.DoesNotExist:
-            return False
+        session_otp = self.request.session.get("otp_hash")
+        h = hmac.new(otp.encode(), digestmod=sha256)
 
-        if msisdn and base32:
-            totp = pyotp.HOTP(base32)
-            if totp.verify(otp, user.pk):
-                return True
-        return False
+        return hmac.compare_digest(base64.b64encode(h.digest()).decode(), session_otp)
 
     def clean_otp(self):
         if not self.verify_otp(self.cleaned_data["otp"]):
