@@ -1,4 +1,11 @@
+from django.conf import settings
+from temba_client.v2 import TembaClient
+
 from higher_health.models import Covid19Triage
+
+rapidpro = None
+if settings.RAPIDPRO_URL and settings.RAPIDPRO_TOKEN:
+    rapidpro = TembaClient(settings.RAPIDPRO_URL, settings.RAPIDPRO_TOKEN)
 
 
 def get_risk_level(data):

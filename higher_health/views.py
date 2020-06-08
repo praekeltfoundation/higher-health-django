@@ -1,11 +1,5 @@
-import base64
-import hmac
-import secrets
-import string
 from functools import partial
-from hashlib import sha256
 
-from django.conf import settings
 from django.contrib.auth import login
 from django.contrib.auth.decorators import login_required, user_passes_test
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
@@ -111,22 +105,15 @@ class HealthCheckLoginView(generic.FormView):
     template_name = "login.html"
     success_url = reverse_lazy("healthcheck_otp")
 
-    def send_otp_sms(self, user):
-        otp = "".join(secrets.choice(string.digits) for _ in range(6))
-        h = hmac.new(settings.SECRET_KEY.encode(), otp.encode(), digestmod=sha256)
-        otp_hash = base64.b64encode(h.digest()).decode()
-        self.request.session["otp_hash"] = otp_hash
-
-        # TODO: send OTP via SMS
-        # print(user.username, otp, otp_hash)
+    def get_form_kwargs(self):
+        kwargs = super().get_form_kwargs()
+        kwargs["request"] = self.request
+        return kwargs
 
     def form_valid(self, form):
         data = form.cleaned_data
         msisdn = data.get("msisdn")
         self.request.session["msisdn"] = msisdn
-        user, created = User.objects.get_or_create(username=msisdn)
-
-        self.send_otp_sms(user)
         return super().form_valid(form)
 
 
@@ -154,7 +141,7 @@ class HealthCheckOTPView(generic.FormView):
 
     def form_valid(self, form):
         msisdn = self.request.session.get("msisdn")
-        user = User.objects.get(username=msisdn)
+        user, _ = User.objects.get_or_create(username=msisdn)
         login(self.request, user)
         return super().form_valid(form)
 
