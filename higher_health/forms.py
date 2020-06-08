@@ -366,7 +366,7 @@ class HealthCheckOTP(forms.Form):
 
     def verify_otp(self, otp):
         session_otp = self.request.session.get("otp_hash")
-        h = hmac.new(otp.encode(), digestmod=sha256)
+        h = hmac.new(settings.SECRET_KEY.encode(), otp.encode(), digestmod=sha256)
 
         return hmac.compare_digest(base64.b64encode(h.digest()).decode(), session_otp)
 

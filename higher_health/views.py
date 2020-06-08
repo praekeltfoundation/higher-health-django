@@ -5,6 +5,7 @@ import string
 from functools import partial
 from hashlib import sha256
 
+from django.conf import settings
 from django.contrib.auth import login
 from django.contrib.auth.decorators import login_required, user_passes_test
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
@@ -112,7 +113,7 @@ class HealthCheckLoginView(generic.FormView):
 
     def send_otp_sms(self, user):
         otp = "".join(secrets.choice(string.digits) for _ in range(6))
-        h = hmac.new(otp.encode(), digestmod=sha256)
+        h = hmac.new(settings.SECRET_KEY.encode(), otp.encode(), digestmod=sha256)
         otp_hash = base64.b64encode(h.digest()).decode()
         self.request.session["otp_hash"] = otp_hash
 

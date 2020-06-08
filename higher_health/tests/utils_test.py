@@ -2,6 +2,7 @@ import base64
 import hmac
 from hashlib import sha256
 
+from django.conf import settings
 from django.urls import reverse
 
 
@@ -39,7 +40,7 @@ def get_data(symptoms=0, exposure=False, age="<18", pre_existing_condition="no")
 
 def login_with_otp(client, msisdn, otp="111111"):
     client.post(reverse("healthcheck_login"), {"msisdn": "+27831231234"})
-    h = hmac.new(otp.encode(), digestmod=sha256)
+    h = hmac.new(settings.SECRET_KEY.encode(), otp.encode(), digestmod=sha256)
     fake_otp_hash = base64.b64encode(h.digest()).decode()
     session = client.session
     session["otp_hash"] = fake_otp_hash
