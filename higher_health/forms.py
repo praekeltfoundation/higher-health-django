@@ -398,10 +398,14 @@ class HealthCheckOTP(forms.Form):
         super().__init__(*args, **kwargs)
 
     def verify_otp(self, otp):
-        session_otp = self.request.session.get("otp_hash")
-        h = hmac.new(settings.SECRET_KEY.encode(), otp.encode(), digestmod=sha256)
-
-        return hmac.compare_digest(base64.b64encode(h.digest()).decode(), session_otp)
+        try:
+            session_otp = self.request.session.pop("otp_hash")
+            h = hmac.new(settings.SECRET_KEY.encode(), otp.encode(), digestmod=sha256)
+            return hmac.compare_digest(
+                base64.b64encode(h.digest()).decode(), session_otp
+            )
+        except KeyError:
+            return False
 
     def clean_otp(self):
         if not self.verify_otp(self.cleaned_data["otp"]):

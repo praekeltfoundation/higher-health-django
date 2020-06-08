@@ -11,6 +11,13 @@ from .utils_test import get_data, login_with_otp
 
 
 class QuestionnaireTest(TestCase):
+    def test_otp_only_used_once_per_session(self):
+        login_with_otp(self.client, "+27831231234")
+        response = self.client.post(reverse("healthcheck_otp"), {"otp": "111111"})
+        self.assertEqual(response.status_code, 200)
+        errors = response.context["form"].errors
+        self.assertEqual(errors["otp"], ["The OTP you have entered is incorrect."])
+
     def test_get_with_empty_session(self):
         response = self.client.get(reverse("healthcheck_questionnaire"))
         self.assertRedirects(response, "/login/?next=%2F")
