@@ -1,4 +1,10 @@
+import base64
+import hmac
+from datetime import datetime, timedelta
+from hashlib import sha256
+
 import responses
+from django.conf import settings
 from django.contrib.auth.models import User
 from django.test import TestCase
 from django.urls import reverse
@@ -12,11 +18,31 @@ from .utils_test import get_data, login_with_otp
 
 class QuestionnaireTest(TestCase):
     def test_otp_only_used_once_per_session(self):
-        login_with_otp(self.client, "+27831231234")
+        response = login_with_otp(self.client, "+27831231234")
+        self.assertEqual(response.status_code, 302)
+
         response = self.client.post(reverse("healthcheck_otp"), {"otp": "111111"})
         self.assertEqual(response.status_code, 200)
         errors = response.context["form"].errors
         self.assertEqual(errors["otp"], ["The OTP you have entered is incorrect."])
+
+    def test_otp_expires(self):
+        self.client.post(reverse("healthcheck_login"), {"msisdn": "+27831231234"})
+        h = hmac.new(settings.SECRET_KEY.encode(), "111222".encode(), digestmod=sha256)
+        fake_otp_hash = base64.b64encode(h.digest()).decode()
+        session = self.client.session
+        session["otp_hash"] = fake_otp_hash
+        session["otp_timestamp"] = (
+            datetime.utcnow() - timedelta(seconds=settings.OTP_EXPIRES_DURATION + 60)
+        ).timestamp()
+        session.save()
+        response = self.client.post(reverse("healthcheck_otp"), {"otp": "111222"})
+        self.assertEqual(response.status_code, 200)
+        errors = response.context["form"].errors
+        self.assertEqual(
+            errors["otp"],
+            ["The OTP you have entered has expired. Please reset and try again."],
+        )
 
     def test_get_with_empty_session(self):
         response = self.client.get(reverse("healthcheck_questionnaire"))

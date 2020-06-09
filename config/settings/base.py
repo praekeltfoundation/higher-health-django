@@ -130,6 +130,8 @@ RAPIDPRO_TOKEN = env.str("RAPIDPRO_TOKEN", "REPLACE_ME")
 RAPIDPRO_URL = env.str("RAPIDPRO_URL", "REPLACE_ME")
 RAPIDPRO_SEND_OTP_SMS_FLOW = env.str("RAPIDPRO_SEND_OTP_SMS_FLOW", "REPLACE_ME")
 
+OTP_EXPIRES_DURATION = env.int("OTP_EXPIRES_DURATION", 60 * 5)
+
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
