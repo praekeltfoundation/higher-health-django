@@ -140,7 +140,7 @@ STATICFILES_FINDERS = (
 )
 
 
-STATIC_ROOT = join(ROOT_DIR, "staticfiles")
+STATIC_ROOT = join(ROOT_DIR, "static")
 STATIC_URL = "/static/"
 COMPRESS_ENABLED = True
 
