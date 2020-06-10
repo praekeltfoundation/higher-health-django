@@ -388,7 +388,7 @@ a:hover {
 */
 
 .pagination-ux {
-  color: rgba(68, 68, 68, 0.8);
+  color: var(--dark-cyan);
   font-size: 12px;
   text-transform: uppercase;
   text-decoration: underline;
@@ -621,7 +621,7 @@ textarea {
 .cta-primary--next {
   margin: 0;
   width: auto;
-  padding: 0 10px;
+  padding: 0 20px;
 }
 .cta-primary--next:after {
   content: "❯";
