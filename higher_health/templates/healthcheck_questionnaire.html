@@ -59,7 +59,7 @@
                 <div id="locationField">
                   <input id="autocomplete"
                     placeholder="Type your physical address"
-                    onFocus="geolocate()"
+                    <!--onFocus="geolocate()"-->
                     type="text"
                     value="{{ form.address.value|default_if_none:'' }}"
                     name="address"/>
@@ -174,9 +174,28 @@
   {{ campuses|json_script:"campus-data" }}
 {% endcache %}
 
+  <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
 {% compress js inline %}
   <script type="text/javascript">
   "use strict";
+
+  $(".pagination__icon").click(function () {
+    $toggle = $(this);
+    console.log($toggle);
+    //getting the next element
+    /*$content = $header.next();*/
+    //open up the content needed - toggle the slide- if visible, slide up, if not slidedown.
+    /*$content.slideToggle(500, function () {
+        //execute this after slideToggle is done
+        //change text of header based on visibility of content div
+        $header.text(function () {
+            //change text based on condition
+            return $content.is(":+") ? "+" : "-";
+        });
+    });*/
+  });
+
+/*
   let universities = JSON.parse(document.getElementById('universities-data').textContent),
   campuses = JSON.parse(document.getElementById('campus-data').textContent);
     let prov = document.getElementById('id_facility_destination_province'),
@@ -221,7 +240,7 @@
     }
 
 
-    /* GOOGLE PLACES API: AUTOCOMPLETE */
+    //GOOGLE PLACES API: AUTOCOMPLETE
     let placeSearch, autocomplete;
     const componentForm = {
       street_number: 'short_name',
@@ -294,7 +313,8 @@
       }
     }
 
-    /* MEDICAL */
+    //MEDICAL
+
     const checkbox = document.getElementById('healthcheck_terms'),
     questionnairesForm = document.getElementById('questionnaires'),
     addressField = document.getElementById('autocomplete'),
@@ -380,9 +400,11 @@
         });
       }
     });
-    isPageLoad = false;
+    isPageLoad = false;*/
   </script>
 {% endcompress %}
+<!--
   <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key={{PLACES_API_KEY}}&libraries=places&callback=initAutocomplete"
       async defer></script>
+      -->
 {% endblock %}
