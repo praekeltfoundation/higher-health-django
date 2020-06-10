@@ -1,9 +1,10 @@
 {% extends 'base.html' %}
-{% load temp_tags static compress %}
+{% load temp_tags static compress cache %}
 {% block content %}
   <div class="content">
     <div class="content-intro">
-      <div class="content-inner">
+      <div class="content-inner content-inner--questionnaires">
+
         <div class="heading-container">
           <h1 class="heading heading-primary">Welcome to HealthCheck</h1>
           <h2 class="heading heading-secondary">Your daily risk assessment tool.</h2>
@@ -17,6 +18,7 @@
             health of all citizens AND stopping the spread of the virus 🦠
           </p>
         </div>
+
         <form action="" method="POST" id="login_form" class="login-form" novalidate>
         {% csrf_token %}
           <div class="login-form__read-terms">
@@ -28,31 +30,28 @@
               </li>
             </ul>
           </div>
-          <div id="questionnaires">
-            <div class="login-form__location">
-              <p class="pagination-ux">Step 1 of 4</p>
+
+          <div class="collapsibles" id="questionnaires">
+            <div class="collapsibles__item login-form__location">
+              <div class="pagination">
+                <p class="pagination__label">Step 1 of 4</p>
+                <span class="pagination__icon">+</span>
+              </div>
               <h2 class="heading-secondary">Registration</h2>
               <div class="login-form__screening">
                 {% if form.errors %}
                   <p class="error">Please correct the errors below</p>
                 {% endif %}
                 <ul id="registration" class="fieldset">
-                  {% with 'city address route country street_number' as field_list %}
-                    {% for field in form %}
-                      {% if "history_" not in field.name and "facility_" not in field.name and "symptoms_" not in field.name and "medical_" not in field.name and field.name not in field_list.split %}
-                        <li class="fieldset__item">
-                          {% if field|field_type != "HiddenInput" %}
-
-                            <label for="{{ field.id_for_label }}" class="label">
-                              {{field.label}}
-                            </label>
-                            {{field}}
-                            {{field.errors}}
-                          {% endif %}
-                        </li>
-                      {% endif %}
-                    {% endfor %}
-                  {% endwith %}
+                  {% for field in form.registration_fields %}
+                    <li class="fieldset__item">
+                      <label for="{{ field.id_for_label }}" class="label">
+                        {{field.label}}
+                      </label>
+                      {{field}}
+                      {{field.errors}}
+                    </li>
+                  {% endfor %}
                 </ul>
               </div>
               <p class="subtitle">Sharing your location data will help us to further accurately map cases of COVID-19</p>
@@ -90,27 +89,32 @@
                 </div>
               </div>
             </div>
-            <div class="login-form__medical">
-              <p class="pagination-ux">Step 2 of 4</p>
+
+            <div class="collapsibles__item login-form__medical">
+              <div class="pagination">
+                <p class="pagination__label">Step 2 of 4</p>
+                <span class="pagination__icon">+</span>
+              </div>
               <h2 class="heading-secondary">Where are you going today?</h2>
               <ul id="destination" class="fieldset">
-                {% for field in form %}
-                  {% if "facility_" in field.name %}
-                    {% if field.name == "facility_destination_university" %}
-                      <h3 class="heading-subtitle heading-subtitle--edu-label">Educational institution information</h3>
-                    {% endif %}
-                    <li class="fieldset__item">
-                      <label for="{{ field.name }}" class="label">{{ field.label }}</label>
-                      {{ field }}
-                      {{field.errors}}
-                    </li>
+                {% for field in form.destination_fields %}
+                  {% if field.name == "facility_destination_university" %}
+                    <h3 class="heading-subtitle heading-subtitle--edu-label">Educational institution information</h3>
                   {% endif %}
+                  <li class="fieldset__item">
+                    <label for="{{ field.name }}" class="label">{{ field.label }}</label>
+                    {{ field }}
+                    {{field.errors}}
+                  </li>
                 {% endfor %}
               </ul>
             </div>
 
-            <div class="login-form__medical">
-              <p class="pagination-ux">Step 3 of 4</p>
+            <div class="collapsibles__item login-form__medical">
+              <div class="pagination">
+                <p class="pagination__label">Step 3 of 4</p>
+                <span class="pagination__icon">+</span>
+              </div>
               <h2 class="heading-secondary">Medical History</h2>
               <ul id="medical-history" class="fieldset">
                 <li class="fieldset__medical">
@@ -120,38 +124,42 @@
                 </li>
               </ul>
               <ul id="preexistingconditionsForm" class="fieldset">
-                {% for field in form %}
-                  {% if "history_" in field.name and field.name != 'history_pre_existing_condition' %}
+                {% for field in form.history_fields %}
                   <li class="fieldset__medical">
                       <label for="{{ field.name }}" class="label">{{ field.label }}</label>
                       {{ field }}
                       {{field.errors}}
-                    </li>
-                  {% endif %}
+                  </li>
                 {% endfor %}
               </ul>
             </div>
 
-            <div class="login-form__medical">
-              <p class="pagination-ux">Step 4 of 4</p>
+            <div class="collapsibles__item login-form__medical">
+              <div class="pagination">
+                <p class="pagination__label">Step 4 of 4</p>
+                <span class="pagination__icon">+</span>
+              </div>
               <h2 class="heading-secondary">How are you feeling today?</h2>
               <ul id="medical" class="fieldset">
-                {% for field in form %}
-                  {% if "symptoms_" in field.name or "medical_" in field.name %}
-                    {% if field.name == "medical_confirm_accuracy" %}
-                      <h3 class="heading-subtitle heading-subtitle--edu-label">Confirmation</h3>
-                    {% endif %}
-                    <li class="fieldset__item">
-                      <label for="{{ field.name }}" class="label">{{ field.label }}</label>
-                      {{ field }}
-                      {{field.errors}}
-                    </li>
+                {% for field in form.medical_fields %}
+                  {% if field.name == "medical_confirm_accuracy" %}
+                    <h3 class="heading-subtitle heading-subtitle--edu-label">Confirmation</h3>
                   {% endif %}
+                  <li class="fieldset__item">
+                    <label for="{{ field.name }}" class="label">{{ field.label }}</label>
+                    {{ field }}
+                    {{field.errors}}
+                  </li>
                 {% endfor %}
               </ul>
+              {% if form.errors %}
+                <br/>
+                <p class="error">Please correct all the errors before submitting.</p>
+              {% endif %}
             </div>
             <button id="entrySubmit" type="submit" class="cta cta-primary">Submit</button>
           </div>
+
         </form>
       </div>
     </div>
@@ -160,9 +168,11 @@
 
 {% block form_js %}
 
+{% cache 300 json_data %}
   {{ universities|json_script:"universities-data" }}
 
   {{ campuses|json_script:"campus-data" }}
+{% endcache %}
 
 {% compress js inline %}
   <script type="text/javascript">
@@ -186,6 +196,7 @@
     clearCampus();
     prov.addEventListener('change', function() {
       showHiddenInputs(this.value, uniClone, uni, universities);
+      showHiddenInputs(uni.value, campClone, camp, campuses);
       clearCampus();
     });
     uni.addEventListener('change', function() {
@@ -194,14 +205,11 @@
 
     function showHiddenInputs(elem, clonedElems, selectInputs, csvInputElem) {
       selectInputs.options.length = 0;
-      if(!isPageLoad){
-        selectInputs.appendChild(new Option("---------", ""));
-      }
 
       for(let i = 0; i < clonedElems.options.length; i++) {
         let uniChild = clonedElems.options[i];
         if(csvInputElem[uniChild.value] == elem || csvInputElem[uniChild.value] == undefined) {
-          selectInputs.appendChild(uniChild);
+          selectInputs.appendChild(uniChild.cloneNode(true));
         }
       }
     };
