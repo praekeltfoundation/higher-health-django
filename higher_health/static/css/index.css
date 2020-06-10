@@ -123,11 +123,12 @@ a:hover {
   display: block;
   padding: 10px 5%;
   position: relative;
+  text-align: center;
   width: 100%;
 }
 
 .header-brand {
-  padding: 0 10px 0 0;
+  padding: 5px 10px 15px 0;
 }
 .header-brand__link {
   display: inline-block;
@@ -137,23 +138,67 @@ a:hover {
 }
 .header__menu {
   align-self: center;
-  width: 100%;
+  padding: 0 0 15px;
+  /*width: 100%;*/
 }
 .menu__item {
   display: inline-block;
   padding: 0 0.5em;
+}
+.menu__item:last-child {
+  padding: 0;
 }
 .menu__link,
 .sub-menu__item {
   color: var(--very-dark-gray);
   display: block;
   font-family: "Varela Round", sans-serif;
-  font-size: 13px;
+  font-size: 16px;
   font-weight: 400;
   text-decoration: none;
   letter-spacing: 0;
   text-transform: capitalize;
   vertical-align: middle;
+}
+
+.menu__link {
+  position: relative;
+}
+.menu__link,
+.menu__link:after,
+.menu__link:before {
+  transition: all .5s;
+}
+.menu__link:hover,
+.menu__link:focus,
+.menu__link:active {
+  text-decoration: none;
+  color: var(--soft-red);
+}
+.menu__link:after {
+  position: absolute;
+  bottom: -3px;
+  left: 0;
+  right: 0;
+  margin: auto;
+  width: 0%;
+  content: '.';
+  color: transparent;
+  background: var(--soft-red);
+  height: 3px;
+  border-radius: 20px;
+}
+.menu__link:hover:after,
+.menu__link:focus:after,
+.menu__link:active:after {
+  width: 100%;
+}
+
+.menu__item--current .menu__link {
+  color: var(--soft-red);
+}
+.menu__item--current .menu__link:after {
+  width: 100%;
 }
 
 /*
@@ -175,7 +220,6 @@ a:hover {
     background-size: 100%;
   }
 }
-
 
 .content-intro {
   position: relative;
@@ -272,11 +316,17 @@ a:hover {
   list-style: disc;
   list-style-position: inside;
 }
-.heading-container {
-  text-align: center;
-}
+
+
+/**
+ TITLE / HEADINGS
+*/
+
 .heading {
  font-weight: 300;
+}
+.heading-container {
+  text-align: center;
 }
 .heading-primary {
   color: #000;
@@ -290,11 +340,7 @@ a:hover {
   font-weight: 400;
   margin: 0;
 }
-.heading--terms {
- font-weight: 600;
- text-align: center;
- padding: 0 0 15px;
-}
+
 .heading-label {
   font-weight: 600;
   font-size: 16px;
@@ -314,6 +360,14 @@ a:hover {
   text-align: center;
   font-size: 20px;
 }
+.heading-primary--403 {
+  color: var(--soft-red);
+}
+.heading--terms {
+ font-weight: 600;
+ text-align: center;
+ padding: 0 0 15px;
+}
 .heading.subtitle {
   font-size: 18px;
   font-weight: bold;
@@ -327,9 +381,12 @@ a:hover {
   font-weight: 600;
 }
 
+/*
+  PAG LABELS
+*/
 
 .pagination-ux {
-  color: rgba(68, 68, 68, 0.8);
+  color: var(--dark-cyan);
   font-size: 12px;
   text-transform: uppercase;
   text-decoration: underline;
@@ -559,6 +616,17 @@ textarea {
   transition: all 0.4s;
   width: 250px;
 }
+.cta-primary--next {
+  margin: 0;
+  width: auto;
+  padding: 0 20px;
+}
+.cta-primary--next:after {
+  content: "❯";
+  font-size: 16px;
+  margin-left: 20px;
+  display: inline-block;
+}
 .cta-primary:hover,
 .cta-primary:focus {
   background: var(--dark-moderate-cyan-2);
@@ -616,6 +684,8 @@ textarea {
   .header-inner {
     display: flex;
     padding: 1em 10%;
+    justify-content: space-around;
+    text-align: inherit;
   }
   .header-brand {
     padding: 0 2em 0 0;
@@ -626,17 +696,43 @@ textarea {
   .heading-container {
     margin: 0 0 2em;
   }
+  .header__menu {
+    padding: 0;
+  }
 
   /*
     CONTENT FORM ENTRY PAGE
   */
   .content-intro {
-    padding: 0 10%;
     width: 900px;
   }
   .content-inner {
     margin: 2em auto;
-    padding: 2em;
+    padding: 2em 0; /*TO REVIEW*/
+  }
+  /*
+  .heading-primary--mobile {
+    color: var(--dark-cyan);
+    color: var(--soft-red);
+  }*/
+  .columns {
+    align-items: baseline;
+    display: flex;
+    justify-content: space-between;
+  }
+  .columns .login-form__mobile input {
+    background: transparent;
+    box-shadow: none;
+  }
+  .columns-child {
+    width: 45%;
+  }
+  .columns-child--excerpts {
+    text-align: left;
+    width: 50%;
+    padding: 0 25px 0 0;
+    margin: 0 25px 0 0;
+    border-right: 1px solid rgba(68, 68, 68, 0.3);
   }
 
   .terms__content {
@@ -708,21 +804,21 @@ textarea {
   .login-form__medical {
     margin: 2em auto 1em;
     padding: 15px 2em 2em;
-    width: 450px;
+    /*width: 450px;*/ /*TO REVIEW */
   }
   .login-form__read-terms {
-      margin: 0 auto;
+    margin: 0 auto;
     width: 500px;
   }
   #address input {
     width: 35%;
   }
-
-  .cta-primary  {
+  /*TO REVIEW */
+  /*.cta-primary  {
     position: absolute;
     left: 0;
     right: 0;
-  }
+  }*/
 
 
   /*

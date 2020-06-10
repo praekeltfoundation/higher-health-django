@@ -76,6 +76,7 @@ TEMPLATES = [
                 "django.contrib.auth.context_processors.auth",
                 "django.contrib.messages.context_processors.messages",
                 "higher_health.context_processors.api_keys",
+                "higher_health.context_processors.ga_tags",
             ]
         },
     }
@@ -123,6 +124,7 @@ USE_L10N = True
 
 USE_TZ = True
 
+GA_TAG_KEY = env.str("GOOGLE_GA_TAG_KEY", "REPLACE_ME")
 CLIENT_PLACES_API_KEY = env.str("GOOGLE_PLACES_CLIENT_API_KEY", "REPLACE_ME")
 SERVER_PLACES_API_KEY = env.str("GOOGLE_PLACES_SERVER_API_KEY", "REPLACE_ME")
 
