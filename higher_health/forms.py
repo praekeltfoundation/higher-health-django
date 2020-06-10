@@ -1,6 +1,7 @@
 import base64
 import hmac
 import logging
+from datetime import datetime, timedelta
 from hashlib import sha256
 from urllib.parse import urlencode
 
@@ -363,6 +364,7 @@ class HealthCheckLogin(forms.Form):
         h = hmac.new(settings.SECRET_KEY.encode(), otp.encode(), digestmod=sha256)
         otp_hash = base64.b64encode(h.digest()).decode()
         self.request.session["otp_hash"] = otp_hash
+        self.request.session["otp_timestamp"] = datetime.utcnow().timestamp()
 
         if rapidpro:
             try:
@@ -400,13 +402,20 @@ class HealthCheckOTP(forms.Form):
     def verify_otp(self, otp):
         try:
             session_otp = self.request.session["otp_hash"]
+            session_otp_timestamp = self.request.session["otp_timestamp"]
             h = hmac.new(settings.SECRET_KEY.encode(), otp.encode(), digestmod=sha256)
             if hmac.compare_digest(base64.b64encode(h.digest()).decode(), session_otp):
                 self.request.session.pop("otp_hash")
-                return True
+                self.request.session.pop("otp_timestamp")
+                if datetime.fromtimestamp(session_otp_timestamp) < (
+                    datetime.utcnow() - timedelta(seconds=settings.OTP_EXPIRES_DURATION)
+                ):
+                    self.add_error(
+                        "otp",
+                        "The OTP you have entered has expired. Please reset and try again.",
+                    )
         except KeyError:
-            return False
+            self.add_error("otp", "The OTP you have entered is incorrect.")
 
     def clean_otp(self):
-        if not self.verify_otp(self.cleaned_data["otp"]):
-            self.add_error("otp", "The OTP you have entered is incorrect.")
+        self.verify_otp(self.cleaned_data["otp"])

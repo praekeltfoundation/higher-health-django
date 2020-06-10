@@ -1,5 +1,6 @@
 import base64
 import hmac
+from datetime import datetime
 from hashlib import sha256
 
 from django.conf import settings
@@ -44,5 +45,6 @@ def login_with_otp(client, msisdn, otp="111111"):
     fake_otp_hash = base64.b64encode(h.digest()).decode()
     session = client.session
     session["otp_hash"] = fake_otp_hash
+    session["otp_timestamp"] = datetime.utcnow().timestamp()
     session.save()
-    client.post(reverse("healthcheck_otp"), {"otp": otp})
+    return client.post(reverse("healthcheck_otp"), {"otp": otp})
