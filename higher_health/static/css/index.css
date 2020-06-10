@@ -255,6 +255,9 @@ a:hover {
   width: 35%;
   margin: 15px auto;
 }
+.content-receipts__logo .header-brand__logo {
+  max-width: 270px;
+}
 
 .receipts-results-message p {
   margin: 0;
@@ -296,13 +299,21 @@ a:hover {
   margin: 0 auto;
 }
 .receipts-headings:before {
-  background-image: url('/static/images/icons/hand-icon.png');
-  content: "";
-  display: inline-block;
-  width: 50px;
-  height: 60px;
+  background-image: url('/static/images/icons/thumbsUp-icon.png');
   background-size: 100%;
   background-repeat: no-repeat;
+  content: "";
+  display: inline-block;
+  height: 50px;
+  width: 50px;
+}
+.receipts-results--low .receipts-headings:before {
+  background-image: url('/static/images/icons/thumbsUp-icon.png');
+}
+.receipts-results--mid .receipts-headings:before,
+.receipts-results--high .receipts-headings:before {
+  background-image: url('/static/images/icons/hand-icon.png');
+  height: 60px;
 }
 
 .terms__content {
@@ -683,13 +694,13 @@ textarea {
 .footer-list__link {
   color: #fff;
 }
+
 .logo-list__image {
   width: auto;
 }
 .logo-list__item {
   margin: 1em 0;
 }
-
 
 /*---------------*/
 
