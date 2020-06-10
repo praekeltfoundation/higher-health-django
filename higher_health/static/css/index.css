@@ -652,11 +652,7 @@ textarea {
 .cta-primary--next {
   margin: 0;
   width: auto;
-<<<<<<< HEAD
-  padding: 0 10px;
-=======
   padding: 0 20px;
->>>>>>> develop
 }
 .cta-primary--next:after {
   content: "❯";
@@ -742,14 +738,10 @@ textarea {
   }
   .content-inner {
     margin: 2em auto;
-<<<<<<< HEAD
     padding: 2em 0;
   }
   .content-inner--questionnaires {
     padding: 2em 10%;
-=======
-    padding: 2em 0; /*TO REVIEW*/
->>>>>>> develop
   }
   /*
   .heading-primary--mobile {
@@ -844,10 +836,6 @@ textarea {
   .login-form__preexistingconditionsForm {
     margin: 2em auto 1em;
     padding: 15px 2em 2em;
-<<<<<<< HEAD
-=======
-    /*width: 450px;*/ /*TO REVIEW */
->>>>>>> develop
   }
   .login-form__read-terms {
     margin: 0 auto;
@@ -862,14 +850,11 @@ textarea {
     left: 0;
     right: 0;
   }*/
-<<<<<<< HEAD
 
   .content-inner--questionnaires .collapsibles__item,
   .content-inner--questionnaires .login-form__preexistingconditionsForm {
     width: 450px;
   }
-=======
->>>>>>> develop
 
 
   /*
