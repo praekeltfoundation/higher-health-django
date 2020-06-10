@@ -419,11 +419,15 @@ a:hover {
   cursor: pointer;
   display: inline-block;
   height: 24px;
-  font-size: 16px;
+  font-size: 18px;
+  font-weight: bold;
   text-align: center;
   width: 24px;
 }
 
+.pagination__icon.active {
+  background: var(--soft-red);
+}
 
 /*
   RISK LEVEL

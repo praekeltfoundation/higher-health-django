@@ -37,55 +37,59 @@
                 <p class="pagination__label">Step 1 of 4</p>
                 <span class="pagination__icon">+</span>
               </div>
-              <h2 class="heading-secondary">Registration</h2>
-              <div class="login-form__screening">
-                {% if form.errors %}
-                  <p class="error">Please correct the errors below</p>
-                {% endif %}
-                <ul id="registration" class="fieldset">
-                  {% for field in form.registration_fields %}
-                    <li class="fieldset__item">
-                      <label for="{{ field.id_for_label }}" class="label">
-                        {{field.label}}
-                      </label>
-                      {{field}}
-                      {{field.errors}}
-                    </li>
-                  {% endfor %}
-                </ul>
+              <div class="collapsibles__label">
+                <h2 class="heading-secondary">Registration</h2>
               </div>
-              <p class="subtitle">Sharing your location data will help us to further accurately map cases of COVID-19</p>
-              <div class="login-form__map">
-                <div id="locationField">
-                  <input id="autocomplete"
-                    placeholder="Type your physical address"
-                    <!--onFocus="geolocate()"-->
-                    type="text"
-                    value="{{ form.address.value|default_if_none:'' }}"
-                    name="address"/>
-                    {% if form.address.errors  %}{{form.address.errors}}{% endif %}
-                </div>
-                {% if form.latitude or form.longitude %}
-                  {{form.latitude}}
-                  {{form.longitude}}
-                {% endif %}
-                <div class="location-field-autoload">
-                  <p class="location-field-hint">The below physical address fields will be automatically populated from the address entered above. Otherwise please fill in the information.</p>
-                  <ul id="address" class="address-list fieldset">
-                    <li class="address-list__item">
-                      <input class="field" name="street_number" id="street_number" readonly value="{{ form.street_number.value|default_if_none:'' }}"/>
-                      <input class="field" name="route" id="route" readonly value="{{ form.route.value|default_if_none:'' }}"/>
-                      <label for="street_number" class="label">Street address:</label>
-                    </li>
-                    <li class="address-list__item">
-                      <input class="field" name="city" id="locality" readonly value="{{ form.city.value|default_if_none:'' }}"/>
-                      <label for="locality" class="label">City:</label>
-                    </li>
-                    <li class="address-list__item">
-                      <input class="field" name="country" id="country" readonly value="{{ form.country.value|default_if_none:'' }}"/>
-                      <label for="country" class="label">Country:</label>
-                    </li>
+              <div id="step_1" class="collapsibles__toggle">
+                <div class="login-form__screening">
+                  {% if form.errors %}
+                    <p class="error">Please correct the errors below</p>
+                  {% endif %}
+                  <ul id="registration" class="fieldset">
+                    {% for field in form.registration_fields %}
+                      <li class="fieldset__item">
+                        <label for="{{ field.id_for_label }}" class="label">
+                          {{field.label}}
+                        </label>
+                        {{field}}
+                        {{field.errors}}
+                      </li>
+                    {% endfor %}
                   </ul>
+                </div>
+                <p class="subtitle">Sharing your location data will help us to further accurately map cases of COVID-19</p>
+                <div class="login-form__map">
+                  <div id="locationField">
+                    <input id="autocomplete"
+                      placeholder="Type your physical address"
+                      onFocus="geolocate()"
+                      type="text"
+                      value="{{ form.address.value|default_if_none:'' }}"
+                      name="address"/>
+                      {% if form.address.errors  %}{{form.address.errors}}{% endif %}
+                  </div>
+                  {% if form.latitude or form.longitude %}
+                    {{form.latitude}}
+                    {{form.longitude}}
+                  {% endif %}
+                  <div class="location-field-autoload">
+                    <p class="location-field-hint">The below physical address fields will be automatically populated from the address entered above. Otherwise please fill in the information.</p>
+                    <ul id="address" class="address-list fieldset">
+                      <li class="address-list__item">
+                        <input class="field" name="street_number" id="street_number" readonly value="{{ form.street_number.value|default_if_none:'' }}"/>
+                        <input class="field" name="route" id="route" readonly value="{{ form.route.value|default_if_none:'' }}"/>
+                        <label for="street_number" class="label">Street address:</label>
+                      </li>
+                      <li class="address-list__item">
+                        <input class="field" name="city" id="locality" readonly value="{{ form.city.value|default_if_none:'' }}"/>
+                        <label for="locality" class="label">City:</label>
+                      </li>
+                      <li class="address-list__item">
+                        <input class="field" name="country" id="country" readonly value="{{ form.country.value|default_if_none:'' }}"/>
+                        <label for="country" class="label">Country:</label>
+                      </li>
+                    </ul>
+                  </div>
                 </div>
               </div>
             </div>
@@ -95,19 +99,23 @@
                 <p class="pagination__label">Step 2 of 4</p>
                 <span class="pagination__icon">+</span>
               </div>
-              <h2 class="heading-secondary">Where are you going today?</h2>
-              <ul id="destination" class="fieldset">
-                {% for field in form.destination_fields %}
-                  {% if field.name == "facility_destination_university" %}
-                    <h3 class="heading-subtitle heading-subtitle--edu-label">Educational institution information</h3>
-                  {% endif %}
-                  <li class="fieldset__item">
-                    <label for="{{ field.name }}" class="label">{{ field.label }}</label>
-                    {{ field }}
-                    {{field.errors}}
-                  </li>
-                {% endfor %}
-              </ul>
+              <div class="collapsibles__label">
+                <h2 class="heading-secondary">Where are you going today?</h2>
+              </div>
+              <div id="step_2" class="collapsibles__toggle">
+                <ul id="destination" class="fieldset">
+                  {% for field in form.destination_fields %}
+                    {% if field.name == "facility_destination_university" %}
+                      <h3 class="heading-subtitle heading-subtitle--edu-label">Educational institution information</h3>
+                    {% endif %}
+                    <li class="fieldset__item">
+                      <label for="{{ field.name }}" class="label">{{ field.label }}</label>
+                      {{ field }}
+                      {{field.errors}}
+                    </li>
+                  {% endfor %}
+                </ul>
+              </div>
             </div>
 
             <div class="collapsibles__item login-form__medical">
@@ -115,23 +123,27 @@
                 <p class="pagination__label">Step 3 of 4</p>
                 <span class="pagination__icon">+</span>
               </div>
-              <h2 class="heading-secondary">Medical History</h2>
-              <ul id="medical-history" class="fieldset">
-                <li class="fieldset__medical">
-                  <label for="{{ form.history_pre_existing_condition.name }}" class="label">{{ form.history_pre_existing_condition.label }}</label>
-                  {{ form.history_pre_existing_condition }}
-                  {{form.history_pre_existing_condition.errors}}
-                </li>
-              </ul>
-              <ul id="preexistingconditionsForm" class="fieldset">
-                {% for field in form.history_fields %}
+              <div class="collapsibles__label">
+                <h2 class="heading-secondary">Medical History</h2>
+              </div>
+              <div id="step_3" class="collapsibles__toggle">
+                <ul id="medical-history" class="fieldset">
                   <li class="fieldset__medical">
-                      <label for="{{ field.name }}" class="label">{{ field.label }}</label>
-                      {{ field }}
-                      {{field.errors}}
+                    <label for="{{ form.history_pre_existing_condition.name }}" class="label">{{ form.history_pre_existing_condition.label }}</label>
+                    {{ form.history_pre_existing_condition }}
+                    {{form.history_pre_existing_condition.errors}}
                   </li>
-                {% endfor %}
-              </ul>
+                </ul>
+                <ul id="preexistingconditionsForm" class="fieldset">
+                  {% for field in form.history_fields %}
+                    <li class="fieldset__medical">
+                        <label for="{{ field.name }}" class="label">{{ field.label }}</label>
+                        {{ field }}
+                        {{field.errors}}
+                    </li>
+                  {% endfor %}
+                </ul>
+              </div>
             </div>
 
             <div class="collapsibles__item login-form__medical">
@@ -139,23 +151,27 @@
                 <p class="pagination__label">Step 4 of 4</p>
                 <span class="pagination__icon">+</span>
               </div>
-              <h2 class="heading-secondary">How are you feeling today?</h2>
-              <ul id="medical" class="fieldset">
-                {% for field in form.medical_fields %}
-                  {% if field.name == "medical_confirm_accuracy" %}
-                    <h3 class="heading-subtitle heading-subtitle--edu-label">Confirmation</h3>
-                  {% endif %}
-                  <li class="fieldset__item">
-                    <label for="{{ field.name }}" class="label">{{ field.label }}</label>
-                    {{ field }}
-                    {{field.errors}}
-                  </li>
-                {% endfor %}
-              </ul>
-              {% if form.errors %}
-                <br/>
-                <p class="error">Please correct all the errors before submitting.</p>
-              {% endif %}
+              <div class="collapsibles__label">
+                <h2 class="heading-secondary">How are you feeling today?</h2>
+              </div>
+              <div id="step_4" class="collapsibles__toggle">
+                <ul id="medical" class="fieldset">
+                  {% for field in form.medical_fields %}
+                    {% if field.name == "medical_confirm_accuracy" %}
+                      <h3 class="heading-subtitle heading-subtitle--edu-label">Confirmation</h3>
+                    {% endif %}
+                    <li class="fieldset__item">
+                      <label for="{{ field.name }}" class="label">{{ field.label }}</label>
+                      {{ field }}
+                      {{field.errors}}
+                    </li>
+                  {% endfor %}
+                </ul>
+                {% if form.errors %}
+                  <br/>
+                  <p class="error">Please correct all the errors before submitting.</p>
+                {% endif %}
+              </div>
             </div>
             <button id="entrySubmit" type="submit" class="cta cta-primary">Submit</button>
           </div>
@@ -174,28 +190,30 @@
   {{ campuses|json_script:"campus-data" }}
 {% endcache %}
 
-  <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+<script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
 {% compress js inline %}
   <script type="text/javascript">
   "use strict";
+  $( document ).ready(function() {
+    let icon = $(".pagination__icon");
+    if(icon.is(":visible")) {
+      icon.text('-');
+    }
+    icon.click(function (e) {
+      let $this = $(this),
+        nextElem = $this.parent().next().next();
 
-  $(".pagination__icon").click(function () {
-    $toggle = $(this);
-    console.log($toggle);
-    //getting the next element
-    /*$content = $header.next();*/
-    //open up the content needed - toggle the slide- if visible, slide up, if not slidedown.
-    /*$content.slideToggle(500, function () {
-        //execute this after slideToggle is done
-        //change text of header based on visibility of content div
-        $header.text(function () {
-            //change text based on condition
-            return $content.is(":+") ? "+" : "-";
+      $(nextElem).slideToggle(500, function () {
+        sessionStorage.setItem($(nextElem).attr('id'),$(nextElem).is(":visible"));
+        $this.text(function () {
+          console.log($(nextElem).is(":visible"));
+          return $(nextElem).is(":visible") ? "-" : "+";
         });
-    });*/
+      });
+    });
   });
 
-/*
+
   let universities = JSON.parse(document.getElementById('universities-data').textContent),
   campuses = JSON.parse(document.getElementById('campus-data').textContent);
     let prov = document.getElementById('id_facility_destination_province'),
@@ -314,7 +332,6 @@
     }
 
     //MEDICAL
-
     const checkbox = document.getElementById('healthcheck_terms'),
     questionnairesForm = document.getElementById('questionnaires'),
     addressField = document.getElementById('autocomplete'),
@@ -400,7 +417,7 @@
         });
       }
     });
-    isPageLoad = false;*/
+    isPageLoad = false;
   </script>
 {% endcompress %}
 <!--
