@@ -199,12 +199,11 @@
     if(icon.is(":visible")) {
       icon.text('-');
     }
+
     icon.click(function (e) {
       let $this = $(this),
         nextElem = $this.parent().next().next();
-
       $(nextElem).slideToggle(500, function () {
-        sessionStorage.setItem($(nextElem).attr('id'),$(nextElem).is(":visible"));
         $this.text(function () {
           console.log($(nextElem).is(":visible"));
           return $(nextElem).is(":visible") ? "-" : "+";
