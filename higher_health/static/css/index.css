@@ -134,7 +134,7 @@ a:hover {
   display: inline-block;
 }
 .header-brand__logo {
-  max-width: 270px;
+  width: 100%;
 }
 .header__menu {
   align-self: center;
@@ -248,13 +248,15 @@ a:hover {
   position: relative;
   text-align: center;
 }
-
 .content-receipts__logo:after {
   content: "";
   display: block;
   border-bottom: var(--very-light-gray) 1px solid;
   width: 35%;
   margin: 15px auto;
+}
+.content-receipts__logo .header-brand__logo {
+  max-width: 270px;
 }
 
 .receipts-results-message p {
@@ -297,13 +299,21 @@ a:hover {
   margin: 0 auto;
 }
 .receipts-headings:before {
-  background-image: url('/static/images/icons/hand-icon.png');
-  content: "";
-  display: inline-block;
-  width: 50px;
-  height: 60px;
+  background-image: url('/static/images/icons/thumbsUp-icon.png');
   background-size: 100%;
   background-repeat: no-repeat;
+  content: "";
+  display: inline-block;
+  height: 50px;
+  width: 50px;
+}
+.receipts-results--low .receipts-headings:before {
+  background-image: url('/static/images/icons/thumbsUp-icon.png');
+}
+.receipts-results--mid .receipts-headings:before,
+.receipts-results--high .receipts-headings:before {
+  background-image: url('/static/images/icons/hand-icon.png');
+  height: 60px;
 }
 
 .terms__content {
@@ -385,13 +395,37 @@ a:hover {
   PAG LABELS
 */
 
+.pagination {
+  align-items: center;
+  display: flex;
+  position: relative;
+  justify-content: space-between;
+}
+.pagination__label {
+  color: var(--dark-cyan);
+  /*color: rgba(68, 68, 68, 0.8);*/
+}
+.pagination__icon {
+  background: var(--dark-cyan);
+  border-radius: 50%;
+  color: #fff;
+  cursor: pointer;
+  display: inline-block;
+  height: 24px;
+  font-size: 18px;
+  font-weight: bold;
+  text-align: center;
+  width: 24px;
+}
+.pagination__icon.active {
+  background: var(--soft-red);
+}
 .pagination-ux {
   color: var(--dark-cyan);
   font-size: 12px;
   text-transform: uppercase;
   text-decoration: underline;
 }
-
 
 /*
   RISK LEVEL
@@ -452,16 +486,15 @@ a:hover {
   text-transform: uppercase;
 }
 
-#questionnaires {
-  transition: all ease-in-out 1s;
-}
 .login-form {
   font-family: 'Lato', sans-serif;
   position: relative;
 }
-.login-form__location,
-.login-form__preexistingconditionsForm,
-.login-form__medical {
+.collapsibles {
+  transition: all ease-in-out 1s;
+}
+.collapsibles__item,
+.login-form__preexistingconditionsForm {
   background: #fff;
   border-radius: 5px;
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
@@ -543,7 +576,7 @@ a:hover {
   color: var(--very-dark-desaturated-cyan);
 }
 #medical input[type="radio"],
-.login-form__medical input[type="radio"]{
+.login-form__medical input[type="radio"] {
   margin: 10px;
   height: auto;
   width: auto;
@@ -663,13 +696,13 @@ textarea {
 .footer-list__link {
   color: #fff;
 }
+
 .logo-list__image {
   width: auto;
 }
 .logo-list__item {
   margin: 1em 0;
 }
-
 
 /*---------------*/
 
@@ -690,9 +723,6 @@ textarea {
   .header-brand {
     padding: 0 2em 0 0;
   }
-  .header-brand__logo {
-    max-width: none;
-  }
   .heading-container {
     margin: 0 0 2em;
   }
@@ -708,7 +738,10 @@ textarea {
   }
   .content-inner {
     margin: 2em auto;
-    padding: 2em 0; /*TO REVIEW*/
+    padding: 2em 0;
+  }
+  .content-inner--questionnaires {
+    padding: 2em 10%;
   }
   /*
   .heading-primary--mobile {
@@ -799,12 +832,10 @@ textarea {
   select {
     width: 100%;
   }
-  .login-form__location,
-  .login-form__preexistingconditionsForm,
-  .login-form__medical {
+  .collapsibles__item,
+  .login-form__preexistingconditionsForm {
     margin: 2em auto 1em;
     padding: 15px 2em 2em;
-    /*width: 450px;*/ /*TO REVIEW */
   }
   .login-form__read-terms {
     margin: 0 auto;
@@ -819,6 +850,11 @@ textarea {
     left: 0;
     right: 0;
   }*/
+
+  .content-inner--questionnaires .collapsibles__item,
+  .content-inner--questionnaires .login-form__preexistingconditionsForm {
+    width: 450px;
+  }
 
 
   /*
