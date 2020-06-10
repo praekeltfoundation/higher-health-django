@@ -195,7 +195,8 @@
   <script type="text/javascript">
   "use strict";
   $( document ).ready(function() {
-    let icon = $(".pagination__icon");
+    let icon = $(".pagination__icon"),
+      sessionToggle = {};
     if(icon.is(":visible")) {
       icon.text('-');
     }
@@ -203,13 +204,27 @@
     icon.click(function (e) {
       let $this = $(this),
         nextElem = $this.parent().next().next();
+        sessionToggle[$(nextElem).attr('id')] = $(nextElem).is(":visible");
+        sessionStorage.setItem('steps', JSON.stringify(sessionToggle));
       $(nextElem).slideToggle(500, function () {
         $this.text(function () {
-          console.log($(nextElem).is(":visible"));
           return $(nextElem).is(":visible") ? "-" : "+";
         });
       });
     });
+    const getSessionToggle = JSON.parse(sessionStorage.getItem('steps') || '{}');
+    if(getSessionToggle !== null){
+      console.log(getSessionToggle);
+      $.each(getSessionToggle, function(key, value){
+        if(value === false) {
+          console.log(value);
+          $('#'+key).css('display', 'none');
+
+        } else {
+          $('#'+key).css('display', 'block');
+        }
+      });
+    };
   });
 
 
