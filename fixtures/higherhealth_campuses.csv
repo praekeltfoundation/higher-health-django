@@ -1,7 +1,9 @@
 university_province,university,name
 ZA-WC,Cape Peninsula University of Technology (CPUT),Athlone
 ZA-WC,Cape Peninsula University of Technology (CPUT),Bellville
+ZA-WC,Cape Peninsula University of Technology (CPUT),Cape Town
 ZA-WC,Cape Peninsula University of Technology (CPUT),Granger Bay
+ZA-WC,Cape Peninsula University of Technology (CPUT),Groote Schuur
 ZA-WC,Cape Peninsula University of Technology (CPUT),Mowbray
 ZA-WC,Cape Peninsula University of Technology (CPUT),Tygerberg
 ZA-WC,Cape Peninsula University of Technology (CPUT),Wellington
@@ -85,6 +87,12 @@ ZA-LP,University of Limpopo (UL),Turfloop Campus
 ZA-MP,University of Mpumalanga (UMP),Mbombela
 ZA-MP,University of Mpumalanga (UMP),Siyabuswa
 ZA-GT,University of Pretoria (UP),Hatfield (Main Campus)
+ZA-GT,University of Pretoria (UP),Groenkloof
+ZA-GT,University of Pretoria (UP),Mamelodi
+ZA-GT,University of Pretoria (UP),Prinshof
+ZA-GT,University of Pretoria (UP),Onderstepoort
+ZA-GT,University of Pretoria (UP),Hillcrest
+ZA-GT,University of Pretoria (UP),GIBS
 ZA-FS,University of the Free State (UFS),Main Campus
 ZA-FS,University of the Free State (UFS),Qwaqwa Campus
 ZA-FS,University of the Free State (UFS),South Campus
@@ -100,9 +108,11 @@ ZA-EC,Walter Sisulu University (WSU),Buffalo City
 ZA-EC,Walter Sisulu University (WSU),Butterworth (Ibika)
 ZA-EC,Walter Sisulu University (WSU),Mthatha
 ZA-EC,Walter Sisulu University (WSU),Queenstown (Masibulele)
+ZA-EC,Buffalo City,Central Office
 ZA-EC,Buffalo City,East London
 ZA-EC,Buffalo City,John Knox Bokwe
 ZA-EC,Buffalo City,St Marks
+ZA-EC,Eastcape Midlands,Central Office
 ZA-EC,Eastcape Midlands,Brickfields
 ZA-EC,Eastcape Midlands,Charles Goodyear
 ZA-EC,Eastcape Midlands,Graaff-Reinet
@@ -111,16 +121,19 @@ ZA-EC,Eastcape Midlands,Heath Park
 ZA-EC,Eastcape Midlands,High Street
 ZA-EC,Eastcape Midlands,Park Avenue
 ZA-EC,Eastcape Midlands,Thanduxolo
+ZA-EC,Ikhala,Central Office
 ZA-EC,Ikhala,Aliwal North
 ZA-EC,Ikhala,Ezibeleni
 ZA-EC,Ikhala,Queen Nonesi
 ZA-EC,Ikhala,Queenstown
 ZA-EC,Ikhala,Sterkspruit
+ZA-EC,Ingwe,Central Office
 ZA-EC,Ingwe,Maluti
 ZA-EC,Ingwe,Mount Fletcher
 ZA-EC,Ingwe,Mount Frere
 ZA-EC,Ingwe,Ngqungqushe
 ZA-EC,Ingwe,Siteto
+ZA-EC,King Hintsa,Central Office
 ZA-EC,King Hintsa,Centane
 ZA-EC,King Hintsa,Dutywa
 ZA-EC,King Hintsa,Msobomvu
@@ -133,19 +146,24 @@ ZA-EC,King Sabata Dalindyebo (KSD),Mthatha
 ZA-EC,King Sabata Dalindyebo (KSD),Ngcobo
 ZA-EC,King Sabata Dalindyebo (KSD),Ntabozuko
 ZA-EC,King Sabata Dalindyebo (KSD),Zimbane
+ZA-EC,Lovedale,Central Office
 ZA-EC,Lovedale,Alice
 ZA-EC,Lovedale,King
 ZA-EC,Lovedale,Zwelitsha
+ZA-EC,Port Elizabeth,Central Office
 ZA-EC,Port Elizabeth,Dower
 ZA-EC,Port Elizabeth,Iqhayiya
 ZA-EC,Port Elizabeth,Russell Road
+ZA-FS,Flavius Mareka ,Central Office
 ZA-FS,Flavius Mareka ,Kroonstad
 ZA-FS,Flavius Mareka ,Mphohadi
 ZA-FS,Flavius Mareka ,Sasolburg
+ZA-FS,Goldfields ,Central Office
 ZA-FS,Goldfields ,Tosa
 ZA-FS,Goldfields ,Welkom
 ZA-FS,Goldfields ,Virginia
 ZA-FS,Goldfields ,Muruti House
+ZA-FS,Maluti ,Central Office
 ZA-FS,Maluti ,Bethlehem
 ZA-FS,Maluti ,Bonamelo
 ZA-FS,Maluti ,Harrismith
@@ -154,12 +172,14 @@ ZA-FS,Maluti ,Kwetlisong
 ZA-FS,Maluti ,Lere La Tshepe
 ZA-FS,Maluti ,Main Campus
 ZA-FS,Maluti ,Sefikeng
+ZA-FS,Motheo ,Central Office
 ZA-FS,Motheo ,Bloemfontein
 ZA-FS,Motheo ,Botshabelo
 ZA-FS,Motheo ,Hillside View
 ZA-FS,Motheo ,Koffiefontein
 ZA-FS,Motheo ,Thaba 'Nchu
 ZA-FS,Motheo ,Zastron
+ZA-GT,Central Johannesburg,Central Office
 ZA-GT,Central Johannesburg,Alexandra
 ZA-GT,Central Johannesburg,Crown Mines
 ZA-GT,Central Johannesburg,Ellis Park
@@ -168,17 +188,20 @@ ZA-GT,Central Johannesburg,Parktown
 ZA-GT,Central Johannesburg,Riverlea
 ZA-GT,Central Johannesburg,Smith - Site
 ZA-GT,Central Johannesburg,Troyeville
+ZA-GT,Ekurhuleni East,Central Office
 ZA-GT,Ekurhuleni East,Benoni
 ZA-GT,Ekurhuleni East,Brakpan
 ZA-GT,Ekurhuleni East,Daveyton
 ZA-GT,Ekurhuleni East,Kwa-Thema
 ZA-GT,Ekurhuleni East,Springs
+ZA-GT,Ekurhuleni West,Central Office
 ZA-GT,Ekurhuleni West,Alberton
 ZA-GT,Ekurhuleni West,Boksburg
 ZA-GT,Ekurhuleni West,Germiston
 ZA-GT,Ekurhuleni West,Kathorus
 ZA-GT,Ekurhuleni West,Kempton
 ZA-GT,Ekurhuleni West,Tembisa
+ZA-GT,Sedibeng,Central Office
 ZA-GT,Sedibeng,Heidelberg
 ZA-GT,Sedibeng,Sebokeng
 ZA-GT,Sedibeng,Vanderbijlpark
@@ -190,20 +213,24 @@ ZA-GT,South West Gauteng ,Molapo
 ZA-GT,South West Gauteng ,Roodepoort
 ZA-GT,South West Gauteng ,Roodepoort West
 ZA-GT,South West Gauteng ,Technisa
+ZA-GT,Tshwane North,Central Office
 ZA-GT,Tshwane North,Mamelodi
 ZA-GT,Tshwane North,Pretoria
 ZA-GT,Tshwane North,Rosslyn
 ZA-GT,Tshwane North,Soshanguve North
 ZA-GT,Tshwane North,Soshanguve South
 ZA-GT,Tshwane North,Temba
+ZA-GT,Tshwane South,Central Office
 ZA-GT,Tshwane South,Atteridgeville
 ZA-GT,Tshwane South,Centurion
 ZA-GT,Tshwane South,Odi
 ZA-GT,Tshwane South,Pretoria West
+ZA-GT,Western,Central Office
 ZA-GT,Western,Carletonville
 ZA-GT,Western,Krugersdorp
 ZA-GT,Western,Krugersdorp West
 ZA-GT,Western,Randfontein
+ZA-NL,Coastal,Central Office
 ZA-NL,Coastal,Appelsbosch
 ZA-NL,Coastal,As - Salaam
 ZA-NL,Coastal,Durban
@@ -212,6 +239,7 @@ ZA-NL,Coastal,Ubuhle Bogu
 ZA-NL,Coastal,Umbumbulu
 ZA-NL,Coastal,Umlazi BB
 ZA-NL,Coastal,Umlazi V
+ZA-NL,Elangeni,Central Office
 ZA-NL,Elangeni,Inanda
 ZA-NL,Elangeni,KwaDabeka
 ZA-NL,Elangeni,Kwamashu
@@ -220,12 +248,14 @@ ZA-NL,Elangeni,Ndwedwe
 ZA-NL,Elangeni,Ntuzuma
 ZA-NL,Elangeni,Pinetown
 ZA-NL,Elangeni,Qadi
+ZA-NL,Esayidi,Central Office
 ZA-NL,Esayidi,Clydesdale
 ZA-NL,Esayidi,Enyenyezi
 ZA-NL,Esayidi,Gamalakhe
 ZA-NL,Esayidi,Kokstad
 ZA-NL,Esayidi,Port Shepstone
 ZA-NL,Esayidi,Umzimkhulu
+ZA-NL,Majuba,Central Office
 ZA-NL,Majuba,CPD
 ZA-NL,Majuba,Dundee
 ZA-NL,Majuba,IT&B
@@ -234,22 +264,26 @@ ZA-NL,Majuba,Newtech
 ZA-NL,Majuba,Newcastle Training Centre (NTC)
 ZA-NL,Majuba,Occupational Learning Unit
 ZA-NL,Majuba,Open Learning Unit (OPU)
+ZA-NL,Mnambithi ,Central Office
 ZA-NL,Mnambithi ,Estcourt
 ZA-NL,Mnambithi ,Ezakheni A
 ZA-NL,Mnambithi ,Ezakheni E
 ZA-NL,Mnambithi ,Ladysmith
+ZA-NL,Mthashana,Central Office
 ZA-NL,Mthashana,Emandleni
 ZA-NL,Mthashana,Kwa-Gqikazi
 ZA-NL,Mthashana,Maputa
 ZA-NL,Mthashana,Nongoma
 ZA-NL,Mthashana,Nquthu
 ZA-NL,Mthashana,Vryheid
+ZA-NL,Thekwini,Central Office
 ZA-NL,Thekwini,Asherville
 ZA-NL,Thekwini,Cato Manor
 ZA-NL,Thekwini,Centec
 ZA-NL,Thekwini,Melbourne
 ZA-NL,Thekwini,Springfield
 ZA-NL,Thekwini,Umbilo
+ZA-NL,Umfolozi,Central Office
 ZA-NL,Umfolozi,Chief Albert Luthuli
 ZA-NL,Umfolozi,Eshowe
 ZA-NL,Umfolozi,Esikhawini
@@ -259,25 +293,32 @@ ZA-NL,Umfolozi,Nkandla
 ZA-NL,Umfolozi,Richards Bay
 ZA-NL,Umfolozi,Sundumbili
 ZA-NL,Umfolozi,Bambanana
+ZA-NL,Umgungundlovu ,Central Office
 ZA-NL,Umgungundlovu ,Edendale
 ZA-NL,Umgungundlovu ,Midlands
 ZA-NL,Umgungundlovu ,Msunduzi
 ZA-NL,Umgungundlovu ,Northdale
 ZA-NL,Umgungundlovu ,Plessislaer
+ZA-LP,Capricorn,Central Office
 ZA-LP,Capricorn,Polokwane
 ZA-LP,Capricorn,Ramokgopa
 ZA-LP,Capricorn,Senwabarwana
 ZA-LP,Capricorn,Seshego
+ZA-LP,Lephalale,Central Office
 ZA-LP,Lephalale,Lephalale
 ZA-LP,Lephalale,Modimolle
+ZA-LP,Letaba,Central Office
 ZA-LP,Letaba,Giyani
 ZA-LP,Letaba,Maake
 ZA-LP,Letaba,Tzaneen
+ZA-LP,Mopani,Central Office
 ZA-LP,Mopani,Phalaborwa
 ZA-LP,Mopani,Sir Val Duncan
+ZA-LP,Sekhukhune,Central Office
 ZA-LP,Sekhukhune,Apel
 ZA-LP,Sekhukhune,CN Phatudi
 ZA-LP,Sekhukhune,CS Barlow
+ZA-LP,Vhembe,Central Office
 ZA-LP,Vhembe,Makwarela
 ZA-LP,Vhembe,Mashamba
 ZA-LP,Vhembe,Mavhoi
@@ -285,10 +326,12 @@ ZA-LP,Vhembe,Shingwedzi
 ZA-LP,Vhembe,Thengwe
 ZA-LP,Vhembe,Tshisimani
 ZA-LP,Vhembe,Musina
+ZA-LP,Waterberg,Central Office
 ZA-LP,Waterberg,Business
 ZA-LP,Waterberg,Engineering
 ZA-LP,Waterberg,IT&C
 ZA-LP,Waterberg,Thabazimbi
+ZA-MP,Ehlanzeni,Central Office
 ZA-MP,Ehlanzeni,Barberton
 ZA-MP,Ehlanzeni,Kanyamazane
 ZA-MP,Ehlanzeni,Lydenburg
@@ -296,31 +339,38 @@ ZA-MP,Ehlanzeni,Mapulaneng
 ZA-MP,Ehlanzeni,Mlumati
 ZA-MP,Ehlanzeni,Mthimba
 ZA-MP,Ehlanzeni,Nelspruit
+ZA-MP,Gert Sibande,Central Office
 ZA-MP,Gert Sibande,Balfour
 ZA-MP,Gert Sibande,Ermelo
 ZA-MP,Gert Sibande,Evander
 ZA-MP,Gert Sibande,Perdekop
 ZA-MP,Gert Sibande,Sibanesetfu
 ZA-MP,Gert Sibande,Standerton
+ZA-MP,Nkangala,Central Office
 ZA-MP,Nkangala,CN Mahlangu
 ZA-MP,Nkangala,Middelburg
 ZA-MP,Nkangala,Mpondozankomo
 ZA-MP,Nkangala,Waterval Boven
 ZA-MP,Nkangala,Witbank
+ZA-NC,Northern Cape Rural,Central Office
 ZA-NC,Northern Cape Rural,De Aar
 ZA-NC,Northern Cape Rural,Kathu
 ZA-NC,Northern Cape Rural,Kuruman
 ZA-NC,Northern Cape Rural,Namaqualand
 ZA-NC,Northern Cape Rural,Upington
+ZA-NC,Northern Cape Urban,Central Office
 ZA-NC,Northern Cape Urban,City Campus
 ZA-NC,Northern Cape Urban,Moremogolo
 ZA-NC,Northern Cape Urban,Phatsimang
+ZA-NW,Orbit,Central Office
 ZA-NW,Orbit,Brits
 ZA-NW,Orbit,Mankwe
 ZA-NW,Orbit,Rustenburg
+ZA-NW,Taletso,Central Office
 ZA-NW,Taletso,Lehurutshe
 ZA-NW,Taletso,Lichtenburg
 ZA-NW,Taletso,Mafikeng
+ZA-NW,Vuselela,Central Office
 ZA-NW,Vuselela,Jouberton
 ZA-NW,Vuselela,Klerksdorp
 ZA-NW,Vuselela,Potchefstroom
@@ -332,6 +382,7 @@ ZA-WC,Boland,Paarl
 ZA-WC,Boland,Stellenbosch
 ZA-WC,Boland,Strand
 ZA-WC,Boland,Worcester
+ZA-WC,College of Cape Town,Central Office
 ZA-WC,College of Cape Town,Athlone
 ZA-WC,College of Cape Town,City
 ZA-WC,College of Cape Town,Crawford
@@ -340,11 +391,13 @@ ZA-WC,College of Cape Town,Pinelands
 ZA-WC,College of Cape Town,Thornton
 ZA-WC,College of Cape Town,Wynberg
 ZA-WC,College of Cape Town,Gardens
+ZA-WC,False Bay,Central Office
 ZA-WC,False Bay,Fish Hoek
 ZA-WC,False Bay,Khayelitsha
 ZA-WC,False Bay,Mitchell's Plain
 ZA-WC,False Bay,Muizenberg
 ZA-WC,False Bay,Westlake
+ZA-WC,Northlink,Central Office
 ZA-WC,Northlink,Belhar
 ZA-WC,Northlink,Bellville
 ZA-WC,Northlink,Goodwood
@@ -352,12 +405,14 @@ ZA-WC,Northlink,Parow
 ZA-WC,Northlink,Protea
 ZA-WC,Northlink,Tygerberg
 ZA-WC,Northlink,Wingfield
+ZA-WC,South Cape,Central Office
 ZA-WC,South Cape,Beaufort West
 ZA-WC,South Cape,Bitou
 ZA-WC,South Cape,George
 ZA-WC,South Cape,Hessequa
 ZA-WC,South Cape,Mossel Bay
 ZA-WC,South Cape,Oudtshoorn
+ZA-WC,West Coast,Central Office
 ZA-WC,West Coast,Atlantis
 ZA-WC,West Coast,Citrusdal
 ZA-WC,West Coast,Malmesbury
