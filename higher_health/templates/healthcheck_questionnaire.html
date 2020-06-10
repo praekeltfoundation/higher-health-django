@@ -203,7 +203,7 @@
   {{ campuses|json_script:"campus-data" }}
 {% endcache %}
 
-<script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+
 {% compress js inline %}
   <script type="text/javascript">
   "use strict";
@@ -447,8 +447,6 @@
     isPageLoad = false;
   </script>
 {% endcompress %}
-<!--
-  <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key={{PLACES_API_KEY}}&libraries=places&callback=initAutocomplete"
-      async defer></script>
-      -->
+<script src="http://code.jquery.com/jquery-1.9.1.min.js" async defer></script>
+<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key={{PLACES_API_KEY}}&libraries=places&callback=initAutocomplete" async defer></script>
 {% endblock %}
