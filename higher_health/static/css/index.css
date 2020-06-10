@@ -341,7 +341,8 @@ a:hover {
   margin: 0;
 }
 .heading-secondary--main {
-  color: var(--dark-cyan);
+  /*color: var(--dark-cyan);*/
+  color: var(--soft-red);
 }
 .heading-label {
   font-weight: 600;
