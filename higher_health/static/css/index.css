@@ -575,12 +575,6 @@ a:hover {
 .radio-value {
   color: var(--very-dark-desaturated-cyan);
 }
-#medical input[type="radio"],
-.login-form__medical input[type="radio"] {
-  margin: 10px;
-  height: auto;
-  width: auto;
-}
 
 #destination li {
   margin: 10px 0 15px;
