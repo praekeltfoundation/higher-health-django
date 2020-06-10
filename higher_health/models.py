@@ -22,6 +22,10 @@ class University(models.Model):
     def __str__(self):
         return "{0} ({1})".format(self.name, self.get_province_display())
 
+    class Meta:
+        verbose_name_plural = "Universities"
+        ordering = ("name",)
+
 
 class Campus(models.Model):
     name = models.CharField(max_length=100)
@@ -29,6 +33,10 @@ class Campus(models.Model):
 
     def __str__(self):
         return self.name
+
+    class Meta:
+        verbose_name_plural = "Campuses"
+        ordering = ("name",)
 
 
 class Covid19Triage(models.Model):
@@ -147,7 +155,13 @@ class Covid19Triage(models.Model):
     history_diabetes = models.BooleanField(default=False)
     history_hypertension = models.BooleanField(default=False)
     history_cardiovascular = models.BooleanField(default=False)
+    user = models.ForeignKey(
+        "auth.User", null=True, blank=True, on_delete=models.SET_NULL
+    )
 
     @property
     def hashed_msisdn(self):
         return self.msisdn[:3] + "*" * 5 + self.msisdn[-4:]
+
+    class Meta:
+        ordering = ("timestamp",)

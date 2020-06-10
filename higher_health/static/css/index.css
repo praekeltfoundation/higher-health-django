@@ -350,9 +350,7 @@ a:hover {
   font-weight: 400;
   margin: 0;
 }
-.heading-secondary--main {
-  color: var(--dark-cyan);
-}
+
 .heading-label {
   font-weight: 600;
   font-size: 16px;
@@ -403,15 +401,10 @@ a:hover {
   position: relative;
   justify-content: space-between;
 }
-
 .pagination__label {
   color: var(--dark-cyan);
   /*color: rgba(68, 68, 68, 0.8);*/
-  font-size: 12px;
-  text-transform: uppercase;
-  text-decoration: underline;
 }
-
 .pagination__icon {
   background: var(--dark-cyan);
   border-radius: 50%;
@@ -424,9 +417,14 @@ a:hover {
   text-align: center;
   width: 24px;
 }
-
 .pagination__icon.active {
   background: var(--soft-red);
+}
+.pagination-ux {
+  color: var(--dark-cyan);
+  font-size: 12px;
+  text-transform: uppercase;
+  text-decoration: underline;
 }
 
 /*
@@ -654,7 +652,11 @@ textarea {
 .cta-primary--next {
   margin: 0;
   width: auto;
+<<<<<<< HEAD
   padding: 0 10px;
+=======
+  padding: 0 20px;
+>>>>>>> develop
 }
 .cta-primary--next:after {
   content: "❯";
@@ -740,10 +742,14 @@ textarea {
   }
   .content-inner {
     margin: 2em auto;
+<<<<<<< HEAD
     padding: 2em 0;
   }
   .content-inner--questionnaires {
     padding: 2em 10%;
+=======
+    padding: 2em 0; /*TO REVIEW*/
+>>>>>>> develop
   }
   /*
   .heading-primary--mobile {
@@ -838,6 +844,10 @@ textarea {
   .login-form__preexistingconditionsForm {
     margin: 2em auto 1em;
     padding: 15px 2em 2em;
+<<<<<<< HEAD
+=======
+    /*width: 450px;*/ /*TO REVIEW */
+>>>>>>> develop
   }
   .login-form__read-terms {
     margin: 0 auto;
@@ -852,11 +862,14 @@ textarea {
     left: 0;
     right: 0;
   }*/
+<<<<<<< HEAD
 
   .content-inner--questionnaires .collapsibles__item,
   .content-inner--questionnaires .login-form__preexistingconditionsForm {
     width: 450px;
   }
+=======
+>>>>>>> develop
 
 
   /*

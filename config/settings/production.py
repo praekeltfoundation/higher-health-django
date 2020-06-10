@@ -19,5 +19,8 @@ if SENTRY_DSN:
         dsn=SENTRY_DSN, integrations=[DjangoIntegration()], send_default_pii=True
     )
 
+GA_TAG_KEY = env.str("GOOGLE_GA_TAG_KEY")
 CLIENT_PLACES_API_KEY = env.str("GOOGLE_PLACES_CLIENT_API_KEY")
 SERVER_PLACES_API_KEY = env.str("GOOGLE_PLACES_SERVER_API_KEY")
+
+STATICFILES_STORAGE = "django.contrib.staticfiles.storage.ManifestStaticFilesStorage"

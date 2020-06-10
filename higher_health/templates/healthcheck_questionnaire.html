@@ -30,12 +30,25 @@
               </li>
             </ul>
           </div>
-
-          <div class="collapsibles" id="questionnaires">
-            <div class="collapsibles__item login-form__location">
-              <div class="pagination">
-                <p class="pagination__label">Step 1 of 4</p>
-                <span class="pagination__icon">+</span>
+          <div id="questionnaires">
+            <div class="login-form__location">
+              <p class="pagination-ux">Step 1 of 4</p>
+              <h2 class="heading-secondary">Registration</h2>
+              <div class="login-form__screening">
+                {% if form.errors %}
+                  <p class="error">Please correct the errors below</p>
+                {% endif %}
+                <ul id="registration" class="fieldset">
+                  {% for field in form.registration_fields %}
+                    <li class="fieldset__item">
+                      <label for="{{ field.id_for_label }}" class="label">
+                        {{field.label}}
+                      </label>
+                      {{field}}
+                      {{field.errors}}
+                    </li>
+                  {% endfor %}
+                </ul>
               </div>
               <div class="collapsibles__label">
                 <h2 class="heading-secondary">Registration</h2>

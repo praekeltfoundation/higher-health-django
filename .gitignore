@@ -57,6 +57,7 @@ coverage.xml
 # Django stuff:
 *.log
 staticfiles/
+static/
 
 # Sphinx documentation
 docs/_build/
@@ -73,5 +74,5 @@ logs/*.log
 *.pid
 local_settings.py
 node_modules/*
-
+higherhealth
 .DS_Store

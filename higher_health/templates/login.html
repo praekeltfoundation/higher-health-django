@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+{% block content %}
+  <div class="content">
+    <div class="content-intro">
+      <div class="content-inner">
+
+        <div class="heading-container">
+          <h1 class="heading heading-primary heading-primary--mobile">Welcome to HealthCheck</h1>
+          <h2 class="heading heading-secondary heading-secondary--main">Your daily risk assessment tool.</h2>
+          <h3>--</h3>
+        </div>
+
+        <div class="columns">
+          <div class="columns-child columns-child--excerpts">
+            <h2 class="heading heading-secondary">Healthcheck will help you with <br/> the following:</h2>
+            <p>You will receive advice on what actions to take based on national guidelines,
+              and the data you enter will help us in predictive modelling and planning
+              our national response to COVID-19.
+            </p>
+            <h4>Thank you for coming forward and for contributing to the
+              health of all citizens AND stopping the spread of the virus 🦠</h4>
+          </div>
+
+          <div class="columns-child">
+            <form action="" method="POST" id="login_form" class="login-form" novalidate>
+            {% csrf_token %}
+              <div id="questionnaires">
+                <div class="login-form__mobile">
+                  <p class="pagination-ux">Verify mobile number</p>
+                  <h2 class="heading-secondary">To get started, we need to verify your mobile number</h2>
+                  <div class="login-form__screening">
+                    {% if form.errors %}
+                      <p class="error">Please correct the errors below</p>
+                    {% endif %}
+                    <ul id="registration" class="fieldset">
+                      {% for field in form %}
+                        <li class="fieldset__item">
+                          <label for="{{ field.id_for_label }}" class="label">
+                            {{field.label}}
+                          </label>
+                          {{field}}
+                          {{field.errors}}
+                        </li>
+                      {% endfor %}
+                    </ul>
+                  </div>
+                </div>
+                <button id="entrySubmit" type="submit" class="cta cta-primary cta-primary--next">Verify mobile</button>
+            </form>
+          </div>
+        </div>
+
+
+      </div>
+    </div>
+  </div>
+{% endblock %}
