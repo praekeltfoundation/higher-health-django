@@ -73,4 +73,5 @@ logs/*.log
 *.pid
 local_settings.py
 node_modules/*
+higherhealth
 .DS_Store
