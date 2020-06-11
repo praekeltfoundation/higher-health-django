@@ -217,67 +217,64 @@
 {% block form_js %}
 
 {% cache 300 json_data %}
+  {{ universities|json_script:"universities-data" }}
 
+  {{ campuses|json_script:"campus-data" }}
 {% endcache %}
 
-{{ universities|json_script:"universities-data" }}
 
-{{ campuses|json_script:"campus-data" }}
 
-<!--inline-->
-{% compress js  %}
+{% compress js inline %}
   <script type="text/javascript">
   "use strict";
 
-  console.log(JSON.parse(document.getElementById('universities-data').textContent));
+  let paginate = document.querySelectorAll('.pagination__icon'),
+    sessionToggle = sessionStorage.getItem('steps') ? JSON.parse(sessionStorage.getItem('steps')) : {},
+    collapsed;
 
-  // let paginate = document.querySelectorAll('.pagination__icon'),
-  //   sessionToggle = sessionStorage.getItem('steps') ? JSON.parse(sessionStorage.getItem('steps')) : {},
-  //   collapsed;
-  //
-  // for(let i = 0; i < paginate.length; i++) {
-  //   paginate[i].innerHTML = '-';
-  //   let collapsiblesToggle = paginate[i].parentElement.nextElementSibling.nextElementSibling.getAttribute('id')
-  //
-  //   paginate[i].addEventListener('click', function(e) {
-  //     let nextElem = this.parentElement.nextElementSibling.nextElementSibling;
-  //     if(document.getElementById(nextElem.getAttribute('id')).style.display === ''){
-  //       document.getElementById(nextElem.getAttribute('id')).style.display = 'none';
-  //       paginate[i].innerHTML = '+';
-  //       collapsed = true;
-  //     } else if(document.getElementById(nextElem.getAttribute('id')).style.display === 'none') {
-  //       document.getElementById(nextElem.getAttribute('id')).style.display = 'block';
-  //       paginate[i].innerHTML = '-';
-  //       collapsed = false;
-  //     } else if(document.getElementById(nextElem.getAttribute('id')).style.display === 'block') {
-  //       document.getElementById(nextElem.getAttribute('id')).style.display = 'none';
-  //       paginate[i].innerHTML = '+';
-  //       collapsed = true;
-  //     }
-  //
-  //     sessionToggle[nextElem.getAttribute('id')] = collapsed;
-  //     sessionStorage.setItem('steps', JSON.stringify(sessionToggle));
-  //   });
-  //
-  //   if(sessionToggle[collapsiblesToggle] !== undefined) {
-  //     if(sessionToggle[collapsiblesToggle] === true) {
-  //       document.getElementById(collapsiblesToggle).style.display = 'none';
-  //       paginate[i].innerHTML = '+';
-  //     } else {
-  //       document.getElementById(collapsiblesToggle).style.display = 'block';
-  //       paginate[i].innerHTML = '-';
-  //     }
-  //     //Not doing a proper reset
-  //     if(document.body.contains(document.querySelectorAll('.errorlist')[i]) === true) {
-  //       document.getElementById(collapsiblesToggle).style.display = 'block';
-  //       paginate[i].innerHTML = '-';
-  //       sessionStorage.setItem('steps',JSON.stringify({}));
-  //     }
-  //
-  //   }
-  // };
+  for(let i = 0; i < paginate.length; i++) {
+    paginate[i].innerHTML = '-';
+    let collapsiblesToggle = paginate[i].parentElement.nextElementSibling.nextElementSibling.getAttribute('id')
 
-  /*
+    paginate[i].addEventListener('click', function(e) {
+      let nextElem = this.parentElement.nextElementSibling.nextElementSibling;
+      if(document.getElementById(nextElem.getAttribute('id')).style.display === ''){
+        document.getElementById(nextElem.getAttribute('id')).style.display = 'none';
+        paginate[i].innerHTML = '+';
+        collapsed = true;
+      } else if(document.getElementById(nextElem.getAttribute('id')).style.display === 'none') {
+        document.getElementById(nextElem.getAttribute('id')).style.display = 'block';
+        paginate[i].innerHTML = '-';
+        collapsed = false;
+      } else if(document.getElementById(nextElem.getAttribute('id')).style.display === 'block') {
+        document.getElementById(nextElem.getAttribute('id')).style.display = 'none';
+        paginate[i].innerHTML = '+';
+        collapsed = true;
+      }
+
+      sessionToggle[nextElem.getAttribute('id')] = collapsed;
+      sessionStorage.setItem('steps', JSON.stringify(sessionToggle));
+    });
+
+    if(sessionToggle[collapsiblesToggle] !== undefined) {
+      if(sessionToggle[collapsiblesToggle] === true) {
+        document.getElementById(collapsiblesToggle).style.display = 'none';
+        paginate[i].innerHTML = '+';
+      } else {
+        document.getElementById(collapsiblesToggle).style.display = 'block';
+        paginate[i].innerHTML = '-';
+      }
+      //Not doing a proper reset
+      if(document.body.contains(document.querySelectorAll('.errorlist')[i]) === true) {
+        document.getElementById(collapsiblesToggle).style.display = 'block';
+        paginate[i].innerHTML = '-';
+        sessionStorage.setItem('steps',JSON.stringify({}));
+      }
+
+    }
+  };
+
+
   let universities = JSON.parse(document.getElementById('universities-data').textContent),
   campuses = JSON.parse(document.getElementById('campus-data').textContent);
     let prov = document.getElementById('id_facility_destination_province'),
@@ -482,7 +479,6 @@
       }
     });
     isPageLoad = false;
-    */
   </script>
 {% endcompress %}
 
