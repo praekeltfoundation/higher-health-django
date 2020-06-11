@@ -60,7 +60,7 @@
             <li class="menu__item menu__item--current">
               <a href="/" class="menu__link">Home</a>
             </li>
-            <li class="menu__item">
+            <li id="login" class="menu__item">
               <a href="/login/" class="menu__link">Login</a>
             </li>
             <li class="menu__item">
@@ -129,7 +129,11 @@
         //DO NOTHING
      } else if(navLink[i].getAttribute("href").indexOf(currentURL) !== -1) {
         navLink[i].parentNode.classList.add('menu__item--current');
-      } else {
+      } else if(currentURL === 'otp' && navLink[i].getAttribute("href").indexOf(currentURL) == -1) {
+        navLink[i].parentNode.classList.remove('menu__item--current');
+        document.getElementById('login').classList.add('menu__item--current');
+      }
+      else {
         navLink[i].parentNode.classList.remove('menu__item--current');
       }
    };
