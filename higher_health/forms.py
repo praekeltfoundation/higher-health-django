@@ -171,7 +171,7 @@ class HealthCheckQuestionnaire(forms.Form):
         required=True,
     )
     medical_confirm_accuracy = forms.ChoiceField(
-        label="Please confirm that the information you shared is accurate to the best of your knowledge. Once you click the SUBMIT button, you will be unable to complete another HealthCheck for the next 24hours. Please note that the National Department of Health may contact you if necessary based on your responses?",
+        label="Please confirm that the information you shared is accurate to the best of your knowledge. Once you click the SUBMIT button, you will be unable to complete another HealthCheck for the next 24hours. Please note that the National Department of Health may contact you if necessary based on your responses.",
         choices=YES_NO,
         widget=forms.RadioSelect,
         required=True,
@@ -361,6 +361,7 @@ class HealthCheckLogin(forms.Form):
 
     def send_otp_sms(self, msisdn):
         otp = "".join(secrets.choice(string.digits) for _ in range(6))
+        print(otp)
         h = hmac.new(settings.SECRET_KEY.encode(), otp.encode(), digestmod=sha256)
         otp_hash = base64.b64encode(h.digest()).decode()
         self.request.session["otp_hash"] = otp_hash
