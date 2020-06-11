@@ -60,13 +60,12 @@
             <li class="menu__item menu__item--current">
               <a href="/" class="menu__link">Home</a>
             </li>
-            <li class="menu__item">
-              <a href="/login/" class="menu__link">Login</a>
+            <li id="login" class="menu__item">
+              <a href="{% url 'healthcheck_login' %}" class="menu__link">Login</a>
             </li>
             <li class="menu__item">
-              <a href="/receipts/" class="menu__link">
+              <a href="{% url 'healthcheck_receipt' %}" class="menu__link">
                 Clearance Certificate
-                <!-- (If return user) -->
               </a>
             </li>
           </ul>
@@ -120,6 +119,25 @@
     </footer>
   </section>
   {% block extra_js %}
+  <script type="text/javascript">
+  "use strict";
+    let navLink = document.querySelectorAll('.menu__link');
+    let currentURL = location.pathname.split('/')[1];
+    for(let i = 0; i < navLink.length; i++ ) {
+      if (currentURL === "") {
+        //DO NOTHING
+     } else if(navLink[i].getAttribute("href").indexOf(currentURL) !== -1) {
+        navLink[i].parentNode.classList.add('menu__item--current');
+      } else if(currentURL === 'otp' && navLink[i].getAttribute("href").indexOf(currentURL) == -1) {
+        navLink[i].parentNode.classList.remove('menu__item--current');
+        document.getElementById('login').classList.add('menu__item--current');
+      }
+      else {
+        navLink[i].parentNode.classList.remove('menu__item--current');
+      }
+   };
+
+  </script>
   {% endblock %}
   {% block form_js %}{% endblock %}
 </body>

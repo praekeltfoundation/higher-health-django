@@ -675,6 +675,26 @@ textarea {
   transform: translateY(-3px);
 }
 
+.cta-inline {
+  color: var(--soft-red);
+  display: block;
+  margin: 15px 5px 0;
+}
+.cta-inline:before {
+  content: "❯";
+  font-size: 16px;
+  display: inline-block;
+  transform: rotate(180deg);
+  margin-right: 5px;
+  vertical-align: middle;
+}
+.cta-inline__links {
+  color: var(--soft-red);
+}
+.cta-inline__links:hover
+.cta-inline__links:focus {
+  text-decoration: underline;
+}
 /*
   FOOTER
 

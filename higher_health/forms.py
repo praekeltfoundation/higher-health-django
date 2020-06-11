@@ -171,7 +171,7 @@ class HealthCheckQuestionnaire(forms.Form):
         required=True,
     )
     medical_confirm_accuracy = forms.ChoiceField(
-        label="Please confirm that the information you shared is accurate to the best of your knowledge. Once you click the SUBMIT button, you will be unable to complete another HealthCheck for the next 24hours. Please note that the National Department of Health may contact you if necessary based on your responses?",
+        label="Please confirm that the information you shared is accurate to the best of your knowledge. Once you click the SUBMIT button, you will be unable to complete another HealthCheck for the next 24hours. Please note that the National Department of Health may contact you if necessary based on your responses.",
         choices=YES_NO,
         widget=forms.RadioSelect,
         required=True,
