@@ -61,12 +61,11 @@
               <a href="/" class="menu__link">Home</a>
             </li>
             <li id="login" class="menu__item">
-              <a href="/login/" class="menu__link">Login</a>
+              <a href="{% url 'healthcheck_login' %}" class="menu__link">Login</a>
             </li>
             <li class="menu__item">
-              <a href="/receipts/" class="menu__link">
+              <a href="{% url 'healthcheck_receipt' %}" class="menu__link">
                 Clearance Certificate
-                <!-- (If return user) -->
               </a>
             </li>
           </ul>
