@@ -361,6 +361,7 @@ class HealthCheckLogin(forms.Form):
 
     def send_otp_sms(self, msisdn):
         otp = "".join(secrets.choice(string.digits) for _ in range(6))
+        print(otp);
         h = hmac.new(settings.SECRET_KEY.encode(), otp.encode(), digestmod=sha256)
         otp_hash = base64.b64encode(h.digest()).decode()
         self.request.session["otp_hash"] = otp_hash

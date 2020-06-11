@@ -31,27 +31,13 @@
             </ul>
           </div>
           <div id="questionnaires">
-            <div class="login-form__location">
-              <p class="pagination-ux">Step 1 of 4</p>
-              <h2 class="heading-secondary">Registration</h2>
-              <div class="login-form__screening">
-                {% if form.errors %}
-                  <p class="error">Please correct the errors below</p>
-                {% endif %}
-                <ul id="registration" class="fieldset">
-                  {% for field in form.registration_fields %}
-                    <li class="fieldset__item">
-                      <label for="{{ field.id_for_label }}" class="label">
-                        {{field.label}}
-                      </label>
-                      {{field}}
-                      {{field.errors}}
-                    </li>
-                  {% endfor %}
-                </ul>
+            <div class="collapsibles__item login-form__location">
+              <div class="pagination">
+                <p class="pagination__label">Step 1 of 4</p>
+                <span class="pagination__icon">+</span>
               </div>
               <div class="collapsibles__label">
-                <h2 class="heading-secondary">Registration</h2>
+                <h3 class="heading heading-secondary">Registration</h3>
               </div>
               <div id="step_1" class="collapsibles__toggle">
                 <div class="login-form__screening">
@@ -123,8 +109,21 @@
                     {% endif %}
                     <li class="fieldset__item">
                       <label for="{{ field.name }}" class="label">{{ field.label }}</label>
-                      {{ field }}
-                      {{field.errors}}
+                      {% if field|field_type == 'RadioSelect' %}
+                        <ul id='id_{{ field.name }}'>
+                        {% for value, text in field.field.choices %}
+                          <li>
+                            <input name="{{ field.name }}"
+                             id="id_{{ field.name|slugify }}_{{ forloop.counter0 }}" type="radio" value="{{ value }}" {% if field.value == value %}checked="checked"{% endif %}/>
+                            <label for="id_{{ field.name|slugify }}_{{ forloop.counter0 }}">{{ text|capfirst }}</label>
+                          </li>
+                        {% endfor %}
+                        </ul>
+                        {{field.errors}}
+                      {% else %}
+                        {{field}}
+                        {{field.errors}}
+                      {% endif %}
                     </li>
                   {% endfor %}
                 </ul>
@@ -142,17 +141,35 @@
               <div id="step_3" class="collapsibles__toggle">
                 <ul id="medical-history" class="fieldset">
                   <li class="fieldset__medical">
-                    <label for="{{ form.history_pre_existing_condition.name }}" class="label">{{ form.history_pre_existing_condition.label }}</label>
-                    {{ form.history_pre_existing_condition }}
-                    {{form.history_pre_existing_condition.errors}}
+                    <label for="{{ form.history_pre_existing_condition.name }}" class="label">
+                      {{ form.history_pre_existing_condition.label }}
+                    </label>
+                    <ul id='id_{{form.history_pre_existing_condition.name}}'>
+                      {% for value, text in form.history_pre_existing_condition.field.choices %}
+                        <li>
+                          <input name="{{ form.history_pre_existing_condition.name }}"
+                           id="id_{{ form.history_pre_existing_condition.name|slugify }}_{{ forloop.counter0 }}" type="radio" value="{{ value }}" {% if field.value == value %}checked="checked"{% endif %}/>
+                          <label for="id_{{ form.history_pre_existing_condition.name|slugify }}_{{ forloop.counter0 }}">{{ text|capfirst }}</label>
+                        </li>
+                      {% endfor %}
+                    </ul>
                   </li>
                 </ul>
                 <ul id="preexistingconditionsForm" class="fieldset">
                   {% for field in form.history_fields %}
                     <li class="fieldset__medical">
-                        <label for="{{ field.name }}" class="label">{{ field.label }}</label>
-                        {{ field }}
+                      {% if field|field_type == 'RadioSelect' %}
+                        <ul id='id_{{ field.name }}'>
+                        {% for value, text in field.field.choices %}
+                          <li>
+                            <input name="{{ field.name }}"
+                             id="id_{{ field.name|slugify }}_{{ forloop.counter0 }}" type="radio" value="{{ value }}" {% if field.value == value %}checked="checked"{% endif %}/>
+                            <label for="id_{{ field.name|slugify }}_{{ forloop.counter0 }}">{{ text|capfirst }}</label>
+                          </li>
+                        {% endfor %}
+                        </ul>
                         {{field.errors}}
+                      {% endif %}
                     </li>
                   {% endfor %}
                 </ul>
@@ -160,31 +177,33 @@
             </div>
 
             <div class="collapsibles__item login-form__medical">
-              <div class="pagination">
-                <p class="pagination__label">Step 4 of 4</p>
-                <span class="pagination__icon">+</span>
-              </div>
-              <div class="collapsibles__label">
-                <h2 class="heading-secondary">How are you feeling today?</h2>
-              </div>
-              <div id="step_4" class="collapsibles__toggle">
-                <ul id="medical" class="fieldset">
-                  {% for field in form.medical_fields %}
-                    {% if field.name == "medical_confirm_accuracy" %}
-                      <h3 class="heading-subtitle heading-subtitle--edu-label">Confirmation</h3>
-                    {% endif %}
-                    <li class="fieldset__item">
-                      <label for="{{ field.name }}" class="label">{{ field.label }}</label>
-                      {{ field }}
+              <p class="pagination-ux">Step 4 of 4</p>
+              <h2 class="heading-secondary">How are you feeling today?</h2>
+              <ul id="medical" class="fieldset">
+                {% for field in form.medical_fields %}
+                  {% if field.name == "medical_confirm_accuracy" %}
+                    <h3 class="heading-subtitle heading-subtitle--edu-label">Confirmation</h3>
+                  {% endif %}
+                  <li class="fieldset__item">
+                    <label for="{{ field.name }}" class="label">{{ field.label }}</label>
+                    {% if field|field_type == 'RadioSelect' %}
+                      <ul id='id_{{ field.name }}'>
+                      {% for value, text in field.field.choices %}
+                        <li>
+                          <input name="{{ field.name }}"
+                           id="id_{{ field.name|slugify }}_{{ forloop.counter0 }}" type="radio" value="{{ value }}" {% if field.value == value %}checked="checked"{% endif %}/>
+                          <label for="id_{{ field.name|slugify }}_{{ forloop.counter0 }}">{{ text|capfirst }}</label>
+                        </li>
+                      {% endfor %}
+                      </ul>
                       {{field.errors}}
-                    </li>
-                  {% endfor %}
-                </ul>
-                {% if form.errors %}
-                  <br/>
-                  <p class="error">Please correct all the errors before submitting.</p>
-                {% endif %}
-              </div>
+                    {% endif %}
+                  </li>
+                {% endfor %}
+              </ul>
+              {% if form.errors %}
+                <p class="error">Please correct all the errors before submitting.</p>
+              {% endif %}
             </div>
             <button id="entrySubmit" type="submit" class="cta cta-primary">Submit</button>
           </div>
@@ -207,39 +226,52 @@
 {% compress js inline %}
   <script type="text/javascript">
   "use strict";
-  $( document ).ready(function() {
-    let icon = $(".pagination__icon"),
-      sessionToggle = {};
-    if(icon.is(":visible")) {
-      icon.text('-');
-    }
 
-    icon.click(function (e) {
-      let $this = $(this),
-        nextElem = $this.parent().next().next();
-        sessionToggle[$(nextElem).attr('id')] = $(nextElem).is(":visible");
-        sessionStorage.setItem('steps', JSON.stringify(sessionToggle));
-      $(nextElem).slideToggle(500, function () {
-        $this.text(function () {
-          return $(nextElem).is(":visible") ? "-" : "+";
-        });
-      });
+  let paginate = document.querySelectorAll('.pagination__icon'),
+    sessionToggle = sessionStorage.getItem('steps') ? JSON.parse(sessionStorage.getItem('steps')) : {},
+    collapsed;
+
+  for(let i = 0; i < paginate.length; i++) {
+    paginate[i].innerHTML = '-';
+    let collapsiblesToggle = paginate[i].parentElement.nextElementSibling.nextElementSibling.getAttribute('id')
+
+    paginate[i].addEventListener('click', function(e) {
+      let nextElem = this.parentElement.nextElementSibling.nextElementSibling;
+      if(document.getElementById(nextElem.getAttribute('id')).style.display === ''){
+        document.getElementById(nextElem.getAttribute('id')).style.display = 'none';
+        paginate[i].innerHTML = '+';
+        collapsed = true;
+      } else if(document.getElementById(nextElem.getAttribute('id')).style.display === 'none') {
+        document.getElementById(nextElem.getAttribute('id')).style.display = 'block';
+        paginate[i].innerHTML = '-';
+        collapsed = false;
+      } else if(document.getElementById(nextElem.getAttribute('id')).style.display === 'block') {
+        document.getElementById(nextElem.getAttribute('id')).style.display = 'none';
+        paginate[i].innerHTML = '+';
+        collapsed = true;
+      }
+
+      sessionToggle[nextElem.getAttribute('id')] = collapsed;
+      sessionStorage.setItem('steps', JSON.stringify(sessionToggle));
     });
-    const getSessionToggle = JSON.parse(sessionStorage.getItem('steps') || '{}');
-    if(getSessionToggle !== null){
-      console.log(getSessionToggle);
-      $.each(getSessionToggle, function(key, value){
-        if(value === false) {
-          console.log(value);
-          $('#'+key).css('display', 'none');
 
-        } else {
-          $('#'+key).css('display', 'block');
-        }
-      });
-    };
-  });
+    if(sessionToggle[collapsiblesToggle] !== undefined) {
+      if(sessionToggle[collapsiblesToggle] === true) {
+        document.getElementById(collapsiblesToggle).style.display = 'none';
+        paginate[i].innerHTML = '+';
+      } else {
+        document.getElementById(collapsiblesToggle).style.display = 'block';
+        paginate[i].innerHTML = '-';
+      }
+      //Not doing a proper reset
+      if(document.body.contains(document.querySelectorAll('.errorlist')[i]) === true) {
+        document.getElementById(collapsiblesToggle).style.display = 'block';
+        paginate[i].innerHTML = '-';
+        sessionStorage.setItem('steps',JSON.stringify({}));
+      }
 
+    }
+  };
 
   let universities = JSON.parse(document.getElementById('universities-data').textContent),
   campuses = JSON.parse(document.getElementById('campus-data').textContent);
@@ -447,6 +479,6 @@
     isPageLoad = false;
   </script>
 {% endcompress %}
-<script src="http://code.jquery.com/jquery-1.9.1.min.js" async defer></script>
+
 <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key={{PLACES_API_KEY}}&libraries=places&callback=initAutocomplete" async defer></script>
 {% endblock %}
