@@ -707,11 +707,13 @@ textarea {
   text-align: center;
 }
 .footer__copyright {
+  font-size: 14px;
   margin: 10px 0;
 }
 .footer-inner {}
 .footer-powered-by {
   position: relative;
+  margin-top: 25px;
 }
 
 .footer-list {
@@ -897,7 +899,12 @@ textarea {
     justify-content: space-between;
     align-items: flex-start;
   }
-  .footer__copyright,
+  .footer-powered-by {
+    margin-top: 0;
+  }
+  .footer__copyright {
+    display: inline-block;
+  }
   .footer-list__item  {
     display: inline-block;
   }
