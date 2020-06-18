@@ -123,37 +123,82 @@ a:hover {
   display: block;
   padding: 10px 5%;
   position: relative;
+  text-align: center;
   width: 100%;
 }
 
 .header-brand {
-  padding: 0 10px 0 0;
+  padding: 5px 10px 15px 0;
 }
 .header-brand__link {
   display: inline-block;
 }
 .header-brand__logo {
-  max-width: 270px;
+  width: 100%;
 }
 .header__menu {
   align-self: center;
-  width: 100%;
+  padding: 0 0 15px;
+  /*width: 100%;*/
 }
 .menu__item {
   display: inline-block;
   padding: 0 0.5em;
+}
+.menu__item:last-child {
+  padding: 0;
 }
 .menu__link,
 .sub-menu__item {
   color: var(--very-dark-gray);
   display: block;
   font-family: "Varela Round", sans-serif;
-  font-size: 13px;
+  font-size: 16px;
   font-weight: 400;
   text-decoration: none;
   letter-spacing: 0;
   text-transform: capitalize;
   vertical-align: middle;
+}
+
+.menu__link {
+  position: relative;
+}
+.menu__link,
+.menu__link:after,
+.menu__link:before {
+  transition: all .5s;
+}
+.menu__link:hover,
+.menu__link:focus,
+.menu__link:active {
+  text-decoration: none;
+  color: var(--soft-red);
+}
+.menu__link:after {
+  position: absolute;
+  bottom: -3px;
+  left: 0;
+  right: 0;
+  margin: auto;
+  width: 0%;
+  content: '.';
+  color: transparent;
+  background: var(--soft-red);
+  height: 3px;
+  border-radius: 20px;
+}
+.menu__link:hover:after,
+.menu__link:focus:after,
+.menu__link:active:after {
+  width: 100%;
+}
+
+.menu__item--current .menu__link {
+  color: var(--soft-red);
+}
+.menu__item--current .menu__link:after {
+  width: 100%;
 }
 
 /*
@@ -175,7 +220,6 @@ a:hover {
     background-size: 100%;
   }
 }
-
 
 .content-intro {
   position: relative;
@@ -204,13 +248,15 @@ a:hover {
   position: relative;
   text-align: center;
 }
-
 .content-receipts__logo:after {
   content: "";
   display: block;
   border-bottom: var(--very-light-gray) 1px solid;
   width: 35%;
   margin: 15px auto;
+}
+.content-receipts__logo .header-brand__logo {
+  max-width: 270px;
 }
 
 .receipts-results-message p {
@@ -253,13 +299,21 @@ a:hover {
   margin: 0 auto;
 }
 .receipts-headings:before {
-  background-image: url('/static/images/icons/hand-icon.png');
-  content: "";
-  display: inline-block;
-  width: 50px;
-  height: 60px;
+  background-image: url('/static/images/icons/thumbsUp-icon.png');
   background-size: 100%;
   background-repeat: no-repeat;
+  content: "";
+  display: inline-block;
+  height: 50px;
+  width: 50px;
+}
+.receipts-results--low .receipts-headings:before {
+  background-image: url('/static/images/icons/thumbsUp-icon.png');
+}
+.receipts-results--mid .receipts-headings:before,
+.receipts-results--high .receipts-headings:before {
+  background-image: url('/static/images/icons/hand-icon.png');
+  height: 60px;
 }
 
 .terms__content {
@@ -270,13 +324,18 @@ a:hover {
 }
 .terms-list__item {
   list-style: disc;
-  list-style-position: inside;
+}
+
+
+/**
+ TITLE / HEADINGS
+*/
+
+.heading {
+ font-weight: 300;
 }
 .heading-container {
   text-align: center;
-}
-.heading {
- font-weight: 300;
 }
 .heading-primary {
   color: #000;
@@ -290,11 +349,7 @@ a:hover {
   font-weight: 400;
   margin: 0;
 }
-.heading--terms {
- font-weight: 600;
- text-align: center;
- padding: 0 0 15px;
-}
+
 .heading-label {
   font-weight: 600;
   font-size: 16px;
@@ -314,6 +369,14 @@ a:hover {
   text-align: center;
   font-size: 20px;
 }
+.heading-primary--403 {
+  color: var(--soft-red);
+}
+.heading--terms {
+ font-weight: 600;
+ text-align: center;
+ padding: 0 0 15px;
+}
 .heading.subtitle {
   font-size: 18px;
   font-weight: bold;
@@ -327,14 +390,42 @@ a:hover {
   font-weight: 600;
 }
 
+/*
+  PAG LABELS
+*/
 
-.pagination-ux {
-  color: rgba(68, 68, 68, 0.8);
-  font-size: 12px;
-  text-transform: uppercase;
-  text-decoration: underline;
+.pagination {
+  align-items: center;
+  display: flex;
+  position: relative;
+  justify-content: space-between;
 }
-
+.pagination__label {
+  color: var(--dark-cyan);
+  margin: 0;
+  /*color: rgba(68, 68, 68, 0.8);*/
+}
+.pagination__icon {
+  background: var(--dark-cyan);
+  border-radius: 50%;
+  color: #fff;
+  cursor: pointer;
+  display: inline-block;
+  height: 24px;
+  font-size: 18px;
+  font-weight: bold;
+  text-align: center;
+  width: 24px;
+}
+.pagination__icon.active {
+  background: var(--soft-red);
+}
+.pagination-ux {
+  color: var(--dark-cyan);
+  font-size: 12px;
+  margin: 0;
+  text-transform: uppercase;
+}
 
 /*
   RISK LEVEL
@@ -390,21 +481,33 @@ a:hover {
 }
 
 .label-link {
-  display: block;
+  display: inline-block;
   font-size: 13px;
+  margin: 0 5px;
   text-transform: uppercase;
 }
-
-#questionnaires {
-  transition: all ease-in-out 1s;
+.label-link:hover,
+.label-link:focus {
+  text-decoration: underline;
 }
+.label-link:before {
+  content: "(";
+  display: inline-block;
+}
+.label-link:after {
+  content: ")";
+  display: inline-block;
+}
+
 .login-form {
   font-family: 'Lato', sans-serif;
   position: relative;
 }
-.login-form__location,
-.login-form__preexistingconditionsForm,
-.login-form__medical {
+.collapsibles {
+  transition: all ease-in-out 1s;
+}
+.collapsibles__item,
+.login-form__preexistingconditionsForm {
   background: #fff;
   border-radius: 5px;
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
@@ -485,12 +588,6 @@ a:hover {
 .radio-value {
   color: var(--very-dark-desaturated-cyan);
 }
-#medical input[type="radio"],
-.login-form__medical input[type="radio"]{
-  margin: 10px;
-  height: auto;
-  width: auto;
-}
 
 #destination li {
   margin: 10px 0 15px;
@@ -500,10 +597,6 @@ a:hover {
 }
 #id_facility_destination {
   margin: 0 auto 15px;
-}
-#id_facility_destination_reason li,
-#id_facility_destination li {
-  margin: 0;
 }
 
 input,
@@ -522,9 +615,15 @@ select {
   font-size: 1rem;
   height: 40px;
   outline: 0;
+  padding: 0 10px;
   word-wrap: break-word;
   word-break: break-all;
   width: 100%;
+}
+
+.columns .login-form__mobile input {
+  background: transparent;
+  box-shadow: none;
 }
 
 select {
@@ -559,12 +658,43 @@ textarea {
   transition: all 0.4s;
   width: 250px;
 }
+.cta-primary--next {
+  margin: 0;
+  width: auto;
+  padding: 0 20px;
+}
+.cta-primary--next:after {
+  content: "❯";
+  font-size: 16px;
+  margin-left: 20px;
+  display: inline-block;
+}
 .cta-primary:hover,
 .cta-primary:focus {
   background: var(--dark-moderate-cyan-2);
   transform: translateY(-3px);
 }
 
+.cta-inline {
+  color: var(--soft-red);
+  display: block;
+  margin: 15px 5px 0;
+}
+.cta-inline:before {
+  content: "❯";
+  font-size: 16px;
+  display: inline-block;
+  transform: rotate(180deg);
+  margin-right: 5px;
+  vertical-align: middle;
+}
+.cta-inline__links {
+  color: var(--soft-red);
+}
+.cta-inline__links:hover
+.cta-inline__links:focus {
+  text-decoration: underline;
+}
 /*
   FOOTER
 
@@ -595,13 +725,13 @@ textarea {
 .footer-list__link {
   color: #fff;
 }
+
 .logo-list__image {
   width: auto;
 }
 .logo-list__item {
   margin: 1em 0;
 }
-
 
 /*---------------*/
 
@@ -616,27 +746,47 @@ textarea {
   .header-inner {
     display: flex;
     padding: 1em 10%;
+    justify-content: space-around;
+    text-align: inherit;
   }
   .header-brand {
     padding: 0 2em 0 0;
   }
-  .header-brand__logo {
-    max-width: none;
-  }
   .heading-container {
     margin: 0 0 2em;
+  }
+  .header__menu {
+    padding: 0;
   }
 
   /*
     CONTENT FORM ENTRY PAGE
   */
   .content-intro {
-    padding: 0 10%;
     width: 900px;
   }
   .content-inner {
     margin: 2em auto;
-    padding: 2em;
+    padding: 2em 0;
+  }
+  .content-inner--questionnaires {
+    padding: 2em 10%;
+  }
+  .columns {
+    align-items: baseline;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .columns-child {
+    width: 45%;
+  }
+  .columns-child--excerpts {
+    text-align: left;
+    width: 50%;
+    padding: 0 25px 0 0;
+    margin: 0 25px 0 0;
+    border-right: 1px solid rgba(68, 68, 68, 0.3);
   }
 
   .terms__content {
@@ -703,25 +853,28 @@ textarea {
   select {
     width: 100%;
   }
-  .login-form__location,
-  .login-form__preexistingconditionsForm,
-  .login-form__medical {
+  .collapsibles__item,
+  .login-form__preexistingconditionsForm {
     margin: 2em auto 1em;
     padding: 15px 2em 2em;
-    width: 450px;
   }
   .login-form__read-terms {
-      margin: 0 auto;
+    margin: 0 auto;
     width: 500px;
   }
   #address input {
     width: 35%;
   }
-
-  .cta-primary  {
+  /*TO REVIEW */
+  /*.cta-primary  {
     position: absolute;
     left: 0;
     right: 0;
+  }*/
+
+  .content-inner--questionnaires .collapsibles__item,
+  .content-inner--questionnaires .login-form__preexistingconditionsForm {
+    width: 450px;
   }
 
 

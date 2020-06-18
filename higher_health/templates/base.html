@@ -1,4 +1,5 @@
 {% load static %}
+
 <!DOCTYPE html>
 <!--[if lt IE 7]><html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
 <!--[if IE 7]><html class="no-js lt-ie9 lt-ie8"> <![endif]-->
@@ -21,7 +22,6 @@
     <link rel="icon" type="image/png" sizes="16x16" href="{% static 'images/icons/favicon-16x16.png' %}">
     <link rel="manifest" href="{% static 'manifest.json' %}">
     <link rel="stylesheet" type="text/css" href="{% static 'css/index.css' %}?v=20200529" media="all">
-    <!-- TO DO: GOOGLE ANALYTICS -->
 
     <!--[if !IE]><!-->
     <link rel="stylesheet" type="text/css" href="{% static 'css/except-ie.css' %}?v=20200529" />
@@ -33,6 +33,17 @@
       Here are the <a href="https://www.enable-javascript.com/">
       instructions how to enable JavaScript in your web browser</a>.</p>
     </noscript>
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', '{{GA_TAG}}');
+    </script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id={{GA_TAG}}"></script>
+    <!-- End Google Analytics -->
+
 </head>
 <body id="healthcheck">
   <section class="wrapper">
@@ -47,7 +58,15 @@
         <div class="header__menu">
           <ul class="menu">
             <li class="menu__item menu__item--current">
-              <a href="#" class="menu__link"></a>
+              <a href="/" class="menu__link">Home</a>
+            </li>
+            <li id="login" class="menu__item">
+              <a href="{% url 'healthcheck_login' %}" class="menu__link">Login</a>
+            </li>
+            <li class="menu__item">
+              <a href="{% url 'healthcheck_receipt' %}" class="menu__link">
+                Clearance Certificate
+              </a>
             </li>
           </ul>
         </div>
@@ -102,16 +121,22 @@
   {% block extra_js %}
   <script type="text/javascript">
   "use strict";
-    const bodyBlock = document.getElementById('healthcheck');
-  	document.addEventListener('DOMContentLoaded',function(e) {
-      bodyBlock.addEventListener('scroll',function(e) {
-				if(e.target.scrollTop > 360) {
-          bodyBlock.classList.add('sticky');
-				} else {
-					bodyBlock.classList.remove('sticky');
-				}
-			});
-    });
+    let navLink = document.querySelectorAll('.menu__link');
+    let currentURL = location.pathname.split('/')[1];
+    for(let i = 0; i < navLink.length; i++ ) {
+      if (currentURL === "") {
+        //DO NOTHING
+     } else if(navLink[i].getAttribute("href").indexOf(currentURL) !== -1) {
+        navLink[i].parentNode.classList.add('menu__item--current');
+      } else if(currentURL === 'otp' && navLink[i].getAttribute("href").indexOf(currentURL) == -1) {
+        navLink[i].parentNode.classList.remove('menu__item--current');
+        document.getElementById('login').classList.add('menu__item--current');
+      }
+      else {
+        navLink[i].parentNode.classList.remove('menu__item--current');
+      }
+   };
+
   </script>
   {% endblock %}
   {% block form_js %}{% endblock %}

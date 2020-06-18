@@ -3,7 +3,8 @@
 {% block content %}
   <div class="content">
     <div class="content-intro">
-      <div class="content-inner">
+      <div class="content-inner content-inner--questionnaires">
+
         <div class="heading-container">
           <h1 class="heading heading-primary">Welcome to HealthCheck</h1>
           <h2 class="heading heading-secondary">Your daily risk assessment tool.</h2>
@@ -17,6 +18,7 @@
             health of all citizens AND stopping the spread of the virus 🦠
           </p>
         </div>
+
         <form action="" method="POST" id="login_form" class="login-form" novalidate>
         {% csrf_token %}
           <div class="login-form__read-terms">
@@ -24,105 +26,157 @@
               <li class="fieldset__item">
                 <input type="checkbox" id="healthcheck_terms" name="healthcheck-terms" required>
                 <label for="healthcheck_terms" class="label">I accept the terms</label>
-                <a href="/terms" class="label-link" target="_blank">Read terms and policy</a>
+                <a href="{% url 'healthcheck_terms' %}" class="label-link" target="_blank">Read terms and policy</a>
               </li>
             </ul>
           </div>
           <div id="questionnaires">
-            <div class="login-form__location">
-              <p class="pagination-ux">Step 1 of 4</p>
-              <h2 class="heading-secondary">Registration</h2>
-              <div class="login-form__screening">
-                {% if form.errors %}
-                  <p class="error">Please correct the errors below</p>
-                {% endif %}
-                <ul id="registration" class="fieldset">
-                  {% for field in form.registration_fields %}
+            <div class="collapsibles__item login-form__location">
+              <div class="pagination">
+                <p class="pagination__label">Step 1 of 4</p>
+                <span class="pagination__icon">+</span>
+              </div>
+              <div class="collapsibles__label">
+                <h3 class="heading heading-secondary">Registration</h3>
+              </div>
+              <div id="step_1" class="collapsibles__toggle">
+                <div class="login-form__screening">
+                  {% if form.errors %}
+                    <p class="error">Please correct the errors below</p>
+                  {% endif %}
+                  <ul id="registration" class="fieldset">
+                    {% for field in form.registration_fields %}
+                      <li class="fieldset__item">
+                        <label for="{{ field.id_for_label }}" class="label">
+                          {{field.label}}
+                        </label>
+                        {{field}}
+                        {{field.errors}}
+                      </li>
+                    {% endfor %}
+                  </ul>
+                </div>
+                <p class="subtitle">Sharing your location data will help us to further accurately map cases of COVID-19</p>
+                <div class="login-form__map">
+                  <div id="locationField">
+                    <input id="autocomplete"
+                      placeholder="Type your physical address"
+                      onFocus="geolocate()"
+                      type="text"
+                      value="{{ form.address.value|default_if_none:'' }}"
+                      name="address"/>
+                      {% if form.address.errors  %}{{form.address.errors}}{% endif %}
+                  </div>
+                  {% if form.latitude or form.longitude %}
+                    {{form.latitude}}
+                    {{form.longitude}}
+                  {% endif %}
+                  <div class="location-field-autoload">
+                    <p class="location-field-hint">The below physical address fields will be automatically populated from the address entered above. Otherwise please fill in the information.</p>
+                    <ul id="address" class="address-list fieldset">
+                      <li class="address-list__item">
+                        <input class="field" name="street_number" id="street_number" readonly value="{{ form.street_number.value|default_if_none:'' }}"/>
+                        <input class="field" name="route" id="route" readonly value="{{ form.route.value|default_if_none:'' }}"/>
+                        <label for="street_number" class="label">Street address:</label>
+                      </li>
+                      <li class="address-list__item">
+                        <input class="field" name="city" id="locality" readonly value="{{ form.city.value|default_if_none:'' }}"/>
+                        <label for="locality" class="label">City:</label>
+                      </li>
+                      <li class="address-list__item">
+                        <input class="field" name="country" id="country" readonly value="{{ form.country.value|default_if_none:'' }}"/>
+                        <label for="country" class="label">Country:</label>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="collapsibles__item login-form__medical">
+              <div class="pagination">
+                <p class="pagination__label">Step 2 of 4</p>
+                <span class="pagination__icon">+</span>
+              </div>
+              <div class="collapsibles__label">
+                <h2 class="heading-secondary">Where are you going today?</h2>
+              </div>
+              <div id="step_2" class="collapsibles__toggle">
+                <ul id="destination" class="fieldset">
+                  {% for field in form.destination_fields %}
+                    {% if field.name == "facility_destination_university" %}
+                      <h3 class="heading-subtitle heading-subtitle--edu-label">Educational institution information</h3>
+                    {% endif %}
                     <li class="fieldset__item">
-                      <label for="{{ field.id_for_label }}" class="label">
-                        {{field.label}}
-                      </label>
-                      {{field}}
-                      {{field.errors}}
+                      <label for="{{ field.name }}" class="label">{{ field.label }}</label>
+                      {% if field|field_type == 'RadioSelect' %}
+                        <ul id='id_{{ field.name }}'>
+                        {% for value, text in field.field.choices %}
+                          <li>
+                            <input name="{{ field.name }}"
+                             id="id_{{ field.name|slugify }}_{{ forloop.counter0 }}" type="radio" value="{{ value }}" {% if field.value == value %}checked="checked"{% endif %}/>
+                            <label for="id_{{ field.name|slugify }}_{{ forloop.counter0 }}">{{ text|capfirst }}</label>
+                          </li>
+                        {% endfor %}
+                        </ul>
+                        {{field.errors}}
+                      {% else %}
+                        {{field}}
+                        {{field.errors}}
+                      {% endif %}
                     </li>
                   {% endfor %}
                 </ul>
               </div>
-              <p class="subtitle">Sharing your location data will help us to further accurately map cases of COVID-19</p>
-              <div class="login-form__map">
-                <div id="locationField">
-                  <input id="autocomplete"
-                    placeholder="Type your physical address"
-                    onFocus="geolocate()"
-                    type="text"
-                    value="{{ form.address.value|default_if_none:'' }}"
-                    name="address"/>
-                    {% if form.address.errors  %}{{form.address.errors}}{% endif %}
-                </div>
-                {% if form.latitude or form.longitude %}
-                  {{form.latitude}}
-                  {{form.longitude}}
-                {% endif %}
-                <div class="location-field-autoload">
-                  <p class="location-field-hint">The below physical address fields will be automatically populated from the address entered above. Otherwise please fill in the information.</p>
-                  <ul id="address" class="address-list fieldset">
-                    <li class="address-list__item">
-                      <input class="field" name="street_number" id="street_number" readonly value="{{ form.street_number.value|default_if_none:'' }}"/>
-                      <input class="field" name="route" id="route" readonly value="{{ form.route.value|default_if_none:'' }}"/>
-                      <label for="street_number" class="label">Street address:</label>
+            </div>
+
+            <div class="collapsibles__item login-form__medical">
+              <div class="pagination">
+                <p class="pagination__label">Step 3 of 4</p>
+                <span class="pagination__icon">+</span>
+              </div>
+              <div class="collapsibles__label">
+                <h2 class="heading-secondary">Medical History</h2>
+              </div>
+              <div id="step_3" class="collapsibles__toggle">
+                <ul id="medical-history" class="fieldset">
+                  <li class="fieldset__medical">
+                    <label for="{{ form.history_pre_existing_condition.name }}" class="label">
+                      {{ form.history_pre_existing_condition.label }}
+                    </label>
+                    <ul id='id_{{form.history_pre_existing_condition.name}}'>
+                      {% for value, text in form.history_pre_existing_condition.field.choices %}
+                        <li>
+                          <input name="{{ form.history_pre_existing_condition.name }}"
+                           id="id_{{ form.history_pre_existing_condition.name|slugify }}_{{ forloop.counter0 }}" type="radio" value="{{ value }}" {% if field.value == value %}checked="checked"{% endif %}/>
+                          <label for="id_{{ form.history_pre_existing_condition.name|slugify }}_{{ forloop.counter0 }}">{{ text|capfirst }}</label>
+                        </li>
+                      {% endfor %}
+                    </ul>
+                  </li>
+                </ul>
+                <ul id="preexistingconditionsForm" class="fieldset">
+                  {% for field in form.history_fields %}
+                    <li class="fieldset__medical">
+                      {% if field|field_type == 'RadioSelect' %}
+                        <ul id='id_{{ field.name }}'>
+                        {% for value, text in field.field.choices %}
+                          <li>
+                            <input name="{{ field.name }}"
+                             id="id_{{ field.name|slugify }}_{{ forloop.counter0 }}" type="radio" value="{{ value }}" {% if field.value == value %}checked="checked"{% endif %}/>
+                            <label for="id_{{ field.name|slugify }}_{{ forloop.counter0 }}">{{ text|capfirst }}</label>
+                          </li>
+                        {% endfor %}
+                        </ul>
+                        {{field.errors}}
+                      {% endif %}
                     </li>
-                    <li class="address-list__item">
-                      <input class="field" name="city" id="locality" readonly value="{{ form.city.value|default_if_none:'' }}"/>
-                      <label for="locality" class="label">City:</label>
-                    </li>
-                    <li class="address-list__item">
-                      <input class="field" name="country" id="country" readonly value="{{ form.country.value|default_if_none:'' }}"/>
-                      <label for="country" class="label">Country:</label>
-                    </li>
-                  </ul>
-                </div>
+                  {% endfor %}
+                </ul>
               </div>
             </div>
-            <div class="login-form__medical">
-              <p class="pagination-ux">Step 2 of 4</p>
-              <h2 class="heading-secondary">Where are you going today?</h2>
-              <ul id="destination" class="fieldset">
-                {% for field in form.destination_fields %}
-                  {% if field.name == "facility_destination_university" %}
-                    <h3 class="heading-subtitle heading-subtitle--edu-label">Educational institution information</h3>
-                  {% endif %}
-                  <li class="fieldset__item">
-                    <label for="{{ field.name }}" class="label">{{ field.label }}</label>
-                    {{ field }}
-                    {{field.errors}}
-                  </li>
-                {% endfor %}
-              </ul>
-            </div>
 
-            <div class="login-form__medical">
-              <p class="pagination-ux">Step 3 of 4</p>
-              <h2 class="heading-secondary">Medical History</h2>
-              <ul id="medical-history" class="fieldset">
-                <li class="fieldset__medical">
-                  <label for="{{ form.history_pre_existing_condition.name }}" class="label">{{ form.history_pre_existing_condition.label }}</label>
-                  {{ form.history_pre_existing_condition }}
-                  {{form.history_pre_existing_condition.errors}}
-                </li>
-              </ul>
-              <ul id="preexistingconditionsForm" class="fieldset">
-                {% for field in form.history_fields %}
-                  <li class="fieldset__medical">
-                      <label for="{{ field.name }}" class="label">{{ field.label }}</label>
-                      {{ field }}
-                      {{field.errors}}
-                  </li>
-                {% endfor %}
-              </ul>
-            </div>
-
-            {% cache 300 symptoms %}
-            <div class="login-form__medical">
+            <div class="collapsibles__item login-form__medical">
               <p class="pagination-ux">Step 4 of 4</p>
               <h2 class="heading-secondary">How are you feeling today?</h2>
               <ul id="medical" class="fieldset">
@@ -132,15 +186,28 @@
                   {% endif %}
                   <li class="fieldset__item">
                     <label for="{{ field.name }}" class="label">{{ field.label }}</label>
-                    {{ field }}
-                    {{field.errors}}
+                    {% if field|field_type == 'RadioSelect' %}
+                      <ul id='id_{{ field.name }}'>
+                      {% for value, text in field.field.choices %}
+                        <li>
+                          <input name="{{ field.name }}"
+                           id="id_{{ field.name|slugify }}_{{ forloop.counter0 }}" type="radio" value="{{ value }}" {% if field.value == value %}checked="checked"{% endif %}/>
+                          <label for="id_{{ field.name|slugify }}_{{ forloop.counter0 }}">{{ text|capfirst }}</label>
+                        </li>
+                      {% endfor %}
+                      </ul>
+                      {{field.errors}}
+                    {% endif %}
                   </li>
                 {% endfor %}
               </ul>
+              {% if form.errors %}
+                <p class="error">Please correct all the errors before submitting.</p>
+              {% endif %}
             </div>
-            {% endcache %}
             <button id="entrySubmit" type="submit" class="cta cta-primary">Submit</button>
           </div>
+
         </form>
       </div>
     </div>
@@ -159,9 +226,56 @@
     let other_university = "{{ other_university }}";
   </script>
 
+
 {% compress js inline %}
   <script type="text/javascript">
   "use strict";
+
+  let paginate = document.querySelectorAll('.pagination__icon'),
+    sessionToggle = sessionStorage.getItem('steps') ? JSON.parse(sessionStorage.getItem('steps')) : {},
+    collapsed;
+
+  for(let i = 0; i < paginate.length; i++) {
+    paginate[i].innerHTML = '-';
+    let collapsiblesToggle = paginate[i].parentElement.nextElementSibling.nextElementSibling.getAttribute('id')
+
+    paginate[i].addEventListener('click', function(e) {
+      let nextElem = this.parentElement.nextElementSibling.nextElementSibling;
+      if(document.getElementById(nextElem.getAttribute('id')).style.display === ''){
+        document.getElementById(nextElem.getAttribute('id')).style.display = 'none';
+        paginate[i].innerHTML = '+';
+        collapsed = true;
+      } else if(document.getElementById(nextElem.getAttribute('id')).style.display === 'none') {
+        document.getElementById(nextElem.getAttribute('id')).style.display = 'block';
+        paginate[i].innerHTML = '-';
+        collapsed = false;
+      } else if(document.getElementById(nextElem.getAttribute('id')).style.display === 'block') {
+        document.getElementById(nextElem.getAttribute('id')).style.display = 'none';
+        paginate[i].innerHTML = '+';
+        collapsed = true;
+      }
+
+      sessionToggle[nextElem.getAttribute('id')] = collapsed;
+      sessionStorage.setItem('steps', JSON.stringify(sessionToggle));
+    });
+
+    if(sessionToggle[collapsiblesToggle] !== undefined) {
+      if(sessionToggle[collapsiblesToggle] === true) {
+        document.getElementById(collapsiblesToggle).style.display = 'none';
+        paginate[i].innerHTML = '+';
+      } else {
+        document.getElementById(collapsiblesToggle).style.display = 'block';
+        paginate[i].innerHTML = '-';
+      }
+      //Not doing a proper reset
+      if(document.body.contains(document.querySelectorAll('.errorlist')[i]) === true) {
+        document.getElementById(collapsiblesToggle).style.display = 'block';
+        paginate[i].innerHTML = '-';
+        sessionStorage.setItem('steps',JSON.stringify({}));
+      }
+
+    }
+  };
 
   let universities = JSON.parse(document.getElementById('universities-data').textContent),
   campuses = JSON.parse(document.getElementById('campus-data').textContent);
@@ -232,7 +346,7 @@
       }
     }
 
-    /* GOOGLE PLACES API: AUTOCOMPLETE */
+    //GOOGLE PLACES API: AUTOCOMPLETE
     let placeSearch, autocomplete;
     const componentForm = {
       street_number: 'short_name',
@@ -305,7 +419,7 @@
       }
     }
 
-    /* MEDICAL */
+    //MEDICAL
     const checkbox = document.getElementById('healthcheck_terms'),
     questionnairesForm = document.getElementById('questionnaires'),
     addressField = document.getElementById('autocomplete'),
@@ -395,6 +509,6 @@
     isPageLoad = false;
   </script>
 {% endcompress %}
-  <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key={{PLACES_API_KEY}}&libraries=places&callback=initAutocomplete"
-      async defer></script>
+
+<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key={{PLACES_API_KEY}}&libraries=places&callback=initAutocomplete" async defer></script>
 {% endblock %}

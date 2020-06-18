@@ -1,25 +1,35 @@
 from functools import partial
 
+from django.contrib.auth import login
+from django.contrib.auth.decorators import login_required, user_passes_test
+from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
+from django.contrib.auth.models import User
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.views import generic
 
-from .forms import HealthCheckLogin, HealthCheckQuestionnaire
+from .forms import HealthCheckLogin, HealthCheckOTP, HealthCheckQuestionnaire
 from .models import Campus, Covid19Triage, University
 from .utils import get_risk_level, save_data
 
 
-class HealthCheckQuestionnaireView(generic.FormView):
+class HealthCheckQuestionnaireView(
+    LoginRequiredMixin, UserPassesTestMixin, generic.FormView
+):
+    login_url = "/login/"
     form_class = HealthCheckQuestionnaire
     template_name = "healthcheck_questionnaire.html"
     success_url = reverse_lazy("healthcheck_receipt")
+    raise_exception = False
+
+    def test_func(self):
+        return not self.request.user.is_staff
 
     def form_valid(self, form):
         data = form.cleaned_data
         data["risk_level"] = get_risk_level(data)
-        triage = save_data(data)
-        self.request.session["triage_id"] = str(triage.id)
+        save_data(data, self.request.user)
         return super().form_valid(form)
 
     def get_context_data(self, **kwargs):
@@ -35,10 +45,8 @@ class HealthCheckQuestionnaireView(generic.FormView):
 
     def get_initial(self):
         initial_data = super().get_initial()
-        if self.request.method == "GET" and self.request.session.get("triage_id"):
-            triage = Covid19Triage.objects.filter(
-                id=self.request.session["triage_id"]
-            ).first()
+        if self.request.method == "GET":
+            triage = Covid19Triage.objects.filter(user=self.request.user).last()
             if triage:
                 initial_data["msisdn"] = triage.msisdn
                 initial_data["first_name"] = triage.first_name
@@ -73,29 +81,72 @@ class HealthCheckQuestionnaireView(generic.FormView):
         return initial_data
 
 
-def healthcheck_receipt(request):
-    try:
-        if "triage_id" in request.session:
-            triage = Covid19Triage.objects.get(id=request.session["triage_id"])
-            data = {
-                "risk_level": triage.risk,
-                "first_name": triage.first_name,
-                "last_name": triage.last_name,
-                "timestamp": triage.timestamp,
-                "msisdn": triage.hashed_msisdn,
-            }
-            return render(request, "healthcheck_receipt.html", data)
-    except Covid19Triage.DoesNotExist:
-        pass
+def staff_check(user):
+    return not user.is_staff
 
+
+@login_required
+@user_passes_test(staff_check)
+def healthcheck_receipt(request):
+    triage = Covid19Triage.objects.filter(user=request.user).last()
+    if triage:
+        data = {
+            "risk_level": triage.risk,
+            "first_name": triage.first_name,
+            "last_name": triage.last_name,
+            "timestamp": triage.timestamp,
+            "msisdn": triage.hashed_msisdn,
+        }
+        return render(request, "healthcheck_receipt.html", data)
     return HttpResponseRedirect("/")
 
 
-def healthcheck_login(request):
-    form = HealthCheckLogin()
-    return render(request, "healthcheck_receipt.html", {"form": form})
+class HealthCheckLoginView(generic.FormView):
+    form_class = HealthCheckLogin
+    template_name = "login.html"
+    success_url = reverse_lazy("healthcheck_otp")
+
+    def get_form_kwargs(self):
+        kwargs = super().get_form_kwargs()
+        kwargs["request"] = self.request
+        return kwargs
+
+    def form_valid(self, form):
+        data = form.cleaned_data
+        msisdn = data.get("msisdn")
+        self.request.session["msisdn"] = msisdn
+        return super().form_valid(form)
 
 
-def healthcheck_terms(request, extra_context=None, template=("healthcheck_terms.html")):
+class HealthCheckOTPView(generic.FormView):
+    form_class = HealthCheckOTP
+    template_name = "otp.html"
+    success_url = "/"
+
+    def dispatch(self, request, *args, **kwargs):
+        if "msisdn" not in request.session:
+            return HttpResponseRedirect("/")
+        return super().dispatch(request, *args, **kwargs)
+
+    def get_form_kwargs(self):
+        kwargs = super().get_form_kwargs()
+        kwargs["request"] = self.request
+        return kwargs
+
+    def get_context_data(self, **kwargs):
+        ctx = super().get_context_data(**kwargs)
+        if self.request.method == "GET" and self.request.session.get("msisdn"):
+            msisdn = self.request.session.get("msisdn")
+            ctx["hashed_msisdn"] = msisdn[:3] + "*" * 5 + msisdn[-4:]
+        return ctx
+
+    def form_valid(self, form):
+        msisdn = self.request.session.get("msisdn")
+        user, _ = User.objects.get_or_create(username=msisdn)
+        login(self.request, user)
+        return super().form_valid(form)
+
+
+def healthcheck_terms(request, extra_context=None, template="healthcheck_terms.html"):
     locale_code = request.GET.get("locale")
     return render(request, template, {"locale_code": locale_code})

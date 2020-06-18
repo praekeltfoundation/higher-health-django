@@ -76,6 +76,7 @@ TEMPLATES = [
                 "django.contrib.auth.context_processors.auth",
                 "django.contrib.messages.context_processors.messages",
                 "higher_health.context_processors.api_keys",
+                "higher_health.context_processors.ga_tags",
             ]
         },
     }
@@ -107,6 +108,8 @@ AUTH_PASSWORD_VALIDATORS = [
     {"NAME": "django.contrib.auth.password_validation.NumericPasswordValidator"},
 ]
 
+LOGIN_URL = "/login/"
+
 
 # Internationalization
 # https://docs.djangoproject.com/en/2.2/topics/i18n/
@@ -121,8 +124,15 @@ USE_L10N = True
 
 USE_TZ = True
 
+GA_TAG_KEY = env.str("GOOGLE_GA_TAG_KEY", "REPLACE_ME")
 CLIENT_PLACES_API_KEY = env.str("GOOGLE_PLACES_CLIENT_API_KEY", "REPLACE_ME")
 SERVER_PLACES_API_KEY = env.str("GOOGLE_PLACES_SERVER_API_KEY", "REPLACE_ME")
+
+RAPIDPRO_TOKEN = env.str("RAPIDPRO_TOKEN", "REPLACE_ME")
+RAPIDPRO_URL = env.str("RAPIDPRO_URL", "REPLACE_ME")
+RAPIDPRO_SEND_OTP_SMS_FLOW = env.str("RAPIDPRO_SEND_OTP_SMS_FLOW", "REPLACE_ME")
+
+OTP_EXPIRES_DURATION = env.int("OTP_EXPIRES_DURATION", 60 * 5)
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
@@ -134,7 +144,7 @@ STATICFILES_FINDERS = (
 )
 
 
-STATIC_ROOT = join(ROOT_DIR, "staticfiles")
+STATIC_ROOT = join(ROOT_DIR, "static")
 STATIC_URL = "/static/"
 COMPRESS_ENABLED = True
 
