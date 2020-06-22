@@ -222,14 +222,22 @@
   {{ campuses|json_script:"campus-data" }}
 {% endcache %}
 
-  <script type="text/javascript">
-    let other_university = "{{ other_university }}";
-  </script>
-
-
 {% compress js inline %}
   <script type="text/javascript">
   "use strict";
+
+  let universities = JSON.parse(document.getElementById('universities-data').textContent),
+  campuses = JSON.parse(document.getElementById('campus-data').textContent);
+
+  // with the assumption other will be the only value without a province
+  // otherwise we will have to add a name to the universities json blob and do a check against it
+  let other_university = null;
+  for(const [university, prov] of Object.entries(universities)){
+    if(prov === "" || prov === undefined){
+      other_university = university;
+      break;
+    }
+  }
 
   let paginate = document.querySelectorAll('.pagination__icon'),
     sessionToggle = sessionStorage.getItem('steps') ? JSON.parse(sessionStorage.getItem('steps')) : {},
@@ -276,9 +284,6 @@
 
     }
   };
-
-  let universities = JSON.parse(document.getElementById('universities-data').textContent),
-  campuses = JSON.parse(document.getElementById('campus-data').textContent);
 
     let prov = document.getElementById('id_facility_destination_province'),
       uni = document.getElementById('id_facility_destination_university'),

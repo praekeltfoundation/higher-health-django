@@ -34,13 +34,12 @@ class HealthCheckQuestionnaireView(
 
     def get_context_data(self, **kwargs):
         ctx = super(HealthCheckQuestionnaireView, self).get_context_data(**kwargs)
-        universities = University.objects.values_list("id", "province")
-        campuses = Campus.objects.values_list("id", "university_id")
-        other = universities.filter(name__iexact="other").first()
-
-        ctx["campuses"] = partial(dict, campuses)
-        ctx["universities"] = partial(dict, universities)
-        ctx["other_university"] = other[0] if other else None
+        ctx["campuses"] = partial(
+            dict, Campus.objects.values_list("id", "university_id")
+        )
+        ctx["universities"] = partial(
+            dict, University.objects.values_list("id", "province")
+        )
         return ctx
 
     def get_initial(self):
