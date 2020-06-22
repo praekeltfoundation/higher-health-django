@@ -321,15 +321,31 @@
 
     function showHiddenInputs(elem, clonedElems, selectInputs, csvInputElem) {
       selectInputs.options.length = 0;
+      let last_option = null;
 
       for(let i = 0; i < clonedElems.options.length; i++) {
         let uniChild = clonedElems.options[i];
-        if(csvInputElem[uniChild.value] == elem ||
-         csvInputElem[uniChild.value] == undefined ||
+
+        if(
+          csvInputElem[uniChild.value] == elem ||
+          csvInputElem[uniChild.value] == undefined ||
           (uniChild.value == other_university && csvInputElem[uniChild.value] == '') ||
-          csvInputElem[uniChild.value] == other_university) {
-          selectInputs.appendChild(uniChild.cloneNode(true));
+          csvInputElem[uniChild.value] == other_university
+          ) {
+            if((uniChild.value == other_university && csvInputElem[uniChild.value] == '') ||
+             csvInputElem[uniChild.value] == other_university
+            ){
+              // if its the other option save it for last
+              last_option = uniChild;
+            }
+            else {
+              selectInputs.appendChild(uniChild.cloneNode(true));
+            }
         }
+      }
+      // make sure we always add other as last opt
+      if (last_option !== null){
+        selectInputs.appendChild(last_option.cloneNode(true));
       }
     };
 
