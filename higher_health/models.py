@@ -3,8 +3,8 @@ import uuid
 
 import pycountry
 from django.db import models
-from django.utils import timezone
 from django.forms import ValidationError
+from django.utils import timezone
 from django.utils.text import gettext_lazy as _
 
 
