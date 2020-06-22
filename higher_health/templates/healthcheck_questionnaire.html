@@ -350,7 +350,7 @@
     };
 
     function showOther(val, list, other){
-      if(val === other_university || String(list[val]) === other_university) {
+      if(Number(val) === Number(other_university) || Number(list[val]) === Number(other_university)) {
         if(other !== null) other.parentElement.classList.remove('hidden');
       }
       else {
