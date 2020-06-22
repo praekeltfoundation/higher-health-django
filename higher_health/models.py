@@ -4,6 +4,8 @@ import uuid
 import pycountry
 from django.db import models
 from django.utils import timezone
+from django.forms import ValidationError
+from django.utils.text import gettext_lazy as _
 
 
 class Choice(enum.Enum):
@@ -17,7 +19,7 @@ class University(models.Model):
         (s.code, s.name) for s in pycountry.subdivisions.get(country_code="ZA")
     )
     name = models.CharField(max_length=100)
-    province = models.CharField(choices=PROVINCE_CHOICES, max_length=100)
+    province = models.CharField(choices=PROVINCE_CHOICES, max_length=100, blank=True)
 
     def __str__(self):
         if not self.province:
@@ -27,6 +29,12 @@ class University(models.Model):
     class Meta:
         verbose_name_plural = "Universities"
         ordering = ("name",)
+
+    def clean(self):
+        super(University, self).clean()
+        if self.name.lower() != "other" and not self.province:
+            err = _('Only a university with the name "Other" can have a None province')
+            raise ValidationError({"province": err})
 
 
 class Campus(models.Model):
