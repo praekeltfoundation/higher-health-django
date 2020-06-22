@@ -20,6 +20,7 @@ class University(models.Model):
     )
     name = models.CharField(max_length=100)
     province = models.CharField(choices=PROVINCE_CHOICES, max_length=100, blank=True)
+    sort_order = models.IntegerField(default=0, blank=True, db_index=True)
 
     def __str__(self):
         if not self.province:
@@ -28,7 +29,7 @@ class University(models.Model):
 
     class Meta:
         verbose_name_plural = "Universities"
-        ordering = ("name",)
+        ordering = ("sort_order", "name")
 
     def clean(self):
         super(University, self).clean()
@@ -40,13 +41,14 @@ class University(models.Model):
 class Campus(models.Model):
     name = models.CharField(max_length=100)
     university = models.ForeignKey(University, on_delete=models.CASCADE)
+    sort_order = models.IntegerField(default=0, blank=True, db_index=True)
 
     def __str__(self):
         return self.name
 
     class Meta:
         verbose_name_plural = "Campuses"
-        ordering = ("name",)
+        ordering = ("sort_order", "name")
 
 
 class Covid19Triage(models.Model):
