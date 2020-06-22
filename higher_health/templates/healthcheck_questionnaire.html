@@ -351,8 +351,10 @@
       }
     };
 
-    function showOther(val, list, other){
-      if(Number(val) === Number(other_university) || Number(list[val]) === Number(other_university)) {
+    function showOther(val, parent_list, other){
+      // show other input box if val is the 'Other' university
+      // show other input box if val is the 'Other' campus
+      if(Number(val) === Number(other_university) || Number(parent_list[val]) === Number(other_university)) {
         if(other !== null) other.parentElement.classList.remove('hidden');
       }
       else {
