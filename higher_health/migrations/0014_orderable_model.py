@@ -22,12 +22,10 @@ class Migration(migrations.Migration):
             model_name='campus',
             name='sort_order',
             field=models.IntegerField(blank=True, db_index=True, default=0),
-            preserve_default=False,
         ),
         migrations.AddField(
             model_name='university',
             name='sort_order',
             field=models.IntegerField(blank=True, db_index=True, default=0),
-            preserve_default=False,
         ),
     ]
