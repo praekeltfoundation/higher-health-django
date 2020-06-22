@@ -360,9 +360,7 @@ class QuestionnaireTest(TestCase):
             match_querystring=True,
         )
 
-        university_other = factories.UniversityFactory(
-            name="other", province=""
-        )
+        university_other = factories.UniversityFactory(name="other", province="")
         campus_other = factories.CampusFactory(
             name="other", university=university_other
         )
