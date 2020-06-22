@@ -552,7 +552,6 @@ a:hover {
   height: auto;
   margin: 20px 0 0;
 }
-
 #address input:disabled ~ label {
   color: var(--very-light-gray);
 }
@@ -719,9 +718,15 @@ textarea {
   color: var(--soft-red);
 }
 
+.excerpt h5 {
+  margin: 10px 0;
+  font-weight: 500;
+  font-size: 16px;
+  text-transform: capitalize;
+}
+
 /*
   FOOTER
-
 */
 
 .footer {
@@ -886,7 +891,7 @@ textarea {
   .collapsibles__item,
   .login-form__preexistingconditionsForm {
     margin: 2em auto 1em;
-    padding: 15px 2em 2em;
+    padding: 15px 2em 1em;
   }
   .login-form__read-terms {
     margin: 0 auto;
