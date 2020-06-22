@@ -285,38 +285,40 @@
     }
   };
 
-    let prov = document.getElementById('id_facility_destination_province'),
-      uni = document.getElementById('id_facility_destination_university'),
-      uni_other = document.getElementById('id_facility_destination_university_other'),
-      camp = document.getElementById('id_facility_destination_campus'),
-      camp_other = document.getElementById('id_facility_destination_campus_other'),
-      uniClone = uni.cloneNode(true),
-      campClone = camp.cloneNode(true),
+    let province_field = document.getElementById('id_facility_destination_province'),
+      university_field = document.getElementById('id_facility_destination_university'),
+      university_other_field = document.getElementById('id_facility_destination_university_other'),
+      campus_field = document.getElementById('id_facility_destination_campus'),
+      campus_other_field = document.getElementById('id_facility_destination_campus_other'),
+      uniClone = university_field.cloneNode(true),
+      campClone = campus_field.cloneNode(true),
       formSubmit = document.getElementById('login_form'),
       addressInput = document.getElementById('autocomplete'),
       latInput = document.getElementById('id_latitude'),
       lngInput = document.getElementById('id_longitude'),
       isPageLoad=true;
 
-    let selected_province = prov.options[prov.selectedIndex];
-    showHiddenInputs(selected_province.value, uniClone, uni, universities);
-    showHiddenInputs(uni.options[uni.selectedIndex].value, campClone, camp, campuses);
+    let selected_province = province_field.options[province_field.selectedIndex];
+    showHiddenInputs(selected_province.value, uniClone, university_field, universities);
+    showHiddenInputs(university_field.options[university_field.selectedIndex].value, campClone, campus_field, campuses);
     clearCampus();
-    showOther(selected_province.value, universities, uni_other);
-    showOther(uni.options[uni.selectedIndex].value, campuses, camp_other);
+    showOther(selected_province.value, universities, university_other_field);
+    showOther(university_field.options[university_field.selectedIndex].value, campuses, campus_other_field);
 
-    prov.addEventListener('change', function() {
-      showHiddenInputs(this.value, uniClone, uni, universities);
-      showHiddenInputs(uni.value, campClone, camp, campuses);
+    province_field.addEventListener('change', function() {
+      showHiddenInputs(this.value, uniClone, university_field, universities);
+      showHiddenInputs(university_field.value, campClone, camp, campuses);
       clearCampus();
     });
-    uni.addEventListener('change', function() {
-      showHiddenInputs(this.value, campClone, camp, campuses);
-      camp.parentElement.classList.remove('hidden');
-      showOther(this.value, universities, uni_other);
+
+    university_field.addEventListener('change', function() {
+      showHiddenInputs(this.value, campClone, campus_field, campuses);
+      campus_field.parentElement.classList.remove('hidden');
+      showOther(this.value, universities, university_other_field);
     });
-    camp.addEventListener('change', function() {
-      showOther(this.value, campuses, camp_other);
+
+    campus_field.addEventListener('change', function() {
+      showOther(this.value, campuses, campus_other_field);
     });
 
     function showHiddenInputs(elem, clonedElems, selectInputs, csvInputElem) {
@@ -360,10 +362,10 @@
 
     function clearCampus() {
       if(!isPageLoad){
-        uni.value = '';
-        camp.value = '';
-        uni_other.value = '';
-        camp_other.value = '';
+        university_field.value = '';
+        campus_field.value = '';
+        university_other_field.value = '';
+        campus_other_field.value = '';
       }
     }
 
