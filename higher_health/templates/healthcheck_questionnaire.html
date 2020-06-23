@@ -40,7 +40,7 @@
             </ul>
           </div>
           <div id="questionnaires">
-            <div id="regInfo" class="collapsibles__item login-form__location">
+            <div class="collapsibles__item login-form__location">
               <div class="pagination">
                 <p class="pagination__label">Step 1 of 4</p>
                 <span class="pagination__icon">+</span>
@@ -86,7 +86,7 @@
                     <p class="location-field-hint">The below physical address fields will be automatically populated from the address entered above. Otherwise please fill in the information.</p>
                     <ul id="address" class="address-list fieldset">
                       <li class="address-list__item">
-                        <input class="field" name="street_number" id="street_number" readonly value="{{ form.street_number.value}}"/>
+                        <input class="field" name="street_number" id="street_number" readonly value="{{ form.street_number.value|default_if_none:''}}"/>
                         <input class="field" name="route" id="route" readonly value="{{ form.route.value|default_if_none:''}}"/>
                         <label for="street_number" class="label">Street address:</label>
                       </li>
