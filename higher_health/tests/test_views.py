@@ -65,6 +65,9 @@ class QuestionnaireTest(TestCase):
         save_data(data, User.objects.get(username="+27831231234"))
 
         response = self.client.get(reverse("healthcheck_questionnaire"))
+        self.assertRedirects(response, "/receipt/")
+
+        response = self.client.get("/?redo=true")
 
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(
