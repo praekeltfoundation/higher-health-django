@@ -60,20 +60,17 @@
             <li class="menu__item menu__item--current">
               <a href="/" class="menu__link">Home</a>
             </li>
-            {% comment %}
-              <!--
-                Exercise 1:
-                Show upon OTP verified / returning visits
-              -->
+              {% if not user.is_authenticated %}
               <li id="login" class="menu__item">
                 <a href="{% url 'healthcheck_login' %}" class="menu__link">Login</a>
               </li>
+              {% else %}
               <li class="menu__item">
                 <a href="{% url 'healthcheck_receipt' %}" class="menu__link">
                   Clearance Certificate
                 </a>
               </li>
-            {% endcomment %}
+            {% endif %}
 
           </ul>
         </div>
