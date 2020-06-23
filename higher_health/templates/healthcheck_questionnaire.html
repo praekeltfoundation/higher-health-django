@@ -416,7 +416,8 @@
                   excerpt.innerHTML = '<h5>'+ entryInfo.entryUni() +' | '+entryInfo.entryCampus()+'</h5>';
                 }
                 else if(collapsiblesToggle === 'step_3') {
-                  excerpt.innerHTML = '<h5>'+preexistingRadioKey+'</h5>';
+                  var preexistingRadioKeyDisplay = preexistingRadioKey === "not_sure" ? "Not sure" : preexistingRadioKey;
+                  excerpt.innerHTML = '<h5>'+preexistingRadioKeyDisplay+'</h5>';
                 }
               excerpt.style.display = 'block';
               collapsiblesBlock.parentElement.append(excerpt);
