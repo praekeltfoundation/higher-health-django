@@ -526,6 +526,24 @@ class ReceiptTest(TestCase):
         self.assertEqual(response.context["last_name"], triage.last_name)
         self.assertEqual(response.context["timestamp"], triage.timestamp)
         self.assertEqual(response.context["msisdn"], triage.hashed_msisdn)
+        self.assertEqual(response.context["is_expired"], False)
+
+    def test_get_with_expired_receipt(self):
+        login_with_otp(self.client, "+27831231234")
+
+        data = get_data()
+        data["risk_level"] = "high"
+        data["timestamp"] = datetime.utcnow() - timedelta(days=1)
+        save_data(data, User.objects.get(username="+27831231234"))
+
+        response = self.client.get(reverse("healthcheck_receipt"))
+
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(
+            response=response, template_name="healthcheck_receipt.html"
+        )
+        self.assertTrue(response.context["is_expired"])
+        self.assertContains(response, "Your clearance certificate has expired.")
 
     def test_get_with_no_triage_completed(self):
         response = self.client.get(reverse("healthcheck_receipt"))
