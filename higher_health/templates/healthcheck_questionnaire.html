@@ -172,6 +172,7 @@
                 <ul id="preexistingconditionsForm" class="fieldset">
                   {% for field in form.history_fields %}
                     <li class="fieldset__medical">
+                      <label for="{{ field.name }}" class="label">{{ field.label }}</label>
                       {% if field|field_type == 'RadioSelect' %}
                         <ul id='id_{{ field.name }}'>
                         {% for value, text in field.field.choices %}
@@ -422,8 +423,6 @@
             } else {
               collapsiblesBlock.style.display = 'block';
               paginate[i].innerHTML = '-';
-
-              document.getElementById('regInfo').style.display = 'none';
               excerpt.style.display = 'none';
             }
           }
