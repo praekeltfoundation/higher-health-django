@@ -133,6 +133,8 @@ RAPIDPRO_URL = env.str("RAPIDPRO_URL", "REPLACE_ME")
 RAPIDPRO_SEND_OTP_SMS_FLOW = env.str("RAPIDPRO_SEND_OTP_SMS_FLOW", "REPLACE_ME")
 
 OTP_EXPIRES_DURATION = env.int("OTP_EXPIRES_DURATION", 60 * 5)
+OTP_BACKOFF_DURATION = env.int("OTP_BACKOFF_DURATION", 60 * 15)
+OTP_RETRIES_LIMIT = env.int("OTP_RETRIES_LIMIT", 3)
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
