@@ -60,14 +60,21 @@
             <li class="menu__item menu__item--current">
               <a href="/" class="menu__link">Home</a>
             </li>
-            <li id="login" class="menu__item">
-              <a href="{% url 'healthcheck_login' %}" class="menu__link">Login</a>
-            </li>
-            <li class="menu__item">
-              <a href="{% url 'healthcheck_receipt' %}" class="menu__link">
-                Clearance Certificate
-              </a>
-            </li>
+            {% comment %}
+              <!--
+                Exercise 1:
+                Show upon OTP verified / returning visits
+              -->
+              <li id="login" class="menu__item">
+                <a href="{% url 'healthcheck_login' %}" class="menu__link">Login</a>
+              </li>
+              <li class="menu__item">
+                <a href="{% url 'healthcheck_receipt' %}" class="menu__link">
+                  Clearance Certificate
+                </a>
+              </li>
+            {% endcomment %}
+
           </ul>
         </div>
       </div>

@@ -7,7 +7,7 @@
 
         <div class="heading-container">
           <h1 class="heading heading-primary">Welcome to HealthCheck</h1>
-          <h2 class="heading heading-secondary">Your daily risk assessment tool.</h2>
+          <h2 class="heading heading-secondary">your daily risk assessment tool.</h2>
           <h3 class="heading heading-subtitle">Please help us by answering a few questions about you and your health.</h3>
           <p>
             You will receive advice on what actions to take based on national guidelines,
@@ -17,6 +17,15 @@
             Thank you for coming forward and for contributing to the
             health of all citizens AND stopping the spread of the virus 🦠
           </p>
+          {% comment %}
+            <!--
+              Exercise 3:
+              Use different headings / ctas for returning users.
+            -->
+            <h1 class="heading heading-primary">Welcome back to HealthCheck</h1>
+            <h3 class="heading heading-subtitle">your daily risk assessment tool.</h3>
+            <p>Please help us by answering a few questions about you and your health.</p>
+          {% endcomment %}
         </div>
 
         <form action="" method="POST" id="login_form" class="login-form" novalidate>
@@ -31,7 +40,7 @@
             </ul>
           </div>
           <div id="questionnaires">
-            <div class="collapsibles__item login-form__location">
+            <div id="regInfo" class="collapsibles__item login-form__location">
               <div class="pagination">
                 <p class="pagination__label">Step 1 of 4</p>
                 <span class="pagination__icon">+</span>
@@ -63,9 +72,11 @@
                       placeholder="Type your physical address"
                       onFocus="geolocate()"
                       type="text"
-                      value="{{ form.address.value|default_if_none:'' }}"
+                      value="{{ form.address.value|default_if_none:''}}"
                       name="address"/>
-                      {% if form.address.errors  %}{{form.address.errors}}{% endif %}
+                      {% if form.address.errors %}
+                        {{form.address.errors}}
+                      {% endif %}
                   </div>
                   {% if form.latitude or form.longitude %}
                     {{form.latitude}}
@@ -75,16 +86,16 @@
                     <p class="location-field-hint">The below physical address fields will be automatically populated from the address entered above. Otherwise please fill in the information.</p>
                     <ul id="address" class="address-list fieldset">
                       <li class="address-list__item">
-                        <input class="field" name="street_number" id="street_number" readonly value="{{ form.street_number.value|default_if_none:'' }}"/>
-                        <input class="field" name="route" id="route" readonly value="{{ form.route.value|default_if_none:'' }}"/>
+                        <input class="field" name="street_number" id="street_number" readonly value="{{ form.street_number.value}}"/>
+                        <input class="field" name="route" id="route" readonly value="{{ form.route.value|default_if_none:''}}"/>
                         <label for="street_number" class="label">Street address:</label>
                       </li>
                       <li class="address-list__item">
-                        <input class="field" name="city" id="locality" readonly value="{{ form.city.value|default_if_none:'' }}"/>
+                        <input class="field" name="city" id="locality" readonly value="{{ form.city.value|default_if_none:''}}"/>
                         <label for="locality" class="label">City:</label>
                       </li>
                       <li class="address-list__item">
-                        <input class="field" name="country" id="country" readonly value="{{ form.country.value|default_if_none:'' }}"/>
+                        <input class="field" name="country" id="country" readonly value="{{ form.country.value|default_if_none:''}}"/>
                         <label for="country" class="label">Country:</label>
                       </li>
                     </ul>
@@ -142,19 +153,22 @@
                 <ul id="medical-history" class="fieldset">
                   <li class="fieldset__medical">
                     <label for="{{ form.history_pre_existing_condition.name }}" class="label">
-                      {{ form.history_pre_existing_condition.label }}
+                    {{ form.history_pre_existing_condition.label }}
                     </label>
                     <ul id='id_{{form.history_pre_existing_condition.name}}'>
                       {% for value, text in form.history_pre_existing_condition.field.choices %}
                         <li>
                           <input name="{{ form.history_pre_existing_condition.name }}"
-                           id="id_{{ form.history_pre_existing_condition.name|slugify }}_{{ forloop.counter0 }}" type="radio" value="{{ value }}" {% if field.value == value %}checked="checked"{% endif %}/>
+                           id="id_{{ form.history_pre_existing_condition.name|slugify }}_{{ forloop.counter0 }}" type="radio" value="{{ value }}" {% if form.history_pre_existing_condition.value == value %}checked="checked"{% endif %}/>
+
                           <label for="id_{{ form.history_pre_existing_condition.name|slugify }}_{{ forloop.counter0 }}">{{ text|capfirst }}</label>
                         </li>
                       {% endfor %}
                     </ul>
+                    {{form.history_pre_existing_condition.errors}}
                   </li>
                 </ul>
+
                 <ul id="preexistingconditionsForm" class="fieldset">
                   {% for field in form.history_fields %}
                     <li class="fieldset__medical">
@@ -173,6 +187,7 @@
                     </li>
                   {% endfor %}
                 </ul>
+
               </div>
             </div>
 
@@ -222,62 +237,13 @@
   {{ campuses|json_script:"campus-data" }}
 {% endcache %}
 
-
-
 {% compress js inline %}
   <script type="text/javascript">
-  "use strict";
+    "use strict";
 
-  let paginate = document.querySelectorAll('.pagination__icon'),
-    sessionToggle = sessionStorage.getItem('steps') ? JSON.parse(sessionStorage.getItem('steps')) : {},
-    collapsed;
-
-  for(let i = 0; i < paginate.length; i++) {
-    paginate[i].innerHTML = '-';
-    let collapsiblesToggle = paginate[i].parentElement.nextElementSibling.nextElementSibling.getAttribute('id')
-
-    paginate[i].addEventListener('click', function(e) {
-      let nextElem = this.parentElement.nextElementSibling.nextElementSibling;
-      if(document.getElementById(nextElem.getAttribute('id')).style.display === ''){
-        document.getElementById(nextElem.getAttribute('id')).style.display = 'none';
-        paginate[i].innerHTML = '+';
-        collapsed = true;
-      } else if(document.getElementById(nextElem.getAttribute('id')).style.display === 'none') {
-        document.getElementById(nextElem.getAttribute('id')).style.display = 'block';
-        paginate[i].innerHTML = '-';
-        collapsed = false;
-      } else if(document.getElementById(nextElem.getAttribute('id')).style.display === 'block') {
-        document.getElementById(nextElem.getAttribute('id')).style.display = 'none';
-        paginate[i].innerHTML = '+';
-        collapsed = true;
-      }
-
-      sessionToggle[nextElem.getAttribute('id')] = collapsed;
-      sessionStorage.setItem('steps', JSON.stringify(sessionToggle));
-    });
-
-    if(sessionToggle[collapsiblesToggle] !== undefined) {
-      if(sessionToggle[collapsiblesToggle] === true) {
-        document.getElementById(collapsiblesToggle).style.display = 'none';
-        paginate[i].innerHTML = '+';
-      } else {
-        document.getElementById(collapsiblesToggle).style.display = 'block';
-        paginate[i].innerHTML = '-';
-      }
-      //Not doing a proper reset
-      if(document.body.contains(document.querySelectorAll('.errorlist')[i]) === true) {
-        document.getElementById(collapsiblesToggle).style.display = 'block';
-        paginate[i].innerHTML = '-';
-        sessionStorage.setItem('steps',JSON.stringify({}));
-      }
-
-    }
-  };
-
-
-  let universities = JSON.parse(document.getElementById('universities-data').textContent),
-  campuses = JSON.parse(document.getElementById('campus-data').textContent);
-    let prov = document.getElementById('id_facility_destination_province'),
+    let universities = JSON.parse(document.getElementById('universities-data').textContent),
+      campuses = JSON.parse(document.getElementById('campus-data').textContent),
+      prov = document.getElementById('id_facility_destination_province'),
       uni = document.getElementById('id_facility_destination_university'),
       camp = document.getElementById('id_facility_destination_campus'),
       uniClone = uni.cloneNode(true),
@@ -286,199 +252,307 @@
       addressInput = document.getElementById('autocomplete'),
       latInput = document.getElementById('id_latitude'),
       lngInput = document.getElementById('id_longitude'),
-      isPageLoad=true;
+      selected_province = prov.options[prov.selectedIndex],
+      checkbox = document.getElementById('healthcheck_terms'),
+      questionnairesForm = document.getElementById('questionnaires'),
+      addressField = document.getElementById('autocomplete'),
+      preexistingconditionsYes = document.getElementById('id_history_pre_existing_condition_0'),
+      preexistingconditionsNo = document.getElementById('id_history_pre_existing_condition_1'),
+      preexistingconditionsNotsure = document.getElementById('id_history_pre_existing_condition_2'),
+      isPageLoad = true;
 
-    let selected_province = prov.options[prov.selectedIndex];
-    showHiddenInputs(selected_province.value, uniClone, uni, universities);
-    showHiddenInputs(uni.options[uni.selectedIndex].value, campClone, camp, campuses);
-    clearCampus();
-    prov.addEventListener('change', function() {
-      showHiddenInputs(this.value, uniClone, uni, universities);
-      showHiddenInputs(uni.value, campClone, camp, campuses);
+      showHiddenInputs(selected_province.value, uniClone, uni, universities);
+      showHiddenInputs(uni.options[uni.selectedIndex].value, campClone, camp, campuses);
       clearCampus();
-    });
-    uni.addEventListener('change', function() {
-      showHiddenInputs(this.value, campClone, camp, campuses);
-    });
-
-    function showHiddenInputs(elem, clonedElems, selectInputs, csvInputElem) {
-      selectInputs.options.length = 0;
-
-      for(let i = 0; i < clonedElems.options.length; i++) {
-        let uniChild = clonedElems.options[i];
-        if(csvInputElem[uniChild.value] == elem || csvInputElem[uniChild.value] == undefined) {
-          selectInputs.appendChild(uniChild.cloneNode(true));
-        }
-      }
-    };
-    function clearCampus() {
-      if(!isPageLoad){
-        uni.value = '';
-        camp.value = '';
-      }
-    }
-
-
-    //GOOGLE PLACES API: AUTOCOMPLETE
-    let placeSearch, autocomplete;
-    const componentForm = {
-      street_number: 'short_name',
-      route: 'long_name',
-      locality: 'long_name',
-      country: 'long_name'
-    };
-
-    function initAutocomplete() {
-      // Create the autocomplete object, restricting the search predictions to
-      // geographical location types.
-      autocomplete = new google.maps.places.Autocomplete(
-        document.getElementById('autocomplete'), {
-          strictbounds: true,
-          types: ['geocode'],
-          componentRestrictions: { country: "ZA" }
-        });
-
-      // Avoid paying for data that you don't need by restricting the set of
-      // place fields that are returned to just the address components.
-      autocomplete.setFields(['address_components', 'geometry']);
-
-      // When the user selects an address from the drop-down, populate the
-      // address fields in the form.
-      addressInput.addEventListener('keyup',function(e){
-        e.target.value = this.value;
-        latInput.value = '';
-        lngInput.value = '';
+      prov.addEventListener('change', function() {
+        showHiddenInputs(this.value, uniClone, uni, universities);
+        showHiddenInputs(uni.value, campClone, camp, campuses);
+        clearCampus();
       });
-      autocomplete.addListener('place_changed', function(){
-        let thisPlace = this.getPlace();
-        let cityInput = autocomplete.getPlace();
+      uni.addEventListener('change', function() {
+        showHiddenInputs(this.value, campClone, camp, campuses);
+      });
 
-        for (let component in componentForm) {
-          document.getElementById(component).value = '';
-        }
-
-        let location = cityInput.geometry.location;
-        latInput.value = location.lat();
-        lngInput.value = location.lng();
-
-        // Get each component of the address from the place details,
-        // and then fill-in the corresponding field on the form.
-        for (let i = 0; i < cityInput.address_components.length; i++) {
-          let addressType = cityInput.address_components[i].types[0];
-          if (componentForm[addressType]) {
-
-            let val = cityInput.address_components[i][componentForm[addressType]];
-            console.log(componentForm[addressType], val);
-
-            document.getElementById(addressType).value = val;
+      function showHiddenInputs(elem, clonedElems, selectInputs, csvInputElem) {
+        selectInputs.options.length = 0;
+        for(let i = 0; i < clonedElems.options.length; i++) {
+          let uniChild = clonedElems.options[i];
+          if(csvInputElem[uniChild.value] == elem || csvInputElem[uniChild.value] == undefined) {
+            selectInputs.appendChild(uniChild.cloneNode(true));
           }
         }
-      });
-    }
-
-    // Bias the autocomplete object to the user's geographical location,
-    // as supplied by the browser's 'navigator.geolocation' object.
-    function geolocate() {
-      if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(function(position) {
-          let geolocation = {
-            lat: position.coords.latitude,
-            lng: position.coords.longitude
-          };
-          let circle = new google.maps.Circle(
-            {center: geolocation, radius: position.coords.accuracy});
-          autocomplete.setBounds(circle.getBounds());
-        });
+      };
+      function clearCampus() {
+        if(!isPageLoad){
+          uni.value = '';
+          camp.value = '';
+        }
       }
-    }
 
-    //MEDICAL
-    const checkbox = document.getElementById('healthcheck_terms'),
-    questionnairesForm = document.getElementById('questionnaires'),
-    addressField = document.getElementById('autocomplete'),
-    preexistingconditionsYes= document.getElementById('id_history_pre_existing_condition_0'),
-    preexistingconditionsNo= document.getElementById('id_history_pre_existing_condition_1'),
-    preexistingconditionsNotsure= document.getElementById('id_history_pre_existing_condition_2');
-    document.addEventListener('DOMContentLoaded',function(e) {
-      //Review & cleanup
-      let checkboxKey = sessionStorage.getItem('checkbox');
-      if(checkboxKey === 'true') {
-        checkbox.checked = true;
-        questionnairesForm.classList.add('showing');
-        questionnairesForm.classList.remove('hidden');
-      } else {
-        checkbox.checked = false;
-        questionnairesForm.classList.add('hidden');
-        questionnairesForm.classList.remove('showing');
-      }
-      checkbox.addEventListener('change', function(e){
-        if (e.target.checked) {
-          sessionStorage.setItem('checkbox', 'true');
+      document.addEventListener('DOMContentLoaded',function(e) {
+        let checkboxKey = sessionStorage.getItem('checkbox'),
+          paginate = document.querySelectorAll('.pagination__icon'),
+          sessionToggle = sessionStorage.getItem('steps') ? JSON.parse(sessionStorage.getItem('steps')) : {},
+          collapsed,
+          preexistingRadioKey = sessionStorage.getItem('preexistingRadio');
+
+        //CHECKBOX TOGGLE
+        if(checkboxKey === 'true') {
+          checkbox.checked = true;
           questionnairesForm.classList.add('showing');
           questionnairesForm.classList.remove('hidden');
         } else {
-          sessionStorage.setItem('checkbox', 'false');
+          checkbox.checked = false;
           questionnairesForm.classList.add('hidden');
           questionnairesForm.classList.remove('showing');
         }
-      });
 
-      //Pre-existing conditions Yes & cleanup
-      let preexistingRadioKey = sessionStorage.getItem('preexistingRadio');
-      if(preexistingRadioKey === 'yes' || preexistingRadioKey === 'not_sure') {
-        if(preexistingRadioKey === 'yes') {
-          preexistingconditionsYes.checked = true;
-        }
-        else {
-          preexistingconditionsNotsure.checked = true;
-        }
+        //ACCEPT TERMS & CHECKBOX TOGGLE
+        checkbox.addEventListener('change', function(e) {
+          if (e.target.checked) {
+            sessionStorage.setItem('checkbox', 'true');
+            sessionStorage.setItem('steps', JSON.stringify(sessionToggle));
+            questionnairesForm.classList.add('showing');
+            questionnairesForm.classList.remove('hidden');
+          } else {
+            sessionStorage.setItem('checkbox', 'false');
+            sessionStorage.setItem('steps', JSON.stringify({}));
+            questionnairesForm.classList.add('hidden');
+            questionnairesForm.classList.remove('showing');
+          }
+        });
 
-        preexistingconditionsForm.classList.add('showing');
-        preexistingconditionsForm.classList.remove('hidden');
-      } else {
-        preexistingconditionsYes.checked = false;
-        preexistingconditionsForm.classList.add('hidden');
-        preexistingconditionsForm.classList.remove('showing');
-      }
-      preexistingconditionsYes.addEventListener('change', function(e){
-        if (e.target.checked) {
-          sessionStorage.setItem('preexistingRadio', 'yes');
+        //COLLAPSE & EXPAND
+        for(let i = 0; i < paginate.length; i++) {
+          let collapsiblesBlock = paginate[i].parentElement.nextElementSibling.nextElementSibling,
+          collapsiblesToggle = collapsiblesBlock.getAttribute('id');
+          paginate[i].innerHTML = '-';
+
+          //Traverse Collapsibles blocks Inputs
+          let allCollapsiblesInputs = collapsiblesBlock.querySelectorAll('input,select');
+
+          // Initial / default
+          for(let j = 0; j < allCollapsiblesInputs.length; j++) {
+            let inputElem = allCollapsiblesInputs[j],
+              inputName = inputElem.name,
+              inputType = inputElem.type,
+              inputValue = inputElem.value;
+            if(inputType === 'text' || inputType === 'hidden') {
+              if(inputValue !== '') { collapsed = true }
+              else { collapsed = false }
+            }
+            else if(inputType === 'select-one') {
+              for(let k = 0; k < inputElem.options.length; k++) {
+                if( inputValue !== '' && inputElem.options[k].selected !== false) {
+                  collapsed = true;
+                } else if(inputValue === '' && inputElem.options[k].selected === false) { collapsed = false }
+              }
+            }
+            else if(inputType === 'radio') {
+              if(inputElem.checked !== false)  { collapsed = true }
+            };
+            sessionToggle[collapsiblesToggle] = collapsed;
+          };
+
+          // Initial / Dafault Expand / Collaspe Click Event
+          if(sessionToggle[collapsiblesToggle] !== undefined) {
+            if(collapsiblesBlock.contains(document.querySelectorAll('.errorlist')[i]) === true) {
+              collapsed = false;
+              sessionToggle[collapsiblesToggle] = collapsed;
+            }
+          };
+
+          // Expand / Collapse Click Event
+          let excerpt = document.createElement('div');
+          paginate[i].addEventListener('click', function(e) {
+            let nextElem = this.parentElement.nextElementSibling.nextElementSibling;
+            if(nextElem.style.display === '') {
+              nextElem.style.display = 'none';
+              paginate[i].innerHTML = '+';
+              collapsed = true;
+              excerpt.style.display = 'block';
+            } else if(nextElem.style.display === 'none') {
+              nextElem.style.display = 'block';
+              paginate[i].innerHTML = '-';
+              collapsed = false;
+              excerpt.style.display = 'none';
+            } else if(nextElem.style.display === 'block') {
+              nextElem.style.display = 'none';
+              excerpt.style.display = 'block';
+              paginate[i].innerHTML = '+';
+              collapsed = true;
+            }
+            sessionToggle[collapsiblesToggle] = collapsed;
+            sessionStorage.setItem('steps', JSON.stringify(sessionToggle));
+          });
+
+          let entryInfo = {
+            entryName: document.getElementById('id_first_name').value,
+            entrySurname: document.getElementById('id_last_name').value,
+            entryAddress: document.getElementById('autocomplete').value,
+            entrySelectedAgeIndex: document.getElementById('id_age_range').selectedIndex,
+            entrySelectedUniIndex: document.getElementById('id_facility_destination_university').selectedIndex,
+            entrySelectedCampusIndex: document.getElementById('id_facility_destination_campus').selectedIndex,
+            entryAge: function() {
+              return  document.getElementById('id_age_range')[this.entrySelectedAgeIndex].value
+            },
+            entryUni: function() {
+              return  document.getElementById('id_facility_destination_university')[this.entrySelectedUniIndex].label
+            },
+            entryCampus: function() {
+              return  document.getElementById('id_facility_destination_campus')[this.entrySelectedCampusIndex].label
+            }
+          };
+          if(sessionToggle[collapsiblesToggle] !== undefined || sessionToggle[collapsiblesToggle] !== null) {
+            if(sessionToggle[collapsiblesToggle] === true ) {
+              collapsiblesBlock.style.display = 'none';
+              paginate[i].innerHTML = '+';
+                excerpt.classList.add('excerpt');
+                if(collapsiblesToggle === 'step_1') {
+                  excerpt.innerHTML =  '<h5>'+entryInfo.entryName + ' '+ entryInfo.entrySurname + ' | ' + entryInfo.entryAge() + ' | ' + entryInfo.entryAddress+'</h5>';
+                }
+                else if(collapsiblesToggle === 'step_2') {
+                  excerpt.innerHTML = '<h5>'+ entryInfo.entryUni() +' | '+entryInfo.entryCampus()+'</h5>';
+                }
+                else if(collapsiblesToggle === 'step_3') {
+                  excerpt.innerHTML = '<h5>'+preexistingRadioKey+'</h5>';
+                }
+              excerpt.style.display = 'block';
+              collapsiblesBlock.parentElement.append(excerpt);
+            } else {
+              collapsiblesBlock.style.display = 'block';
+              paginate[i].innerHTML = '-';
+
+              document.getElementById('regInfo').style.display = 'none';
+              excerpt.style.display = 'none';
+            }
+          }
+        };
+
+        //PRE-EXISTING CONDITIONS
+        if(preexistingRadioKey !== null) {}
+        if(preexistingRadioKey === 'yes' || preexistingRadioKey === 'not_sure') {
+          if(preexistingRadioKey === 'yes') {
+            preexistingconditionsYes.checked = true;
+          } else {
+            preexistingconditionsNotsure.checked = true;
+          }
           preexistingconditionsForm.classList.add('showing');
           preexistingconditionsForm.classList.remove('hidden');
         } else {
-          sessionStorage.setItem('preexistingRadio', 'no');
+          preexistingconditionsYes.checked = false;
           preexistingconditionsForm.classList.add('hidden');
           preexistingconditionsForm.classList.remove('showing');
         }
-      });
+        preexistingconditionsYes.addEventListener('change', function(e) {
+          if (e.target.checked) {
+            sessionStorage.setItem('preexistingRadio', 'yes');
+            preexistingconditionsForm.classList.add('showing');
+            preexistingconditionsForm.classList.remove('hidden');
+          } else {
+            sessionStorage.setItem('preexistingRadio', 'no');
+            preexistingconditionsForm.classList.add('hidden');
+            preexistingconditionsForm.classList.remove('showing');
+          }
+        });
+        preexistingconditionsNo.addEventListener('change', function(e) {
+          if (e.target.checked) {
+            sessionStorage.setItem('preexistingRadio', 'no');
+            preexistingconditionsForm.classList.add('hidden');
+            preexistingconditionsForm.classList.remove('showing');
+          }
+        });
+        preexistingconditionsNotsure.addEventListener('change', function(e) {
+          if (e.target.checked) {
+            sessionStorage.setItem('preexistingRadio', 'not_sure');
+            preexistingconditionsForm.classList.add('showing');
+            preexistingconditionsForm.classList.remove('hidden');
+          } else {
+            sessionStorage.setItem('preexistingRadio', 'no');
+            preexistingconditionsForm.classList.add('hidden');
+            preexistingconditionsForm.classList.remove('showing');
+          }
+        });
 
-      preexistingconditionsNo.addEventListener('change', function(e){
-        if (e.target.checked) {
-          sessionStorage.setItem('preexistingRadio', 'no');
-          preexistingconditionsForm.classList.add('hidden');
-          preexistingconditionsForm.classList.remove('showing');
+        //ERRORS
+        let ErrorList = document.querySelectorAll('.errorlist');
+        if(ErrorList.length > 0) {
+          ErrorList[0].parentElement.scrollIntoView({
+            bahavior: "smooth",
+            block: "start"
+          });
         }
       });
-      preexistingconditionsNotsure.addEventListener('change', function(e){
-        if (e.target.checked) {
-          sessionStorage.setItem('preexistingRadio', 'not_sure');
-          preexistingconditionsForm.classList.add('showing');
-          preexistingconditionsForm.classList.remove('hidden');
-        } else {
-          sessionStorage.setItem('preexistingRadio', 'no');
-          preexistingconditionsForm.classList.add('hidden');
-          preexistingconditionsForm.classList.remove('showing');
-        }
-      });
-      let ErrorList = document.querySelectorAll('.errorlist');
-      if(ErrorList.length > 0) {
-        ErrorList[0].parentElement.scrollIntoView({
-          bahavior: "smooth",
-          block: "start"
+      isPageLoad = false;
+
+
+      //GOOGLE PLACES API: AUTOCOMPLETE
+      let placeSearch, autocomplete;
+      const componentForm = {
+        street_number: 'short_name',
+        route: 'long_name',
+        locality: 'long_name',
+        country: 'long_name'
+      };
+      function initAutocomplete() {
+        // Create the autocomplete object, restricting the search predictions to
+        // geographical location types.
+        autocomplete = new google.maps.places.Autocomplete(
+          document.getElementById('autocomplete'), {
+            strictbounds: true,
+            types: ['geocode'],
+            componentRestrictions: { country: "ZA" }
+          });
+
+        // Avoid paying for data that you don't need by restricting the set of
+        // place fields that are returned to just the address components.
+        autocomplete.setFields(['address_components', 'geometry']);
+
+        // When the user selects an address from the drop-down, populate the
+        // address fields in the form.
+        addressInput.addEventListener('keyup',function(e){
+          e.target.value = this.value;
+          latInput.value = '';
+          lngInput.value = '';
+        });
+        autocomplete.addListener('place_changed', function(){
+          let thisPlace = this.getPlace();
+          let cityInput = autocomplete.getPlace();
+
+          for (let component in componentForm) {
+            document.getElementById(component).value = '';
+          }
+
+          let location = cityInput.geometry.location;
+          latInput.value = location.lat();
+          lngInput.value = location.lng();
+
+          // Get each component of the address from the place details,
+          // and then fill-in the corresponding field on the form.
+          for (let i = 0; i < cityInput.address_components.length; i++) {
+            let addressType = cityInput.address_components[i].types[0];
+            if (componentForm[addressType]) {
+              let val = cityInput.address_components[i][componentForm[addressType]];
+              document.getElementById(addressType).value = val;
+            }
+          }
         });
       }
-    });
-    isPageLoad = false;
+      // Bias the autocomplete object to the user's geographical location,
+      // as supplied by the browser's 'navigator.geolocation' object.
+      function geolocate() {
+        if (navigator.geolocation) {
+          navigator.geolocation.getCurrentPosition(function(position) {
+            let geolocation = {
+              lat: position.coords.latitude,
+              lng: position.coords.longitude
+            };
+            let circle = new google.maps.Circle(
+              {center: geolocation, radius: position.coords.accuracy});
+            autocomplete.setBounds(circle.getBounds());
+          });
+        }
+      }
   </script>
 {% endcompress %}
 
