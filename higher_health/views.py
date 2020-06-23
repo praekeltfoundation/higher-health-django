@@ -96,7 +96,7 @@ def healthcheck_receipt(request):
             "last_name": triage.last_name,
             "timestamp": triage.timestamp,
             "msisdn": triage.hashed_msisdn,
-            "is_expired": triage.timestamp.date() <= datetime.now().date(),
+            "is_expired": triage.timestamp.date() < datetime.now().date(),
         }
         return render(request, "healthcheck_receipt.html", data)
     return HttpResponseRedirect("/")
