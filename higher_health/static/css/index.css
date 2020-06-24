@@ -147,6 +147,10 @@ a:hover {
 .menu__item:last-child {
   padding: 0;
 }
+button.menu__link {
+  border: none;
+  background: transparent;
+}
 .menu__link,
 .sub-menu__item {
   color: var(--very-dark-gray);
@@ -676,7 +680,7 @@ textarea {
 .cta-block {
   display: flex;
   margin: 15px 0;
-  justify-content: flex-start;
+  justify-content: center;
 }
 .cta-inline {
   color: var(--very-dark-desaturated-cyan);
@@ -900,17 +904,17 @@ textarea {
   #address input {
     width: 35%;
   }
-  /*TO REVIEW */
-  /*.cta-primary  {
-    position: absolute;
-    left: 0;
-    right: 0;
-  }*/
+
+  .cta-block {
+    justify-content: flex-start;
+  }
+
 
   .content-inner--questionnaires .collapsibles__item,
   .content-inner--questionnaires .login-form__preexistingconditionsForm {
     width: 450px;
   }
+
 
 
   /*
