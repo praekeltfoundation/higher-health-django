@@ -11,7 +11,7 @@ class AdminViewsTest(TestCase):
         factories.CampusFactory(
             university=factories.UniversityFactory())
 
-        management.call_command('create_other_dropdown_fields')
+        management.call_command('create_other_dropdown_field_values')
 
         self.assertEqual(
             uni1._meta.model.objects.all().count(),
@@ -36,7 +36,7 @@ class AdminViewsTest(TestCase):
             name="Other",
             university=factories.UniversityFactory(name="Other"))
 
-        management.call_command('create_other_dropdown_fields')
+        management.call_command('create_other_dropdown_field_values')
 
         self.assertEqual(
             uni1._meta.model.objects.all().count(),
