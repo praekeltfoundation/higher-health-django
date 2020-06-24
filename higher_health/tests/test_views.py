@@ -26,6 +26,60 @@ class QuestionnaireTest(TestCase):
         errors = response.context["form"].errors
         self.assertEqual(errors["otp"], ["The OTP you have entered is incorrect."])
 
+    def test_otp_session_retries_limit_exceeded(self):
+        # attempt to login 3 times
+        for i in range(0, 3):
+            response = self.client.post(
+                reverse("healthcheck_login"), {"msisdn": "+27831231234"}
+            )
+            self.assertEqual(response.status_code, 302)
+            self.assertRedirects(response, "/otp/")
+
+        response = self.client.post(
+            reverse("healthcheck_login"), {"msisdn": "+27831231234"}
+        )
+
+        self.assertEqual(response.status_code, 200)
+        errors = response.context["form"].errors
+        self.assertEqual(
+            errors["msisdn"],
+            [
+                "You've exceeded the number of times you can request an OTP. Please try again later."
+            ],
+        )
+
+        # wait the duration of the cool off period
+        session = self.client.session
+        session["otp_timestamp"] = (
+            datetime.utcnow() - timedelta(seconds=settings.OTP_BACKOFF_DURATION + 60)
+        ).timestamp()
+        session.save()
+
+        response = self.client.post(
+            reverse("healthcheck_login"), {"msisdn": "+27831231234"}
+        )
+        self.assertEqual(response.status_code, 302)
+
+        # attempt to login 2 more times
+        for i in range(0, 2):
+            response = self.client.post(
+                reverse("healthcheck_login"), {"msisdn": "+27831231234"}
+            )
+            self.assertEqual(response.status_code, 302)
+
+        response = self.client.post(
+            reverse("healthcheck_login"), {"msisdn": "+27831231234"}
+        )
+
+        self.assertEqual(response.status_code, 200)
+        errors = response.context["form"].errors
+        self.assertEqual(
+            errors["msisdn"],
+            [
+                "You've exceeded the number of times you can request an OTP. Please try again later."
+            ],
+        )
+
     def test_otp_expires(self):
         self.client.post(reverse("healthcheck_login"), {"msisdn": "+27831231234"})
         h = hmac.new(settings.SECRET_KEY.encode(), "111222".encode(), digestmod=sha256)
@@ -65,6 +119,9 @@ class QuestionnaireTest(TestCase):
         save_data(data, User.objects.get(username="+27831231234"))
 
         response = self.client.get(reverse("healthcheck_questionnaire"))
+        self.assertRedirects(response, "/receipt/")
+
+        response = self.client.get("/?redo=true")
 
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(
@@ -149,6 +206,11 @@ class QuestionnaireTest(TestCase):
             errors["medical_confirm_accuracy"], ["This field is required."]
         )
 
+        self.assertTrue(response.context["form"].registration_fields_has_errors)
+        self.assertTrue(response.context["form"].destination_fields_has_errors)
+        self.assertTrue(response.context["form"].history_fields_has_errors)
+        self.assertTrue(response.context["form"].medical_fields_has_errors)
+
     def test_post_with_invalid_accuracy(self):
         login_with_otp(self.client, "+27831231234")
 
@@ -163,6 +225,11 @@ class QuestionnaireTest(TestCase):
             errors["medical_confirm_accuracy"],
             ["You need to confirm that this information is accurate"],
         )
+
+        self.assertTrue(response.context["form"].registration_fields_has_errors())
+        self.assertFalse(response.context["form"].destination_fields_has_errors())
+        self.assertFalse(response.context["form"].history_fields_has_errors())
+        self.assertTrue(response.context["form"].medical_fields_has_errors())
 
     @responses.activate
     def test_post_get_coordinates_from_address(self):
@@ -264,6 +331,10 @@ class QuestionnaireTest(TestCase):
                 "facility_destination_campus": ["This field is required."],
             },
         )
+        self.assertFalse(response.context["form"].registration_fields_has_errors())
+        self.assertTrue(response.context["form"].destination_fields_has_errors())
+        self.assertFalse(response.context["form"].history_fields_has_errors())
+        self.assertFalse(response.context["form"].medical_fields_has_errors())
 
         university = factories.UniversityFactory(province="ZA-WC")
         campus = factories.CampusFactory(university=university)
@@ -450,6 +521,11 @@ class QuestionnaireTest(TestCase):
             },
         )
 
+        self.assertFalse(response.context["form"].registration_fields_has_errors())
+        self.assertFalse(response.context["form"].destination_fields_has_errors())
+        self.assertTrue(response.context["form"].history_fields_has_errors())
+        self.assertFalse(response.context["form"].medical_fields_has_errors())
+
         data.update(
             {
                 "history_cardiovascular": "True",
@@ -548,6 +624,11 @@ class QuestionnaireTest(TestCase):
             ],
         )
 
+        self.assertTrue(response.context["form"].registration_fields_has_errors())
+        self.assertFalse(response.context["form"].destination_fields_has_errors())
+        self.assertFalse(response.context["form"].history_fields_has_errors())
+        self.assertFalse(response.context["form"].medical_fields_has_errors())
+
     @responses.activate
     def test_post_google_places_lookup_error(self):
         data = get_data()
@@ -573,6 +654,11 @@ class QuestionnaireTest(TestCase):
             ],
         )
 
+        self.assertTrue(response.context["form"].registration_fields_has_errors())
+        self.assertFalse(response.context["form"].destination_fields_has_errors())
+        self.assertFalse(response.context["form"].history_fields_has_errors())
+        self.assertFalse(response.context["form"].medical_fields_has_errors())
+
 
 class ReceiptTest(TestCase):
     def test_get_with_empty_session(self):
@@ -587,8 +673,15 @@ class ReceiptTest(TestCase):
         data["risk_level"] = "high"
         triage = save_data(data, User.objects.get(username="+27831231234"))
 
-        response = self.client.get(reverse("healthcheck_receipt"))
+        response = self.client.get("/")
+        self.assertEqual(response.status_code, 302)
+        self.assertRedirects(response, reverse("healthcheck_receipt"))
 
+        # allow a user to re-do a HealthCheck
+        response = self.client.get("/?redo=true")
+        self.assertEqual(response.status_code, 200)
+
+        response = self.client.get(reverse("healthcheck_receipt"))
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(
             response=response, template_name="healthcheck_receipt.html"
@@ -598,6 +691,26 @@ class ReceiptTest(TestCase):
         self.assertEqual(response.context["last_name"], triage.last_name)
         self.assertEqual(response.context["timestamp"], triage.timestamp)
         self.assertEqual(response.context["msisdn"], triage.hashed_msisdn)
+
+        self.assertFalse(response.context["is_expired"])
+
+    def test_get_with_expired_receipt(self):
+        login_with_otp(self.client, "+27831231234")
+
+        data = get_data()
+        data["risk_level"] = "high"
+        triage = save_data(data, User.objects.get(username="+27831231234"))
+        triage.timestamp = datetime.now() - timedelta(days=1)
+        triage.save()
+
+        response = self.client.get(reverse("healthcheck_receipt"))
+
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(
+            response=response, template_name="healthcheck_receipt.html"
+        )
+        self.assertTrue(response.context["is_expired"])
+        self.assertContains(response, "Your clearance certificate has expired.")
 
     def test_get_with_no_triage_completed(self):
         response = self.client.get(reverse("healthcheck_receipt"))

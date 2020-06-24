@@ -362,6 +362,24 @@ class HealthCheckQuestionnaire(forms.Form):
             self["medical_confirm_accuracy"],
         ]
 
+    def registration_fields_has_errors(self):
+        return any(
+            [
+                field
+                for field in self.registration_fields() + [self["address"]]
+                if field.errors
+            ]
+        )
+
+    def destination_fields_has_errors(self):
+        return any([field for field in self.destination_fields() if field.errors])
+
+    def history_fields_has_errors(self):
+        return any([field for field in self.history_fields() if field.errors])
+
+    def medical_fields_has_errors(self):
+        return any([field for field in self.medical_fields() if field.errors])
+
 
 class HealthCheckLogin(forms.Form):
     msisdn = forms.CharField(
@@ -380,6 +398,26 @@ class HealthCheckLogin(forms.Form):
         return phonenumbers.format_number(number, phonenumbers.PhoneNumberFormat.E164)
 
     def send_otp_sms(self, msisdn):
+        if (
+            "otp_retries" in self.request.session
+            and self.request.session["otp_retries"] >= settings.OTP_RETRIES_LIMIT
+        ):
+            if (
+                datetime.utcnow() - timedelta(seconds=settings.OTP_BACKOFF_DURATION)
+            ).timestamp() < self.request.session["otp_timestamp"]:
+                self.add_error(
+                    "msisdn",
+                    "You've exceeded the number of times you can request an OTP. Please try again later.",
+                )
+                return
+            else:
+                self.request.session["otp_retries"] = 0
+
+        if "otp_retries" in self.request.session:
+            self.request.session["otp_retries"] += 1
+        else:
+            self.request.session["otp_retries"] = 1
+
         otp = "".join(secrets.choice(string.digits) for _ in range(6))
         h = hmac.new(settings.SECRET_KEY.encode(), otp.encode(), digestmod=sha256)
         otp_hash = base64.b64encode(h.digest()).decode()

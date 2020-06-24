@@ -1,3 +1,4 @@
+from datetime import datetime
 from functools import partial
 
 from django.contrib.auth import login
@@ -41,6 +42,17 @@ class HealthCheckQuestionnaireView(
             dict, University.objects.values_list("id", "province")
         )
         return ctx
+
+    def dispatch(self, request, *args, **kwargs):
+        if self.request.user.is_authenticated and self.request.method == "GET":
+            triage = Covid19Triage.objects.filter(user=self.request.user).last()
+            if (
+                triage
+                and triage.timestamp.date() >= datetime.now().date()
+                and "redo" not in self.request.GET
+            ):
+                return HttpResponseRedirect("/receipt/")
+        return super().dispatch(request, *args, **kwargs)
 
     def get_initial(self):
         initial_data = super().get_initial()
@@ -95,6 +107,7 @@ def healthcheck_receipt(request):
             "last_name": triage.last_name,
             "timestamp": triage.timestamp,
             "msisdn": triage.hashed_msisdn,
+            "is_expired": triage.timestamp.date() < datetime.now().date(),
         }
         return render(request, "healthcheck_receipt.html", data)
     return HttpResponseRedirect("/")

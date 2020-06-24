@@ -41,7 +41,7 @@
               </div>
               <div id="step_1" class="collapsibles__toggle">
                 <div class="login-form__screening">
-                  {% if form.errors %}
+                  {% if form.registration_fields_has_errors %}
                     <p class="error">Please correct the errors below</p>
                   {% endif %}
                   <ul id="registration" class="fieldset">
@@ -101,8 +101,15 @@
               <div class="collapsibles__label">
                 <h2 class="heading-secondary">Where are you going today?</h2>
               </div>
+              {% if form.destination_fields_has_errors %}
+                <p class="error">Please correct the errors below</p>
+              {% endif %}
               <div id="step_2" class="collapsibles__toggle">
                 <ul id="destination" class="fieldset">
+                  {% if form.destination_fields.errors %}
+                    <p class="error">Please correct the errors below</p>
+                  {% endif %}
+
                   {% for field in form.destination_fields %}
                     {% if field.name == "facility_destination_university" %}
                       <h3 class="heading-subtitle heading-subtitle--edu-label">Educational institution information</h3>
@@ -138,6 +145,9 @@
               <div class="collapsibles__label">
                 <h2 class="heading-secondary">Medical History</h2>
               </div>
+              {% if form.history_fields_has_errors %}
+                <p class="error">Please correct the errors below</p>
+              {% endif %}
               <div id="step_3" class="collapsibles__toggle">
                 <ul id="medical-history" class="fieldset">
                   <li class="fieldset__medical">
@@ -158,6 +168,7 @@
                 <ul id="preexistingconditionsForm" class="fieldset">
                   {% for field in form.history_fields %}
                     <li class="fieldset__medical">
+                      <label for="{{ field.name }}" class="label">{{ field.label }}</label>
                       {% if field|field_type == 'RadioSelect' %}
                         <ul id='id_{{ field.name }}'>
                         {% for value, text in field.field.choices %}
@@ -179,6 +190,9 @@
             <div class="collapsibles__item login-form__medical">
               <p class="pagination-ux">Step 4 of 4</p>
               <h2 class="heading-secondary">How are you feeling today?</h2>
+              {% if form.medical_fields_has_errors %}
+                <p class="error">Please correct the errors below</p>
+              {% endif %}
               <ul id="medical" class="fieldset">
                 {% for field in form.medical_fields %}
                   {% if field.name == "medical_confirm_accuracy" %}

@@ -13,7 +13,10 @@
         <p>Please note that you cannot do another HealthCheck for the next 24 hours.
         If you need to do a HealthCheck for someone else, please click the button below.
         </p>
-        <button url="{% url 'healthcheck_login' %}" class="cta cta-primary cta-primary--next">Do another HealthCheck</button>
+        <form action="/" method="GET">
+          <button class="cta cta-primary cta-primary--next">Do another HealthCheck</button>
+          <input type="hidden" name="redo" value="true"/>
+        </form>
       </div>
 
 
@@ -26,7 +29,11 @@
           </div>
 
           <ul class="receipts-results-message-list">
-            {% if risk_level == "low" %}
+            {% if is_expired %}
+              <h3 class="heading-subtitle heading-subtitle--receipt">
+                Your clearance certificate has expired. Please do another HealthCheck.
+              </h3>
+            {% elif risk_level == "low" %}
               <li class="receipts-results-message">
                 <h3 class="heading-subtitle heading-subtitle--receipt">
                   Thank you for answering all questions.
@@ -88,11 +95,13 @@
           </ul>
         </div>
 
-        <div class="receipts-results receipts-results--{% if risk_level == "low" %}low{% elif risk_level == "moderate" %}mid{% elif risk_level == "high" or risk_level == "critical" %}high{% endif %}
+        <div class="receipts-results receipts-results--{% if risk_level == "high" or risk_level == "critical" or is_expired %}high{% elif risk_level == "moderate" %}mid{% elif risk_level == "low" %}low{% endif %}
         ">
           <div class="receipts-headings">
             <h4 class="heading subheading">HealthCheck Clearance
-            {% if risk_level == "low" %}Granted{% elif risk_level == "moderate" or risk_level == "high" or risk_level == "critical" %}Denied{% endif %}
+              {% if is_expired %}Expired{% else %}
+                {% if risk_level == "low" %}Granted{% elif risk_level == "moderate" or risk_level == "high" or risk_level == "critical" %}Denied{% endif %}
+              {% endif %}
             </h4>
           </div>
           <div class="risks">
@@ -111,7 +120,7 @@
               </li>
               <li class="risk-cat__item">
                 <h5 class="risk-cat__label">Expiry date:</h5>
-                <p class="risk-cat__val">{% now "F j, Y" %}, 23:59:59 p.m. <span class="expiry-hint">(At the end of today)</span></p>
+                <p class="risk-cat__val">{% now "F j, Y" %}, 23:59:59 p.m. <span class="expiry-hint">(At the end of the day)</span></p>
               </li>
             </ul>
           </div>
