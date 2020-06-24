@@ -119,6 +119,9 @@ class QuestionnaireTest(TestCase):
         save_data(data, User.objects.get(username="+27831231234"))
 
         response = self.client.get(reverse("healthcheck_questionnaire"))
+        self.assertRedirects(response, "/receipt/")
+
+        response = self.client.get("/?redo=true")
 
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(
@@ -598,8 +601,15 @@ class ReceiptTest(TestCase):
         data["risk_level"] = "high"
         triage = save_data(data, User.objects.get(username="+27831231234"))
 
-        response = self.client.get(reverse("healthcheck_receipt"))
+        response = self.client.get("/")
+        self.assertEqual(response.status_code, 302)
+        self.assertRedirects(response, reverse("healthcheck_receipt"))
 
+        # allow a user to re-do a HealthCheck
+        response = self.client.get("/?redo=true")
+        self.assertEqual(response.status_code, 200)
+
+        response = self.client.get(reverse("healthcheck_receipt"))
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(
             response=response, template_name="healthcheck_receipt.html"
@@ -609,6 +619,26 @@ class ReceiptTest(TestCase):
         self.assertEqual(response.context["last_name"], triage.last_name)
         self.assertEqual(response.context["timestamp"], triage.timestamp)
         self.assertEqual(response.context["msisdn"], triage.hashed_msisdn)
+
+        self.assertFalse(response.context["is_expired"])
+
+    def test_get_with_expired_receipt(self):
+        login_with_otp(self.client, "+27831231234")
+
+        data = get_data()
+        data["risk_level"] = "high"
+        triage = save_data(data, User.objects.get(username="+27831231234"))
+        triage.timestamp = datetime.now() - timedelta(days=1)
+        triage.save()
+
+        response = self.client.get(reverse("healthcheck_receipt"))
+
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(
+            response=response, template_name="healthcheck_receipt.html"
+        )
+        self.assertTrue(response.context["is_expired"])
+        self.assertContains(response, "Your clearance certificate has expired.")
 
     def test_get_with_no_triage_completed(self):
         response = self.client.get(reverse("healthcheck_receipt"))
