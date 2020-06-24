@@ -57,15 +57,18 @@
         </div>
         <div class="header__menu">
           <ul class="menu">
-            <li class="menu__item menu__item--current">
-              <a href="/" class="menu__link">Home</a>
-            </li>
               {% if not user.is_authenticated %}
+              <li class="menu__item menu__item--current">
+                <a href="/" class="menu__link">Home</a>
+              </li>
               <li id="login" class="menu__item">
                 <a href="{% url 'healthcheck_login' %}" class="menu__link">Login</a>
               </li>
               {% else %}
               <li class="menu__item">
+                <a href="{% url 'healthcheck_login' %}" class="menu__link">Home</a>
+              </li>
+              <li class="menu__item menu__item--current">
                 <a href="{% url 'healthcheck_receipt' %}" class="menu__link">
                   Clearance Certificate
                 </a>
