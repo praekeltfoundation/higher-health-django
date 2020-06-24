@@ -29,7 +29,11 @@ class QuestionnaireTest(TestCase):
     def test_otp_session_retries_limit_exceeded(self):
         # attempt to login 3 times
         for i in range(0, 3):
-            self.client.post(reverse("healthcheck_login"), {"msisdn": "+27831231234"})
+            response = self.client.post(
+                reverse("healthcheck_login"), {"msisdn": "+27831231234"}
+            )
+            self.assertEqual(response.status_code, 302)
+            self.assertRedirects(response, "/otp/")
 
         response = self.client.post(
             reverse("healthcheck_login"), {"msisdn": "+27831231234"}
