@@ -151,3 +151,5 @@ STATIC_URL = "/static/"
 COMPRESS_ENABLED = True
 
 CACHES = {"default": env.cache("CACHE_URL", default="locmemcache://")}
+
+CELERY_BROKER_URL = env.str("CELERY_BROKER_URL", "amqp://")
