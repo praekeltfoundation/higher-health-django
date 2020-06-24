@@ -342,6 +342,24 @@ class HealthCheckQuestionnaire(forms.Form):
             self["medical_confirm_accuracy"],
         ]
 
+    def registration_fields_has_errors(self):
+        return any(
+            [
+                field
+                for field in self.registration_fields() + [self["address"]]
+                if field.errors
+            ]
+        )
+
+    def destination_fields_has_errors(self):
+        return any([field for field in self.destination_fields() if field.errors])
+
+    def history_fields_has_errors(self):
+        return any([field for field in self.history_fields() if field.errors])
+
+    def medical_fields_has_errors(self):
+        return any([field for field in self.medical_fields() if field.errors])
+
 
 class HealthCheckLogin(forms.Form):
     msisdn = forms.CharField(

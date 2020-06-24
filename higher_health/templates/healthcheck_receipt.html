@@ -13,7 +13,10 @@
         <p>Please note that you cannot do another HealthCheck for the next 24 hours.
         If you need to do a HealthCheck for someone else, please click the button below.
         </p>
-        <button url="{% url 'healthcheck_login' %}" class="cta cta-primary cta-primary--next">Do another HealthCheck</button>
+        <form action="/" method="GET">
+          <button class="cta cta-primary cta-primary--next">Do another HealthCheck</button>
+          <input type="hidden" name="redo" value="true"/>
+        </form>
       </div>
 
 

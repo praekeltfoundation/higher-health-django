@@ -203,6 +203,11 @@ class QuestionnaireTest(TestCase):
             errors["medical_confirm_accuracy"], ["This field is required."]
         )
 
+        self.assertTrue(response.context["form"].registration_fields_has_errors)
+        self.assertTrue(response.context["form"].destination_fields_has_errors)
+        self.assertTrue(response.context["form"].history_fields_has_errors)
+        self.assertTrue(response.context["form"].medical_fields_has_errors)
+
     def test_post_with_invalid_accuracy(self):
         login_with_otp(self.client, "+27831231234")
 
@@ -217,6 +222,11 @@ class QuestionnaireTest(TestCase):
             errors["medical_confirm_accuracy"],
             ["You need to confirm that this information is accurate"],
         )
+
+        self.assertTrue(response.context["form"].registration_fields_has_errors())
+        self.assertFalse(response.context["form"].destination_fields_has_errors())
+        self.assertFalse(response.context["form"].history_fields_has_errors())
+        self.assertTrue(response.context["form"].medical_fields_has_errors())
 
     @responses.activate
     def test_post_get_coordinates_from_address(self):
@@ -318,6 +328,10 @@ class QuestionnaireTest(TestCase):
                 "facility_destination_campus": ["This field is required."],
             },
         )
+        self.assertFalse(response.context["form"].registration_fields_has_errors())
+        self.assertTrue(response.context["form"].destination_fields_has_errors())
+        self.assertFalse(response.context["form"].history_fields_has_errors())
+        self.assertFalse(response.context["form"].medical_fields_has_errors())
 
         university = factories.UniversityFactory(province="ZA-WC")
         campus = factories.CampusFactory(university=university)
@@ -432,6 +446,11 @@ class QuestionnaireTest(TestCase):
             },
         )
 
+        self.assertFalse(response.context["form"].registration_fields_has_errors())
+        self.assertFalse(response.context["form"].destination_fields_has_errors())
+        self.assertTrue(response.context["form"].history_fields_has_errors())
+        self.assertFalse(response.context["form"].medical_fields_has_errors())
+
         data.update(
             {
                 "history_cardiovascular": "True",
@@ -530,6 +549,11 @@ class QuestionnaireTest(TestCase):
             ],
         )
 
+        self.assertTrue(response.context["form"].registration_fields_has_errors())
+        self.assertFalse(response.context["form"].destination_fields_has_errors())
+        self.assertFalse(response.context["form"].history_fields_has_errors())
+        self.assertFalse(response.context["form"].medical_fields_has_errors())
+
     @responses.activate
     def test_post_google_places_lookup_error(self):
         data = get_data()
@@ -554,6 +578,11 @@ class QuestionnaireTest(TestCase):
                 "Sorry, we had a temporary error trying to validate this address, please try again"
             ],
         )
+
+        self.assertTrue(response.context["form"].registration_fields_has_errors())
+        self.assertFalse(response.context["form"].destination_fields_has_errors())
+        self.assertFalse(response.context["form"].history_fields_has_errors())
+        self.assertFalse(response.context["form"].medical_fields_has_errors())
 
 
 class ReceiptTest(TestCase):
