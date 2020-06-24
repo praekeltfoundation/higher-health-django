@@ -518,8 +518,15 @@ class ReceiptTest(TestCase):
         data["risk_level"] = "high"
         triage = save_data(data, User.objects.get(username="+27831231234"))
 
-        response = self.client.get(reverse("healthcheck_receipt"))
+        response = self.client.get("/")
+        self.assertEqual(response.status_code, 302)
+        self.assertRedirects(response, reverse("healthcheck_receipt"))
 
+        # allow a user to re-do a HealthCheck
+        response = self.client.get("/?redo=true")
+        self.assertEqual(response.status_code, 200)
+
+        response = self.client.get(reverse("healthcheck_receipt"))
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(
             response=response, template_name="healthcheck_receipt.html"
