@@ -21,11 +21,11 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='campus',
             name='sort_order',
-            field=models.IntegerField(blank=True, db_index=True, default=0),
+            field=models.IntegerField(blank=True, default=0),
         ),
         migrations.AddField(
             model_name='university',
             name='sort_order',
-            field=models.IntegerField(blank=True, db_index=True, default=0),
+            field=models.IntegerField(blank=True, default=0),
         ),
     ]
