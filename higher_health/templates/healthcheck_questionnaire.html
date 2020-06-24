@@ -308,6 +308,7 @@
           paginate = document.querySelectorAll('.pagination__icon'),
           sessionToggle = sessionStorage.getItem('steps') ? JSON.parse(sessionStorage.getItem('steps')) : {},
           collapsed,
+          medicalOptions = document.getElementsByName('history_pre_existing_condition'),
           preexistingRadioKey = sessionStorage.getItem('preexistingRadio');
 
         //CHECKBOX TOGGLE
@@ -336,10 +337,64 @@
           }
         });
 
+        //PRE-EXISTING CONDITIONS
+        // Test other case scenarios
+        if(preexistingRadioKey === null) {
+          for(let m= 0; m < medicalOptions.length; m++) {
+            if(medicalOptions[m].checked) {
+              sessionStorage.setItem('preexistingRadio', medicalOptions[m].value);
+            }
+          };
+        };
+        if(preexistingRadioKey === 'yes' || preexistingRadioKey === 'not_sure') {
+          if(preexistingRadioKey === 'yes') {
+            preexistingconditionsYes.checked = true;
+          } else {
+            preexistingconditionsNotsure.checked = true;
+          }
+          preexistingconditionsForm.classList.add('showing');
+          preexistingconditionsForm.classList.remove('hidden');
+        } else {
+          preexistingconditionsYes.checked = false;
+          preexistingconditionsForm.classList.add('hidden');
+          preexistingconditionsForm.classList.remove('showing');
+        }
+        preexistingconditionsYes.addEventListener('change', function(e) {
+          if (e.target.checked) {
+            sessionStorage.setItem('preexistingRadio', 'yes');
+            preexistingconditionsForm.classList.add('showing');
+            preexistingconditionsForm.classList.remove('hidden');
+          } else {
+            sessionStorage.setItem('preexistingRadio', 'no');
+            preexistingconditionsForm.classList.add('hidden');
+            preexistingconditionsForm.classList.remove('showing');
+          }
+        });
+        preexistingconditionsNo.addEventListener('change', function(e) {
+          if (e.target.checked) {
+            sessionStorage.setItem('preexistingRadio', 'no');
+            preexistingconditionsForm.classList.add('hidden');
+            preexistingconditionsForm.classList.remove('showing');
+          }
+        });
+        preexistingconditionsNotsure.addEventListener('change', function(e) {
+          if (e.target.checked) {
+            sessionStorage.setItem('preexistingRadio', 'not_sure');
+            preexistingconditionsForm.classList.add('showing');
+            preexistingconditionsForm.classList.remove('hidden');
+          } else {
+            sessionStorage.setItem('preexistingRadio', 'no');
+            preexistingconditionsForm.classList.add('hidden');
+            preexistingconditionsForm.classList.remove('showing');
+          }
+        });
+
+
         //COLLAPSE & EXPAND
         for(let i = 0; i < paginate.length; i++) {
           let collapsiblesBlock = paginate[i].parentElement.nextElementSibling.nextElementSibling,
           collapsiblesToggle = collapsiblesBlock.getAttribute('id');
+
           paginate[i].innerHTML = '-';
 
           //Traverse Collapsibles blocks Inputs
@@ -417,8 +472,9 @@
               return  document.getElementById('id_facility_destination_campus')[this.entrySelectedCampusIndex].label
             }
           };
-          if(sessionToggle[collapsiblesToggle] !== undefined || sessionToggle[collapsiblesToggle] !== null) {
-            if(sessionToggle[collapsiblesToggle] === true ) {
+
+          if(sessionToggle[collapsiblesToggle] !== undefined || sessionToggle[collapsiblesToggle] !== null ) {
+            if(sessionToggle[collapsiblesToggle] === true) {
               collapsiblesBlock.style.display = 'none';
               paginate[i].innerHTML = '+';
                 excerpt.classList.add('excerpt');
@@ -441,51 +497,6 @@
             }
           }
         };
-
-        //PRE-EXISTING CONDITIONS
-        if(preexistingRadioKey !== null) {}
-        if(preexistingRadioKey === 'yes' || preexistingRadioKey === 'not_sure') {
-          if(preexistingRadioKey === 'yes') {
-            preexistingconditionsYes.checked = true;
-          } else {
-            preexistingconditionsNotsure.checked = true;
-          }
-          preexistingconditionsForm.classList.add('showing');
-          preexistingconditionsForm.classList.remove('hidden');
-        } else {
-          preexistingconditionsYes.checked = false;
-          preexistingconditionsForm.classList.add('hidden');
-          preexistingconditionsForm.classList.remove('showing');
-        }
-        preexistingconditionsYes.addEventListener('change', function(e) {
-          if (e.target.checked) {
-            sessionStorage.setItem('preexistingRadio', 'yes');
-            preexistingconditionsForm.classList.add('showing');
-            preexistingconditionsForm.classList.remove('hidden');
-          } else {
-            sessionStorage.setItem('preexistingRadio', 'no');
-            preexistingconditionsForm.classList.add('hidden');
-            preexistingconditionsForm.classList.remove('showing');
-          }
-        });
-        preexistingconditionsNo.addEventListener('change', function(e) {
-          if (e.target.checked) {
-            sessionStorage.setItem('preexistingRadio', 'no');
-            preexistingconditionsForm.classList.add('hidden');
-            preexistingconditionsForm.classList.remove('showing');
-          }
-        });
-        preexistingconditionsNotsure.addEventListener('change', function(e) {
-          if (e.target.checked) {
-            sessionStorage.setItem('preexistingRadio', 'not_sure');
-            preexistingconditionsForm.classList.add('showing');
-            preexistingconditionsForm.classList.remove('hidden');
-          } else {
-            sessionStorage.setItem('preexistingRadio', 'no');
-            preexistingconditionsForm.classList.add('hidden');
-            preexistingconditionsForm.classList.remove('showing');
-          }
-        });
 
         //ERRORS
         let ErrorList = document.querySelectorAll('.errorlist');
