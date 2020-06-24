@@ -26,6 +26,60 @@ class QuestionnaireTest(TestCase):
         errors = response.context["form"].errors
         self.assertEqual(errors["otp"], ["The OTP you have entered is incorrect."])
 
+    def test_otp_session_retries_limit_exceeded(self):
+        # attempt to login 3 times
+        for i in range(0, 3):
+            response = self.client.post(
+                reverse("healthcheck_login"), {"msisdn": "+27831231234"}
+            )
+            self.assertEqual(response.status_code, 302)
+            self.assertRedirects(response, "/otp/")
+
+        response = self.client.post(
+            reverse("healthcheck_login"), {"msisdn": "+27831231234"}
+        )
+
+        self.assertEqual(response.status_code, 200)
+        errors = response.context["form"].errors
+        self.assertEqual(
+            errors["msisdn"],
+            [
+                "You've exceeded the number of times you can request an OTP. Please try again later."
+            ],
+        )
+
+        # wait the duration of the cool off period
+        session = self.client.session
+        session["otp_timestamp"] = (
+            datetime.utcnow() - timedelta(seconds=settings.OTP_BACKOFF_DURATION + 60)
+        ).timestamp()
+        session.save()
+
+        response = self.client.post(
+            reverse("healthcheck_login"), {"msisdn": "+27831231234"}
+        )
+        self.assertEqual(response.status_code, 302)
+
+        # attempt to login 2 more times
+        for i in range(0, 2):
+            response = self.client.post(
+                reverse("healthcheck_login"), {"msisdn": "+27831231234"}
+            )
+            self.assertEqual(response.status_code, 302)
+
+        response = self.client.post(
+            reverse("healthcheck_login"), {"msisdn": "+27831231234"}
+        )
+
+        self.assertEqual(response.status_code, 200)
+        errors = response.context["form"].errors
+        self.assertEqual(
+            errors["msisdn"],
+            [
+                "You've exceeded the number of times you can request an OTP. Please try again later."
+            ],
+        )
+
     def test_otp_expires(self):
         self.client.post(reverse("healthcheck_login"), {"msisdn": "+27831231234"})
         h = hmac.new(settings.SECRET_KEY.encode(), "111222".encode(), digestmod=sha256)
