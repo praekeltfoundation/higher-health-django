@@ -17,11 +17,11 @@ class AdminViewsTest(TestCase):
         self.assertEqual(camp1._meta.model.objects.all().count(), 3)
 
         self.assertEqual(
-            uni1._meta.model.objects.filter(name__iexact="Other").first().sort_order, 3
+            uni1._meta.model.objects.filter(name__iexact="Other").first().sort_order, 1
         )
 
         self.assertEqual(
-            camp1._meta.model.objects.filter(name__iexact="Other").first().sort_order, 3
+            camp1._meta.model.objects.filter(name__iexact="Other").first().sort_order, 1
         )
 
     def test_create_dropdown_fields_created(self):
@@ -38,9 +38,9 @@ class AdminViewsTest(TestCase):
         self.assertEqual(camp1._meta.model.objects.all().count(), 2)
 
         self.assertEqual(
-            uni1._meta.model.objects.filter(name__iexact="Other").first().sort_order, 2
+            uni1._meta.model.objects.filter(name__iexact="Other").first().sort_order, 1
         )
 
         self.assertEqual(
-            camp1._meta.model.objects.filter(name__iexact="Other").first().sort_order, 2
+            camp1._meta.model.objects.filter(name__iexact="Other").first().sort_order, 1
         )
