@@ -1,5 +1,6 @@
 from django.core.management.base import BaseCommand
-from higher_health.models import University, Campus
+
+from higher_health.models import Campus, University
 
 
 class Command(BaseCommand):
