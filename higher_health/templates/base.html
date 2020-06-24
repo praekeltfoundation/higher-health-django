@@ -58,7 +58,12 @@
         <div class="header__menu">
           <ul class="menu">
             <li class="menu__item menu__item--current">
-              <a href="/" class="menu__link">Home</a>
+              <form action="/" method="GET">
+                <button class="menu__link">
+                  Home
+                </button>
+                <input type="hidden" name="redo" value="true"/>
+              </form>
             </li>
               {% if not user.is_authenticated %}
               <li id="login" class="menu__item">
