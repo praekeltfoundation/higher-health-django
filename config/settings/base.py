@@ -151,3 +151,8 @@ STATIC_URL = "/static/"
 COMPRESS_ENABLED = True
 
 CACHES = {"default": env.cache("CACHE_URL", default="locmemcache://")}
+
+CELERY_BROKER_URL = env.str("CELERY_BROKER_URL", "amqp://")
+
+EVENTSTORE_URL = env.str("EVENTSTORE_URL", "https://eventstore-placeholder")
+EVENTSTORE_TOKEN = env.str("EVENTSTORE_TOKEN", "placeholder-token")

@@ -2,6 +2,7 @@ from django.conf import settings
 from temba_client.v2 import TembaClient
 
 from higher_health.models import Covid19Triage
+from higher_health.tasks import submit_healthcheck_to_eventstore
 
 rapidpro = None
 if settings.RAPIDPRO_URL and settings.RAPIDPRO_TOKEN:
@@ -49,8 +50,7 @@ def get_location(data):
 
 
 def save_data(data, user):
-
-    return Covid19Triage.objects.create(
+    healthcheck = Covid19Triage.objects.create(
         **{
             "source": "WEB",
             "user": user,
@@ -93,3 +93,5 @@ def save_data(data, user):
             "history_cardiovascular": data.get("history_cardiovascular") or False,
         }
     )
+    submit_healthcheck_to_eventstore.delay(str(healthcheck.id))
+    return healthcheck

@@ -27,6 +27,9 @@ class University(models.Model):
             return "{0}".format(self.name)
         return "{0} ({1})".format(self.name, self.get_province_display())
 
+    def to_dict(self):
+        return {"id": self.id, "name": self.name, "province": self.province}
+
     class Meta:
         verbose_name_plural = "Universities"
         ordering = ("sort_order", "name")
@@ -45,6 +48,13 @@ class Campus(models.Model):
 
     def __str__(self):
         return self.name
+
+    def to_dict(self):
+        return {
+            "id": self.id,
+            "name": self.name,
+            "university": self.university.to_dict(),
+        }
 
     class Meta:
         verbose_name_plural = "Campuses"

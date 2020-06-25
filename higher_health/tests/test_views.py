@@ -3,11 +3,13 @@ import hmac
 from datetime import datetime, timedelta
 from hashlib import sha256
 
+import mock
 import responses
 from django.conf import settings
 from django.contrib.auth.models import User
 from django.test import TestCase
 from django.urls import reverse
+from django.utils import timezone
 
 from higher_health.models import Covid19Triage
 from higher_health.utils import get_location, save_data
@@ -232,7 +234,8 @@ class QuestionnaireTest(TestCase):
         self.assertTrue(response.context["form"].medical_fields_has_errors())
 
     @responses.activate
-    def test_post_get_coordinates_from_address(self):
+    @mock.patch("higher_health.utils.submit_healthcheck_to_eventstore")
+    def test_post_get_coordinates_from_address(self, _):
         login_with_otp(self.client, "+27831231234")
 
         data = get_data()
@@ -700,7 +703,7 @@ class ReceiptTest(TestCase):
         data = get_data()
         data["risk_level"] = "high"
         triage = save_data(data, User.objects.get(username="+27831231234"))
-        triage.timestamp = datetime.now() - timedelta(days=1)
+        triage.timestamp = timezone.now() - timedelta(days=1)
         triage.save()
 
         response = self.client.get(reverse("healthcheck_receipt"))
