@@ -13,14 +13,12 @@ class ApiKeysTestCase(TestCase):
 
 class GATagKeysTestCase(TestCase):
     def test_ga_tag_keys(self):
-        self.assertEqual(ga_tags(None), {"GA_TAGS": ["REPLACE_ME"]})
+        self.assertEqual(ga_tags(None), {"GA_TAGS": []})
 
         response = self.client.get("/login/")
-        self.assertContains(
-            response, "https://www.googletagmanager.com/gtag/js?id=REPLACE_ME"
-        )
+        self.assertNotContains(response, "https://www.googletagmanager.com/")
 
-    @override_settings(GA_TAG_KEYS="test_key_1, test_key_2")
+    @override_settings(GA_TAG_KEYS=["test_key_1", "test_key_2"])
     def test_multiple_api_keys(self):
         self.assertEqual(ga_tags(None), {"GA_TAGS": ["test_key_1", "test_key_2"]})
 
