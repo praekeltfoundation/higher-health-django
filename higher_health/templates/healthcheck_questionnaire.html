@@ -259,7 +259,9 @@
       campuses = JSON.parse(document.getElementById('campus-data').textContent),
       prov = document.getElementById('id_facility_destination_province'),
       uni = document.getElementById('id_facility_destination_university'),
+      uni_other = document.getElementById('id_facility_destination_university_other'),
       camp = document.getElementById('id_facility_destination_campus'),
+      camp_other = document.getElementById('id_facility_destination_campus_other'),
       uniClone = uni.cloneNode(true),
       campClone = camp.cloneNode(true),
       formSubmit = document.getElementById('login_form'),
@@ -275,31 +277,85 @@
       preexistingconditionsNotsure = document.getElementById('id_history_pre_existing_condition_2'),
       isPageLoad = true;
 
+      let other_university = null;
+      for(const [university, prov] of Object.entries(universities)){
+        if(prov === "" || prov === undefined){
+          other_university = university;
+          break;
+        }
+      }
+
       showHiddenInputs(selected_province.value, uniClone, uni, universities);
       showHiddenInputs(uni.options[uni.selectedIndex].value, campClone, camp, campuses);
+      showOther(uni.value, universities, uni_other);
+      showOther(camp.value, campuses, camp_other);
       clearCampus();
+
       prov.addEventListener('change', function() {
         showHiddenInputs(this.value, uniClone, uni, universities);
         showHiddenInputs(uni.value, campClone, camp, campuses);
         clearCampus();
       });
+
       uni.addEventListener('change', function() {
         showHiddenInputs(this.value, campClone, camp, campuses);
+        showOther(this.value, universities, uni_other);
+      });
+
+      camp.addEventListener('change', function() {
+        showOther(this.value, campuses, camp_other);
       });
 
       function showHiddenInputs(elem, clonedElems, selectInputs, csvInputElem) {
         selectInputs.options.length = 0;
+        let last_option = null;
+
         for(let i = 0; i < clonedElems.options.length; i++) {
           let uniChild = clonedElems.options[i];
-          if(csvInputElem[uniChild.value] == elem || csvInputElem[uniChild.value] == undefined) {
-            selectInputs.appendChild(uniChild.cloneNode(true));
+
+          if(
+            csvInputElem[uniChild.value] == elem ||
+            csvInputElem[uniChild.value] == undefined ||
+            (uniChild.value == other_university && csvInputElem[uniChild.value] == '') ||
+            csvInputElem[uniChild.value] == other_university
+          ) {
+
+            if(
+              (uniChild.value == other_university && csvInputElem[uniChild.value] == '') ||
+              csvInputElem[uniChild.value] == other_university
+            ){
+              // if its the other option save it for last
+              last_option = uniChild;
+            }
+            else {
+              selectInputs.appendChild(uniChild.cloneNode(true));
+            }
           }
         }
+        // make sure we always add other as last opt
+        if (last_option !== null){
+          selectInputs.appendChild(last_option.cloneNode(true));
+        }
       };
+
       function clearCampus() {
         if(!isPageLoad){
           uni.value = '';
           camp.value = '';
+        }
+      }
+
+      function showOther(val, parent_list, other){
+        // show other input box if val is the 'Other' university
+        // show other input box if val is the 'Other' campus
+        if(
+          Number(val) === Number(other_university) ||
+          Number(parent_list[val]) === Number(other_university)
+        ) {
+          if(other !== null) other.parentElement.classList.remove('hidden');
+        }
+        else {
+          if(other !== null) other.parentElement.classList.add('hidden');
         }
       }
 

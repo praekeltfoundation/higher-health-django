@@ -3,7 +3,9 @@ import uuid
 
 import pycountry
 from django.db import models
+from django.forms import ValidationError
 from django.utils import timezone
+from django.utils.text import gettext_lazy as _
 
 
 class Choice(enum.Enum):
@@ -17,26 +19,36 @@ class University(models.Model):
         (s.code, s.name) for s in pycountry.subdivisions.get(country_code="ZA")
     )
     name = models.CharField(max_length=100)
-    province = models.CharField(choices=PROVINCE_CHOICES, max_length=100)
+    province = models.CharField(choices=PROVINCE_CHOICES, max_length=100, blank=True)
+    sort_order = models.IntegerField(default=0, blank=True)
 
     def __str__(self):
+        if not self.province:
+            return "{0}".format(self.name)
         return "{0} ({1})".format(self.name, self.get_province_display())
 
     class Meta:
         verbose_name_plural = "Universities"
-        ordering = ("name",)
+        ordering = ("sort_order", "name")
+
+    def clean(self):
+        super(University, self).clean()
+        if self.name.lower() != "other" and not self.province:
+            err = _('Only a university with the name "Other" can have a None province')
+            raise ValidationError({"province": err})
 
 
 class Campus(models.Model):
     name = models.CharField(max_length=100)
     university = models.ForeignKey(University, on_delete=models.CASCADE)
+    sort_order = models.IntegerField(default=0, blank=True)
 
     def __str__(self):
         return self.name
 
     class Meta:
         verbose_name_plural = "Campuses"
-        ordering = ("name",)
+        ordering = ("sort_order", "name")
 
 
 class Covid19Triage(models.Model):
@@ -142,8 +154,14 @@ class Covid19Triage(models.Model):
     facility_destination_university = models.ForeignKey(
         University, null=True, blank=True, on_delete=models.CASCADE
     )
+    facility_destination_university_other = models.CharField(
+        max_length=255, null=True, blank=True
+    )
     facility_destination_campus = models.ForeignKey(
         Campus, null=True, blank=True, on_delete=models.CASCADE
+    )
+    facility_destination_campus_other = models.CharField(
+        max_length=255, null=True, blank=True
     )
     facility_destination_reason = models.CharField(
         choices=FacilityDestinationReasonChoice._choices(),

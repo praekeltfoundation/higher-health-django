@@ -79,7 +79,13 @@ def save_data(data, user):
             "facility_destination_university": data.get(
                 "facility_destination_university"
             ),
+            "facility_destination_university_other": data.get(
+                "facility_destination_university_other"
+            ),
             "facility_destination_campus": data.get("facility_destination_campus"),
+            "facility_destination_campus_other": data.get(
+                "facility_destination_campus_other"
+            ),
             "facility_destination_reason": data.get("facility_destination_reason"),
             "history_obesity": data.get("history_obesity") or False,
             "history_diabetes": data.get("history_diabetes") or False,

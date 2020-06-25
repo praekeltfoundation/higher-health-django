@@ -402,6 +402,78 @@ class QuestionnaireTest(TestCase):
         )
 
     @responses.activate
+    def test_post_drop_downs_other(self):
+        login_with_otp(self.client, "+27831231234")
+
+        data = get_data()
+        data["facility_destination"] = "campus"
+        data["latitude"] = ""
+        data["latitude"] = ""
+        data["longitude"] = ""
+        data["address"] = "4 friend street woodstock"
+
+        places_url = "https://maps.googleapis.com/maps/api/place/autocomplete/json?key=TEST_API_KEY&input=4+friend+street+woodstock&language=en&components=country%3Aza"
+
+        responses.add(
+            responses.GET,
+            places_url,
+            json={"predictions": [{"place_id": "resultplaceid"}]},
+            status=200,
+            match_querystring=True,
+        )
+
+        places_detail_url = "https://maps.googleapis.com/maps/api/place/details/json?key=TEST_API_KEY&place_id=resultplaceid&language=en&fields=geometry"
+        responses.add(
+            responses.GET,
+            places_detail_url,
+            json={"result": {"geometry": {"location": {"lat": 11.1, "lng": 22.2}}}},
+            status=200,
+            match_querystring=True,
+        )
+
+        university_other = factories.UniversityFactory(name="other", province="")
+        campus_other = factories.CampusFactory(
+            name="other", university=university_other
+        )
+
+        data.update(
+            {
+                "facility_destination_university": university_other.pk,
+                "facility_destination_campus": campus_other.pk,
+            }
+        )
+        response = self.client.post(reverse("healthcheck_questionnaire"), data)
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(
+            response.context["form"].errors,
+            {
+                "facility_destination_university_other": ["This field is required."],
+                "facility_destination_campus_other": ["This field is required."],
+            },
+        )
+
+        data.update(
+            {
+                "facility_destination_university_other": "Unisa-abroad",
+                "facility_destination_campus_other": "Unisa-atlantic-ocean",
+            }
+        )
+        response = self.client.post(reverse("healthcheck_questionnaire"), data)
+
+        self.assertEqual(response.status_code, 302)
+
+        places_call = responses.calls[0]
+        self.assertEqual(places_call.request.method, "GET")
+        self.assertEqual(places_call.request.url, places_url)
+
+        [triage] = Covid19Triage.objects.all()
+
+        self.assertEqual(triage.facility_destination_university_other, "Unisa-abroad")
+        self.assertEqual(
+            triage.facility_destination_campus_other, "Unisa-atlantic-ocean"
+        )
+
+    @responses.activate
     def test_post_pre_existing_conditions(self):
         login_with_otp(self.client, "+27831231234")
 
