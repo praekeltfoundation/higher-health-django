@@ -1,4 +1,5 @@
 import sentry_sdk
+from sentry_sdk.integrations.celery import CeleryIntegration
 from sentry_sdk.integrations.django import DjangoIntegration
 
 from .base import *  # noqa
@@ -16,7 +17,9 @@ SENTRY_DSN = env.str("SENTRY_DSN", "")
 
 if SENTRY_DSN:
     sentry_sdk.init(
-        dsn=SENTRY_DSN, integrations=[DjangoIntegration()], send_default_pii=True
+        dsn=SENTRY_DSN,
+        integrations=[DjangoIntegration(), CeleryIntegration()],
+        send_default_pii=True,
     )
 
 GA_TAG_KEY = env.str("GOOGLE_GA_TAG_KEY")
