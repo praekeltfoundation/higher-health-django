@@ -7,9 +7,6 @@ class ApiKeysTestCase(TestCase):
     def test_api_keys(self):
         self.assertEqual(api_keys(None), {"PLACES_API_KEY": "TEST_API_KEY"})
 
-    def test_multiple_api_keys(self):
-        self.assertEqual(api_keys(None), {"PLACES_API_KEY": "TEST_API_KEY"})
-
 
 class GATagKeysTestCase(TestCase):
     def test_ga_tag_keys(self):
