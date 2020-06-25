@@ -6,4 +6,4 @@ def api_keys(request):
 
 
 def ga_tags(request):
-    return {"GA_TAG": settings.GA_TAG_KEY}
+    return {"GA_TAGS": settings.GA_TAG_KEYS}
