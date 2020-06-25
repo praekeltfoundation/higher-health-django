@@ -33,7 +33,7 @@ def submit_healthcheck_to_eventstore(healthcheck_id: Text) -> None:
         "source": healthcheck.source,
         "province": healthcheck.province,
         "city": healthcheck.city,
-        "age": healthcheck.age,
+        "age": {"18-39": "18-40"}.get(healthcheck.age, healthcheck.age),
         "date_of_birth": (
             healthcheck.date_of_birth.isoformat() if healthcheck.date_of_birth else None
         ),

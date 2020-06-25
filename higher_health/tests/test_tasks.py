@@ -179,3 +179,25 @@ class SubmitHealthCheckToEventStoreTests(TestCase):
                 },
             },
         )
+
+    @responses.activate
+    def test_age(self):
+        """
+        Submits correct age value for 18-40
+        """
+        responses.add(
+            method=responses.POST,
+            url="https://eventstore-placeholder/api/v3/covid19triage/",
+        )
+        data = get_data()
+        data["risk_level"] = get_risk_level(data)
+        user = User.objects.create_user("27820001001")
+
+        healthcheck = save_data(data, user)
+        healthcheck.age = "18-39"
+        healthcheck.save()
+        submit_healthcheck_to_eventstore(str(healthcheck.id))
+
+        call = responses.calls[-1]
+        request_data = json.loads(call.request.body)
+        self.assertEqual(request_data["age"], "18-40")
