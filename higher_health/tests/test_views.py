@@ -3,6 +3,7 @@ import hmac
 from datetime import datetime, timedelta
 from hashlib import sha256
 
+import mock
 import responses
 from django.conf import settings
 from django.contrib.auth.models import User
@@ -233,7 +234,8 @@ class QuestionnaireTest(TestCase):
         self.assertTrue(response.context["form"].medical_fields_has_errors())
 
     @responses.activate
-    def test_post_get_coordinates_from_address(self):
+    @mock.patch("higher_health.utils.submit_healthcheck_to_eventstore")
+    def test_post_get_coordinates_from_address(self, _):
         login_with_otp(self.client, "+27831231234")
 
         data = get_data()
