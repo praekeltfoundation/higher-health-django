@@ -6,4 +6,6 @@ def api_keys(request):
 
 
 def ga_tags(request):
-    return {"GA_TAG": settings.GA_TAG_KEY}
+    if settings.GA_TAG_KEYS:
+        split_keys = [x.strip() for x in settings.GA_TAG_KEYS.split(",")]
+        return {"GA_TAGS": split_keys}

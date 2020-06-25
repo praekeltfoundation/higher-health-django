@@ -35,13 +35,17 @@
     </noscript>
 
     <!-- Global site tag (gtag.js) - Google Analytics -->
+    {% for tag in GA_TAGS %}
+    {% if tag %}
     <script>
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
       gtag('js', new Date());
-      gtag('config', '{{GA_TAG}}');
+      gtag('config', '{{tag}}');
     </script>
-    <script async src="https://www.googletagmanager.com/gtag/js?id={{GA_TAG}}"></script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id={{tag}}"></script>
+    {% endif %}
+    {% endfor %}
     <!-- End Google Analytics -->
 
 </head>
