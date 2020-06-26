@@ -32,7 +32,13 @@ def submit_healthcheck_to_eventstore(healthcheck_id: Text) -> None:
         "last_name": healthcheck.last_name or "",
         "source": healthcheck.source,
         "province": healthcheck.province,
-        "city": healthcheck.city,
+        # city is a required field on the API, but address is allowed to be blank.
+        # So we make sure that it is not blank. We'll store the original value in
+        # data in case we need it.
+        # We use the address, not city value here, because city is just the result
+        # from the google places API, where as address is the formatted address, which
+        # is what we actually want for city
+        "city": healthcheck.address or "<None>",
         "age": {"18-39": "18-40"}.get(healthcheck.age, healthcheck.age),
         "date_of_birth": (
             healthcheck.date_of_birth.isoformat() if healthcheck.date_of_birth else None
@@ -57,6 +63,7 @@ def submit_healthcheck_to_eventstore(healthcheck_id: Text) -> None:
         "data": {
             "confirm_accuracy": healthcheck.confirm_accuracy,
             "address": healthcheck.address,
+            "city": healthcheck.city,
             "street_number": healthcheck.street_number,
             "route": healthcheck.route,
             "country": healthcheck.country,
