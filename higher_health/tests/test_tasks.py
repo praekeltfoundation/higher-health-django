@@ -36,7 +36,7 @@ class SubmitHealthCheckToEventStoreTests(TestCase):
                 "last_name": healthcheck.last_name,
                 "source": healthcheck.source,
                 "province": healthcheck.province,
-                "city": healthcheck.city,
+                "city": "<None>",
                 "age": healthcheck.age,
                 "date_of_birth": None,
                 "fever": healthcheck.fever,
@@ -56,6 +56,7 @@ class SubmitHealthCheckToEventStoreTests(TestCase):
                 "data": {
                     "confirm_accuracy": healthcheck.confirm_accuracy,
                     "address": healthcheck.address,
+                    "city": healthcheck.city,
                     "street_number": healthcheck.street_number,
                     "route": healthcheck.route,
                     "country": healthcheck.country,
@@ -201,3 +202,25 @@ class SubmitHealthCheckToEventStoreTests(TestCase):
         call = responses.calls[-1]
         request_data = json.loads(call.request.body)
         self.assertEqual(request_data["age"], "18-40")
+
+    @responses.activate
+    def test_city(self):
+        """
+        Submits the address value if present
+        """
+        responses.add(
+            method=responses.POST,
+            url="https://eventstore-placeholder/api/v3/covid19triage/",
+        )
+        data = get_data()
+        data["risk_level"] = get_risk_level(data)
+        user = User.objects.create_user("27820001001")
+
+        healthcheck = save_data(data, user)
+        healthcheck.address = "Test address"
+        healthcheck.save()
+        submit_healthcheck_to_eventstore(str(healthcheck.id))
+
+        call = responses.calls[-1]
+        request_data = json.loads(call.request.body)
+        self.assertEqual(request_data["city"], "Test address")
