@@ -403,8 +403,12 @@ class HealthCheckLogin(forms.Form):
             and self.request.session["otp_retries"] >= settings.OTP_RETRIES_LIMIT
         ):
             if (
-                datetime.utcnow() - timedelta(seconds=settings.OTP_BACKOFF_DURATION)
-            ).timestamp() < self.request.session["otp_timestamp"]:
+                "otp_timestamp" in self.request.session
+                and (
+                    datetime.utcnow() - timedelta(seconds=settings.OTP_BACKOFF_DURATION)
+                ).timestamp()
+                < self.request.session["otp_timestamp"]
+            ):
                 self.add_error(
                     "msisdn",
                     "You've exceeded the number of times you can request an OTP. Please try again later.",
