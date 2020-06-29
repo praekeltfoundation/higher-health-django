@@ -1,5 +1,5 @@
-from django.core.management.base import BaseCommand
 from django.core.exceptions import MultipleObjectsReturned
+from django.core.management.base import BaseCommand
 
 from higher_health.models import Campus, University
 
@@ -10,10 +10,10 @@ class Command(BaseCommand):
     def handle(self, *args, **options):
         try:
             university, created = University.objects.get_or_create(
-                name="Other", province='')
+                name="Other", province=""
+            )
         except MultipleObjectsReturned:
-            university = University.objects.filter(
-                name="Other", province='').first()
+            university = University.objects.filter(name="Other", province="").first()
         university.sort_order = 1
         university.save()
 
@@ -22,9 +22,7 @@ class Command(BaseCommand):
                 name="Other", university=university
             )
         except MultipleObjectsReturned:
-            campus = Campus.objects.filter(
-                name="Other", university=university
-            ).first()
+            campus = Campus.objects.filter(name="Other", university=university).first()
 
         campus.sort_order = 1
         campus.save()
