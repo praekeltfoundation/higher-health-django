@@ -6,6 +6,11 @@ from . import factories
 
 class AdminViewsTest(TestCase):
     def test_create_dropdown_fields(self):
+        factories.UniversityFactory._meta.model. \
+            objects.all().delete()
+        factories.CampusFactory._meta. \
+            model.objects.all().delete()
+
         uni1 = factories.UniversityFactory()
         camp1 = factories.CampusFactory(university=uni1)
         factories.CampusFactory(university=factories.UniversityFactory())
@@ -17,11 +22,11 @@ class AdminViewsTest(TestCase):
         self.assertEqual(camp1._meta.model.objects.all().count(), 3)
 
         self.assertEqual(
-            uni1._meta.model.objects.filter(name__iexact="Other").first().sort_order, 1
+            uni1._meta.model.objects.get(name__iexact="Other").sort_order, 1
         )
 
         self.assertEqual(
-            camp1._meta.model.objects.filter(name__iexact="Other").first().sort_order, 1
+            camp1._meta.model.objects.get(name__iexact="Other").sort_order, 1
         )
 
     def test_create_dropdown_fields_created(self):
