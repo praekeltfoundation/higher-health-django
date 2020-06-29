@@ -28,14 +28,11 @@ class AdminViewsTest(TestCase):
         uni1 = factories.UniversityFactory()
         camp1 = factories.CampusFactory(university=uni1)
         factories.CampusFactory(
-            name="Other", university=factories.UniversityFactory(name="Other")
+            name="Other", university=factories.UniversityFactory(
+                name="Other", province='')
         )
 
         management.call_command("create_other_dropdown_field_values")
-
-        self.assertEqual(uni1._meta.model.objects.all().count(), 2)
-
-        self.assertEqual(camp1._meta.model.objects.all().count(), 2)
 
         self.assertEqual(
             uni1._meta.model.objects.filter(name__iexact="Other").first().sort_order, 1
