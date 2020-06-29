@@ -696,9 +696,9 @@ class ReceiptTest(TestCase):
         self.assertEqual(response.context["msisdn"], triage.hashed_msisdn)
 
         self.assertFalse(response.context["is_expired"])
-        self.assertTrue(
-            "{} 23:59".format(triage.timestamp.strftime("%B, %d, %Y,"))
-            in str(response.content)
+        self.assertIn(
+            "{} 23:59".format(triage.timestamp.strftime("%B, %d, %Y,")),
+            response.content,
         )
 
     def test_get_with_expired_receipt(self):

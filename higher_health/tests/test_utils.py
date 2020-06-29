@@ -1,6 +1,7 @@
 from unittest import mock
 
 from django.contrib.auth.models import User
+from django.utils import timezone
 from django.test import TestCase
 
 from higher_health.utils import get_risk_level, save_data
@@ -57,3 +58,39 @@ class SaveDataTestCase(TestCase):
         user = User.objects.create_user("27820001001")
         healthcheck = save_data(data, user)
         task.delay.assert_called_once_with(str(healthcheck.id))
+
+
+class TestTemplateTags(TestCase):
+    def test_expiry_template_filter(self):
+        from higher_health.templatetags.temp_tags import expires
+
+        val = timezone.now()
+        self.assertEqual(
+            expires(val, 0),
+            timezone.datetime(
+                year=val.year,
+                month=val.month,
+                day=val.day,
+                hour=23,
+                minute=59,
+                second=59,
+                microsecond=999,
+                tzinfo=val.tzinfo,
+            ),
+        )
+
+        val = timezone.now()
+        end_val = val + timezone.timedelta(days=1)
+        self.assertEqual(
+            expires(val, 1, midnight=False),
+            timezone.datetime(
+                year=end_val.year,
+                month=end_val.month,
+                day=end_val.day,
+                hour=end_val.hour,
+                minute=end_val.minute,
+                second=end_val.second,
+                microsecond=end_val.microsecond,
+                tzinfo=end_val.tzinfo,
+            ),
+        )

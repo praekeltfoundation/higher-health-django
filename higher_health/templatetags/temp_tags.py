@@ -13,5 +13,5 @@ def field_type(field):
 def expires(val, days, midnight=True):
     expire = val + timezone.timedelta(days=days)
     if midnight:
-        expire = expire.replace(second=59, minute=59, hour=23)
+        expire = expire.replace(second=59, minute=59, hour=23, microsecond=999)
     return expire
