@@ -697,7 +697,7 @@ class ReceiptTest(TestCase):
 
         self.assertFalse(response.context["is_expired"])
         self.assertTrue(
-            "{} 23:59:59".format(triage.timestamp.strftime("%B, %d, %Y,"))
+            "{} 23:59".format(triage.timestamp.strftime("%B, %d, %Y,"))
             in str(response.content)
         )
 
