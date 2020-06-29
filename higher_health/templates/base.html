@@ -34,6 +34,8 @@
       instructions how to enable JavaScript in your web browser</a>.</p>
     </noscript>
 
+    <script defer src="https://browser.sentry-cdn.com/5.18.1/bundle.min.js" integrity="sha384-4zdOhGLDdcXl+MRlpApt/Nvfe6A3AqGGBil9+lwFSkXNTv0rVx0eCyM1EaJCXS7r" crossorigin="anonymous">
+    </script>
     <!-- Global site tag (gtag.js) - Google Analytics -->
     {% for tag in GA_TAGS %}
     {% if tag %}
@@ -133,8 +135,13 @@
       </div>
 
     </footer>
-
   </section>
+
+  <script type="module">
+    Sentry.init({
+      dsn: '{{SENTRY_DSN}}'
+    });
+ </script>
   {% block extra_js %}
   <script type="text/javascript">
   "use strict";
