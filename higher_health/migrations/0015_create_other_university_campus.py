@@ -8,7 +8,7 @@ def create_other_university_campus_objects(apps, schema_editor):
 
     uni_model = apps.get_model('higher_health.University')
     campus_model = apps.get_model('higher_health.Campus')
-    uni_kwargs = dict(name='Other', sort_order=1, province=None)
+    uni_kwargs = dict(name='Other', sort_order=1, province='')
 
     try:
         uni_instance, created = uni_model.objects.get_or_create(
