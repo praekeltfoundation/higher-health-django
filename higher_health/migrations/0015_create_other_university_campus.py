@@ -15,7 +15,7 @@ def create_other_university_campus_objects(apps, schema_editor):
            **uni_kwargs
         )
     except MultipleObjectsReturned:
-        uni_instance, created = uni_model.objects.filter(
+        uni_instance = uni_model.objects.filter(
             **uni_kwargs
         ).first()
 
