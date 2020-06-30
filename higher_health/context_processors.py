@@ -7,3 +7,7 @@ def api_keys(request):
 
 def ga_tags(request):
     return {"GA_TAGS": settings.GA_TAG_KEYS}
+
+
+def sentry_connect(request):
+    return {"SENTRY_DSN": settings.SENTRY_DSN}
