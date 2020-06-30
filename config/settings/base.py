@@ -13,6 +13,9 @@ import os
 from os.path import join
 
 import environ
+import sentry_sdk
+from sentry_sdk.integrations.celery import CeleryIntegration
+from sentry_sdk.integrations.django import DjangoIntegration
 
 root = environ.Path(__file__) - 3
 env = environ.Env(DEBUG=(bool, False))
@@ -126,7 +129,15 @@ USE_TZ = True
 
 
 GA_TAG_KEYS = env.list("GOOGLE_GA_TAG_KEYS", default=[])
-SENTRY_DSN = env.str("SENTRY_DSN", "REPLACE_ME")
+
+SENTRY_DSN = env.str("SENTRY_DSN", "")
+if SENTRY_DSN:
+    sentry_sdk.init(
+        dsn=SENTRY_DSN,
+        integrations=[DjangoIntegration(), CeleryIntegration()],
+        send_default_pii=True,
+    )
+
 CLIENT_PLACES_API_KEY = env.str("GOOGLE_PLACES_CLIENT_API_KEY", "REPLACE_ME")
 SERVER_PLACES_API_KEY = env.str("GOOGLE_PLACES_SERVER_API_KEY", "REPLACE_ME")
 

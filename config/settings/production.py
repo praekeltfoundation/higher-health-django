@@ -1,7 +1,3 @@
-import sentry_sdk
-from sentry_sdk.integrations.celery import CeleryIntegration
-from sentry_sdk.integrations.django import DjangoIntegration
-
 from .base import *  # noqa
 from .base import env
 
@@ -9,13 +5,6 @@ DEBUG = False
 
 # Raises ImproperlyConfigured exception if SECRET_KEY not in os.environ
 SECRET_KEY = env.str("SECRET_KEY")
-
-if SENTRY_DSN:
-    sentry_sdk.init(
-        dsn=SENTRY_DSN,
-        integrations=[DjangoIntegration(), CeleryIntegration()],
-        send_default_pii=True,
-    )
 
 ALLOWED_HOSTS = env.str("ALLOWED_HOSTS").split(",")
 
