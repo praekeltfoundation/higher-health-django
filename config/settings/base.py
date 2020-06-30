@@ -148,8 +148,6 @@ OTP_EXPIRES_DURATION = env.int("OTP_EXPIRES_DURATION", 60 * 5)
 OTP_BACKOFF_DURATION = env.int("OTP_BACKOFF_DURATION", 60 * 15)
 OTP_RETRIES_LIMIT = env.int("OTP_RETRIES_LIMIT", 3)
 
-
-
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
