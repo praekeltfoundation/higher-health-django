@@ -7,17 +7,17 @@ from .base import env
 
 DEBUG = False
 
-# Raises ImproperlyConfigured exception if SECRET_KEY not in os.environ
-SECRET_KEY = env.str("SECRET_KEY")
-
-ALLOWED_HOSTS = env.str("ALLOWED_HOSTS").split(",")
-
 if SENTRY_DSN:
     sentry_sdk.init(
         dsn=SENTRY_DSN,
         integrations=[DjangoIntegration(), CeleryIntegration()],
         send_default_pii=True,
     )
+
+# Raises ImproperlyConfigured exception if SECRET_KEY not in os.environ
+SECRET_KEY = env.str("SECRET_KEY")
+
+ALLOWED_HOSTS = env.str("ALLOWED_HOSTS").split(",")
 
 GA_TAG_KEY = env.str("GOOGLE_GA_TAG_KEY")
 CLIENT_PLACES_API_KEY = env.str("GOOGLE_PLACES_CLIENT_API_KEY")
