@@ -9,6 +9,9 @@ https://docs.djangoproject.com/en/2.2/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/2.2/ref/settings/
 """
+import sentry_sdk
+from sentry_sdk.integrations.celery import CeleryIntegration
+from sentry_sdk.integrations.django import DjangoIntegration
 
 import os
 from os.path import join
@@ -128,6 +131,14 @@ USE_TZ = True
 
 GA_TAG_KEYS = env.list("GOOGLE_GA_TAG_KEYS", default=[])
 SENTRY_DSN = env.str("SENTRY_DSN", "REPLACE_ME")
+
+if SENTRY_DSN:
+    sentry_sdk.init(
+        dsn=SENTRY_DSN,
+        integrations=[DjangoIntegration(), CeleryIntegration()],
+        send_default_pii=True,
+    )
+
 CLIENT_PLACES_API_KEY = env.str("GOOGLE_PLACES_CLIENT_API_KEY", "REPLACE_ME")
 SERVER_PLACES_API_KEY = env.str("GOOGLE_PLACES_SERVER_API_KEY", "REPLACE_ME")
 
@@ -138,6 +149,7 @@ RAPIDPRO_SEND_OTP_SMS_FLOW = env.str("RAPIDPRO_SEND_OTP_SMS_FLOW", "REPLACE_ME")
 OTP_EXPIRES_DURATION = env.int("OTP_EXPIRES_DURATION", 60 * 5)
 OTP_BACKOFF_DURATION = env.int("OTP_BACKOFF_DURATION", 60 * 15)
 OTP_RETRIES_LIMIT = env.int("OTP_RETRIES_LIMIT", 3)
+
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
