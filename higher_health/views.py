@@ -72,7 +72,6 @@ class HealthCheckQuestionnaireView(
 
                 initial_data["facility_destination"] = triage.facility_destination
                 initial_data["facility_destination_province"] = triage.province
-                initial_data["facility_destination_province"] = triage.province
                 initial_data[
                     "facility_destination_university"
                 ] = triage.facility_destination_university_id
