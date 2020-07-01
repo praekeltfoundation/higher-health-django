@@ -148,6 +148,14 @@ class QuestionnaireTest(TestCase):
             initial_data["facility_destination"], data["facility_destination"]
         )
         self.assertEqual(
+            initial_data["facility_destination_campus_other"],
+            data.get("facility_destination_campus_other")
+        )
+        self.assertEqual(
+            initial_data["facility_destination_university_other"],
+            data.get("facility_destination_university_other")
+        )
+        self.assertEqual(
             initial_data["facility_destination_province"],
             data["facility_destination_province"],
         )
