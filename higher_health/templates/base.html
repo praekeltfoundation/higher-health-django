@@ -34,8 +34,9 @@
       instructions how to enable JavaScript in your web browser</a>.</p>
     </noscript>
 
-    <script defer src="https://browser.sentry-cdn.com/5.18.1/bundle.min.js" integrity="sha384-4zdOhGLDdcXl+MRlpApt/Nvfe6A3AqGGBil9+lwFSkXNTv0rVx0eCyM1EaJCXS7r" crossorigin="anonymous">
-    </script>
+    <script src="https://browser.sentry-cdn.com/5.19.0/bundle.min.js" integrity="sha384-edPCPWtQrj57nipnV3wt78Frrb12XdZsyMbmpIKZ9zZRi4uAxNWiC6S8xtGCqwDG" crossorigin="anonymous">
+</script>
+
     <!-- Global site tag (gtag.js) - Google Analytics -->
     {% for tag in GA_TAGS %}
     {% if tag %}
@@ -64,21 +65,21 @@
         <div class="header__menu">
           <ul class="menu">
               {% if not user.is_authenticated %}
-              <li class="menu__item menu__item--current">
-                <a href="/" class="menu__link">Home</a>
-              </li>
-              <li id="login" class="menu__item">
-                <a href="{% url 'healthcheck_login' %}" class="menu__link">Login</a>
-              </li>
+                <li class="menu__item menu__item--current">
+                  <a href="/" class="menu__link">Home</a>
+                </li>
+                <li id="login" class="menu__item">
+                  <a href="{% url 'healthcheck_login' %}" class="menu__link">Login</a>
+                </li>
               {% else %}
-              <li class="menu__item">
-                <a href="{% url 'healthcheck_login' %}" class="menu__link">Home</a>
-              </li>
-              <li class="menu__item menu__item--current">
-                <a href="{% url 'healthcheck_receipt' %}" class="menu__link">
-                  Clearance Certificate
-                </a>
-              </li>
+                <li id="login" class="menu__item">
+                  <a href="{% url 'healthcheck_login' %}" class="menu__link">Home</a>
+                </li>
+                <li class="menu__item menu__item--current">
+                  <a href="{% url 'healthcheck_receipt' %}" class="menu__link">
+                    Clearance Certificate
+                  </a>
+                </li>
             {% endif %}
 
           </ul>
@@ -91,12 +92,9 @@
 
     <footer class="footer">
       <div class="footer-inner">
-
         <div class="footer-content">
           <ul class="footer-list">
-            <li class="footer-list__item">
-              <a href="/" class="footer-list__link">Home</a>
-            </li>
+
             <li class="footer-list__item">
               <a href="/terms" class="footer-list__link">Terms</a>
             </li>
@@ -139,7 +137,8 @@
 
   <script type="module">
     Sentry.init({
-      dsn: '{{SENTRY_DSN}}'
+      //dsn: '{{SENTRY_DSN}}'
+      dsn: 'https://859d4a8493e84b4a9becfa1d86d684d4@o413908.ingest.sentry.io/5302494'
     });
  </script>
   {% block extra_js %}
@@ -147,7 +146,9 @@
   "use strict";
     let navLink = document.querySelectorAll('.menu__link, .footer-list__link');
     let currentURL = location.pathname.split('/')[1];
+
     for(let i = 0; i < navLink.length; i++ ) {
+
       if (currentURL === "") {
         //DO NOTHING
      } else if(navLink[i].getAttribute("href").indexOf(currentURL) !== -1) {

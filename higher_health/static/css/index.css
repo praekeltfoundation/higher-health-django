@@ -750,7 +750,7 @@ textarea {
 }
 
 .footer-list {
-  display: inline-block;
+  display: block;
 }
 .footer-list__item {
   text-transform: uppercase;
@@ -759,6 +759,10 @@ textarea {
 .footer-list__link {
   color: #fff;
   font-size: 14px;
+}
+.footer-list__item.menu__item--current
+.footer-list__link {
+  text-decoration: underline;
 }
 
 .logo-list__image {

@@ -365,7 +365,16 @@
           sessionToggle = sessionStorage.getItem('steps') ? JSON.parse(sessionStorage.getItem('steps')) : {},
           collapsed,
           medicalOptions = document.getElementsByName('history_pre_existing_condition'),
-          preexistingRadioKey = sessionStorage.getItem('preexistingRadio');
+          medicalOptionsIndex;
+
+          for(let m= 0; m < medicalOptions.length; m++) {
+            if(medicalOptions[m].checked){
+              medicalOptionsIndex = medicalOptions[m].value
+            }
+          };
+
+          let preexistingRadioKey = sessionStorage.getItem('preexistingRadio') ? sessionStorage.getItem('preexistingRadio') : medicalOptionsIndex;
+          console.log(medicalOptionsIndex);
 
         //CHECKBOX TOGGLE
         if(checkboxKey === 'true') {
@@ -394,14 +403,7 @@
         });
 
         //PRE-EXISTING CONDITIONS
-        // Test other case scenarios
-        if(preexistingRadioKey === null) {
-          for(let m= 0; m < medicalOptions.length; m++) {
-            if(medicalOptions[m].checked) {
-              sessionStorage.setItem('preexistingRadio', medicalOptions[m].value);
-            }
-          };
-        };
+
         if(preexistingRadioKey === 'yes' || preexistingRadioKey === 'not_sure') {
           if(preexistingRadioKey === 'yes') {
             preexistingconditionsYes.checked = true;
@@ -444,7 +446,6 @@
             preexistingconditionsForm.classList.remove('showing');
           }
         });
-
 
         //COLLAPSE & EXPAND
         for(let i = 0; i < paginate.length; i++) {
@@ -528,7 +529,6 @@
               return  document.getElementById('id_facility_destination_campus')[this.entrySelectedCampusIndex].label
             }
           };
-
           if(sessionToggle[collapsiblesToggle] !== undefined || sessionToggle[collapsiblesToggle] !== null ) {
             if(sessionToggle[collapsiblesToggle] === true) {
               collapsiblesBlock.style.display = 'none';
@@ -541,7 +541,7 @@
                   excerpt.innerHTML = '<h5>'+ entryInfo.entryUni() +' | '+entryInfo.entryCampus()+'</h5>';
                 }
                 else if(collapsiblesToggle === 'step_3') {
-                  var preexistingRadioKeyDisplay = preexistingRadioKey === "not_sure" ? "Not sure" : preexistingRadioKey;
+                  let preexistingRadioKeyDisplay = preexistingRadioKey === "not_sure" ? "Not sure" : preexistingRadioKey;
                   excerpt.innerHTML = '<h5>'+preexistingRadioKeyDisplay+'</h5>';
                 }
               excerpt.style.display = 'block';
