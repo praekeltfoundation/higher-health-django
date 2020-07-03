@@ -145,7 +145,7 @@
   {% block extra_js %}
   <script type="text/javascript">
   "use strict";
-    let navLink = document.querySelectorAll('.menu__link');
+    let navLink = document.querySelectorAll('.menu__link, .footer-list__link');
     let currentURL = location.pathname.split('/')[1];
     for(let i = 0; i < navLink.length; i++ ) {
       if (currentURL === "") {
