@@ -129,9 +129,7 @@
             </li>
           </ul>
         </div>
-
       </div>
-
     </footer>
   </section>
 
@@ -148,10 +146,9 @@
     let currentURL = location.pathname.split('/')[1];
 
     for(let i = 0; i < navLink.length; i++ ) {
-
       if (currentURL === "") {
         //DO NOTHING
-     } else if(navLink[i].getAttribute("href").indexOf(currentURL) !== -1) {
+      } else if(navLink[i].getAttribute("href").indexOf(currentURL) !== -1) {
         navLink[i].parentNode.classList.add('menu__item--current');
       } else if(currentURL === 'otp' && navLink[i].getAttribute("href").indexOf(currentURL) == -1) {
         navLink[i].parentNode.classList.remove('menu__item--current');
@@ -163,6 +160,5 @@
    };
   </script>
   {% endblock %}
-  {% block form_js %}{% endblock %}
 </body>
 </html>

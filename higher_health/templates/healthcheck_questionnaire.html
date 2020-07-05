@@ -243,14 +243,10 @@
   </div>
 {% endblock %}
 
-{% block form_js %}
-
 {% cache 300 json_data %}
   {{ universities|json_script:"universities-data" }}
-
   {{ campuses|json_script:"campus-data" }}
 {% endcache %}
-
 {% compress js inline %}
   <script type="text/javascript">
     "use strict";
@@ -344,7 +340,6 @@
           camp.value = '';
         }
       }
-
       function showOther(val, parent_list, other){
         // show other input box if val is the 'Other' university
         // show other input box if val is the 'Other' campus
@@ -358,7 +353,6 @@
           if(other !== null) other.parentElement.classList.add('hidden');
         }
       }
-
       document.addEventListener('DOMContentLoaded',function(e) {
         let checkboxKey = sessionStorage.getItem('checkbox'),
           paginate = document.querySelectorAll('.pagination__icon'),
@@ -374,7 +368,6 @@
           };
 
           let preexistingRadioKey = sessionStorage.getItem('preexistingRadio') ? sessionStorage.getItem('preexistingRadio') : medicalOptionsIndex;
-          console.log(medicalOptionsIndex);
 
         //CHECKBOX TOGGLE
         if(checkboxKey === 'true') {
@@ -564,8 +557,6 @@
         }
       });
       isPageLoad = false;
-
-
       //GOOGLE PLACES API: AUTOCOMPLETE
       let placeSearch, autocomplete;
       const componentForm = {
@@ -590,12 +581,15 @@
 
         // When the user selects an address from the drop-down, populate the
         // address fields in the form.
-        addressInput.addEventListener('keyup',function(e){
+        addressInput.addEventListener('keyup',function(e) {
           e.target.value = this.value;
           latInput.value = '';
           lngInput.value = '';
+
+          console.log('initAutocomplete::INPUT CHANGE',e.target.value,'',this.value)
         });
-        autocomplete.addListener('place_changed', function(){
+
+        autocomplete.addListener('place_changed', function() {
           let thisPlace = this.getPlace();
           let cityInput = autocomplete.getPlace();
 
@@ -616,25 +610,33 @@
               document.getElementById(addressType).value = val;
             }
           }
+          console.log('initAutocomplete::AUTOCOMPLETE PLACE CHANGE',thisPlace,'===',cityInput);
         });
+
       }
+
       // Bias the autocomplete object to the user's geographical location,
       // as supplied by the browser's 'navigator.geolocation' object.
       function geolocate() {
+        console.log('Geolocation function');
         if (navigator.geolocation) {
+          console.log('geolocate::NAVIGATOR GEOLOCATION:',navigator.geolocation)
           navigator.geolocation.getCurrentPosition(function(position) {
             let geolocation = {
               lat: position.coords.latitude,
               lng: position.coords.longitude
             };
-            let circle = new google.maps.Circle(
-              {center: geolocation, radius: position.coords.accuracy});
+            console.log('geolocate::NAVIGATOR CURRENT POSITION LAT/LNG:',geolocation);
+            let circle = new google.maps.Circle({
+              center: geolocation,
+              radius: position.coords.accuracy
+            });
             autocomplete.setBounds(circle.getBounds());
+            console.log('geolocate::GOOGLE MAPS CIRCLE:',circle);
           });
         }
       }
   </script>
 {% endcompress %}
 
-<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key={{PLACES_API_KEY}}&libraries=places&callback=initAutocomplete" async defer></script>
-{% endblock %}
+<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key={{PLACES_API_KEY}}&libraries=places&callback=initAutocomplete" defer></script>

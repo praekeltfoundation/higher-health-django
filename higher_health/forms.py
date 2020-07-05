@@ -191,7 +191,7 @@ class HealthCheckQuestionnaire(forms.Form):
                 try:
                     querystring = urlencode(
                         {
-                            "key": settings.SERVER_PLACES_API_KEY,
+                            "key": settings.CLIENT_PLACES_API_KEY,
                             "input": data["address"],
                             "language": "en",
                             "components": "country:za",
@@ -204,7 +204,7 @@ class HealthCheckQuestionnaire(forms.Form):
                     if location["predictions"]:
                         querystring = urlencode(
                             {
-                                "key": settings.SERVER_PLACES_API_KEY,
+                                "key": settings.CLIENT_PLACES_API_KEY,
                                 "place_id": location["predictions"][0]["place_id"],
                                 "language": "en",
                                 "fields": "geometry",
@@ -423,6 +423,7 @@ class HealthCheckLogin(forms.Form):
             self.request.session["otp_retries"] = 1
 
         otp = "".join(secrets.choice(string.digits) for _ in range(6))
+        print(otp)
         h = hmac.new(settings.SECRET_KEY.encode(), otp.encode(), digestmod=sha256)
         otp_hash = base64.b64encode(h.digest()).decode()
         self.request.session["otp_hash"] = otp_hash
