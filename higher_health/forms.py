@@ -191,7 +191,7 @@ class HealthCheckQuestionnaire(forms.Form):
                 try:
                     querystring = urlencode(
                         {
-                            "key": settings.CLIENT_PLACES_API_KEY,
+                            "key": settings.SERVER_PLACES_API_KEY,
                             "input": data["address"],
                             "language": "en",
                             "components": "country:za",
@@ -204,7 +204,7 @@ class HealthCheckQuestionnaire(forms.Form):
                     if location["predictions"]:
                         querystring = urlencode(
                             {
-                                "key": settings.CLIENT_PLACES_API_KEY,
+                                "key": settings.SERVER_PLACES_API_KEY,
                                 "place_id": location["predictions"][0]["place_id"],
                                 "language": "en",
                                 "fields": "geometry",
