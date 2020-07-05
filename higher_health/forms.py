@@ -423,7 +423,6 @@ class HealthCheckLogin(forms.Form):
             self.request.session["otp_retries"] = 1
 
         otp = "".join(secrets.choice(string.digits) for _ in range(6))
-        print(otp)
         h = hmac.new(settings.SECRET_KEY.encode(), otp.encode(), digestmod=sha256)
         otp_hash = base64.b64encode(h.digest()).decode()
         self.request.session["otp_hash"] = otp_hash
