@@ -242,7 +242,7 @@
     </div>
   </div>
 {% endblock %}
-
+{% block form_js %}
 {% cache 300 json_data %}
   {{ universities|json_script:"universities-data" }}
   {{ campuses|json_script:"campus-data" }}
@@ -250,7 +250,7 @@
 {% compress js inline %}
   <script type="text/javascript">
     "use strict";
-
+    //window.addEventListener("load", load, false);
     let universities = JSON.parse(document.getElementById('universities-data').textContent),
       campuses = JSON.parse(document.getElementById('campus-data').textContent),
       prov = document.getElementById('id_facility_destination_province'),
@@ -271,9 +271,8 @@
       preexistingconditionsYes = document.getElementById('id_history_pre_existing_condition_0'),
       preexistingconditionsNo = document.getElementById('id_history_pre_existing_condition_1'),
       preexistingconditionsNotsure = document.getElementById('id_history_pre_existing_condition_2'),
-      isPageLoad = true;
-
-      let other_university = null;
+      isPageLoad = true,
+      other_university = null;
       for(const [university, prov] of Object.entries(universities)){
         if(prov === "" || prov === undefined){
           other_university = university;
@@ -366,7 +365,6 @@
               medicalOptionsIndex = medicalOptions[m].value
             }
           };
-
           let preexistingRadioKey = sessionStorage.getItem('preexistingRadio') ? sessionStorage.getItem('preexistingRadio') : medicalOptionsIndex;
 
         //CHECKBOX TOGGLE
@@ -396,7 +394,6 @@
         });
 
         //PRE-EXISTING CONDITIONS
-
         if(preexistingRadioKey === 'yes' || preexistingRadioKey === 'not_sure') {
           if(preexistingRadioKey === 'yes') {
             preexistingconditionsYes.checked = true;
@@ -557,6 +554,7 @@
         }
       });
       isPageLoad = false;
+
       //GOOGLE PLACES API: AUTOCOMPLETE
       let placeSearch, autocomplete;
       const componentForm = {
@@ -574,6 +572,8 @@
             types: ['geocode'],
             componentRestrictions: { country: "ZA" }
           });
+
+
 
         // Avoid paying for data that you don't need by restricting the set of
         // place fields that are returned to just the address components.
@@ -609,7 +609,6 @@
             }
           }
         });
-
       }
 
       // Bias the autocomplete object to the user's geographical location,
@@ -629,7 +628,12 @@
           });
         }
       }
+      //google.maps.event.addDomListener(window, 'load', initAutocomplete);
   </script>
 {% endcompress %}
-
+<!-- DOM ISSUE:
+  Execute the javascript callback after the page loads.
+  https://stackoverflow.com/questions/34063439/invalidvalueerror-not-an-instance-of-htmlinputelement
+ -->
 <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key={{PLACES_API_KEY}}&libraries=places&callback=initAutocomplete" defer></script>
+{% endblock %}

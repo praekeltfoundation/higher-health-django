@@ -1,4 +1,4 @@
-{% load static %}
+{% load static compress %}
 
 <!DOCTYPE html>
 <!--[if lt IE 7]><html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
@@ -135,29 +135,33 @@
 
   <script type="module">
     Sentry.init({
-      dsn: '{{SENTRY_DSN}}'
+      //dsn: '{{SENTRY_DSN}}'
+      dsn: 'https://38b65b5733654a008f318acc8e13c324@o393154.ingest.sentry.io/5241801'
     });
  </script>
   {% block extra_js %}
-  <script type="text/javascript">
-  "use strict";
-    let navLink = document.querySelectorAll('.menu__link, .footer-list__link');
-    let currentURL = location.pathname.split('/')[1];
+    {% compress js inline %}
+    <script type="text/javascript">
+    "use strict";
+      let navLink = document.querySelectorAll('.menu__link, .footer-list__link');
+      let currentURL = location.pathname.split('/')[1];
 
-    for(let i = 0; i < navLink.length; i++ ) {
-      if (currentURL === "") {
-        //DO NOTHING
-      } else if(navLink[i].getAttribute("href").indexOf(currentURL) !== -1) {
-        navLink[i].parentNode.classList.add('menu__item--current');
-      } else if(currentURL === 'otp' && navLink[i].getAttribute("href").indexOf(currentURL) == -1) {
-        navLink[i].parentNode.classList.remove('menu__item--current');
-        document.getElementById('login').classList.add('menu__item--current');
-      }
-      else {
-        navLink[i].parentNode.classList.remove('menu__item--current');
-      }
-   };
-  </script>
+      for(let i = 0; i < navLink.length; i++ ) {
+        if (currentURL === "") {
+          //DO NOTHING
+        } else if(navLink[i].getAttribute("href").indexOf(currentURL) !== -1) {
+          navLink[i].parentNode.classList.add('menu__item--current');
+        } else if(currentURL === 'otp' && navLink[i].getAttribute("href").indexOf(currentURL) == -1) {
+          navLink[i].parentNode.classList.remove('menu__item--current');
+          document.getElementById('login').classList.add('menu__item--current');
+        }
+        else {
+          navLink[i].parentNode.classList.remove('menu__item--current');
+        }
+     };
+    </script>
+    {% endcompress %}
   {% endblock %}
+  {% block form_js %}{% endblock %}
 </body>
 </html>
