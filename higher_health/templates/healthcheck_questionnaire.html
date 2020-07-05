@@ -563,7 +563,7 @@
         locality: 'long_name',
         country: 'long_name'
       };
-      function initAutocomplete() {
+      window.initAutocomplete = function () {
         // Create the autocomplete object, restricting the search predictions to
         // geographical location types.
         autocomplete = new google.maps.places.Autocomplete(
@@ -631,9 +631,5 @@
       //google.maps.event.addDomListener(window, 'load', initAutocomplete);
   </script>
 {% endcompress %}
-<!-- DOM ISSUE:
-  Execute the javascript callback after the page loads.
-  https://stackoverflow.com/questions/34063439/invalidvalueerror-not-an-instance-of-htmlinputelement
- -->
 <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key={{PLACES_API_KEY}}&libraries=places&callback=initAutocomplete" defer></script>
 {% endblock %}
