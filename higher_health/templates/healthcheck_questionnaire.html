@@ -242,19 +242,14 @@
     </div>
   </div>
 {% endblock %}
-
 {% block form_js %}
-
 {% cache 300 json_data %}
   {{ universities|json_script:"universities-data" }}
-
   {{ campuses|json_script:"campus-data" }}
 {% endcache %}
-
 {% compress js inline %}
   <script type="text/javascript">
     "use strict";
-
     let universities = JSON.parse(document.getElementById('universities-data').textContent),
       campuses = JSON.parse(document.getElementById('campus-data').textContent),
       prov = document.getElementById('id_facility_destination_province'),
@@ -275,9 +270,8 @@
       preexistingconditionsYes = document.getElementById('id_history_pre_existing_condition_0'),
       preexistingconditionsNo = document.getElementById('id_history_pre_existing_condition_1'),
       preexistingconditionsNotsure = document.getElementById('id_history_pre_existing_condition_2'),
-      isPageLoad = true;
-
-      let other_university = null;
+      isPageLoad = true,
+      other_university = null;
       for(const [university, prov] of Object.entries(universities)){
         if(prov === "" || prov === undefined){
           other_university = university;
@@ -344,7 +338,6 @@
           camp.value = '';
         }
       }
-
       function showOther(val, parent_list, other){
         // show other input box if val is the 'Other' university
         // show other input box if val is the 'Other' campus
@@ -358,14 +351,20 @@
           if(other !== null) other.parentElement.classList.add('hidden');
         }
       }
-
       document.addEventListener('DOMContentLoaded',function(e) {
         let checkboxKey = sessionStorage.getItem('checkbox'),
           paginate = document.querySelectorAll('.pagination__icon'),
           sessionToggle = sessionStorage.getItem('steps') ? JSON.parse(sessionStorage.getItem('steps')) : {},
           collapsed,
           medicalOptions = document.getElementsByName('history_pre_existing_condition'),
-          preexistingRadioKey = sessionStorage.getItem('preexistingRadio');
+          medicalOptionsIndex;
+
+          for(let m= 0; m < medicalOptions.length; m++) {
+            if(medicalOptions[m].checked){
+              medicalOptionsIndex = medicalOptions[m].value
+            }
+          };
+          let preexistingRadioKey = sessionStorage.getItem('preexistingRadio') ? sessionStorage.getItem('preexistingRadio') : medicalOptionsIndex;
 
         //CHECKBOX TOGGLE
         if(checkboxKey === 'true') {
@@ -394,14 +393,6 @@
         });
 
         //PRE-EXISTING CONDITIONS
-        // Test other case scenarios
-        if(preexistingRadioKey === null) {
-          for(let m= 0; m < medicalOptions.length; m++) {
-            if(medicalOptions[m].checked) {
-              sessionStorage.setItem('preexistingRadio', medicalOptions[m].value);
-            }
-          };
-        };
         if(preexistingRadioKey === 'yes' || preexistingRadioKey === 'not_sure') {
           if(preexistingRadioKey === 'yes') {
             preexistingconditionsYes.checked = true;
@@ -444,7 +435,6 @@
             preexistingconditionsForm.classList.remove('showing');
           }
         });
-
 
         //COLLAPSE & EXPAND
         for(let i = 0; i < paginate.length; i++) {
@@ -528,7 +518,6 @@
               return  document.getElementById('id_facility_destination_campus')[this.entrySelectedCampusIndex].label
             }
           };
-
           if(sessionToggle[collapsiblesToggle] !== undefined || sessionToggle[collapsiblesToggle] !== null ) {
             if(sessionToggle[collapsiblesToggle] === true) {
               collapsiblesBlock.style.display = 'none';
@@ -541,7 +530,7 @@
                   excerpt.innerHTML = '<h5>'+ entryInfo.entryUni() +' | '+entryInfo.entryCampus()+'</h5>';
                 }
                 else if(collapsiblesToggle === 'step_3') {
-                  var preexistingRadioKeyDisplay = preexistingRadioKey === "not_sure" ? "Not sure" : preexistingRadioKey;
+                  let preexistingRadioKeyDisplay = preexistingRadioKey === "not_sure" ? "Not sure" : preexistingRadioKey;
                   excerpt.innerHTML = '<h5>'+preexistingRadioKeyDisplay+'</h5>';
                 }
               excerpt.style.display = 'block';
@@ -565,7 +554,6 @@
       });
       isPageLoad = false;
 
-
       //GOOGLE PLACES API: AUTOCOMPLETE
       let placeSearch, autocomplete;
       const componentForm = {
@@ -574,7 +562,7 @@
         locality: 'long_name',
         country: 'long_name'
       };
-      function initAutocomplete() {
+      window.initAutocomplete = function () {
         // Create the autocomplete object, restricting the search predictions to
         // geographical location types.
         autocomplete = new google.maps.places.Autocomplete(
@@ -590,12 +578,13 @@
 
         // When the user selects an address from the drop-down, populate the
         // address fields in the form.
-        addressInput.addEventListener('keyup',function(e){
+        addressInput.addEventListener('keyup',function(e) {
           e.target.value = this.value;
           latInput.value = '';
           lngInput.value = '';
         });
-        autocomplete.addListener('place_changed', function(){
+
+        autocomplete.addListener('place_changed', function() {
           let thisPlace = this.getPlace();
           let cityInput = autocomplete.getPlace();
 
@@ -618,6 +607,7 @@
           }
         });
       }
+
       // Bias the autocomplete object to the user's geographical location,
       // as supplied by the browser's 'navigator.geolocation' object.
       function geolocate() {
@@ -627,14 +617,15 @@
               lat: position.coords.latitude,
               lng: position.coords.longitude
             };
-            let circle = new google.maps.Circle(
-              {center: geolocation, radius: position.coords.accuracy});
+            let circle = new google.maps.Circle({
+              center: geolocation,
+              radius: position.coords.accuracy
+            });
             autocomplete.setBounds(circle.getBounds());
           });
         }
       }
   </script>
 {% endcompress %}
-
-<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key={{PLACES_API_KEY}}&libraries=places&callback=initAutocomplete" async defer></script>
+<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key={{PLACES_API_KEY}}&libraries=places&callback=initAutocomplete" defer></script>
 {% endblock %}
