@@ -250,7 +250,6 @@
 {% compress js inline %}
   <script type="text/javascript">
     "use strict";
-    //window.addEventListener("load", load, false);
     let universities = JSON.parse(document.getElementById('universities-data').textContent),
       campuses = JSON.parse(document.getElementById('campus-data').textContent),
       prov = document.getElementById('id_facility_destination_province'),
@@ -626,7 +625,6 @@
           });
         }
       }
-      //google.maps.event.addDomListener(window, 'load', initAutocomplete);
   </script>
 {% endcompress %}
 <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key={{PLACES_API_KEY}}&libraries=places&callback=initAutocomplete" defer></script>
