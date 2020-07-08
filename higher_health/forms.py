@@ -96,7 +96,7 @@ class HealthCheckQuestionnaire(forms.Form):
         required=False,
     )
     facility_destination_university_other = forms.CharField(
-        label="Enter the name of an institution:", required=False
+        label="Enter the institution name if other:", required=False
     )
     facility_destination_campus = forms.ModelChoiceField(
         label="Please select a campus:",
@@ -104,7 +104,7 @@ class HealthCheckQuestionnaire(forms.Form):
         required=False,
     )
     facility_destination_campus_other = forms.CharField(
-        label="Enter the name of a campus:", required=False
+        label="Enter the campus name if other:", required=False
     )
     facility_destination_reason = forms.ChoiceField(
         label="Are you a:", choices=REASON_CHOICES, widget=forms.RadioSelect
