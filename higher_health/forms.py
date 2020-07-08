@@ -35,12 +35,12 @@ class HealthCheckQuestionnaire(forms.Form):
     )
 
     first_name = forms.CharField(
-        label="Enter your name",
+        label="Enter your name:",
         widget=TextInput(attrs={"placeholder": "Name"}),
         required=True,
     )
     last_name = forms.CharField(
-        label="Enter your surname",
+        label="Enter your surname:",
         widget=TextInput(attrs={"placeholder": "Surname"}),
         required=True,
     )
@@ -56,7 +56,7 @@ class HealthCheckQuestionnaire(forms.Form):
         required=True,
     )
     gender = forms.ChoiceField(
-        label="Please provide us with the gender you identify as",
+        label="Please provide us with the gender you identify as:",
         choices=(
             ("", _("Gender")),
             ("male", _("Male")),
@@ -88,22 +88,22 @@ class HealthCheckQuestionnaire(forms.Form):
         label="", choices=DESTINATION_CHOICES, widget=forms.RadioSelect
     )
     facility_destination_province = forms.ChoiceField(
-        label="Please select a province", choices=[("", "--------")] + PROVINCE_CHOICES
+        label="Please select a province:", choices=[("", "--------")] + PROVINCE_CHOICES
     )
     facility_destination_university = forms.ModelChoiceField(
-        label="Please select an institution",
+        label="Please select an institution:",
         queryset=models.University.objects.all(),
         required=False,
     )
     facility_destination_university_other = forms.CharField(
-        label="Other", required=False
+        label="Enter a name of an institution:", required=False
     )
     facility_destination_campus = forms.ModelChoiceField(
-        label="Please select a campus",
+        label="Please select a campus:",
         queryset=models.Campus.objects.all(),
         required=False,
     )
-    facility_destination_campus_other = forms.CharField(label="Other", required=False)
+    facility_destination_campus_other = forms.CharField(label="Enter a name of a campus:", required=False)
     facility_destination_reason = forms.ChoiceField(
         label="Are you a:", choices=REASON_CHOICES, widget=forms.RadioSelect
     )
@@ -191,7 +191,7 @@ class HealthCheckQuestionnaire(forms.Form):
                 try:
                     querystring = urlencode(
                         {
-                            "key": settings.CLIENT_PLACES_API_KEY,
+                            "key": settings.SERVER_PLACES_API_KEY,
                             "input": data["address"],
                             "language": "en",
                             "components": "country:za",
@@ -204,7 +204,7 @@ class HealthCheckQuestionnaire(forms.Form):
                     if location["predictions"]:
                         querystring = urlencode(
                             {
-                                "key": settings.CLIENT_PLACES_API_KEY,
+                                "key": settings.SERVER_PLACES_API_KEY,
                                 "place_id": location["predictions"][0]["place_id"],
                                 "language": "en",
                                 "fields": "geometry",
@@ -423,7 +423,6 @@ class HealthCheckLogin(forms.Form):
             self.request.session["otp_retries"] = 1
 
         otp = "".join(secrets.choice(string.digits) for _ in range(6))
-        print(otp)
         h = hmac.new(settings.SECRET_KEY.encode(), otp.encode(), digestmod=sha256)
         otp_hash = base64.b64encode(h.digest()).decode()
         self.request.session["otp_hash"] = otp_hash
