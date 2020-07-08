@@ -318,7 +318,7 @@
               (uniChild.value == other_university && csvInputElem[uniChild.value] == '') ||
               csvInputElem[uniChild.value] == other_university
             ){
-              // if its the other option save it for last
+              // If its the other option save it for last
               last_option = uniChild;
             }
             else {
@@ -326,7 +326,7 @@
             }
           }
         }
-        // make sure we always add other as last opt
+        // Make sure we always add other as last opt
         if (last_option !== null){
           selectInputs.appendChild(last_option.cloneNode(true));
         }
@@ -339,8 +339,8 @@
         }
       }
       function showOther(val, parent_list, other){
-        // show other input box if val is the 'Other' university
-        // show other input box if val is the 'Other' campus
+        // Show other input box if val is the 'Other' university
+        // Show other input box if val is the 'Other' campus
         if(
           Number(val) === Number(other_university) ||
           Number(parent_list[val]) === Number(other_university)
@@ -508,6 +508,8 @@
             entrySelectedAgeIndex: document.getElementById('id_age_range').selectedIndex,
             entrySelectedUniIndex: document.getElementById('id_facility_destination_university').selectedIndex,
             entrySelectedCampusIndex: document.getElementById('id_facility_destination_campus').selectedIndex,
+            entryUniOther: document.getElementById('id_facility_destination_university_other').value,
+            entryCampusOther: document.getElementById('id_facility_destination_campus_other').value,
             entryAge: function() {
               return  document.getElementById('id_age_range')[this.entrySelectedAgeIndex].value
             },
@@ -518,6 +520,7 @@
               return  document.getElementById('id_facility_destination_campus')[this.entrySelectedCampusIndex].label
             }
           };
+
           if(sessionToggle[collapsiblesToggle] !== undefined || sessionToggle[collapsiblesToggle] !== null ) {
             if(sessionToggle[collapsiblesToggle] === true) {
               collapsiblesBlock.style.display = 'none';
@@ -527,7 +530,11 @@
                   excerpt.innerHTML =  '<h5>'+entryInfo.entryName + ' '+ entryInfo.entrySurname + ' | ' + entryInfo.entryAge() + ' | ' + entryInfo.entryAddress+'</h5>';
                 }
                 else if(collapsiblesToggle === 'step_2') {
-                  excerpt.innerHTML = '<h5>'+ entryInfo.entryUni() +' | '+entryInfo.entryCampus()+'</h5>';
+                  if(entryInfo.entryUni() === 'Other' || entryInfo.entryCampus() === 'Other') {
+                    excerpt.innerHTML = '<h5>'+ entryInfo.entryUniOther +' | '+ entryInfo.entryCampusOther +'</h5>';
+                  } else {
+                    excerpt.innerHTML = '<h5>'+ entryInfo.entryUni() +' | '+entryInfo.entryCampus()+'</h5>';
+                  }
                 }
                 else if(collapsiblesToggle === 'step_3') {
                   let preexistingRadioKeyDisplay = preexistingRadioKey === "not_sure" ? "Not sure" : preexistingRadioKey;

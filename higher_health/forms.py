@@ -35,12 +35,12 @@ class HealthCheckQuestionnaire(forms.Form):
     )
 
     first_name = forms.CharField(
-        label="Enter your name",
+        label="Enter your name:",
         widget=TextInput(attrs={"placeholder": "Name"}),
         required=True,
     )
     last_name = forms.CharField(
-        label="Enter your surname",
+        label="Enter your surname:",
         widget=TextInput(attrs={"placeholder": "Surname"}),
         required=True,
     )
@@ -56,7 +56,7 @@ class HealthCheckQuestionnaire(forms.Form):
         required=True,
     )
     gender = forms.ChoiceField(
-        label="Please provide us with the gender you identify as",
+        label="Please provide us with the gender you identify as:",
         choices=(
             ("", _("Gender")),
             ("male", _("Male")),
@@ -88,22 +88,24 @@ class HealthCheckQuestionnaire(forms.Form):
         label="", choices=DESTINATION_CHOICES, widget=forms.RadioSelect
     )
     facility_destination_province = forms.ChoiceField(
-        label="Please select a province", choices=[("", "--------")] + PROVINCE_CHOICES
+        label="Please select a province:", choices=[("", "--------")] + PROVINCE_CHOICES
     )
     facility_destination_university = forms.ModelChoiceField(
-        label="Please select an institution",
+        label="Please select an institution:",
         queryset=models.University.objects.all(),
         required=False,
     )
     facility_destination_university_other = forms.CharField(
-        label="Other", required=False
+        label="If other, enter the name of the institution:", required=False
     )
     facility_destination_campus = forms.ModelChoiceField(
-        label="Please select a campus",
+        label="Please select a campus:",
         queryset=models.Campus.objects.all(),
         required=False,
     )
-    facility_destination_campus_other = forms.CharField(label="Other", required=False)
+    facility_destination_campus_other = forms.CharField(
+        label="If other, enter the name of a campus:", required=False
+    )
     facility_destination_reason = forms.ChoiceField(
         label="Are you a:", choices=REASON_CHOICES, widget=forms.RadioSelect
     )
