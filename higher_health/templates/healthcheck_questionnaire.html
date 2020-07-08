@@ -532,10 +532,8 @@
                 else if(collapsiblesToggle === 'step_2') {
                   if(entryInfo.entryUni() === 'Other' || entryInfo.entryCampus() === 'Other') {
                     excerpt.innerHTML = '<h5>'+ entryInfo.entryUniOther +' | '+ entryInfo.entryCampusOther +'</h5>';
-                    console.log('True');
                   } else {
                     excerpt.innerHTML = '<h5>'+ entryInfo.entryUni() +' | '+entryInfo.entryCampus()+'</h5>';
-                    console.log('Other');
                   }
                 }
                 else if(collapsiblesToggle === 'step_3') {
