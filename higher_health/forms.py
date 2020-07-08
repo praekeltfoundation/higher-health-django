@@ -103,7 +103,9 @@ class HealthCheckQuestionnaire(forms.Form):
         queryset=models.Campus.objects.all(),
         required=False,
     )
-    facility_destination_campus_other = forms.CharField(label="Enter a name of a campus:", required=False)
+    facility_destination_campus_other = forms.CharField(
+        label="Enter a name of a campus:", required=False
+    )
     facility_destination_reason = forms.ChoiceField(
         label="Are you a:", choices=REASON_CHOICES, widget=forms.RadioSelect
     )
