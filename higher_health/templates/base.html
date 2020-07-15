@@ -26,17 +26,13 @@
     <!--[if !IE]><!-->
     <link rel="stylesheet" type="text/css" href="{% static 'css/except-ie.css' %}?v=20200529" />
     <!--<![endif]-->
-    <noscript>
-      <p class="no-script-label">For full functionality of this site it is necessary to enable JavaScript on your browser.
+    <noscript><div id="noscript">For full functionality of this site it is necessary to enable JavaScript on your browser.
       Or use or install the chrome browser with JavaScript enabled.
       <a href="https://www.google.com/chrome/">Install Chrome</a>
       Here are the <a href="https://www.enable-javascript.com/">
-      instructions how to enable JavaScript in your web browser</a>.</p>
+      instructions how to enable JavaScript in your web browser</a>.</div>
     </noscript>
-
-    <script src="https://browser.sentry-cdn.com/5.19.0/bundle.min.js" integrity="sha384-edPCPWtQrj57nipnV3wt78Frrb12XdZsyMbmpIKZ9zZRi4uAxNWiC6S8xtGCqwDG" crossorigin="anonymous">
-</script>
-
+    <script src="https://browser.sentry-cdn.com/5.19.0/bundle.min.js" integrity="sha384-edPCPWtQrj57nipnV3wt78Frrb12XdZsyMbmpIKZ9zZRi4uAxNWiC6S8xtGCqwDG" crossorigin="anonymous"></script>
     <!-- Global site tag (gtag.js) - Google Analytics -->
     {% for tag in GA_TAGS %}
     {% if tag %}
@@ -50,41 +46,39 @@
     {% endif %}
     {% endfor %}
     <!-- End Google Analytics -->
-
 </head>
 <body id="healthcheck">
   <section class="wrapper">
     {% block header %}
       <header id="masthead" class="header">
         <div class="header-inner">
-        <div class="header-brand">
-          <a class="header-brand__link" href="/" rel="home">
-            <img class="header-brand__logo"  src="{% static 'images/hh-logo.png' %}" alt="Higherhealth Logo">
-          </a>
+          <div class="header-brand">
+            <a class="header-brand__link" href="/" rel="home">
+              <img class="header-brand__logo"  src="{% static 'images/hh-logo.png' %}" alt="Higherhealth Logo">
+            </a>
+          </div>
+          <div class="header__menu">
+            <ul class="menu">
+                {% if not user.is_authenticated %}
+                  <li class="menu__item menu__item--current">
+                    <a href="/" class="menu__link">Home</a>
+                  </li>
+                  <li id="login" class="menu__item">
+                    <a href="{% url 'healthcheck_login' %}" class="menu__link">Login</a>
+                  </li>
+                {% else %}
+                  <li id="login" class="menu__item">
+                    <a href="{% url 'healthcheck_login' %}" class="menu__link">Home</a>
+                  </li>
+                  <li class="menu__item menu__item--current">
+                    <a href="{% url 'healthcheck_receipt' %}" class="menu__link">
+                      Clearance Certificate
+                    </a>
+                  </li>
+              {% endif %}
+            </ul>
+          </div>
         </div>
-        <div class="header__menu">
-          <ul class="menu">
-              {% if not user.is_authenticated %}
-                <li class="menu__item menu__item--current">
-                  <a href="/" class="menu__link">Home</a>
-                </li>
-                <li id="login" class="menu__item">
-                  <a href="{% url 'healthcheck_login' %}" class="menu__link">Login</a>
-                </li>
-              {% else %}
-                <li id="login" class="menu__item">
-                  <a href="{% url 'healthcheck_login' %}" class="menu__link">Home</a>
-                </li>
-                <li class="menu__item menu__item--current">
-                  <a href="{% url 'healthcheck_receipt' %}" class="menu__link">
-                    Clearance Certificate
-                  </a>
-                </li>
-            {% endif %}
-
-          </ul>
-        </div>
-      </div>
       </header>
     {% endblock %}
     {% block content %}{% endblock %}
@@ -109,22 +103,22 @@
           <ul class="logo-list">
             <li class="logo-list__item">
               <a class="logo-list__anchor" href="http://higherhealth.ac.za/">
-                <img class="logo-list__image" src="{% static 'images/footer-logo.png' %}" alt="Higherhealth Footer Logo" width="120" height="26,34">
+                <img class="logo-list__image" src="{% static 'images/footer-logo.png' %}" alt="Higherhealth Footer Logo" width="120" height="35">
               </a>
             </li>
             <li class="logo-list__item">
               <a class="logo-list__anchor" href="http://www.dhet.gov.za/">
-                <img class="logo-list__image" src="{% static 'images/DHEAT-logo-white.png' %}" alt="Department of Higher Education and Training" width="120" height="46,88">
+                <img class="logo-list__image" src="{% static 'images/DHEAT-logo-white.png' %}" alt="Department of Higher Education and Training" width="120" height="50">
               </a>
             </li>
             <li class="logo-list__item">
               <a class="logo-list__anchor" href="http://praekelt.org">
-                <img class="logo-list__image" src="{% static 'images/prk-logo.png' %}" alt="Praekelt" width="120" height="36,56">
+                <img class="logo-list__image" src="{% static 'images/prk-logo.png' %}" alt="Praekelt" width="120" height="50">
               </a>
             </li>
             <li class="logo-list__item">
               <a class="logo-list__anchor" href="http://turn.io">
-                <img class="logo-list__image" src="{% static 'images/turn-logo-white.png' %}" alt="Turn" width="78" height="31,65">
+                <img class="logo-list__image" src="{% static 'images/turn-logo-white.png' %}" alt="Turn" width="80" height="35">
               </a>
             </li>
           </ul>
@@ -137,6 +131,19 @@
     Sentry.init({
       dsn: '{{SENTRY_DSN}}'
     });
+    const bodyElems = document.querySelectorAll('h1, h2, h3, h4, h5, h6, p, span, img, ul, ol, li, a, form, label, input[type=text], input[type=checkbox], input[type=radio], input[type=number], button, select, textarea');
+    let values = [];
+    const genericTabs = function (items) {
+      for(let i = 0; i < items.length; i++ ) {
+        if(getComputedStyle(items[i], null).display !== 'none') {
+          console.log(':',items[i],i);
+          items[i].setAttribute('tabindex', i);
+          values.push(items[i]);
+        }
+      }
+      return values;
+    };
+    genericTabs(bodyElems);
  </script>
   {% block extra_js %}
     {% compress js inline %}
