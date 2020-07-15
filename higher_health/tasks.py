@@ -73,9 +73,19 @@ def submit_healthcheck_to_eventstore(healthcheck_id: Text) -> None:
                 if healthcheck.facility_destination_university
                 else None
             ),
+            "university_other": (
+                healthcheck.facility_destination_university_other
+                if healthcheck.facility_destination_university_other
+                else None
+            ),
             "campus": (
                 healthcheck.facility_destination_campus.to_dict()
                 if healthcheck.facility_destination_campus
+                else None
+            ),
+            "campus_other": (
+                healthcheck.facility_destination_campus_other
+                if healthcheck.facility_destination_campus_other
                 else None
             ),
             "reason": healthcheck.facility_destination_reason,
