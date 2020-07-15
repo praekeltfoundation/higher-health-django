@@ -136,7 +136,6 @@
     const genericTabs = function (items) {
       for(let i = 0; i < items.length; i++ ) {
         if(getComputedStyle(items[i], null).display !== 'none') {
-          console.log(':',items[i],i);
           items[i].setAttribute('tabindex', i);
           values.push(items[i]);
         }
