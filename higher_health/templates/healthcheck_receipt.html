@@ -2,7 +2,7 @@
 {% load temp_tags static tz %}
 
 {% block content %}
-<div class="content">
+<div class="content" role="contentinfo">
   <div class="content-intro">
     <div class="content-inner">
 
@@ -13,7 +13,7 @@
         <p>Please note that you cannot do another HealthCheck for the next 24 hours.
         If you need to do a HealthCheck for someone else, please click the button below.
         </p>
-        <form action="/" method="GET">
+        <form action="/" method="GET" role="form">
           <button class="cta cta-primary cta-primary--next">Do another HealthCheck</button>
           <input type="hidden" name="redo" value="true"/>
         </form>

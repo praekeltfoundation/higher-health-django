@@ -1,12 +1,12 @@
 #medical input[type="radio"],
 .login-form__medical input[type="radio"] {
-  margin: 10px;
-  height: auto;
-  width: auto;
+  margin: 5px;
+  width: 25px;
+  height: 25px;
 }
 #read-terms input[type="checkbox"] {
-  visibility: hidden;
-  position: absolute;
+  /* visibility: hidden;
+  position: absolute; */
 }
 .fieldset ul li,
 .fieldset__item ul li {
@@ -16,8 +16,12 @@
 input[type="checkbox"],
 input[type="radio"] {
   display: inline-block;
-  visibility: hidden;
-  position: absolute;
+  width: 25px;
+  height: 25px;
+  vertical-align: middle;
+  margin: 0;
+  /* visibility: hidden;
+  position: absolute; */
 }
 
 input[type="radio"] ~ label,
@@ -25,24 +29,24 @@ input[type="checkbox"] ~ label {
   font-size: 16px;
   visibility: visible;
   display: inline-block;
-	cursor: pointer;
-	position: relative;
+  cursor: pointer;
+  position: relative;
 }
 input[type="checkbox"] ~ label {
   text-transform: uppercase;
 }
-input[type="radio"] ~ label:before,
+/* input[type="radio"] ~ label:before,
 input[type="checkbox"] ~ label:before {
-	background: #fff;
-	border: 2px solid var(--soft-red);
-	content: "";
-	cursor: pointer;;
-	display: inline-block;
-	width: 25px;
-	height: 25px;
-	vertical-align: middle;
-	margin: 0 20px;
-	transition: all ease-in-out 0.2s;
+  background: #fff;
+  border: 2px solid var(--soft-red);
+  content: "";
+  cursor: pointer;;
+  display: inline-block;
+  width: 25px;
+  height: 25px;
+  vertical-align: middle;
+  margin: 0 10px 0 5px;
+  transition: all ease-in-out 0.2s;
 }
 
 input[type="radio"] ~ label:before {
@@ -58,13 +62,6 @@ input[type="radio"]:checked + label:before {
   background: var(--dark-cyan) url('/static/images/icons/check.png') 0 50%/25px no-repeat;;
   opacity: 1;
 }
-input[type="radio"]#id_checkbox:disabled ~ label {
- 	color: var(--very-dark-gray);
-}
-input[type="radio"]#id_checkbox:disabled ~ label:before {
-	border-color: var(--very-dark-gray);
-}
-
 
 input[type="checkbox"] + label,
 input[type="checkbox"]:checked + label {
@@ -78,5 +75,11 @@ input[type="checkbox"]#id_checkbox:disabled ~ label {
  	color: var(--very-dark-gray);
 }
 input[type="checkbox"]#id_checkbox:disabled ~ label:before {
-	border-color: var(--very-dark-gray);
+  border-color: var(--very-dark-gray);
 }
+input[type="radio"]#id_checkbox:disabled ~ label {
+  color: var(--very-dark-gray);
+}
+input[type="radio"]#id_checkbox:disabled ~ label:before {
+  border-color: var(--very-dark-gray);
+}*/

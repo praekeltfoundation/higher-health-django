@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 {% load temp_tags static compress cache %}
 {% block content %}
-  <div class="content">
+  <div class="content" role="contentinfo">
     <div class="content-intro">
       <div class="content-inner content-inner--questionnaires">
 
@@ -15,7 +15,7 @@
             our national response to COVID-19.
 
             Thank you for coming forward and for contributing to the
-            health of all citizens AND stopping the spread of the virus 🦠
+            health of all citizens AND stopping the spread of the virus.🦠
           </p>
           {% comment %}
             <!--
@@ -28,7 +28,7 @@
           {% endcomment %}
         </div>
 
-        <form action="" method="POST" id="login_form" class="login-form" novalidate>
+        <form action="" method="POST" id="login_form" class="login-form" role="form" novalidate>
         {% csrf_token %}
           <div class="login-form__read-terms">
             <ul id="read-terms" class="fieldset">
@@ -479,7 +479,7 @@
 
           // Expand / Collapse Click Event
           let excerpt = document.createElement('div');
-          paginate[i].addEventListener('click', function(e) {
+          const collasiblesFunc = function(e) {
             let nextElem = this.parentElement.nextElementSibling.nextElementSibling;
             if(nextElem.style.display === '') {
               nextElem.style.display = 'none';
@@ -499,7 +499,9 @@
             }
             sessionToggle[collapsiblesToggle] = collapsed;
             sessionStorage.setItem('steps', JSON.stringify(sessionToggle));
-          });
+          }
+          paginate[i].addEventListener('click', collasiblesFunc);
+          paginate[i].addEventListener('keydown', collasiblesFunc);
 
           let entryInfo = {
             entryName: document.getElementById('id_first_name').value,
@@ -634,5 +636,5 @@
       }
   </script>
 {% endcompress %}
-<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key={{PLACES_API_KEY}}&libraries=places&callback=initAutocomplete" defer></script>
+<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key={{PLACES_API_KEY}}&libraries=places&callback=initAutocomplete"></script>
 {% endblock %}

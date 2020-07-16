@@ -1,13 +1,12 @@
 {% extends 'base.html' %}
 {% block content %}
-  <div class="content">
+  <div class="content" role="contentinfo">
     <div class="content-intro">
       <div class="content-inner">
 
         <div class="heading-container">
           <h1 class="heading heading-primary heading-primary--mobile">Welcome to HealthCheck</h1>
           <h2 class="heading heading-secondary heading-secondary--main">Your daily risk assessment tool.</h2>
-          <h3></h3>
         </div>
 
         <div class="columns">
@@ -18,11 +17,11 @@
               our national response to COVID-19.
             </p>
             <h4>Thank you for coming forward and for contributing to the
-              health of all citizens AND stopping the spread of the virus 🦠</h4>
+              health of all citizens AND stopping the spread of the virus.🦠</h4>
           </div>
 
           <div class="columns-child">
-            <form action="" method="POST" id="login_form" class="login-form" novalidate>
+            <form action="" method="POST" id="login_form" class="login-form" role="form" novalidate>
             {% csrf_token %}
               <div id="questionnaires">
                 <div class="login-form__mobile">

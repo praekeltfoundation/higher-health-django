@@ -36,12 +36,16 @@ class HealthCheckQuestionnaire(forms.Form):
 
     first_name = forms.CharField(
         label="Enter your name:",
-        widget=TextInput(attrs={"placeholder": "Name"}),
+        widget=TextInput(
+            attrs={"placeholder": "Name", "aria-label": "Name input field"}
+        ),
         required=True,
     )
     last_name = forms.CharField(
         label="Enter your surname:",
-        widget=TextInput(attrs={"placeholder": "Surname"}),
+        widget=TextInput(
+            attrs={"placeholder": "Surname", "aria-label": "Surname input field"}
+        ),
         required=True,
     )
     age_range = forms.ChoiceField(
@@ -242,7 +246,7 @@ class HealthCheckQuestionnaire(forms.Form):
             if data.get("medical_confirm_accuracy") == "no":
                 self.add_error(
                     "medical_confirm_accuracy",
-                    "You need to confirm that this information is accurate",
+                    "You need to confirm that this information is accurate.",
                 )
 
     def clean(self):
@@ -385,8 +389,13 @@ class HealthCheckQuestionnaire(forms.Form):
 
 class HealthCheckLogin(forms.Form):
     msisdn = forms.CharField(
-        label="Enter your mobile number",
-        widget=TextInput(attrs={"placeholder": "Mobile number"}),
+        label="Enter your mobile number below:",
+        widget=TextInput(
+            attrs={
+                "placeholder": "Mobile number",
+                "aria-label": "Mobile number input field",
+            }
+        ),
         required=True,
         validators=[za_phone_number],
     )
