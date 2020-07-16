@@ -8,24 +8,19 @@
         <div class="heading-container">
           <h1 class="heading heading-primary">Welcome to HealthCheck</h1>
           <h2 class="heading heading-secondary">your daily risk assessment tool.</h2>
-          <h3 class="heading heading-subtitle">Please help us by answering a few questions about you and your health.</h3>
-          <p>
-            You will receive advice on what actions to take based on national guidelines,
-            and the data you enter will help us in predictive modelling and planning
-            our national response to COVID-19.
+          {% if not user.is_authenticated %}
+            <h3 class="heading heading-subtitle">Please help us by answering a few questions about you and your health.</h3>
+            <p>
+              You will receive advice on what actions to take based on national guidelines,
+              and the data you enter will help us in predictive modelling and planning
+              our national response to COVID-19.
 
-            Thank you for coming forward and for contributing to the
-            health of all citizens AND stopping the spread of the virus.🦠
-          </p>
-          {% comment %}
-            <!--
-              Exercise 3:
-              Use different headings / ctas for returning users.
-            -->
-            <h1 class="heading heading-primary">Welcome back to HealthCheck</h1>
-            <h3 class="heading heading-subtitle">your daily risk assessment tool.</h3>
-            <p>Please help us by answering a few questions about you and your health.</p>
-          {% endcomment %}
+              Thank you for coming forward and for contributing to the
+              health of all citizens AND stopping the spread of the virus.🦠
+            </p>
+          {% else %}
+            <h4 class="highlighter">Please help us by answering a few questions about you and your health.</h4>
+          {% endif %}
         </div>
 
         <form action="" method="POST" id="login_form" class="login-form" role="form" novalidate>
@@ -214,19 +209,20 @@
                     <h3 class="heading-subtitle heading-subtitle--edu-label">Confirmation</h3>
                   {% endif %}
                   <li class="fieldset__item">
-                    <label for="{{ field.name }}" class="label">{{ field.label }}</label>
-                    {% if field|field_type == 'RadioSelect' %}
-                      <ul id='id_{{ field.name }}'>
-                      {% for value, text in field.field.choices %}
-                        <li>
-                          <input name="{{ field.name }}"
-                           id="id_{{ field.name|slugify }}_{{ forloop.counter0 }}" type="radio" value="{{ value }}" {% if field.value == value %}checked="checked"{% endif %}/>
-                          <label for="id_{{ field.name|slugify }}_{{ forloop.counter0 }}">{{ text|capfirst }}</label>
-                        </li>
-                      {% endfor %}
-                      </ul>
-                      {{field.errors}}
-                    {% endif %}
+                    <label for="{{ field.name }}" class="label">{{ field.label }}
+                      {% if field|field_type == 'RadioSelect' %}
+                        <ul id='id_{{ field.name }}'>
+                        {% for value, text in field.field.choices %}
+                          <li>
+                            <input name="{{ field.name }}"
+                             id="id_{{ field.name|slugify }}_{{ forloop.counter0 }}" type="radio" value="{{ value }}" {% if field.value == value %}checked="checked"{% endif %}/>
+                            <label for="id_{{ field.name|slugify }}_{{ forloop.counter0 }}">{{ text|capfirst }}</label>
+                          </li>
+                        {% endfor %}
+                        </ul>
+                        {{field.errors}}
+                      {% endif %}
+                    </label>
                   </li>
                 {% endfor %}
               </ul>
@@ -480,28 +476,32 @@
           // Expand / Collapse Click Event
           let excerpt = document.createElement('div');
           const collasiblesFunc = function(e) {
-            let nextElem = this.parentElement.nextElementSibling.nextElementSibling;
-            if(nextElem.style.display === '') {
-              nextElem.style.display = 'none';
-              paginate[i].innerHTML = '+';
-              collapsed = true;
-              excerpt.style.display = 'block';
-            } else if(nextElem.style.display === 'none') {
-              nextElem.style.display = 'block';
-              paginate[i].innerHTML = '-';
-              collapsed = false;
-              excerpt.style.display = 'none';
-            } else if(nextElem.style.display === 'block') {
-              nextElem.style.display = 'none';
-              excerpt.style.display = 'block';
-              paginate[i].innerHTML = '+';
-              collapsed = true;
+            let nextElem = e.target.parentElement.nextElementSibling.nextElementSibling;
+              if(nextElem.style.display === '') {
+                nextElem.style.display = 'none';
+                paginate[i].innerHTML = '+';
+                collapsed = true;
+                excerpt.style.display = 'block';
+              } else if(nextElem.style.display === 'none') {
+                nextElem.style.display = 'block';
+                paginate[i].innerHTML = '-';
+                collapsed = false;
+                excerpt.style.display = 'none';
+              } else if(nextElem.style.display === 'block') {
+                nextElem.style.display = 'none';
+                excerpt.style.display = 'block';
+                paginate[i].innerHTML = '+';
+                collapsed = true;
+              }
+              sessionToggle[collapsiblesToggle] = collapsed;
+              sessionStorage.setItem('steps', JSON.stringify(sessionToggle));
+          };
+          paginate[i].addEventListener('click',collasiblesFunc);
+          paginate[i].addEventListener('keydown', function(e) {
+            if (e.keyCode == 32 || e.keyCode == 13) {
+              collasiblesFunc(e);
             }
-            sessionToggle[collapsiblesToggle] = collapsed;
-            sessionStorage.setItem('steps', JSON.stringify(sessionToggle));
-          }
-          paginate[i].addEventListener('click', collasiblesFunc);
-          paginate[i].addEventListener('keydown', collasiblesFunc);
+          });
 
           let entryInfo = {
             entryName: document.getElementById('id_first_name').value,
