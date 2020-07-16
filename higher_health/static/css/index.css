@@ -17,10 +17,13 @@
 }
 
 /*----------- RESETS ----------*/
-*, *:focus {
-  outline: none;
+* {
+  outline: 2px solid transparent;
 }
-
+*:focus {
+  outline-offset: 2px;
+  outline: 2px solid var(--soft-red);
+}
 html, body {
   height: 100%;
   overflow:auto;
@@ -44,7 +47,7 @@ a {
   text-decoration: none;
 }
 a:focus {
-  outline: 1px dotted var(--soft-red) !important;
+  outline: 1px dotted var(--soft-red);
 }
 a:hover {
   text-decoration: underline;
@@ -52,6 +55,7 @@ a:hover {
 
 img {
   border: 0;
+  padding: 2px;
 }
 
 p {
