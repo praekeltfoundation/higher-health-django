@@ -36,12 +36,12 @@ class HealthCheckQuestionnaire(forms.Form):
 
     first_name = forms.CharField(
         label="Enter your name:",
-        widget=TextInput(attrs={"placeholder": "Name","aria-label":"Name input field"}),
+        widget=TextInput(attrs={"placeholder": "Name", "aria-label": "Name input field"}),
         required=True,
     )
     last_name = forms.CharField(
         label="Enter your surname:",
-        widget=TextInput(attrs={"placeholder": "Surname","aria-label":"Surname input field"}),
+        widget=TextInput(attrs={"placeholder": "Surname", "aria-label": "Surname input field"}),
         required=True,
     )
     age_range = forms.ChoiceField(
@@ -386,7 +386,7 @@ class HealthCheckQuestionnaire(forms.Form):
 class HealthCheckLogin(forms.Form):
     msisdn = forms.CharField(
         label="Enter your mobile number below:",
-        widget=TextInput(attrs={"placeholder": "Mobile number","aria-label":"Mobile number input field"}),
+        widget=TextInput(attrs={"placeholder": "Mobile number", "aria-label": "Mobile number input field"}),
         required=True,
         validators=[za_phone_number],
     )
