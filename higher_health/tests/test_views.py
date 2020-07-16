@@ -233,7 +233,7 @@ class QuestionnaireTest(TestCase):
         errors = response.context["form"].errors
         self.assertEqual(
             errors["medical_confirm_accuracy"],
-            ["You need to confirm that this information is accurate"],
+            ["You need to confirm that this information is accurate."],
         )
 
         self.assertTrue(response.context["form"].registration_fields_has_errors())
