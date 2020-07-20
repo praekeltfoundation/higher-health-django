@@ -22,7 +22,7 @@
 }
 *:focus {
   outline-offset: 2px;
-  outline: 2px solid var(--soft-red);
+  outline: 2px solid var(--dark-cyan);
 }
 html, body {
   height: 100%;
