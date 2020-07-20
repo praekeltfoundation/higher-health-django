@@ -22,7 +22,6 @@
 }
 *:focus {
   outline-offset: 2px;
-  outline: inherit;
   outline: 2px solid var(--dark-cyan);
 }
 html, body {
