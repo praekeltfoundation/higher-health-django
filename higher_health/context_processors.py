@@ -10,4 +10,4 @@ def ga_tags(request):
 
 
 def sentry_connect(request):
-    return {"SENTRY_DSN": settings.SENTRY_DSN}
+    return {"SENTRY_DSN": settings.FE_SENTRY_DSN}

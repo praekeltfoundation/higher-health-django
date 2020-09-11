@@ -131,9 +131,11 @@ USE_TZ = True
 GA_TAG_KEYS = env.list("GOOGLE_GA_TAG_KEYS", default=[])
 
 SENTRY_DSN = env.str("SENTRY_DSN", "")
-if SENTRY_DSN:
+FE_SENTRY_DSN = env.str("FE_SENTRY_DSN", default=SENTRY_DSN)
+BE_SENTRY_DSN = env.str("BE_SENTRY_DSN", default=SENTRY_DSN)
+if BE_SENTRY_DSN:
     sentry_sdk.init(
-        dsn=SENTRY_DSN,
+        dsn=BE_SENTRY_DSN,
         integrations=[DjangoIntegration(), CeleryIntegration()],
         send_default_pii=True,
     )
