@@ -205,10 +205,9 @@ class HealthCheckQuestionnaire(forms.Form):
             existing = Covid19Triage.objects.filter(user=user, address=address).latest(
                 "timestamp"
             )
-            if existing.address == address:
-                lat, lng = iso6709_to_lat_lng(existing.location)
-                if lat and lng:
-                    return False, False, lat, lng
+            lat, lng = iso6709_to_lat_lng(existing.location)
+            if lat and lng:
+                return False, False, lat, lng
         except Covid19Triage.DoesNotExist:
             pass
 
