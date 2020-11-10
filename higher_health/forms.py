@@ -17,7 +17,8 @@ from django.utils.translation import ugettext_lazy as _
 from temba_client.exceptions import TembaException
 
 from higher_health import models
-from higher_health.utils import rapidpro
+from higher_health.models import Covid19Triage
+from higher_health.utils import iso6709_to_lat_lng, rapidpro
 from higher_health.validators import za_phone_number
 
 logger = logging.getLogger(__name__)
@@ -187,47 +188,79 @@ class HealthCheckQuestionnaire(forms.Form):
         required=True,
     )
 
+    def get_coords(self, user, address):
+        """
+        Returns a tuple of:
+
+        invalid_address
+        lookup_error
+        latitude
+        longitude
+        """
+        # First try to get existing coords if address matches
+        try:
+            # TODO: This could be optimised to check across all users, but then we would
+            # need an index, so we first need to see how prevalent shared addresses are
+            # between users before implementing
+            existing = Covid19Triage.objects.filter(user=user, address=address).latest(
+                "timestamp"
+            )
+            if existing.address == address:
+                lat, lng = iso6709_to_lat_lng(existing.location)
+                if lat and lng:
+                    return False, False, lat, lng
+        except Covid19Triage.DoesNotExist:
+            pass
+
+        # Otherwise do google places lookup
+        try:
+            querystring = urlencode(
+                {
+                    "key": settings.SERVER_PLACES_API_KEY,
+                    "input": address,
+                    "language": "en",
+                    "components": "country:za",
+                }
+            )
+            response = requests.get(
+                f"https://maps.googleapis.com/maps/api/place/autocomplete/json?{querystring}"
+            )
+            location = response.json()
+            if not location["predictions"]:
+                return True, False, None, None
+            querystring = urlencode(
+                {
+                    "key": settings.SERVER_PLACES_API_KEY,
+                    "place_id": location["predictions"][0]["place_id"],
+                    "language": "en",
+                    "fields": "geometry",
+                }
+            )
+            response = requests.get(
+                f"https://maps.googleapis.com/maps/api/place/details/json?{querystring}"
+            )
+            place_details = response.json()
+            geometry = place_details["result"]["geometry"]["location"]
+            return False, False, geometry["lat"], geometry["lng"]
+        except (KeyError, requests.RequestException):
+            logger.exception("Google Places lookup error")
+            return False, True, None, None
+
     def __init__(self, *args, **kwargs):
+        data = args[0] if args else kwargs.get("data", None)
+        user = kwargs.pop("user")
         invalid_address = False
         address_lookup_error = False
-        data = args[0] if args else kwargs.get("data", None)
+
         if data:
             data = data.copy()
             if data.get("address"):
-                try:
-                    querystring = urlencode(
-                        {
-                            "key": settings.SERVER_PLACES_API_KEY,
-                            "input": data["address"],
-                            "language": "en",
-                            "components": "country:za",
-                        }
-                    )
-                    response = requests.get(
-                        f"https://maps.googleapis.com/maps/api/place/autocomplete/json?{querystring}"
-                    )
-                    location = response.json()
-                    if location["predictions"]:
-                        querystring = urlencode(
-                            {
-                                "key": settings.SERVER_PLACES_API_KEY,
-                                "place_id": location["predictions"][0]["place_id"],
-                                "language": "en",
-                                "fields": "geometry",
-                            }
-                        )
-                        response = requests.get(
-                            f"https://maps.googleapis.com/maps/api/place/details/json?{querystring}"
-                        )
-                        place_details = response.json()
-                        geometry = place_details["result"]["geometry"]["location"]
-                        data["latitude"] = geometry["lat"]
-                        data["longitude"] = geometry["lng"]
-                    else:
-                        invalid_address = True
-                except (KeyError, requests.RequestException):
-                    logger.exception("Google Places lookup error")
-                    address_lookup_error = True
+                invalid_address, address_lookup_error, lat, lng = self.get_coords(
+                    user, data["address"]
+                )
+                if lat and lng:
+                    data["latitude"] = lat
+                    data["longitude"] = lng
             kwargs.update({"data": data})
         super(HealthCheckQuestionnaire, self).__init__(*args, **kwargs)
 

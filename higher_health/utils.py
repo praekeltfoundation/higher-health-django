@@ -1,3 +1,5 @@
+import re
+
 from django.conf import settings
 from temba_client.v2 import TembaClient
 
@@ -47,6 +49,19 @@ def get_location(data):
         lng = f"+{lng}"
 
     return f"{lat}{lng}/"
+
+
+def iso6709_to_lat_lng(location):
+    """
+    Extracts the latitude and longitude from the iso6709 string, but only for the
+    decimal format
+    """
+    re_coord = r"^(?P<lat>[\+-]\d{0,2}\.?\d+)(?P<lng>[\+-]\d{0,3}\.?\d+)"
+    match = re.match(re_coord, location)
+    if match["lat"] and match["lng"]:
+        return float(match["lat"]), float(match["lng"])
+    else:
+        return None, None
 
 
 def save_data(data, user):

@@ -97,6 +97,11 @@ class HealthCheckQuestionnaireView(
                 ] = triage.preexisting_condition
         return initial_data
 
+    def get_form_kwargs(self):
+        kwargs = super().get_form_kwargs()
+        kwargs["user"] = self.request.user
+        return kwargs
+
 
 def staff_check(user):
     return not user.is_staff
