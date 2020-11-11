@@ -302,6 +302,37 @@ class QuestionnaireTest(TestCase):
             triage.location, get_location({"latitude": "11.1", "longitude": "22.2"})
         )
 
+    @mock.patch("higher_health.utils.submit_healthcheck_to_eventstore")
+    def test_post_get_coordinates_from_previous_healthcheck(self, _):
+        """
+        If the address is the same as the last healthcheck, then get the coordinates
+        from there instead
+        """
+        login_with_otp(self.client, "+27831231234")
+
+        data = get_data()
+        data["address"] = "4 friend street woodstock"
+        data["risk_level"] = "low"
+        save_data(data, User.objects.get(username="+27831231234"))
+
+        data["latitude"] = ""
+        data["longitude"] = ""
+
+        response = self.client.post(reverse("healthcheck_questionnaire"), data)
+
+        self.assertEqual(response.status_code, 302)
+
+        [_, triage] = Covid19Triage.objects.order_by("timestamp").all()
+
+        for triage in Covid19Triage.objects.all():
+            self.assertEqual(triage.address, "4 friend street woodstock")
+            self.assertEqual(
+                triage.location,
+                get_location(
+                    {"latitude": "53.3913081", "longitude": "-2.109429099999999"}
+                ),
+            )
+
     @responses.activate
     def test_post_going_to_campus(self):
         login_with_otp(self.client, "+27831231234")
