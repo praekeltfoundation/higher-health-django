@@ -965,3 +965,18 @@ textarea {
   display: block;
   width: 100%;
 }
+.eu {
+  display: block;
+  width: 50%;
+  align-items: center;
+  float: right;
+}
+.hwseta {
+  display: block;
+  width: 100%;
+}
+.grid-container {
+  display: inline-grid;
+  grid-template-columns: auto auto;
+  margin-right: 3em;
+}
