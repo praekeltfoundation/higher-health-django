@@ -965,3 +965,7 @@ textarea {
   display: block;
   width: 100%;
 }
+
+.grid-container {
+  display: grid;
+}
