@@ -799,7 +799,7 @@ textarea {
     padding: 2em 10%;
   }
   .columns {
-    align-items: baseline;
+    align-items: center;
     display: flex;
     justify-content: space-between;
   }
@@ -955,4 +955,13 @@ textarea {
   .logo-list__item:last-child {
     margin: 5px 0 5px 1em;
   }
+}
+
+/*
+  ADS
+*/
+
+.lifebouy-ad {
+  display: block;
+  width: 100%;
 }
