@@ -95,7 +95,7 @@
             {% endif %}
           </ul>
         </div>
-
+        <img class="lifebouy-ad"  src="{% static 'images/logos.png' %}" alt="Eu, HWSETA, Lifebuoy logos" role="img">
         <div class="receipts-results receipts-results--{% if risk_level == "high" or risk_level == "critical" or is_expired %}high{% elif risk_level == "moderate" %}mid{% elif risk_level == "low" %}low{% endif %}
         ">
           <div class="receipts-headings">
@@ -131,4 +131,5 @@
   </div>
 </div>
 {% endblock %}
+
 {% block extra_js %}{% endblock %}
