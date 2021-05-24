@@ -28,6 +28,19 @@ class QuestionnaireTest(TestCase):
         errors = response.context["form"].errors
         self.assertEqual(errors["otp"], ["The OTP you have entered is incorrect."])
 
+    def test_otp_with_incorrect_otp(self):
+        self.client.post(reverse("healthcheck_login"), {"msisdn": "+27831231234"})
+        h = hmac.new(settings.SECRET_KEY.encode(), "111222".encode(), digestmod=sha256)
+        fake_otp_hash = base64.b64encode(h.digest()).decode()
+        session = self.client.session
+        session["otp_hash"] = fake_otp_hash
+        session["otp_timestamp"] = datetime.utcnow().timestamp()
+        session.save()
+        response = self.client.post(reverse("healthcheck_otp"), {"otp": "999999"})
+        self.assertEqual(response.status_code, 200)
+        errors = response.context["form"].errors
+        self.assertEqual(errors["otp"], ["The OTP you have entered is incorrect."])
+
     def test_otp_session_retries_limit_exceeded(self):
         # attempt to login 3 times
         for i in range(0, 3):

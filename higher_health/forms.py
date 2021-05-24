@@ -519,6 +519,8 @@ class HealthCheckOTP(forms.Form):
                         "otp",
                         "The OTP you have entered has expired. Please reset and try again.",
                     )
+            else:
+                self.add_error("otp", "The OTP you have entered is incorrect.")
         except KeyError:
             self.add_error("otp", "The OTP you have entered is incorrect.")
 
