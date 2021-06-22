@@ -252,13 +252,6 @@ ZA-WC,Oakfields College (Pty) Ltd,250
 ZA-GT,Open Learning Group (distance only),251
 ZA-GT,Open Window (Pty) Ltd,252
 ZA-WC,Optimi College (Pty) Ltd T/A College SA,253
-ZA-FS,Pearson Instittute of Higher Education,254
-ZA-GT,Pearson Instittute of Higher Education,255
-ZA-WC,Pearson Instittute of Higher Education,256
-ZA-EC,Pearson Instittute of Higher Education,257
-ZA-MP,Pearson Instittute of Higher Education,258
-ZA-NW,Pearson Instittute of Higher Education,259
-ZA-NL,Pearson Instittute of Higher Education,260
 ZA-GT,PM Academy,261
 ZA-NW,Potchefstroom Academy,262
 ZA-GT,Private Hotel School (Part of ADvTech Group),263
@@ -543,10 +536,10 @@ ZA-FS,Swift Skills Academy,541
 ZA-GT,St Augustine College of South Africa,542
 ZA-WC,Mowbray Maternity Hospital,543
 ZA-WC,Swift Skills Academy,544
-ZA-EC,Pearson Institute of Higher Education  Eduvos,545
-ZA-FS,Pearson Institute of Higher Education  Eduvos,546
-ZA-GT,Pearson Institute of Higher Education  Eduvos,547
-ZA-MP,Pearson Institute of Higher Education  Eduvos,548
-ZA-NL,Pearson Institute of Higher Education  Eduvos,549
-ZA-NW,Pearson Institute of Higher Education  Eduvos,550
-ZA-WC,Pearson Institute of Higher Education  Eduvos,551
+ZA-EC,Eduvos,552
+ZA-FS,Eduvos,553
+ZA-GT,Eduvos,554
+ZA-MP,Eduvos,555
+ZA-NL,Eduvos,556
+ZA-NW,Eduvos,557
+ZA-WC,Eduvos,558
