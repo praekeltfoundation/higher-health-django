@@ -1,119 +1,19 @@
-university_province,university,name
-ZA-WC,Cape Peninsula University of Technology (CPUT),Athlone
-ZA-WC,Cape Peninsula University of Technology (CPUT),Bellville
-ZA-WC,Cape Peninsula University of Technology (CPUT),Cape Town
-ZA-WC,Cape Peninsula University of Technology (CPUT),Granger Bay
-ZA-WC,Cape Peninsula University of Technology (CPUT),Groote Schuur
-ZA-WC,Cape Peninsula University of Technology (CPUT),Mowbray
-ZA-WC,Cape Peninsula University of Technology (CPUT),Tygerberg
-ZA-WC,Cape Peninsula University of Technology (CPUT),Wellington
-ZA-WC,Cape Peninsula University of Technology (CPUT),Worcester
-ZA-WC,Cape Peninsula University of Technology (CPUT),District Six
-ZA-WC,Cape Peninsula University of Technology (CPUT),Optical Dispensing
-ZA-WC,Cape Peninsula University of Technology (CPUT),Roeland Street
-ZA-WC,Cape Peninsula University of Technology (CPUT),Media City
-ZA-WC,Cape Peninsula University of Technology (CPUT),George
-ZA-FS,Central University of Technology (CUT),Bloemfontein
-ZA-FS,Central University of Technology (CUT),Welkom
-ZA-NL,Durban University of Technology (DUT),Steve Biko
-ZA-NL,Durban University of Technology (DUT),Ritson
-ZA-NL,Durban University of Technology (DUT),City Campus
-ZA-NL,Durban University of Technology (DUT),ML Sultan
-ZA-NL,Durban University of Technology (DUT),Brickfield
-ZA-NL,Durban University of Technology (DUT),Indumiso
-ZA-NL,Durban University of Technology (DUT),Riverside
-ZA-NL,Mangosuthu University of Technology (MUT),Main Campus
-ZA-EC,Nelson Mandela University (NMU),2nd Avenue
-ZA-WC,Nelson Mandela University (NMU),George
-ZA-EC,Nelson Mandela University (NMU),Missionville
-ZA-EC,Nelson Mandela University (NMU),North
-ZA-EC,Nelson Mandela University (NMU),South
-ZA-NW,North West University (NWU),Mafikeng
-ZA-NW,North West University (NWU),Potchefstroom
-ZA-GT,North West University (NWU),Vaal Triangle (Vanderbijl Park)
-ZA-EC,Rhodes University (RU),Grahamstown
-ZA-GT,Sefako Makgatho Health Sciences University (SMU),Main Campus
-ZA-NC,Sol Plaatje University (SPU),Kimberley
-ZA-WC,Stellenbosch University (SU),Stellenbosch
-ZA-WC,Stellenbosch University (SU),Tygerberg
-ZA-LP,Tshwane University of Technology (TUT),Polokwane
-ZA-MP,Tshwane University of Technology (TUT),eMalahleni
-ZA-GT,Tshwane University of Technology (TUT),Ga-Rankuwa
-ZA-MP,Tshwane University of Technology (TUT),Mbombela
-ZA-GT,Tshwane University of Technology (TUT),Pretoria West
-ZA-GT,Tshwane University of Technology (TUT),Soshanguve
-ZA-GT,Tshwane University of Technology (TUT),Arts
-ZA-GT,Tshwane University of Technology (TUT),Arcadia
-ZA-FS,UNISA,Bloemfontein
-ZA-NL,UNISA,Durban
-ZA-EC,UNISA,East London
-ZA-GT,UNISA,Ekurhuleni
-ZA-WC,UNISA,George
-ZA-LP,UNISA,Giyani
-ZA-GT,UNISA,Johannesburg
-ZA-NC,UNISA,Kimberley
-ZA-FS,UNISA,Kroonstad
-ZA-NW,UNISA,Mafikeng
-ZA-LP,UNISA,Makhado
-ZA-MP,UNISA,Mbombela
-ZA-MP,UNISA,Middelburg
-ZA-EC,UNISA,Mthatha
-ZA-NL,UNISA,Newcastle
-ZA-WC,UNISA,Parow
-ZA-NL,UNISA,Pietermaritzburg
-ZA-LP,UNISA,Polokwane
-ZA-EC,UNISA,Port Elizabeth
-ZA-NW,UNISA,Potchefstroom
-ZA-GT,UNISA,Pretoria (Sunnyside)
-ZA-NL,UNISA,Richards Bay
-ZA-NW,UNISA,Rustenburg
-ZA-GT,UNISA,Florida (Science Campus)
-ZA-GT,UNISA,Vaal
-ZA-NL,UNISA,Wild Coast (Mbizana)
-ZA-WC,University of Cape Town (UCT),Rondebosch
-ZA-EC,University of Fort Hare (UFH),Alice
-ZA-EC,University of Fort Hare (UFH),Bisho
-ZA-EC,University of Fort Hare (UFH),East London
-ZA-GT,University of Johannesburg (UJ),Doornfontein (DFC)
-ZA-GT,University of Johannesburg (UJ),Kingsway Auckland Park (APK)
-ZA-GT,University of Johannesburg (UJ),Kingsway Bunting Road (APB)
-ZA-GT,University of Johannesburg (UJ),Soweto
-ZA-NL,University of Kwazulu Natal (UKZN),Edgewood
-ZA-NL,University of Kwazulu Natal (UKZN),Howard
-ZA-NL,University of Kwazulu Natal (UKZN),Medical School
-ZA-NL,University of Kwazulu Natal (UKZN),Pietermaritzburg
-ZA-NL,University of Kwazulu Natal (UKZN),Westville
-ZA-LP,University of Limpopo (UL),Turfloop Campus
-ZA-MP,University of Mpumalanga (UMP),Mbombela
-ZA-MP,University of Mpumalanga (UMP),Siyabuswa
-ZA-GT,University of Pretoria (UP),Hatfield (Main Campus)
-ZA-GT,University of Pretoria (UP),Groenkloof
-ZA-GT,University of Pretoria (UP),Mamelodi
-ZA-GT,University of Pretoria (UP),Prinshof
-ZA-GT,University of Pretoria (UP),Onderstepoort
-ZA-GT,University of Pretoria (UP),Hillcrest
-ZA-GT,University of Pretoria (UP),GIBS
-ZA-FS,University of the Free State (UFS),Main Campus
-ZA-FS,University of the Free State (UFS),Qwaqwa Campus
-ZA-FS,University of the Free State (UFS),South Campus
-ZA-GT,University of the Witwatersrand (WITS),Braamfontein
-ZA-LP,University of Venda (UNIVEN),Thohoyandou
-ZA-WC,University of Western Cape (UWC),Bellville
-ZA-NL,University of Zululand (UNIZULU),KwaDlangezwa
-ZA-NL,University of Zululand (UNIZULU),Richards Bay
-ZA-GT,Vaal University of Technology (VUT),Ekurhuleni
-ZA-GT,Vaal University of Technology (VUT),Main Campus (Vanderbijlpark)
-ZA-MP,Vaal University of Technology (VUT),Secunda
-ZA-EC,Walter Sisulu University (WSU),Buffalo City
-ZA-EC,Walter Sisulu University (WSU),Butterworth (Ibika)
-ZA-EC,Walter Sisulu University (WSU),Mthatha
-ZA-EC,Walter Sisulu University (WSU),Queenstown (Masibulele)
+ZA-EC,AFDA,Cenral
+ZA-EC,Boston City Campus & Business College,East London
+ZA-EC,Boston City Campus & Business College,Mthatha
+ZA-EC,Boston City Campus & Business College,Port Elizabeth
+ZA-EC,Boston City Campus & Business College,Queenstown
 ZA-EC,Buffalo City,Central Office
 ZA-EC,Buffalo City,East London
 ZA-EC,Buffalo City,John Knox Bokwe
 ZA-EC,Buffalo City,St Marks
-ZA-EC,Eastcape Midlands,Central Office
+ZA-EC,CTU Training Solutions,Port Elizabeth
+ZA-EC,College of Transfiguration NPC,Grahamstown
+ZA-EC,Damelin,East London
+ZA-EC,Damelin,Port Elizabeth
+ZA-EC,East London Management Institute Pty Ltd,East London
 ZA-EC,Eastcape Midlands,Brickfields
+ZA-EC,Eastcape Midlands,Central Office
 ZA-EC,Eastcape Midlands,Charles Goodyear
 ZA-EC,Eastcape Midlands,Graaff-Reinet
 ZA-EC,Eastcape Midlands,Grahamstown
@@ -121,8 +21,13 @@ ZA-EC,Eastcape Midlands,Heath Park
 ZA-EC,Eastcape Midlands,High Street
 ZA-EC,Eastcape Midlands,Park Avenue
 ZA-EC,Eastcape Midlands,Thanduxolo
-ZA-EC,Ikhala,Central Office
+ZA-EC,Ed-U City Campus (Pty) Ltd,Port Elizabeth
+ZA-EC,Eduvos,East London
+ZA-EC,Eduvos,Port Elizabeth
+ZA-EC,Health and Fitness Professionals Academy (HFPA),Port Elizabeth
+ZA-EC,IQ Academy,East London
 ZA-EC,Ikhala,Aliwal North
+ZA-EC,Ikhala,Central Office
 ZA-EC,Ikhala,Ezibeleni
 ZA-EC,Ikhala,Queen Nonesi
 ZA-EC,Ikhala,Queenstown
@@ -133,8 +38,8 @@ ZA-EC,Ingwe,Mount Fletcher
 ZA-EC,Ingwe,Mount Frere
 ZA-EC,Ingwe,Ngqungqushe
 ZA-EC,Ingwe,Siteto
-ZA-EC,King Hintsa,Central Office
 ZA-EC,King Hintsa,Centane
+ZA-EC,King Hintsa,Central Office
 ZA-EC,King Hintsa,Dutywa
 ZA-EC,King Hintsa,Msobomvu
 ZA-EC,King Hintsa,Teko
@@ -146,41 +51,135 @@ ZA-EC,King Sabata Dalindyebo (KSD),Mthatha
 ZA-EC,King Sabata Dalindyebo (KSD),Ngcobo
 ZA-EC,King Sabata Dalindyebo (KSD),Ntabozuko
 ZA-EC,King Sabata Dalindyebo (KSD),Zimbane
-ZA-EC,Lovedale,Central Office
 ZA-EC,Lovedale,Alice
+ZA-EC,Lovedale,Central Office
 ZA-EC,Lovedale,King
 ZA-EC,Lovedale,Zwelitsha
+ZA-EC,MANCOSA,East London
+ZA-EC,MANCOSA,Port Elizabeth
+ZA-EC,MSC Business College,East London
+ZA-EC,MSC Business College,Head Office
+ZA-EC,MSC Business College,Port Elizabeth
+ZA-EC,MSC Business College,Queenstown
+ZA-EC,MSC Business College,Uitenhage
+ZA-EC,Nelson Mandela University (NMU),2nd Avenue
+ZA-EC,Nelson Mandela University (NMU),Missionville
+ZA-EC,Nelson Mandela University (NMU),North
+ZA-EC,Nelson Mandela University (NMU),South
+ZA-EC,Netcare  Education (Pty Ltd),Port Elizabeth
 ZA-EC,Port Elizabeth,Central Office
 ZA-EC,Port Elizabeth,Dower
 ZA-EC,Port Elizabeth,Iqhayiya
 ZA-EC,Port Elizabeth,Russell Road
-ZA-FS,Flavius Mareka ,Central Office
-ZA-FS,Flavius Mareka ,Kroonstad
-ZA-FS,Flavius Mareka ,Mphohadi
-ZA-FS,Flavius Mareka ,Sasolburg
-ZA-FS,Goldfields ,Central Office
-ZA-FS,Goldfields ,Tosa
-ZA-FS,Goldfields ,Welkom
-ZA-FS,Goldfields ,Virginia
-ZA-FS,Goldfields ,Muruti House
-ZA-FS,Maluti ,Central Office
-ZA-FS,Maluti ,Bethlehem
-ZA-FS,Maluti ,Bonamelo
-ZA-FS,Maluti ,Harrismith
-ZA-FS,Maluti ,Itemoheleng
-ZA-FS,Maluti ,Kwetlisong
-ZA-FS,Maluti ,Lere La Tshepe
-ZA-FS,Maluti ,Main Campus
-ZA-FS,Maluti ,Sefikeng
-ZA-FS,Motheo ,Central Office
-ZA-FS,Motheo ,Bloemfontein
-ZA-FS,Motheo ,Botshabelo
-ZA-FS,Motheo ,Hillside View
-ZA-FS,Motheo ,Koffiefontein
-ZA-FS,Motheo ,Thaba 'Nchu
-ZA-FS,Motheo ,Zastron
-ZA-GT,Central Johannesburg,Central Office
+ZA-EC,Production Management Institute of Southern Africa PTY LTD / PMI,East London
+ZA-EC,Production Management Institute of Southern Africa PTY LTD / PMI,Uitenhage
+ZA-EC,Regent Business School (Pty) Ltd (Learning Centre),East London
+ZA-EC,Rhodes University (RU),Grahamstown
+ZA-EC,STADIO AFDA,Port Elizabeth
+ZA-EC,Stenden,Port Alfred
+ZA-EC,UNISA,East London
+ZA-EC,UNISA,Mthatha
+ZA-EC,UNISA,Port Elizabeth
+ZA-EC,University of Fort Hare (UFH),Alice
+ZA-EC,University of Fort Hare (UFH),Bisho
+ZA-EC,University of Fort Hare (UFH),East London
+ZA-EC,Walter Sisulu University (WSU),Buffalo City
+ZA-EC,Walter Sisulu University (WSU),Butterworth (Ibika)
+ZA-EC,Walter Sisulu University (WSU),Mthatha
+ZA-EC,Walter Sisulu University (WSU),Queenstown (Masibulele)
+ZA-EC,eta College,East London
+ZA-EC,eta College,George
+ZA-EC,eta College,Port Elizabeth
+ZA-FS,Boston City Campus & Business College,Bloemfontein
+ZA-FS,Boston City Campus & Business College,Welkom
+ZA-FS,CTU Training Solutions,Bloemfontein
+ZA-FS,Camelot International,Bloemfontein
+ZA-FS,Central University of Technology (CUT),Bloemfontein
+ZA-FS,Central University of Technology (CUT),Welkom
+ZA-FS,Damelin,Bloemfontein
+ZA-FS,Eduvos,Bloemfontein
+ZA-FS,Flavius Mareka,Central Office
+ZA-FS,Flavius Mareka,Kroonstad
+ZA-FS,Flavius Mareka,Mphohadi
+ZA-FS,Flavius Mareka,Sasolburg
+ZA-FS,Goldfields,Central Office
+ZA-FS,Goldfields,Muruti House
+ZA-FS,Goldfields,Tosa
+ZA-FS,Goldfields,Virginia
+ZA-FS,Goldfields,Welkom
+ZA-FS,Jeppe College,Bloemfontein
+ZA-FS,MSC Business College,Bloemfontein
+ZA-FS,Maluti,Bethlehem
+ZA-FS,Maluti,Bonamelo
+ZA-FS,Maluti,Central Office
+ZA-FS,Maluti,Harrismith
+ZA-FS,Maluti,Itemoheleng
+ZA-FS,Maluti,Kwetlisong
+ZA-FS,Maluti,Lere La Tshepe
+ZA-FS,Maluti,Main Campus
+ZA-FS,Maluti,Sefikeng
+ZA-FS,Mediclinic (Central Region Mediclinic Learning Centre),Bloemfontein
+ZA-FS,Motheo,Bloemfontein
+ZA-FS,Motheo,Botshabelo
+ZA-FS,Motheo,Central Office
+ZA-FS,Motheo,Hillside View
+ZA-FS,Motheo,Koffiefontein
+ZA-FS,Motheo,Thaba 'Nchu
+ZA-FS,Motheo,Zastron
+ZA-FS,Richfield Graduate School,Bloemfontein
+ZA-FS,Richfield Graduate School,Phuthaditjhaba
+ZA-FS,Swift Skills Academy,Sasolburg
+ZA-FS,UNISA,Bloemfontein
+ZA-FS,UNISA,Kroonstad
+ZA-FS,University of the Free State (UFS),Main Campus
+ZA-FS,University of the Free State (UFS),Qwaqwa Campus
+ZA-FS,University of the Free State (UFS),South Campus
+ZA-FS,eta College,Bloemfontein
+ZA-GT,AAA School of Advertising,Bryanston
+ZA-GT,AFDA,Braamfontein
+ZA-GT,AROS,Waverly Pretoria
+ZA-GT,Academy for Facilities Management (distance only),Waterkloof
+ZA-GT,Academy of Sound Engineering (Pty) Ltd,Auckland Park
+ZA-GT,Afrikaanse Protestantse Akademie,Pretoria
+ZA-GT,Akademia NPC,Centurion
+ZA-GT,Animation School (Pty) Ltd (The),Craighall Park
+ZA-GT,Arwyp Training Institute,Kempton Park
+ZA-GT,Baptist Theological College of Southern Africa (The) NPC CONTACT,Randburg
+ZA-GT,Belgium Campus,Akasia
+ZA-GT,Belgium Campus,Kempton Park
+ZA-GT,Belgium Campus,Sydenham
+ZA-GT,Boston City Campus & Business College,Alberton
+ZA-GT,Boston City Campus & Business College,Arcadia
+ZA-GT,Boston City Campus & Business College,Bedfordview
+ZA-GT,Boston City Campus & Business College,Benoni
+ZA-GT,Boston City Campus & Business College,Braamfontein
+ZA-GT,Boston City Campus & Business College,Germiston
+ZA-GT,Boston City Campus & Business College,Johnnesburg
+ZA-GT,Boston City Campus & Business College,Kemptonpark
+ZA-GT,Boston City Campus & Business College,Krugersdorp
+ZA-GT,Boston City Campus & Business College,Lynvwoodglen
+ZA-GT,Boston City Campus & Business College,Orange Grove
+ZA-GT,Boston City Campus & Business College,Pretoria North
+ZA-GT,Boston City Campus & Business College,Randburg
+ZA-GT,Boston City Campus & Business College,Roodepoort
+ZA-GT,Boston City Campus & Business College,Rosebank
+ZA-GT,Boston City Campus & Business College,Sandton
+ZA-GT,Boston City Campus & Business College,Soweto
+ZA-GT,Boston City Campus & Business College,Springs
+ZA-GT,Boston City Campus & Business College,Vereeniging
+ZA-GT,Boston Media House,Pretoria
+ZA-GT,Boston Media House,Sandton
+ZA-GT,Business Management Training College (Pty) Ltd (BMT College),Head Office
+ZA-GT,CTU Training Solutions,Aukland Park
+ZA-GT,CTU Training Solutions,Boksburg
+ZA-GT,CTU Training Solutions,Menlyn
+ZA-GT,CTU Training Solutions,Roodepoort
+ZA-GT,CTU Training Solutions,Vereeniging
+ZA-GT,Camelot International,East Rand
+ZA-GT,Camelot International,Houghton
+ZA-GT,Camelot International,Pretoria
 ZA-GT,Central Johannesburg,Alexandra
+ZA-GT,Central Johannesburg,Central Office
 ZA-GT,Central Johannesburg,Crown Mines
 ZA-GT,Central Johannesburg,Ellis Park
 ZA-GT,Central Johannesburg,Langlaagte
@@ -188,31 +187,141 @@ ZA-GT,Central Johannesburg,Parktown
 ZA-GT,Central Johannesburg,Riverlea
 ZA-GT,Central Johannesburg,Smith - Site
 ZA-GT,Central Johannesburg,Troyeville
-ZA-GT,Ekurhuleni East,Central Office
+ZA-GT,Centurion Akademie,Centurion
+ZA-GT,Chartall Business College,Broadacres
+ZA-GT,Christian Reformed Theological Seminary (Distance only),Bronkhorstspruit
+ZA-GT,Concept Interactive Cape,Midrand
+ZA-GT,Cranefield COllege,Pretoria
+ZA-GT,Damelin,Boksburg
+ZA-GT,Damelin,Braamfontein
+ZA-GT,Damelin,Centurion
+ZA-GT,Damelin,Menlyn
+ZA-GT,Damelin,Pretoria CBD
+ZA-GT,Damelin,Randburg
+ZA-GT,Damelin,Vereeniging
+ZA-GT,Eduvos,Bedfordview
+ZA-GT,Eduvos,Midrand
+ZA-GT,Eduvos,Pretoria
+ZA-GT,Eduvos,Vanderbijlpark
 ZA-GT,Ekurhuleni East,Benoni
 ZA-GT,Ekurhuleni East,Brakpan
+ZA-GT,Ekurhuleni East,Central Office
 ZA-GT,Ekurhuleni East,Daveyton
 ZA-GT,Ekurhuleni East,Kwa-Thema
 ZA-GT,Ekurhuleni East,Springs
-ZA-GT,Ekurhuleni West,Central Office
 ZA-GT,Ekurhuleni West,Alberton
 ZA-GT,Ekurhuleni West,Boksburg
+ZA-GT,Ekurhuleni West,Central Office
 ZA-GT,Ekurhuleni West,Germiston
 ZA-GT,Ekurhuleni West,Kathorus
 ZA-GT,Ekurhuleni West,Kempton
 ZA-GT,Ekurhuleni West,Tembisa
+ZA-GT,Emendy (Pty) Ltd,Hatfield
+ZA-GT,FEDISA Pty Ltd,Sandton
+ZA-GT,Foundation for Professional Development (Pty) Ltd,Pretoria
+ZA-GT,Global School of Theology,Rooderpoort
+ZA-GT,"Greenside Design Centre, College of Design","Greenside, Gauteng"
+ZA-GT,Health Science Academy,Pretoria
+ZA-GT,Health and Fitness Professionals Academy (HFPA),Bedfordview
+ZA-GT,Health and Fitness Professionals Academy (HFPA),Pretoria
+ZA-GT,Health and Fitness Professionals Academy (HFPA),"Rivonia, Gauteng"
+ZA-GT,Health and Fitness Professionals Academy (HFPA),Sunninghill
+ZA-GT,Hebron Theological College NPC,Benoni
+ZA-GT,Henley Business School,Paulshof
+ZA-GT,IMM Graduate School of Marketing,Edenvale
+ZA-GT,IMM Graduate School of Marketing,Milpark
+ZA-GT,IMM Graduate School of Marketing,Pretoria
+ZA-GT,IMM Graduate School of Marketing,Sandton
+ZA-GT,IQ Academy,Johannesburg
+ZA-GT,Independent  Institute of Education,Sandton
+ZA-GT,Inscape Education Group,Midrand
+ZA-GT,Inscape Education Group HEAD OFFICE,Pretoria
+ZA-GT,Institute of Accounting Science,Meyersdal
+ZA-GT,Institute of Accounting Science,New Market
+ZA-GT,International College of Bible and Missions NPC,Roodepoort
+ZA-GT,International Trade Institute of Southern Africa NPC,Sandton
+ZA-GT,Invictus (SAE Institute (Pty) Ltd),Johannesburg
+ZA-GT,Invictus (The International Hotel School (Pty) Ltd),Johannesburg
+ZA-GT,Invictus (The International Hotel School (Pty) Ltd),Pretoria
+ZA-GT,Isa Carstens Academy (Pty),Pretoria
+ZA-GT,Jeppe College,Johannesburg
+ZA-GT,Jeppe College,Pretoria
+ZA-GT,Jeppe College,Vereeniging
+ZA-GT,Katapult Business School (Pty) Ltd,Bedfordview
+ZA-GT,Life College of Learning (Life Healthcare Group (Pty) Ltd),Johannesburg
+ZA-GT,Lunghile Nursing School (Pty) Ltd,Rosebank
+ZA-GT,MANCOSA,Johannesburg
+ZA-GT,MSC Business College,Alberton
+ZA-GT,MSC Business College,Glenvista
+ZA-GT,MSC Business College,Kempton Park
+ZA-GT,MSC Business College,Midrand
+ZA-GT,MSC Business College,Pretoria
+ZA-GT,Macmillan South Africa,Midrand
+ZA-GT,Mediclinic (Northern Region Mediclinic Learning Centre),Johannesburg
+ZA-GT,Mediclinic (Tshwane Region Mediclinic Learning Centre),Pretoria
+ZA-GT,Moonstone Business School of Excellence,Pretoria
+ZA-GT,Mukhanyo Theological College NPC,Braamfontein
+ZA-GT,Mukhanyo Theological College NPC,Pretoria
+ZA-GT,Nazarene Theological College,Honeydew
+ZA-GT,Netcare  Education (Pty Ltd),Auckland Park
+ZA-GT,Netcare  Education (Pty Ltd),Pretoria
+ZA-GT,Netcare  Education (Pty Ltd)  Head office,Sandton
+ZA-GT,North West University (NWU),Vaal Triangle (Vanderbijl Park)
+ZA-GT,Oakfields College (Pty) Ltd,Edenvale
+ZA-GT,Oakfields College (Pty) Ltd,Pretoria
+ZA-GT,Open Learning Group (distance only),Randburg
+ZA-GT,Open Window (Pty) Ltd,Centurion
+ZA-GT,PM Academy,Edenvale
+ZA-GT,Private Hotel School (Part of ADvTech Group),Rosebank
+ZA-GT,Pro-Active Public Services College (Pty) Ltd,Pretoria
+ZA-GT,Production Management Institute of Southern Africa PTY LTD / PMI,Johannesburg
+ZA-GT,Red and Yellow Creative School of Business,Johannesburg
+ZA-GT,Regent Business School (Pty) Ltd (Learning Centre),Auckland Park
+ZA-GT,Regent Business School (Pty) Ltd (Learning Centre),Pretoria
+ZA-GT,Richfield Graduate School,Benoni
+ZA-GT,Richfield Graduate School,Braamfontein
+ZA-GT,Richfield Graduate School,Johannesburg
+ZA-GT,Richfield Graduate School,Kempton Park
+ZA-GT,Richfield Graduate School,Krugersdorp
+ZA-GT,Richfield Graduate School,Midrand
+ZA-GT,Richfield Graduate School,Pretoria
+ZA-GT,Richfield Graduate School,Randburg
+ZA-GT,Richfield Graduate School,Vereeniging
+ZA-GT,SANTS,Pretoria
+ZA-GT,STADIO AFDA,Johannesburg
+ZA-GT,STADIO Embury (Stadio School of Education),Midrand
+ZA-GT,STADIO Embury (Stadio School of Education),Pretoria
+ZA-GT,STADIO LISOF,Hatfield
+ZA-GT,STADIO LISOF,Randburg
+ZA-GT,STADIO Milpark Education,Auckland Park
+ZA-GT,STADIO Prestige Academy,Centurion
+ZA-GT,STADIO Southern Business School,Krugersdorp
 ZA-GT,Sedibeng,Central Office
 ZA-GT,Sedibeng,Heidelberg
 ZA-GT,Sedibeng,Sebokeng
 ZA-GT,Sedibeng,Vanderbijlpark
 ZA-GT,Sedibeng,Vereeniging
-ZA-GT,South West Gauteng ,Dobsonville
-ZA-GT,South West Gauteng ,George Tabor
-ZA-GT,South West Gauteng ,Land is Wealth Farm
-ZA-GT,South West Gauteng ,Molapo
-ZA-GT,South West Gauteng ,Roodepoort
-ZA-GT,South West Gauteng ,Roodepoort West
-ZA-GT,South West Gauteng ,Technisa
+ZA-GT,Sefako Makgatho Health Sciences University (SMU),Main Campus
+ZA-GT,South African College of Applied Psychology (SACAP),Johannesburg
+ZA-GT,South African College of Applied Psychology (SACAP),Pretoria
+ZA-GT,South West Gauteng,Dobsonville
+ZA-GT,South West Gauteng,George Tabor
+ZA-GT,South West Gauteng,Land is Wealth Farm
+ZA-GT,South West Gauteng,Molapo
+ZA-GT,South West Gauteng,Roodepoort
+ZA-GT,South West Gauteng,Roodepoort West
+ZA-GT,South West Gauteng,Technisa
+ZA-GT,Southern Africa Bible College NPC,Benoni
+ZA-GT,South African Theological Seminary,Sandton
+ZA-GT,St Augustine College of South Africa,Johannesburg
+ZA-GT,St John Vianney Seminary,Pretoria
+ZA-GT,TSIBA Education NPC,Newtown
+ZA-GT,The Animation School,Johannesburg Campus
+ZA-GT,The Da Vinci Institute for Technology Management (Pty) Ltd,Johannesburg
+ZA-GT,The International Hotel School (Pty) Ltd,Johannesburg
+ZA-GT,The International Hotel School (Pty) Ltd,Pretoria
+ZA-GT,The Open Window (Pty) Ltd,Main campus
+ZA-GT,Theological Education by Extension College NPC (Distance only),Johanesburg
 ZA-GT,Tshwane North,Central Office
 ZA-GT,Tshwane North,Mamelodi
 ZA-GT,Tshwane North,Pretoria
@@ -220,25 +329,193 @@ ZA-GT,Tshwane North,Rosslyn
 ZA-GT,Tshwane North,Soshanguve North
 ZA-GT,Tshwane North,Soshanguve South
 ZA-GT,Tshwane North,Temba
-ZA-GT,Tshwane South,Central Office
 ZA-GT,Tshwane South,Atteridgeville
+ZA-GT,Tshwane South,Central Office
 ZA-GT,Tshwane South,Centurion
 ZA-GT,Tshwane South,Odi
 ZA-GT,Tshwane South,Pretoria West
-ZA-GT,Western,Central Office
+ZA-GT,Tshwane University of Technology (TUT),Arcadia
+ZA-GT,Tshwane University of Technology (TUT),Arts
+ZA-GT,Tshwane University of Technology (TUT),Ga-Rankuwa
+ZA-GT,Tshwane University of Technology (TUT),Pretoria West
+ZA-GT,Tshwane University of Technology (TUT),Soshanguve
+ZA-GT,Turaco Hospitality (Pty) Ltd,Randburg
+ZA-GT,UNISA,Brooklyn
+ZA-GT,UNISA,Daveyton
+ZA-GT,UNISA,Ekurhuleni
+ZA-GT,UNISA,Florida (Science Campus)
+ZA-GT,UNISA,Johannesburg
+ZA-GT,UNISA,Little Theatre
+ZA-GT,UNISA,Muckleneuk
+ZA-GT,UNISA,Pretoria (Sunnyside)
+ZA-GT,UNISA,Robert Sobukwe
+ZA-GT,UNISA,SBL
+ZA-GT,UNISA,Solomon Mahlangu
+ZA-GT,UNISA,Vaal
+ZA-GT,University of Johannesburg (UJ),Doornfontein (DFC)
+ZA-GT,University of Johannesburg (UJ),Kingsway Auckland Park (APK)
+ZA-GT,University of Johannesburg (UJ),Kingsway Bunting Road (APB)
+ZA-GT,University of Johannesburg (UJ),Soweto
+ZA-GT,University of Pretoria (UP),GIBS
+ZA-GT,University of Pretoria (UP),Groenkloof
+ZA-GT,University of Pretoria (UP),Hatfield (Main Campus)
+ZA-GT,University of Pretoria (UP),Hillcrest
+ZA-GT,University of Pretoria (UP),Mamelodi
+ZA-GT,University of Pretoria (UP),Onderstepoort
+ZA-GT,University of Pretoria (UP),Prinshof
+ZA-GT,University of the Witwatersrand (WITS),Braamfontein
+ZA-GT,Vaal University of Technology (VUT),Ekurhuleni
+ZA-GT,Vaal University of Technology (VUT),Main Campus (Vanderbijlpark)
+ZA-GT,Villioti Fashion Institute (Pty) Ltd,Hyde Park
 ZA-GT,Western,Carletonville
+ZA-GT,Western,Central Office
 ZA-GT,Western,Krugersdorp
 ZA-GT,Western,Krugersdorp West
 ZA-GT,Western,Randfontein
-ZA-NL,Coastal,Central Office
+ZA-GT,eta College,Johannesburg
+ZA-GT,eta College,Pretoria
+ZA-LP,Boston City Campus & Business College,Polokwane
+ZA-LP,Boston City Campus & Business College,Tzaneen
+ZA-LP,CTU Training Solutions,Polokwane
+ZA-LP,Capricorn,Central Office
+ZA-LP,Capricorn,Polokwane
+ZA-LP,Capricorn,Ramokgopa
+ZA-LP,Capricorn,Senwabarwana
+ZA-LP,Capricorn,Seshego
+ZA-LP,Christ Baptist Church Seminary NPC,Faunapark
+ZA-LP,Jeppe College,Polokwane
+ZA-LP,Lephalale,Central Office
+ZA-LP,Lephalale,Lephalale
+ZA-LP,Lephalale,Modimolle
+ZA-LP,Letaba,Central Office
+ZA-LP,Letaba,Giyani
+ZA-LP,Letaba,Maake
+ZA-LP,Letaba,Tzaneen
+ZA-LP,MANCOSA,Polokwane
+ZA-LP,MSC Business College,Louis Trichardt
+ZA-LP,MSC Business College,Polokwane
+ZA-LP,Mediclinic (Limpopo Mediclinic Learning Centre),Polokwane
+ZA-LP,Mopani,Central Office
+ZA-LP,Mopani,Phalaborwa
+ZA-LP,Mopani,Sir Val Duncan
+ZA-LP,Richfield Graduate School,Mankweng
+ZA-LP,Richfield Graduate School,Polokwane
+ZA-LP,Richfield Graduate School,Thohoyandou
+ZA-LP,Sekhukhune,Apel
+ZA-LP,Sekhukhune,CN Phatudi
+ZA-LP,Sekhukhune,CS Barlow
+ZA-LP,Sekhukhune,Central Office
+ZA-LP,Tshwane University of Technology (TUT),Polokwane
+ZA-LP,UNISA,Giyani
+ZA-LP,UNISA,Makhado
+ZA-LP,UNISA,Polokwane
+ZA-LP,University of Limpopo (UL),Turfloop Campus
+ZA-LP,University of Venda (UNIVEN),Thohoyandou
+ZA-LP,Vhembe,Central Office
+ZA-LP,Vhembe,Makwarela
+ZA-LP,Vhembe,Mashamba
+ZA-LP,Vhembe,Mavhoi
+ZA-LP,Vhembe,Musina
+ZA-LP,Vhembe,Shingwedzi
+ZA-LP,Vhembe,Thengwe
+ZA-LP,Vhembe,Tshisimani
+ZA-LP,Waterberg,Business
+ZA-LP,Waterberg,Central Office
+ZA-LP,Waterberg,Engineering
+ZA-LP,Waterberg,IT&C
+ZA-LP,Waterberg,Thabazimbi
+ZA-MP,Boston City Campus & Business College,Mbombela
+ZA-MP,Boston City Campus & Business College,Wtibank
+ZA-MP,CTU Training Solutions,Mbombela
+ZA-MP,Centurion Akademie,Witbank
+ZA-MP,Eduvos,Nelspruit
+ZA-MP,Ehlanzeni,Barberton
+ZA-MP,Ehlanzeni,Central Office
+ZA-MP,Ehlanzeni,Kanyamazane
+ZA-MP,Ehlanzeni,Lydenburg
+ZA-MP,Ehlanzeni,Mapulaneng
+ZA-MP,Ehlanzeni,Mlumati
+ZA-MP,Ehlanzeni,Mthimba
+ZA-MP,Ehlanzeni,Nelspruit
+ZA-MP,Gert Sibande,Balfour
+ZA-MP,Gert Sibande,Central Office
+ZA-MP,Gert Sibande,Ermelo
+ZA-MP,Gert Sibande,Evander
+ZA-MP,Gert Sibande,Perdekop
+ZA-MP,Gert Sibande,Sibanesetfu
+ZA-MP,Gert Sibande,Standerton
+ZA-MP,Health and Fitness Professionals Academy (HFPA),Mbombela
+ZA-MP,Jeppe College,Mbombela
+ZA-MP,MANCOSA,Mbombela
+ZA-MP,MSC Business College,Nelspruit
+ZA-MP,Mediclinic (Nelspruit Mediclinic Learning Centre),Mbombela
+ZA-MP,Mukhanyo Theological College NPC,KwaMhlanga
+ZA-MP,Nkangala,CN Mahlangu
+ZA-MP,Nkangala,Central Office
+ZA-MP,Nkangala,Middelburg
+ZA-MP,Nkangala,Mpondozankomo
+ZA-MP,Nkangala,Waterval Boven
+ZA-MP,Nkangala,Witbank
+ZA-MP,Richfield Graduate School,Mbombela
+ZA-MP,Richfield Graduate School,Middelburg
+ZA-MP,Richfield Graduate School,eMalahleni
+ZA-MP,Tshwane University of Technology (TUT),Mbombela
+ZA-MP,Tshwane University of Technology (TUT),eMalahleni
+ZA-MP,UNISA,Mbombela
+ZA-MP,UNISA,Middelburg
+ZA-MP,University of Mpumalanga (UMP),Mbombela
+ZA-MP,University of Mpumalanga (UMP),Siyabuswa
+ZA-MP,Vaal University of Technology (VUT),Secunda
+ZA-MP,eta College,Nelspruit
+ZA-NC,Boston City Campus & Business College,Kimberley
+ZA-NC,Damelin,Nelspruit
+ZA-NC,Hugenote Kollege,Kimberely
+ZA-NC,Northern Cape Rural,Central Office
+ZA-NC,Northern Cape Rural,De Aar
+ZA-NC,Northern Cape Rural,Kathu
+ZA-NC,Northern Cape Rural,Kuruman
+ZA-NC,Northern Cape Rural,Namaqualand
+ZA-NC,Northern Cape Rural,Upington
+ZA-NC,Northern Cape Urban,Central Office
+ZA-NC,Northern Cape Urban,City Campus
+ZA-NC,Northern Cape Urban,Moremogolo
+ZA-NC,Northern Cape Urban,Phatsimang
+ZA-NC,Sol Plaatje University (SPU),Kimberley
+ZA-NC,UNISA,Kimberley
+ZA-NL,AFDA,Glen Anil
+ZA-NL,Berea College of Technology,Durban Tourist Juncion
+ZA-NL,Berea Technical College,Durban
+ZA-NL,Boston City Campus & Business College,Durban CBD
+ZA-NL,Boston City Campus & Business College,Ladysmith
+ZA-NL,Boston City Campus & Business College,New Castle
+ZA-NL,Boston City Campus & Business College,Pietermaritzburg
+ZA-NL,Boston City Campus & Business College,Port Shepstone
+ZA-NL,Boston City Campus & Business College,Richards Bay
+ZA-NL,Boston City Campus & Business College,Stanger
+ZA-NL,Boston City Campus & Business College,Umhlanga
+ZA-NL,Boston Media House,Durban
+ZA-NL,CTU Training Solutions,Durban
+ZA-NL,Camelot International,Durban
 ZA-NL,Coastal,Appelsbosch
 ZA-NL,Coastal,As - Salaam
+ZA-NL,Coastal,Central Office
 ZA-NL,Coastal,Durban
 ZA-NL,Coastal,Swinton
 ZA-NL,Coastal,Ubuhle Bogu
 ZA-NL,Coastal,Umbumbulu
 ZA-NL,Coastal,Umlazi BB
 ZA-NL,Coastal,Umlazi V
+ZA-NL,Commerce and Computer College of South Africa (Pty) Ltd,Duban CBD
+ZA-NL,Damelin,Durban
+ZA-NL,Damelin,Pietermaritzburg
+ZA-NL,Durban University of Technology (DUT),Brickfield
+ZA-NL,Durban University of Technology (DUT),City Campus
+ZA-NL,Durban University of Technology (DUT),Indumiso
+ZA-NL,Durban University of Technology (DUT),ML Sultan
+ZA-NL,Durban University of Technology (DUT),Ritson
+ZA-NL,Durban University of Technology (DUT),Riverside
+ZA-NL,Durban University of Technology (DUT),Steve Biko
+ZA-NL,Eduvos,Umhlanga
 ZA-NL,Elangeni,Central Office
 ZA-NL,Elangeni,Inanda
 ZA-NL,Elangeni,KwaDabeka
@@ -255,20 +532,28 @@ ZA-NL,Esayidi,Gamalakhe
 ZA-NL,Esayidi,Kokstad
 ZA-NL,Esayidi,Port Shepstone
 ZA-NL,Esayidi,Umzimkhulu
-ZA-NL,Majuba,Central Office
+ZA-NL,Health and Fitness Professionals Academy (HFPA),Durban
+ZA-NL,IMM Graduate School of Marketing,Durban
+ZA-NL,Inscape Education Group,"Morningside, Durban"
+ZA-NL,Invictus (The International Hotel School (Pty) Ltd),Durban
+ZA-NL,MANCOSA,Durban
+ZA-NL,MANCOSA,PieterMaritzburg
 ZA-NL,Majuba,CPD
+ZA-NL,Majuba,Central Office
 ZA-NL,Majuba,Dundee
 ZA-NL,Majuba,IT&B
 ZA-NL,Majuba,MTC
-ZA-NL,Majuba,Newtech
 ZA-NL,Majuba,Newcastle Training Centre (NTC)
+ZA-NL,Majuba,Newtech
 ZA-NL,Majuba,Occupational Learning Unit
 ZA-NL,Majuba,Open Learning Unit (OPU)
-ZA-NL,Mnambithi ,Central Office
-ZA-NL,Mnambithi ,Estcourt
-ZA-NL,Mnambithi ,Ezakheni A
-ZA-NL,Mnambithi ,Ezakheni E
-ZA-NL,Mnambithi ,Ladysmith
+ZA-NL,Mangosuthu University of Technology (MUT),Main Campus
+ZA-NL,Mangosuthu University of Technology (MUT),Natural Sciences
+ZA-NL,Mnambithi,Central Office
+ZA-NL,Mnambithi,Estcourt
+ZA-NL,Mnambithi,Ezakheni A
+ZA-NL,Mnambithi,Ezakheni E
+ZA-NL,Mnambithi,Ladysmith
 ZA-NL,Mthashana,Central Office
 ZA-NL,Mthashana,Emandleni
 ZA-NL,Mthashana,Kwa-Gqikazi
@@ -276,13 +561,38 @@ ZA-NL,Mthashana,Maputa
 ZA-NL,Mthashana,Nongoma
 ZA-NL,Mthashana,Nquthu
 ZA-NL,Mthashana,Vryheid
-ZA-NL,Thekwini,Central Office
+ZA-NL,Mukhanyo Theological College NPC,Pinetown
+ZA-NL,Netcare  Education (Pty Ltd),Durban
+ZA-NL,Production Management Institute of Southern Africa PTY LTD / PMI (HEAD OFFICE),Durban
+ZA-NL,Regent Business School (Pty) Ltd,Durban
+ZA-NL,Richfield Graduate School,Durban
+ZA-NL,Richfield Graduate School,Ladysmith
+ZA-NL,Richfield Graduate School,Pietermarirzburg
+ZA-NL,Richfield Graduate School,Pinetown
+ZA-NL,Richfield Graduate School,Richareds Bay
+ZA-NL,Richfield Graduate School,Umhlanga
+ZA-NL,STADIO AFDA,Durban
+ZA-NL,STADIO Embury (Stadio School of Education),Durban
+ZA-NL,Seth Mokitimi Methodist Seminary (NPC),Pietermaritzburg
+ZA-NL,South African College of Applied Psychology (SACAP),Durban
+ZA-NL,St Joseph’s Theological Institute NPC,Cedara
+ZA-NL,The International Hotel School (Pty) Ltd,Durban
+ZA-NL,The International Hotel School (Pty) Ltd,Umhlanga
 ZA-NL,Thekwini,Asherville
 ZA-NL,Thekwini,Cato Manor
 ZA-NL,Thekwini,Centec
+ZA-NL,Thekwini,Central Office
 ZA-NL,Thekwini,Melbourne
 ZA-NL,Thekwini,Springfield
 ZA-NL,Thekwini,Umbilo
+ZA-NL,UNISA,Braam Fisher
+ZA-NL,UNISA,Durban
+ZA-NL,UNISA,Newcastle
+ZA-NL,UNISA,Pietermaritzburg
+ZA-NL,UNISA,Richards Bay
+ZA-NL,UNISA,Simiso Nkwanyana
+ZA-NL,UNISA,Wild Coast (Mbizana)
+ZA-NL,Umfolozi,Bambanana
 ZA-NL,Umfolozi,Central Office
 ZA-NL,Umfolozi,Chief Albert Luthuli
 ZA-NL,Umfolozi,Eshowe
@@ -292,745 +602,190 @@ ZA-NL,Umfolozi,Mandeni
 ZA-NL,Umfolozi,Nkandla
 ZA-NL,Umfolozi,Richards Bay
 ZA-NL,Umfolozi,Sundumbili
-ZA-NL,Umfolozi,Bambanana
-ZA-NL,Umgungundlovu ,Central Office
-ZA-NL,Umgungundlovu ,Edendale
-ZA-NL,Umgungundlovu ,Midlands
-ZA-NL,Umgungundlovu ,Msunduzi
-ZA-NL,Umgungundlovu ,Northdale
-ZA-NL,Umgungundlovu ,Plessislaer
-ZA-LP,Capricorn,Central Office
-ZA-LP,Capricorn,Polokwane
-ZA-LP,Capricorn,Ramokgopa
-ZA-LP,Capricorn,Senwabarwana
-ZA-LP,Capricorn,Seshego
-ZA-LP,Lephalale,Central Office
-ZA-LP,Lephalale,Lephalale
-ZA-LP,Lephalale,Modimolle
-ZA-LP,Letaba,Central Office
-ZA-LP,Letaba,Giyani
-ZA-LP,Letaba,Maake
-ZA-LP,Letaba,Tzaneen
-ZA-LP,Mopani,Central Office
-ZA-LP,Mopani,Phalaborwa
-ZA-LP,Mopani,Sir Val Duncan
-ZA-LP,Sekhukhune,Central Office
-ZA-LP,Sekhukhune,Apel
-ZA-LP,Sekhukhune,CN Phatudi
-ZA-LP,Sekhukhune,CS Barlow
-ZA-LP,Vhembe,Central Office
-ZA-LP,Vhembe,Makwarela
-ZA-LP,Vhembe,Mashamba
-ZA-LP,Vhembe,Mavhoi
-ZA-LP,Vhembe,Shingwedzi
-ZA-LP,Vhembe,Thengwe
-ZA-LP,Vhembe,Tshisimani
-ZA-LP,Vhembe,Musina
-ZA-LP,Waterberg,Central Office
-ZA-LP,Waterberg,Business
-ZA-LP,Waterberg,Engineering
-ZA-LP,Waterberg,IT&C
-ZA-LP,Waterberg,Thabazimbi
-ZA-MP,Ehlanzeni,Central Office
-ZA-MP,Ehlanzeni,Barberton
-ZA-MP,Ehlanzeni,Kanyamazane
-ZA-MP,Ehlanzeni,Lydenburg
-ZA-MP,Ehlanzeni,Mapulaneng
-ZA-MP,Ehlanzeni,Mlumati
-ZA-MP,Ehlanzeni,Mthimba
-ZA-MP,Ehlanzeni,Nelspruit
-ZA-MP,Gert Sibande,Central Office
-ZA-MP,Gert Sibande,Balfour
-ZA-MP,Gert Sibande,Ermelo
-ZA-MP,Gert Sibande,Evander
-ZA-MP,Gert Sibande,Perdekop
-ZA-MP,Gert Sibande,Sibanesetfu
-ZA-MP,Gert Sibande,Standerton
-ZA-MP,Nkangala,Central Office
-ZA-MP,Nkangala,CN Mahlangu
-ZA-MP,Nkangala,Middelburg
-ZA-MP,Nkangala,Mpondozankomo
-ZA-MP,Nkangala,Waterval Boven
-ZA-MP,Nkangala,Witbank
-ZA-NC,Northern Cape Rural,Central Office
-ZA-NC,Northern Cape Rural,De Aar
-ZA-NC,Northern Cape Rural,Kathu
-ZA-NC,Northern Cape Rural,Kuruman
-ZA-NC,Northern Cape Rural,Namaqualand
-ZA-NC,Northern Cape Rural,Upington
-ZA-NC,Northern Cape Urban,Central Office
-ZA-NC,Northern Cape Urban,City Campus
-ZA-NC,Northern Cape Urban,Moremogolo
-ZA-NC,Northern Cape Urban,Phatsimang
-ZA-NW,Orbit,Central Office
+ZA-NL,Umgungundlovu,Central Office
+ZA-NL,Umgungundlovu,Edendale
+ZA-NL,Umgungundlovu,Midlands
+ZA-NL,Umgungundlovu,Msunduzi
+ZA-NL,Umgungundlovu,Northdale
+ZA-NL,Umgungundlovu,Plessislaer
+ZA-NL,Union Bible Institute NPC,Hilton
+ZA-NL,University of Kwazulu Natal (UKZN),Edgewood
+ZA-NL,University of Kwazulu Natal (UKZN),Howard
+ZA-NL,University of Kwazulu Natal (UKZN),Medical School
+ZA-NL,University of Kwazulu Natal (UKZN),Pietermaritzburg
+ZA-NL,University of Kwazulu Natal (UKZN),Westville
+ZA-NL,University of Zululand (UNIZULU),KwaDlangezwa
+ZA-NL,University of Zululand (UNIZULU),Richards Bay
+ZA-NL,eta College,Durban
+ZA-NW,Boston City Campus & Business College,Klerksdrop
+ZA-NW,Boston City Campus & Business College,Potchefstroom
+ZA-NW,Boston City Campus & Business College,Rustenburg
+ZA-NW,CTU Training Solutions,Potchefstroom
+ZA-NW,Centurion Akademie,Klerksdrop
+ZA-NW,Centurion Akademie,Rusternburg
+ZA-NW,Eduvos,Potchefstroom
+ZA-NW,Jeppe College,Rustenburg
+ZA-NW,MSC Business College,Rustenburg
+ZA-NW,Mukhanyo Theological College NPC,Rustenburg
+ZA-NW,North West University (NWU),Mafikeng
+ZA-NW,North West University (NWU),Potchefstroom
 ZA-NW,Orbit,Brits
+ZA-NW,Orbit,Central Office
 ZA-NW,Orbit,Mankwe
 ZA-NW,Orbit,Rustenburg
+ZA-NW,Potchefstroom Academy,Potchefstroom
+ZA-NW,Richfield Graduate School,Rustenburg
 ZA-NW,Taletso,Central Office
 ZA-NW,Taletso,Lehurutshe
 ZA-NW,Taletso,Lichtenburg
 ZA-NW,Taletso,Mafikeng
+ZA-NW,The South African Academy for Hair and Skincare Technology,Potchefstroom
+ZA-NW,UNISA,Mafikeng
+ZA-NW,UNISA,Potchefstroom
+ZA-NW,UNISA,Rustenburg
 ZA-NW,Vuselela,Central Office
 ZA-NW,Vuselela,Jouberton
 ZA-NW,Vuselela,Klerksdorp
+ZA-NW,Vuselela,Matlosana
 ZA-NW,Vuselela,Potchefstroom
 ZA-NW,Vuselela,Taung
-ZA-NW,Vuselela,Matlosana
-ZA-WC,Boland,Head Office
+ZA-WC,AAA School of Advertising,Cape Town
+ZA-WC,ACT Cape Town - Film Acting Academy,CPT CBD
+ZA-WC,AFDA,Observatory
+ZA-WC,Academy of Digital Arts,CPT CBD
+ZA-WC,Academy of Sound Engineering (Pty) Ltd,Zonnebloem
+ZA-WC,Animation School (Pty) Ltd (The),Woodstock
+ZA-WC,BHC School of Design,Cape Town
 ZA-WC,Boland,Caledon
+ZA-WC,Boland,Head Office
 ZA-WC,Boland,Paarl
 ZA-WC,Boland,Stellenbosch
 ZA-WC,Boland,Strand
 ZA-WC,Boland,Worcester
-ZA-WC,College of Cape Town,Central Office
+ZA-WC,Boston City Campus & Business College,Belville
+ZA-WC,Boston City Campus & Business College,Cape Town
+ZA-WC,Boston City Campus & Business College,George
+ZA-WC,Boston City Campus & Business College,Paarl
+ZA-WC,Boston City Campus & Business College,Somerset West
+ZA-WC,CTU Training Solutions,Cape Town
+ZA-WC,CTU Training Solutions,Stellenbosch
+ZA-WC,Camelot International,Cape Town
+ZA-WC,Cape Audio College,Single Campus
+ZA-WC,Cape Peninsula University of Technology (CPUT),Athlone
+ZA-WC,Cape Peninsula University of Technology (CPUT),Bellville
+ZA-WC,Cape Peninsula University of Technology (CPUT),Cape Town
+ZA-WC,Cape Peninsula University of Technology (CPUT),District Six
+ZA-WC,Cape Peninsula University of Technology (CPUT),George
+ZA-WC,Cape Peninsula University of Technology (CPUT),Granger Bay
+ZA-WC,Cape Peninsula University of Technology (CPUT),Groote Schuur
+ZA-WC,Cape Peninsula University of Technology (CPUT),Media City
+ZA-WC,Cape Peninsula University of Technology (CPUT),Mowbray
+ZA-WC,Cape Peninsula University of Technology (CPUT),Optical Dispensing
+ZA-WC,Cape Peninsula University of Technology (CPUT),Roeland Street
+ZA-WC,Cape Peninsula University of Technology (CPUT),Tygerberg
+ZA-WC,Cape Peninsula University of Technology (CPUT),Wellington
+ZA-WC,Cape Peninsula University of Technology (CPUT),Worcester
+ZA-WC,Cape Town Baptist Seminary,Cape Town
+ZA-WC,Cape Town College of Fashion Design (Pty) Ltd,Moabray
+ZA-WC,Centre for Creative Education/Iziko La Bantu Be Afrika NPC,Plumstead
+ZA-WC,Centurion Akademie,Tygervalley
 ZA-WC,College of Cape Town,Athlone
+ZA-WC,College of Cape Town,Central Office
 ZA-WC,College of Cape Town,City
 ZA-WC,College of Cape Town,Crawford
+ZA-WC,College of Cape Town,Gardens
 ZA-WC,College of Cape Town,Guguletu
 ZA-WC,College of Cape Town,Pinelands
 ZA-WC,College of Cape Town,Thornton
 ZA-WC,College of Cape Town,Wynberg
-ZA-WC,College of Cape Town,Gardens
+ZA-WC,Concept Interactive Cape,Salt River
+ZA-WC,Cornerstone Institute (RF) NPC,Cape Town
+ZA-WC,Damelin,Cape Town
+ZA-WC,Dermatech,Table View
+ZA-WC,Design Academy of Fashion,Cape Town
+ZA-WC,Eduvos,Cape Town
+ZA-WC,Eduvos,Durbanville
+ZA-WC,Elizabeth Galloway Academy of Fashion Design,Stellenbosch
+ZA-WC,Equine Librium,Plettenberg Bay
+ZA-WC,FEDISA Pty Ltd,Cape Town
 ZA-WC,False Bay,Central Office
 ZA-WC,False Bay,Fish Hoek
 ZA-WC,False Bay,Khayelitsha
 ZA-WC,False Bay,Mitchell's Plain
 ZA-WC,False Bay,Muizenberg
 ZA-WC,False Bay,Westlake
-ZA-WC,Northlink,Central Office
+ZA-WC,George Whitefield College,Muizenberg
+ZA-WC,Global School of Theology,Cape Town
+ZA-WC,HC College,Table View
+ZA-WC,Health and Fitness Professionals Academy (HFPA),Claremont
+ZA-WC,Helderberg College of Higher Education,Somerset West
+ZA-WC,Hugenote Kollege,Wellington
+ZA-WC,Hugenote Kollege,Worcester
+ZA-WC,IHT Hotel School (Pty) Ltd,Belville
+ZA-WC,IMM Graduate School of Marketing,Cape Town
+ZA-WC,IMM Graduate School of Marketing,Stellenbosch
+ZA-WC,Inscape Education Group,Cape Town
+ZA-WC,Inscape Education Group,Stellenbosch
+ZA-WC,International Peace College SA,Cape Town
+ZA-WC,Invictus (SAE Institute (Pty) Ltd),Cape Town
+ZA-WC,Invictus (The International Hotel School (Pty) Ltd),Cape Town
+ZA-WC,Isa Carstens Academy (Pty),Stellenbosch
+ZA-WC,MANCOSA,Cape Town
+ZA-WC,Madina Institute NPC,Cape Town
+ZA-WC,Mediclinic (Cape Region Mediclinic Learning Centre),Belville
+ZA-WC,Moonstone Business School of Excellence,Stellenbosch
+ZA-WC,Mowbray Maternity Hospital,Mowbray
+ZA-WC,Nelson Mandela University (NMU),George
+ZA-WC,Netcare  Education (Pty Ltd),Bellville
 ZA-WC,Northlink,Belhar
 ZA-WC,Northlink,Bellville
+ZA-WC,Northlink,Central Office
 ZA-WC,Northlink,Goodwood
 ZA-WC,Northlink,Parow
 ZA-WC,Northlink,Protea
 ZA-WC,Northlink,Tygerberg
 ZA-WC,Northlink,Wingfield
-ZA-WC,South Cape,Central Office
+ZA-WC,Oakfields College (Pty) Ltd,Somerset West
+ZA-WC,Optimi College (Pty) Ltd T/A College SA,Cape Town
+ZA-WC,Private Hotel School (Part of ADvTech Group),Stellenbosch
+ZA-WC,Production Management Institute of Southern Africa PTY LTD / PMI,Bellville
+ZA-WC,Red and Yellow Creative School of Business,Cape Town
+ZA-WC,Regent Business School (Pty) Ltd (Learning Centre),Woodstock
+ZA-WC,Richfield Graduate School,Cape Town
+ZA-WC,Ruth Prowse School of Art NPC,Woodstock
+ZA-WC,STADIO AFDA,Capetown
+ZA-WC,STADIO Milpark Education,Cape Town
+ZA-WC,STADIO Prestige Academy,Belville
+ZA-WC,South African College of Applied Psychology (SACAP),Cape Town
 ZA-WC,South Cape,Beaufort West
 ZA-WC,South Cape,Bitou
+ZA-WC,South Cape,Central Office
 ZA-WC,South Cape,George
 ZA-WC,South Cape,Hessequa
 ZA-WC,South Cape,Mossel Bay
 ZA-WC,South Cape,Oudtshoorn
-ZA-WC,West Coast,Central Office
+ZA-WC,Southern African Wildlife College NPC,Stellenbosch
+ZA-WC,Stellenbosch Academy of Design and Photography (Pty) Ltd,Stellenbosch
+ZA-WC,Stellenbosch University (SU),Bellville Park
+ZA-WC,Stellenbosch University (SU),Saldanha
+ZA-WC,Stellenbosch University (SU),Stellenbosch
+ZA-WC,Stellenbosch University (SU),Tygerberg
+ZA-WC,Stellenbosch University (SU),Worcester
+ZA-WC,Swift Skills Academy,Killarney Gardens
+ZA-WC,Swift Skills Academy,Vredenburg
+ZA-WC,TSIBA Education NPC,Woodstock
+ZA-WC,The Animation School,Cape Town
+ZA-WC,The Fashion Institute of Garment Technology (Cape Town College of Fashion Design),Mowbray
+ZA-WC,The International Hotel School (Pty) Ltd,Cape Town
+ZA-WC,UNISA,George
+ZA-WC,UNISA,Parow
+ZA-WC,University of Cape Town (UCT),Rondebosch
+ZA-WC,University of Western Cape (UWC),Bellville
 ZA-WC,West Coast,Atlantis
+ZA-WC,West Coast,Central Office
 ZA-WC,West Coast,Citrusdal
 ZA-WC,West Coast,Malmesbury
 ZA-WC,West Coast,Vredenburg
 ZA-WC,West Coast,Vredendal
-ZA-GT,AAA School of Advertising,Bryanston
-ZA-WC,AAA School of Advertising,Cape Town
-ZA-GT,Academy for Facilities Management (distance only),Waterkloof
-ZA-WC,Academy of Digital Arts,CPT CBD
-ZA-GT,Academy of Sound Engineering (Pty) Ltd,Auckland Park
-ZA-WC,Academy of Sound Engineering (Pty) Ltd,Zonnebloem
-ZA-WC,ACT Cape Town - Film Acting Academy,CPT CBD
-ZA-GT,AFDA,Braamfontein
-ZA-EC,AFDA,Cenral
-ZA-NL,AFDA,Glen Anil
-ZA-WC,AFDA,Observatory
-ZA-GT,Afrikaanse Protestantse Akademie,Pretoria
-ZA-GT,Akademia NPC,Centurion
-ZA-GT,Animation School (Pty) Ltd (The), Craighall Park
-ZA-WC,Animation School (Pty) Ltd (The),Woodstock
-ZA-GT,AROS,Waverly Pretoria
-ZA-GT,Arwyp Training Institute,Kempton Park
-ZA-GT,Baptist Theological College of Southern Africa (The) NPC CONTACT,Randburg
-ZA-GT,Belgium Campus,Akasia
-ZA-GT,Belgium Campus,Kempton Park
-ZA-GT,Belgium Campus,Sydenham
-ZA-NL,Berea College of Technology,Durban Tourist Juncion
-ZA-NL,Berea Technical College,Durban
-ZA-WC,BHC School of Design,Cape Town
-ZA-NL,Boaton Media House,Durban
-ZA-GT,Boaton Media House,Pretoria
-ZA-GT,Boaton Media House,Sandton
-ZA-GT,Boston City Campus & Business College,Alberton
-ZA-GT,Boston City Campus & Business College,Arcadia
-ZA-GT,Boston City Campus & Business College,Bedfordview
-ZA-WC,Boston City Campus & Business College,Belville
-ZA-GT,Boston City Campus & Business College,Benoni
-ZA-FS,Boston City Campus & Business College,Bloemfontein
-ZA-GT,Boston City Campus & Business College,Braamfontein
-ZA-WC,Boston City Campus & Business College,Cape Town
-ZA-NL,Boston City Campus & Business College,Durban CBD
-ZA-EC,Boston City Campus & Business College,East London
-ZA-WC,Boston City Campus & Business College,George
-ZA-GT,Boston City Campus & Business College,Germiston
-ZA-GT,Boston City Campus & Business College,Johnnesburg
-ZA-GT,Boston City Campus & Business College,Kemptonpark
-ZA-NC,Boston City Campus & Business College,Kimberley
-ZA-NW,Boston City Campus & Business College,Klerksdrop
-ZA-GT,Boston City Campus & Business College,Krugersdorp
-ZA-NL,Boston City Campus & Business College,Ladysmith
-ZA-GT,Boston City Campus & Business College,Lynvwoodglen
-ZA-MP,Boston City Campus & Business College,Mbombela
-ZA-EC,Boston City Campus & Business College,Mthatha
-ZA-NL,Boston City Campus & Business College,New Castle
-ZA-GT,Boston City Campus & Business College,Orange Grove
-ZA-WC,Boston City Campus & Business College,Paarl
-ZA-NL,Boston City Campus & Business College,Pietermaritzburg
-ZA-LP,Boston City Campus & Business College,Polokwane
-ZA-EC,Boston City Campus & Business College,Port Elizabeth
-ZA-NL,Boston City Campus & Business College,Port Shepstone
-ZA-NW,Boston City Campus & Business College,Potchefstroom
-ZA-GT,Boston City Campus & Business College,Pretoria North
-ZA-EC,Boston City Campus & Business College,Queenstown
-ZA-GT,Boston City Campus & Business College,Randburg
-ZA-NL,Boston City Campus & Business College,Richards Bay
-ZA-GT,Boston City Campus & Business College,Roodepoort
-ZA-GT,Boston City Campus & Business College,Rosebank
-ZA-NW,Boston City Campus & Business College,Rustenburg
-ZA-GT,Boston City Campus & Business College,Sandton
-ZA-WC,Boston City Campus & Business College,Somerset West
-ZA-GT,Boston City Campus & Business College,Soweto
-ZA-GT,Boston City Campus & Business College,Springs
-ZA-NL,Boston City Campus & Business College,Stanger
-ZA-LP,Boston City Campus & Business College,Tzaneen
-ZA-NL,Boston City Campus & Business College,Umhlanga
-ZA-GT,Boston City Campus & Business College,Vereeniging
-ZA-FS,Boston City Campus & Business College,Welkom
-ZA-MP,Boston City Campus & Business College,Wtibank
-ZA-GT,Business Management Training College (Pty) Ltd (BMT College),Head Office
-ZA-FS,Camelot International,Bloemfontein
-ZA-WC,Camelot International,Cape Town
-ZA-NL,Camelot International,Durban
-ZA-GT,Camelot International,East Rand
-ZA-GT,Camelot International,Houghton
-ZA-GT,Camelot International,Pretoria
-ZA-WC,Cape Audio College,Single Campus
-ZA-WC,Cape Town Baptist Seminary,Cape Town
-ZA-WC,Cape Town College of Fashion Design (Pty) Ltd,Moabray
-ZA-WC,Centre for Creative Education/Iziko La Bantu Be Afrika NPC,Plumstead
-ZA-GT,Centurion Akademie,Centurion
-ZA-GT,Centurion Akademie,Centurion
-ZA-NW,Centurion Akademie,Klerksdrop
-ZA-NW,Centurion Akademie,Rusternburg
-ZA-WC,Centurion Akademie,Tygervalley
-ZA-MP,Centurion Akademie,Witbank
-ZA-GT,Chartall Business College,Broadacres
-ZA-LP,Christ Baptist Church Seminary NPC,Faunapark
-ZA-GT,Christian Reformed Theological Seminary (Distance only),Bronkhorstspruit
-ZA-EC,College of Transfiguration NPC,Grahamstown
-ZA-NL,Commerce and Computer College of South Africa (Pty) Ltd,Duban CBD
-ZA-GT,Concept Interactive Cape,Midrand
-ZA-WC,Concept Interactive Cape,Salt River
-ZA-WC,Cornerstone Institute (RF) NPC,Cape Town
-ZA-GT,Cranefield COllege,Pretoria
-ZA-GT,CTU Training Solutions,Aukland Park
-ZA-FS,CTU Training Solutions,Bloemfontein
-ZA-GT,CTU Training Solutions,Boksburg
-ZA-WC,CTU Training Solutions,Cape Town
-ZA-NL,CTU Training Solutions,Durban
-ZA-MP,CTU Training Solutions,Mbombela
-ZA-GT,CTU Training Solutions,Menlyn
-ZA-LP,CTU Training Solutions,Polokwane
-ZA-EC,CTU Training Solutions,Port Elizabeth
-ZA-NW,CTU Training Solutions,Potchefstroom
-ZA-GT,CTU Training Solutions,Roodepoort
-ZA-WC,CTU Training Solutions,Stellenbosch
-ZA-GT,CTU Training Solutions,Vereeniging
-ZA-FS,Damelin,Bloemfontein
-ZA-GT,Damelin,Boksburg
-ZA-GT,Damelin,Braamfontein
-ZA-WC,Damelin,Cape Town CBD
-ZA-WC,Damelin,Cape Town
-ZA-GT,Damelin,Centurion
-ZA-NL,Damelin,Durban (Overport)
-ZA-EC,Damelin,East London
-ZA-GT,Damelin,Menlyn
-ZA-NC,Damelin,Nelspruit
-ZA-NL,Damelin,Pietermaritzburg
-ZA-EC,Damelin,Port Elizabeth
-ZA-GT,Damelin,Pretoria CBD
-ZA-GT,Damelin,Randburg
-ZA-GT,Damelin,Vereeniging
-ZA-NL,Damelin,Durban
-ZA-WC,Dermatech,Table View
-ZA-WC,Design Academy of Fashion,Cape Town
-ZA-EC,East London Management Institute Pty Ltd,East London
-ZA-EC,Ed-U City Campus (Pty) Ltd,Port Elizabeth
-ZA-WC,Elizabeth Galloway Academy of Fashion Design,Stellenbosch
-ZA-GT,Emendy (Pty) Ltd,Hatfield
-ZA-WC,Equine Librium,Plettenberg Bay
-ZA-WC,Exercise Teachers Academy (Pty) Ltd,Rondebosch
-ZA-WC,FEDISA Pty Ltd,Cape Town
-ZA-GT,FEDISA Pty Ltd,Sandton
-ZA-GT,Foundation for Professional Development (Pty) Ltd,Pretoria
-ZA-WC,George Whitefield College,Muizenberg
-ZA-WC,Global School of Theology,Cape Town
-ZA-GT,Global School of Theology,Rooderpoort
-ZA-GT,"Greenside Design Centre, College of Design","Greenside, Gauteng"
-ZA-WC,HC College,Table View
-ZA-GT,Health and Fitness Professionals Academy (HFPA),Bedfordview
-ZA-WC,Health and Fitness Professionals Academy (HFPA),Claremont
-ZA-NL,Health and Fitness Professionals Academy (HFPA),Durban
-ZA-MP,Health and Fitness Professionals Academy (HFPA),Mbombela
-ZA-EC,Health and Fitness Professionals Academy (HFPA),Port Elizabeth
-ZA-GT,Health and Fitness Professionals Academy (HFPA),Pretoria
-ZA-GT,Health and Fitness Professionals Academy (HFPA),"Rivonia, Gauteng"
-ZA-GT,Health and Fitness Professionals Academy (HFPA),Sunninghill
-ZA-GT,Health Science Academy,Pretoria
-ZA-GT,Hebron Theological College NPC,Benoni
-ZA-WC,Helderberg College of Higher Education,Somerset West
-ZA-GT,Henley Business School,Paulshof
-ZA-NC,Hugenote Kollege,Kimberely
-ZA-WC,Hugenote Kollege,Wellington
-ZA-WC,Hugenote Kollege,Worcester
-ZA-WC,IHT Hotel School (Pty) Ltd,Belville
-ZA-WC,IMM Graduate School of Marketing,Cape Town
-ZA-NL,IMM Graduate School of Marketing,Durban
-ZA-GT,IMM Graduate School of Marketing,Edenvale
-ZA-GT,IMM Graduate School of Marketing,Milpark
-ZA-GT,IMM Graduate School of Marketing,Pretoria
-ZA-GT,IMM Graduate School of Marketing,Sandton
-ZA-WC,IMM Graduate School of Marketing,Stellenbosch
-ZA-GT,Independent  Institute of Education,Sandton
-ZA-WC,Inscape Education Group,Cape Town
-ZA-GT,Inscape Education Group,Midrand
-ZA-NL,Inscape Education Group,"Morningside, Durban"
-ZA-WC,Inscape Education Group,Stellenbosch
-ZA-GT,Inscape Education Group HEAD OFFICE,Pretoria
-ZA-GT,Institute of Accounting Science,Meyersdal
-ZA-GT,Institute of Accounting Science,New Market
-ZA-GT,International College of Bible and Missions NPC,Roodepoort
-ZA-WC,International Peace College SA,Cape Town
-ZA-GT,International Trade Institute of Southern Africa NPC,Sandton
-ZA-WC,Invictus (SAE Institute (Pty) Ltd),Cape Town
-ZA-GT,Invictus (SAE Institute (Pty) Ltd),Johannesburg
-ZA-WC,Invictus (The International Hotel School (Pty) Ltd),Cape Town
-ZA-NL,Invictus (The International Hotel School (Pty) Ltd),Durban
-ZA-GT,Invictus (The International Hotel School (Pty) Ltd),Johannesburg
-ZA-GT,Invictus (The International Hotel School (Pty) Ltd),Pretoria
-ZA-EC,IQ Academy,East London
-ZA-GT,IQ Academy,Johannesburg
-ZA-GT,Isa Carstens Academy (Pty),Pretoria
-ZA-WC,Isa Carstens Academy (Pty),Stellenbosch
-ZA-FS,Jeppe College,Bloemfontein
-ZA-GT,Jeppe College,Johannesburg
-ZA-MP,Jeppe College,Mbombela
-ZA-LP,Jeppe College,Polokwane
-ZA-GT,Jeppe College,Pretoria
-ZA-NW,Jeppe College,Rustenburg
-ZA-GT,Jeppe College,Vereeniging
-ZA-GT,Katapult Business School (Pty) Ltd,Bedfordview
-ZA-GT,Life College of Learning (Life Healthcare Group (Pty) Ltd),Johannesburg
-ZA-GT,Lunghile Nursing School (Pty) Ltd,Rosebank
-ZA-GT,Macmillan South Africa,Midrand
-ZA-WC,Madina Institute NPC,Cape Town
-ZA-WC,MANCOSA,Cape Town
-ZA-NL,MANCOSA,Durban
-ZA-EC,MANCOSA,East London
-ZA-GT,MANCOSA,Johannesburg
-ZA-MP,MANCOSA,Mbombela
-ZA-NL,MANCOSA,PieterMaritzburg
-ZA-LP,MANCOSA,Polokwane
-ZA-EC,MANCOSA,Port Elizabeth
-ZA-WC,Mediclinic (Cape Region Mediclinic Learning Centre),Belville
-ZA-FS,Mediclinic (Central Region Mediclinic Learning Centre),Bloemfontein
-ZA-LP,Mediclinic (Limpopo Mediclinic Learning Centre),Polokwane
-ZA-MP,Mediclinic (Nelspruit Mediclinic Learning Centre),Mbombela
-ZA-GT,Mediclinic (Northern Region Mediclinic Learning Centre),Johannesburg
-ZA-GT,Mediclinic (Tshwane Region Mediclinic Learning Centre),Pretoria
-ZA-GT,Moonstone Business School of Excellence,Pretoria
-ZA-WC,Moonstone Business School of Excellence,Stellenbosch
-ZA-GT,MSC Business College,Alberton
-ZA-FS,MSC Business College,Bloemfontein
-ZA-EC,MSC Business College,East London
-ZA-GT,MSC Business College,Glenvista
-ZA-EC,MSC Business College,Head Office
-ZA-GT,MSC Business College,Kempton Park
-ZA-LP,MSC Business College,Louis Trichardt
-ZA-GT,MSC Business College,Midrand
-ZA-MP,MSC Business College,Nelspruit
-ZA-LP,MSC Business College,Polokwane
-ZA-EC,MSC Business College,Port Elizabeth
-ZA-GT,MSC Business College,Pretoria
-ZA-EC,MSC Business College,Queenstown
-ZA-NW,MSC Business College,Rustenburg
-ZA-EC,MSC Business College,Uitenhage
-ZA-MP,Mukhanyo Theological College NPC, KwaMhlanga
-ZA-GT,Mukhanyo Theological College NPC,Braamfontein
-ZA-NL,Mukhanyo Theological College NPC,Pinetown
-ZA-GT,Mukhanyo Theological College NPC,Pretoria
-ZA-NW,Mukhanyo Theological College NPC,Rustenburg
-ZA-GT,Nazarene Theological College,Honeydew
-ZA-GT,Netcare  Education (Pty Ltd),Auckland Park
-ZA-WC,Netcare  Education (Pty Ltd),Bellville
-ZA-NL,Netcare  Education (Pty Ltd),Durban
-ZA-EC,Netcare  Education (Pty Ltd),Port Elizabeth
-ZA-GT,Netcare  Education (Pty Ltd),Pretoria
-ZA-GT,Netcare  Education (Pty Ltd)  Head office,Sandton
-ZA-GT,Oakfields College (Pty) Ltd,Edenvale
-ZA-GT,Oakfields College (Pty) Ltd,Pretoria
-ZA-WC,Oakfields College (Pty) Ltd,Somerset West
-ZA-GT,Open Learning Group (distance only),Randburg
-ZA-GT,Open Window (Pty) Ltd,Centurion
-ZA-WC,Optimi College (Pty) Ltd T/A College SA,Cape Town
-ZA-FS,Pearson Instittute of Higher Education, Bloemfontein
-ZA-GT,Pearson Instittute of Higher Education, Pretoria
-ZA-GT,Pearson Instittute of Higher Education,Bedfordview
-ZA-WC,Pearson Instittute of Higher Education,Cape Town
-ZA-WC,Pearson Instittute of Higher Education,Durbanville
-ZA-EC,Pearson Instittute of Higher Education,East London
-ZA-GT,Pearson Instittute of Higher Education,Midrand
-ZA-MP,Pearson Instittute of Higher Education,Nelspruit
-ZA-EC,Pearson Instittute of Higher Education,Port Elizabeth
-ZA-NW,Pearson Instittute of Higher Education,Potchefstroom
-ZA-NL,Pearson Instittute of Higher Education,Umhlanga
-ZA-GT,Pearson Instittute of Higher Education,Vanderbijlpark
-ZA-GT,PM Academy,Edenvale
-ZA-NW,Potchefstroom Academy,Potchefstroom
-ZA-GT,Private Hotel School (Part of ADvTech Group),Rosebank
-ZA-WC,Private Hotel School (Part of ADvTech Group),Stellenbosch
-ZA-GT,Pro-Active Public Services College (Pty) Ltd  ,Pretoria
-ZA-WC,Production Management Institute of Southern Africa PTY LTD / PMI,Bellville
-ZA-EC,Production Management Institute of Southern Africa PTY LTD / PMI,East London
-ZA-GT,Production Management Institute of Southern Africa PTY LTD / PMI,Johannesburg
-ZA-EC,Production Management Institute of Southern Africa PTY LTD / PMI,Uitenhage
-ZA-NL,Production Management Institute of Southern Africa PTY LTD / PMI (HEAD OFFICE),Durban
-ZA-WC,Red and Yellow Creative School of Business,Cape Town
-ZA-GT,Red and Yellow Creative School of Business,Johannesburg
-ZA-NL,Regent Business School (Pty) Ltd,Durban
-ZA-GT,Regent Business School (Pty) Ltd (Learning Centre),Auckland Park
-ZA-EC,Regent Business School (Pty) Ltd (Learning Centre),East London
-ZA-GT,Regent Business School (Pty) Ltd (Learning Centre),Pretoria
-ZA-WC,Regent Business School (Pty) Ltd (Learning Centre),Woodstock
-ZA-GT,Richfield Graduate School,Benoni
-ZA-FS,Richfield Graduate School,Bloemfontein
-ZA-GT,Richfield Graduate School,Braamfontein
-ZA-GT,Richfield Graduate School,Braamfontein
-ZA-WC,Richfield Graduate School,Cape Town
-ZA-NL,Richfield Graduate School,Durban
-ZA-NL,Richfield Graduate School,Durban
-ZA-NL,Richfield Graduate School,Durban
-ZA-NL,Richfield Graduate School,Durban
-ZA-MP,Richfield Graduate School,eMalahleni 
-ZA-GT,Richfield Graduate School,Johannesburg
-ZA-GT,Richfield Graduate School,Johannesburg
-ZA-GT,Richfield Graduate School,Johannesburg
-ZA-GT,Richfield Graduate School,Kempton Park
-ZA-GT,Richfield Graduate School,Kempton Park
-ZA-GT,Richfield Graduate School,Krugersdorp
-ZA-NL,Richfield Graduate School,Ladysmith
-ZA-LP,Richfield Graduate School,Mankweng
-ZA-MP,Richfield Graduate School,Mbombela
-ZA-MP,Richfield Graduate School,Middelburg
-ZA-GT,Richfield Graduate School,Midrand
-ZA-FS,Richfield Graduate School,Phuthaditjhaba
-ZA-NL,Richfield Graduate School,Pietermarirzburg
-ZA-NL,Richfield Graduate School,Pinetown
-ZA-LP,Richfield Graduate School,Polokwane
-ZA-LP,Richfield Graduate School,Polokwane
-ZA-GT,Richfield Graduate School,Pretoria
-ZA-GT,Richfield Graduate School,Pretoria
-ZA-GT,Richfield Graduate School,Pretoria
-ZA-GT,Richfield Graduate School,Pretoria
-ZA-GT,Richfield Graduate School,Pretoria
-ZA-GT,Richfield Graduate School,Pretoria
-ZA-GT,Richfield Graduate School,Randburg
-ZA-NL,Richfield Graduate School,Richareds Bay
-ZA-NW,Richfield Graduate School,Rustenburg
-ZA-LP,Richfield Graduate School,Thohoyandou
-ZA-NL,Richfield Graduate School,Umhlanga
-ZA-GT,Richfield Graduate School,Vereeniging
-ZA-WC,Ruth Prowse School of Art NPC,Woodstock
-ZA-GT,SANTS,Pretoria
-ZA-NL,Seth Mokitimi Methodist Seminary (NPC),Pietermaritzburg
-ZA-WC,South African College of Applied Psychology (SACAP),Cape Town
-ZA-NL,South African College of Applied Psychology (SACAP),Durban
-ZA-GT,South African College of Applied Psychology (SACAP),Johannesburg
-ZA-GT,South African College of Applied Psychology (SACAP),Pretoria
-ZA-GT,South African Theological Seminary,Sandton
-ZA-GT,Southern Africa Bible College NPC,Benoni
-ZA-WC,Southern African Wildlife College NPC,Stellenbosch
-ZA-GT,ST Augustine College of  South Africa,Johannesburg
-ZA-GT,St John Vianney Seminary,Pretoria
-ZA-NL,St Joseph’s Theological Institute NPC,Cedara
-ZA-WC,STADIO AFDA,Capetown
-ZA-NL,STADIO AFDA,Durban
-ZA-GT,STADIO AFDA,Johannesburg
-ZA-EC,STADIO AFDA,Port Elizabeth
-ZA-NL,STADIO Embury (Stadio School of Education),Durban
-ZA-GT,STADIO Embury (Stadio School of Education),Midrand
-ZA-GT,STADIO Embury (Stadio School of Education),Pretoria
-ZA-GT,STADIO LISOF,Hatfield
-ZA-GT,STADIO LISOF,Randburg
-ZA-GT,STADIO Milpark Education,Auckland Park
-ZA-WC,STADIO Milpark Education,Cape Town
-ZA-WC,STADIO Prestige Academy,Belville
-ZA-GT,STADIO Prestige Academy,Centurion
-ZA-GT,STADIO Southern Business School,Krugersdorp
-ZA-WC,Stellenbosch Academy of Design and Photography (Pty) Ltd,Stellenbosch
-ZA-EC,Stenden,Port Alfred
-ZA-WC,The Animation School,Cape Town
-ZA-GT,The Animation School,Johannesburg Campus
-ZA-GT,The Da Vinci Institute for Technology Management (Pty) Ltd,Johannesburg
-ZA-WC,The Fashion Institute of Garment Technology (Cape Town College of Fashion Design),Mobray
-ZA-GT,The International Hotel School (Pty) Ltd, Pretoria
-ZA-WC,The International Hotel School (Pty) Ltd,Cape Town
-ZA-NL,The International Hotel School (Pty) Ltd,Durban
-ZA-GT,The International Hotel School (Pty) Ltd,Johannesburg
-ZA-NL,The International Hotel School (Pty) Ltd,Umhlanga
-ZA-GT,The Open Window (Pty) Ltd,Main campus
-ZA-NW,The South African Academy for Hair and Skincare Technology,Potchefstroom
-ZA-GT,Theological Education by Extension College NPC (Distance only),Johanesburg
-ZA-GT,TSIBA Education NPC,Newtown
-ZA-WC,TSIBA Education NPC,Woodstock
-ZA-GT,Turaco Hospitality (Pty) Ltd,Randburg
-ZA-NL,Union Bible Institute NPC,Hilton
-ZA-GT,Villioti Fashion Institute (Pty) Ltd,Hyde Park
-,Other,Other
-ZA-GT,Boston Media House,Pretoria
-ZA-GT,Boston Media House,Sandton
-ZA-NL,Boston Media House,Durban
-ZA-EC,eta College,East London
-ZA-EC,eta College,George
-ZA-EC,eta College,Port Elizabeth
-ZA-FS,eta College,Bloemfontein
-ZA-GT,UNISA,Brooklyn
-ZA-GT,UNISA,Daveyton
-ZA-GT,UNISA,Little Theatre
-ZA-GT,UNISA,Muckleneuk
-ZA-GT,UNISA,Robert Sobukwe
-ZA-GT,UNISA,SBL
-ZA-GT,UNISA,Solomon Mahlangu
-ZA-GT,eta College,Johannesburg
-ZA-GT,eta College,Pretoria
-ZA-MP,eta College,Nelspruit
-ZA-NL,UNISA,Braam Fisher
-ZA-NL,UNISA,Simiso Nkwanyana
-ZA-NL,eta College,Durban
 ZA-WC,eta College,Cape Town
 ZA-WC,eta College,Stellenbosch
-ZA-EC,Betshwana,Betshwana
-ZA-EC,Blythswood,Blythswood
-ZA-EC,Bofolo,Bofolo
-ZA-EC,Bokamoso,Bokamoso
-ZA-EC,Cecilia Makiwane,Cecilia Makiwane
-ZA-EC,Eastern Cape CET College,Eastern Cape CET College
-ZA-EC,Equleni,Equleni
-ZA-EC,Frere Hospital,Frere Hospital
-ZA-EC,Jeffrey’s Bay,Jeffrey’s Bay
-ZA-EC,Kalerato,Kalerato
-ZA-EC,Khanya,Khanya
-ZA-EC,Khanyisa,Khanyisa
-ZA-EC,Makanaskop,Makanaskop
-ZA-EC,Mangquzu,Mangquzu
-ZA-EC,Masizakhe,Masizakhe
-ZA-EC,Mgobozi Commercial,Mgobozi Commercial
-ZA-EC,Msobomvu,Msobomvu
-ZA-EC,Ngqeleni,Ngqeleni
-ZA-EC,Ntukayi,Ntukayi
-ZA-EC,Osborn,Osborn
-ZA-EC,Phakamile (Phaphani),Phakamile (Phaphani)
-ZA-EC,Port St Johns,Port St Johns
-ZA-EC,Qoqodala,Qoqodala
-ZA-EC,Qumbu,Qumbu
-ZA-EC,Sinethemba,Sinethemba
-ZA-EC,Sofunda,Sofunda
-ZA-EC,Soweto-On-Sea,Soweto-On-Sea
-ZA-EC,St Dennis,St Dennis
-ZA-EC,Vorster,Vorster
-ZA-EC,Zimele,Zimele
-ZA-EC,Zwelakhe,Zwelakhe
-ZA-FS,Boitumelo,Boitumelo
-ZA-FS,Free State CET College,Free State CET College
-ZA-FS,Katlehong,Katlehong
-ZA-FS,Kgodiso,Kgodiso
-ZA-FS,Letjhabile,Letjhabile
-ZA-FS,NG Noord,NG Noord
-ZA-FS,Ponelopele,Ponelopele
-ZA-FS,Retswelletse,Retswelletse
-ZA-FS,Rutegang,Rutegang
-ZA-FS,Tjheseho,Tjheseho
-ZA-FS,Tsibogang,Tsibogang
-ZA-FS,Tumahole,Tumahole
-ZA-FS,Umziwoxolo,Umziwoxolo
-ZA-FS,Vulamehlo,Vulamehlo
-ZA-FS,Wesselsbron,Wesselsbron
-ZA-FS,Zakhele Ikusasa,Zakhele Ikusasa
-ZA-GT,21 Battalion Community Learning Centre,21 Battalion Community Learning Centre
-ZA-GT,Aaron Moeti Community Learning Centre,Aaron Moeti Community Learning Centre
-ZA-GT,Alexandra Community Learning Centre,Alexandra Community Learning Centre
-ZA-GT,Bekkersdal Community Learning Centre,Bekkersdal Community Learning Centre
-ZA-GT,Bethsaida,Bethsaida
-ZA-GT,Chiawelo Community Learning Centre,Chiawelo Community Learning Centre
-ZA-GT,City Deep Community Learning Centre,City Deep Community Learning Centre
-ZA-GT,DWT Thate,DWT Thate
-ZA-GT,Daveyton Community Learning Centre,Daveyton Community Learning Centre
-ZA-GT,Denver Community Learning Centre,Denver Community Learning Centre
-ZA-GT,Diepkloof Community Learning Centre,Diepkloof Community Learning Centre
-ZA-GT,Duduza Community Learning Centre,Duduza Community Learning Centre
-ZA-GT,E.D Mafole Community Learning Centre,E.D Mafole Community Learning Centre
-ZA-GT,Fourways Community Learning Centre,Fourways Community Learning Centre
-ZA-GT,Gaegolelwe,Gaegolelwe
-ZA-GT,Gaerobe,Gaerobe
-ZA-GT,Gauteng CET College,Gauteng CET College
-ZA-GT,Hammanstkraal,Hammanstkraal
-ZA-GT,Herbert Mdingi Community Learning Centre,Herbert Mdingi Community Learning Centre
-ZA-GT,Holy Trinity,Holy Trinity
-ZA-GT,Ivory Park Community Learning Centre,Ivory Park Community Learning Centre
-ZA-GT,Josiah Khumalo Community Learning Centre,Josiah Khumalo Community Learning Centre
-ZA-GT,Kagiso Community Learning Centre,Kagiso Community Learning Centre
-ZA-GT,Khutsong Community Learning Centre,Khutsong Community Learning Centre
-ZA-GT,Kwa -Thema Community Learning Centre,Kwa -Thema Community Learning Centre
-ZA-GT,Kwazini Community Learning Centre,Kwazini Community Learning Centre
-ZA-GT,Mamelodi,Mamelodi
-ZA-GT,Moepathutse,Moepathutse
-ZA-GT,Morakapula,Morakapula
-ZA-GT,PQ Vundla Community Learning Centre,PQ Vundla Community Learning Centre
-ZA-GT,Peter Lengene Community Learning Centre,Peter Lengene Community Learning Centre
-ZA-GT,Pretoria Central,Pretoria Central
-ZA-GT,Reneilwe,Reneilwe
-ZA-GT,Sebokeng Community Learning Centre,Sebokeng Community Learning Centre
-ZA-GT,Setlakalane Molepo Community Learning Centre,Setlakalane Molepo Community Learning Centre
-ZA-GT,Sharperville Community Learning Centre,Sharperville Community Learning Centre
-ZA-GT,St Anthonys Community Learning Centre,St Anthonys Community Learning Centre
-ZA-GT,Sydney Maseko Community Learning Centre,Sydney Maseko Community Learning Centre
-ZA-GT,Taamane,Taamane
-ZA-GT,Tembisa Community Learning Centre,Tembisa Community Learning Centre
-ZA-GT,Thokoza Community Learning Centre,Thokoza Community Learning Centre
-ZA-GT,Thutomfundo Community Learning Centre,Thutomfundo Community Learning Centre
-ZA-GT,Tsakane Community Learning Centre,Tsakane Community Learning Centre
-ZA-GT,Tswinyane Community Learning Centre,Tswinyane Community Learning Centre
-ZA-GT,Victory Community Learning Centre,Victory Community Learning Centre
-ZA-GT,Vunanimfundo Communi Learnin Centre,Vunanimfundo Communi Learnin Centre
-ZA-GT,Wattville Community Learning Centre,Wattville Community Learning Centre
-ZA-GT,Wedela Community Learning Centre,Wedela Community Learning Centre
-ZA-LP,Bogwasha Community Learning Centre,Bogwasha Community Learning Centre
-ZA-LP,Dambalwashe Community Learning Centre,Dambalwashe Community Learning Centre
-ZA-LP,Giyani Comprehensive Community Learning Centre,Giyani Comprehensive Community Learning Centre
-ZA-LP,Helen Franz Hospital,Helen Franz Hospital
-ZA-LP,Khudutseke Community Learning Centre,Khudutseke Community Learning Centre
-ZA-LP,Limpopo CET College,Limpopo CET College
-ZA-LP,Mageme Community Learning Centre,Mageme Community Learning Centre
-ZA-LP,Makwarela Community Learning Centre,Makwarela Community Learning Centre
-ZA-LP,Malamulele Public Works Community Learning Centre,Malamulele Public Works Community Learning Centre
-ZA-LP,Mapeloana,Mapeloana
-ZA-LP,Maphopha Community Learning Centre,Maphopha Community Learning Centre
-ZA-LP,Modjadji Community,Modjadji Community
-ZA-LP,Musina Community Learning Centre,Musina Community Learning Centre
-ZA-LP,Nelson Skop Community Learning Centre,Nelson Skop Community Learning Centre
-ZA-LP,OR Tambo Community Learning Centre,OR Tambo Community Learning Centre
-ZA-LP,Phomelelo Community Learning College,Phomelelo Community Learning College
-ZA-LP,Pondo Community Learning Centre,Pondo Community Learning Centre
-ZA-LP,Seshego Hospital,Seshego Hospital
-ZA-LP,Thabamoopo Hospital,Thabamoopo Hospital
-ZA-LP,Tivumbeni Community,Tivumbeni Community
-ZA-LP,Tshikondeni Community Learning Centre,Tshikondeni Community Learning Centre
-ZA-MP,Andisa,Andisa
-ZA-MP,Cheshire,Cheshire
-ZA-MP,Chubekani,Chubekani
-ZA-MP,Eamogetswe,Eamogetswe
-ZA-MP,Kamaqhekeza,Kamaqhekeza
-ZA-MP,Kennen,Kennen
-ZA-MP,Kwaguqa,Kwaguqa
-ZA-MP,Mafu,Mafu
-ZA-MP,Mpumalanga CET College,Mpumalanga CET College
-ZA-MP,Rivoningo,Rivoningo
-ZA-MP,Salubindza,Salubindza
-ZA-MP,Shalamuka,Shalamuka
-ZA-MP,Simile,Simile
-ZA-MP,Thulamahashe,Thulamahashe
-ZA-MP,Vulamehlo,Vulamehlo
-ZA-MP,Wesselton,Wesselton
-ZA-NC,Helen Joseph CLC,Helen Joseph CLC
-ZA-NC,Itlhatloseng CLC,Itlhatloseng CLC
-ZA-NC,Kareeville CLC,Kareeville CLC
-ZA-NC,Kolomela CLC,Kolomela CLC
-ZA-NC,Mecwi CLC,Mecwi CLC
-ZA-NC,Northern Cape CET College,Northern Cape CET College
-ZA-NC,People's Public CLC,People's Public CLC
-ZA-NC,Thuto-Boswa CLC,Thuto-Boswa CLC
-ZA-NL,121 Battalion CLC,121 Battalion CLC
-ZA-NL,Bekezela CLC,Bekezela CLC
-ZA-NL,Bhongweni CLC,Bhongweni CLC
-ZA-NL,Bonamuva CLC,Bonamuva CLC
-ZA-NL,Bonela CLC,Bonela CLC
-ZA-NL,Braaimwood CLC,Braaimwood CLC
-ZA-NL,CB Addison CLC,CB Addison CLC
-ZA-NL,Dokkies CLC,Dokkies CLC
-ZA-NL,Embonisweni CLC,Embonisweni CLC
-ZA-NL,Emlandeleni CLC,Emlandeleni CLC
-ZA-NL,Endleleni CLC,Endleleni CLC
-ZA-NL,Funulwazi CLC,Funulwazi CLC
-ZA-NL,Harding HRD CLC,Harding HRD CLC
-ZA-NL,Hlakaniphani CLC,Hlakaniphani CLC
-ZA-NL,Ilungelolethu CLC,Ilungelolethu CLC
-ZA-NL,Inqabayamangwane CLC,Inqabayamangwane CLC
-ZA-NL,Isibani CLC,Isibani CLC
-ZA-NL,Ithuba CLC,Ithuba CLC
-ZA-NL,Jozini CLC,Jozini CLC
-ZA-NL,KZN CET College,KZN CET College
-ZA-NL,Lathi-tha CLC,Lathi-tha CLC
-ZA-NL,Lethukukhanya CLC,Lethukukhanya CLC
-ZA-NL,Manaye CLC,Manaye CLC
-ZA-NL,Meshack Ntshulwana CLC,Meshack Ntshulwana CLC
-ZA-NL,Ondini CLC,Ondini CLC
-ZA-NL,Phathisizwe CLC,Phathisizwe CLC
-ZA-NL,Phindangene CLC,Phindangene CLC
-ZA-NL,Phumelela,Phumelela
-ZA-NL,Qinisela CLC,Qinisela CLC
-ZA-NL,Sesikwazi CLC,Sesikwazi CLC
-ZA-NL,Sikhanyiselwe CLC,Sikhanyiselwe CLC
-ZA-NL,Siyanatha  CLC,Siyanatha  CLC
-ZA-NL,Stoffelton  CLC,Stoffelton  CLC
-ZA-NL,Thandiwe CLC,Thandiwe CLC
-ZA-NL,Thathezakho CLC (Limehill),Thathezakho CLC (Limehill)
-ZA-NL,Ulwazi CLC,Ulwazi CLC
-ZA-NL,Umendomuhle CLC,Umendomuhle CLC
-ZA-NL,Usizuzulu CLC,Usizuzulu CLC
-ZA-NL,Wotana CLC,Wotana CLC
-ZA-NL,Zamani CLC,Zamani CLC
-ZA-NL,Zibuke CLC,Zibuke CLC
-ZA-NW,Dinaledi CLC,Dinaledi CLC
-ZA-NW,Good Shepherd CLC,Good Shepherd CLC
-ZA-NW,Ikageng CLC,Ikageng CLC
-ZA-NW,Iphatlhose CLC,Iphatlhose CLC
-ZA-NW,Kgatelopele CLC,Kgatelopele CLC
-ZA-NW,Lodirile CLC,Lodirile CLC
-ZA-NW,Neo-Estsile,Neo-Estsile
-ZA-NW,North West CET College,North West CET College
-ZA-NW,Pooe CLC,Pooe CLC
-ZA-NW,Raphephe CLC,Raphephe CLC
-ZA-NW,Reabetswe CLC,Reabetswe CLC
-ZA-NW,Sekitla CLC,Sekitla CLC
-ZA-WC,Central Karoo,Central Karoo
-ZA-WC,Eerste River,Eerste River
-ZA-WC,Elsies River,Elsies River
-ZA-WC,George,George
-ZA-WC,Malmesbury,Malmesbury
-ZA-WC,Masiyile,Masiyile
-ZA-WC,Olifantsriver,Olifantsriver
-ZA-WC,Oudtshoorn,Oudtshoorn
-ZA-WC,Overberg,Overberg
-ZA-WC,Portlands,Portlands
-ZA-WC,Sijonga-Phambili,Sijonga-Phambili
-ZA-WC,St Francis,St Francis
-ZA-WC,Villiersdorp,Villiersdorp
-ZA-WC,Wellington,Wellington
-ZA-WC,Western Cape CET College,Western Cape CET College
-ZA-WC,Worcester,Worcester
-ZA-FS,Swift Skills Academy,Sasolburg
-ZA-GT,St Augustine College of South Africa,Johannesburg
-ZA-NL,Mangosuthu University of Technology (MUT),Natural Sciences
-ZA-WC,Mowbray Maternity Hospital,Mowbray
-ZA-WC,Stellenbosch University (SU),Bellville Park
-ZA-WC,Stellenbosch University (SU),Saldanha
-ZA-WC,Stellenbosch University (SU),Worcester
-ZA-WC,Swift Skills Academy,Killarney Gardens
-ZA-WC,Swift Skills Academy,Vredenburg
-ZA-WC,The Fashion Institute of Garment Technology (Cape Town College of Fashion Design),Mowbray
-ZA-EC,Pearson Institute of Higher Education  Eduvos,East London
-ZA-EC,Pearson Institute of Higher Education  Eduvos,Port Elizabeth
-ZA-FS,Pearson Institute of Higher Education  Eduvos,Bloemfontein
-ZA-GT,Pearson Institute of Higher Education  Eduvos,Bedfordview
-ZA-GT,Pearson Institute of Higher Education  Eduvos,Midrand
-ZA-GT,Pearson Institute of Higher Education  Eduvos,Pretoria
-ZA-GT,Pearson Institute of Higher Education  Eduvos,Vanderbijlpark
-ZA-MP,Pearson Institute of Higher Education  Eduvos,Nelspruit
-ZA-NL,Pearson Institute of Higher Education  Eduvos,Umhlanga
-ZA-NW,Pearson Institute of Higher Education  Eduvos,Potchefstroom
-ZA-WC,Pearson Institute of Higher Education  Eduvos,Cape Town
-ZA-WC,Pearson Institute of Higher Education  Eduvos,Durbanville
