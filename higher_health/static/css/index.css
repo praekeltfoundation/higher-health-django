@@ -956,3 +956,12 @@ textarea {
     margin: 5px 0 5px 1em;
   }
 }
+
+/*
+  ADS
+*/
+
+.lifebouy-ad {
+  display: block;
+  width: 100%;
+}
