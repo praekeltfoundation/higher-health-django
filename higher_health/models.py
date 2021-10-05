@@ -111,7 +111,8 @@ class Covid19Triage(models.Model):
     VACCINE_UPTAKE = (
         ("PARTIALLY", "Yes, partially vaccinated"),
         ("FULLY", "Yes, fully vaccinated"),
-        ("NOT", "Not vaccinated"))
+        ("NOT", "Not vaccinated"),
+    )
 
     class YesNoBoolChoice(Choice):
         Yes = True
