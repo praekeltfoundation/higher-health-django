@@ -60,9 +60,9 @@
                     {% endfor %}
                   </ul>
                 </div>
-                <p class="subtitle">Sharing your location data will help us to further accurately map cases of COVID-19</p>
-                {% if form.id_age_range != "<18" %}
-                  <div class="login-form__map">
+
+                  <div class="login-form__map" id="locationBlock">
+                    <p class="subtitle">Sharing your location data will help us to further accurately map cases of COVID-19</p>
                     <div id="locationField">
                       <input id="autocomplete"
                         placeholder="Type your physical address"
@@ -97,7 +97,6 @@
                       </ul>
                     </div>
                   </div>
-                {% endif %}
               </div>
             </div>
 
@@ -258,6 +257,7 @@
       campClone = camp.cloneNode(true),
       formSubmit = document.getElementById('login_form'),
       addressInput = document.getElementById('autocomplete'),
+      age = document.getElementById('id_age_range'),
       latInput = document.getElementById('id_latitude'),
       lngInput = document.getElementById('id_longitude'),
       selected_province = prov.options[prov.selectedIndex],
@@ -363,6 +363,7 @@
           };
           let preexistingRadioKey = sessionStorage.getItem('preexistingRadio') ? sessionStorage.getItem('preexistingRadio') : medicalOptionsIndex;
 
+
         //CHECKBOX TOGGLE
         if(checkboxKey === 'true') {
           checkbox.checked = true;
@@ -387,6 +388,16 @@
             questionnairesForm.classList.add('hidden');
             questionnairesForm.classList.remove('showing');
           }
+        });
+        age.addEventListener('change', function(e) {
+          //LOCATION TOGGLE
+          var selectedValue = document.getElementById('id_age_range').value;
+          if(selectedValue === "<18"){
+            document.getElementById('locationBlock').style.visibility = "hidden";
+          } else {
+            document.getElementById('locationBlock').style.visibility = "visible";
+          }
+
         });
 
         //PRE-EXISTING CONDITIONS
