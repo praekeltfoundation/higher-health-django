@@ -60,42 +60,43 @@
                     {% endfor %}
                   </ul>
                 </div>
-                <p class="subtitle">Sharing your location data will help us to further accurately map cases of COVID-19</p>
-                <div class="login-form__map">
-                  <div id="locationField">
-                    <input id="autocomplete"
-                      placeholder="Type your physical address"
-                      onFocus="geolocate()"
-                      type="text"
-                      value="{{ form.address.value|default_if_none:''}}"
-                      name="address"/>
-                      {% if form.address.errors %}
-                        {{form.address.errors}}
-                      {% endif %}
+
+                  <div class="login-form__map" id="locationBlock">
+                    <p class="subtitle">Sharing your location data will help us to further accurately map cases of COVID-19</p>
+                    <div id="locationField">
+                      <input id="autocomplete"
+                        placeholder="Type your physical address"
+                        onFocus="geolocate()"
+                        type="text"
+                        value="{{ form.address.value|default_if_none:''}}"
+                        name="address"/>
+                        {% if form.address.errors %}
+                          {{form.address.errors}}
+                        {% endif %}
+                    </div>
+                    {% if form.latitude or form.longitude %}
+                      {{form.latitude}}
+                      {{form.longitude}}
+                    {% endif %}
+                    <div class="location-field-autoload">
+                      <p class="location-field-hint">The below physical address fields will be automatically populated from the address entered above. Otherwise please fill in the information.</p>
+                      <ul id="address" class="address-list fieldset">
+                        <li class="address-list__item">
+                          <input class="field" name="street_number" id="street_number" readonly value="{{ form.street_number.value|default_if_none:''}}"/>
+                          <input class="field" name="route" id="route" readonly value="{{ form.route.value|default_if_none:''}}"/>
+                          <label for="street_number" class="label">Street address:</label>
+                        </li>
+                        <li class="address-list__item">
+                          <input class="field" name="city" id="locality" readonly value="{{ form.city.value|default_if_none:''}}"/>
+                          <label for="locality" class="label">City:</label>
+                        </li>
+                        <li class="address-list__item">
+                          <input class="field" name="country" id="country" readonly value="{{ form.country.value|default_if_none:''}}"/>
+                          <label for="country" class="label">Country:</label>
+                        </li>
+                      </ul>
+                    </div>
                   </div>
-                  {% if form.latitude or form.longitude %}
-                    {{form.latitude}}
-                    {{form.longitude}}
-                  {% endif %}
-                  <div class="location-field-autoload">
-                    <p class="location-field-hint">The below physical address fields will be automatically populated from the address entered above. Otherwise please fill in the information.</p>
-                    <ul id="address" class="address-list fieldset">
-                      <li class="address-list__item">
-                        <input class="field" name="street_number" id="street_number" readonly value="{{ form.street_number.value|default_if_none:''}}"/>
-                        <input class="field" name="route" id="route" readonly value="{{ form.route.value|default_if_none:''}}"/>
-                        <label for="street_number" class="label">Street address:</label>
-                      </li>
-                      <li class="address-list__item">
-                        <input class="field" name="city" id="locality" readonly value="{{ form.city.value|default_if_none:''}}"/>
-                        <label for="locality" class="label">City:</label>
-                      </li>
-                      <li class="address-list__item">
-                        <input class="field" name="country" id="country" readonly value="{{ form.country.value|default_if_none:''}}"/>
-                        <label for="country" class="label">Country:</label>
-                      </li>
-                    </ul>
-                  </div>
-                </div>
               </div>
             </div>
 
@@ -256,6 +257,7 @@
       campClone = camp.cloneNode(true),
       formSubmit = document.getElementById('login_form'),
       addressInput = document.getElementById('autocomplete'),
+      age = document.getElementById('id_age_range'),
       latInput = document.getElementById('id_latitude'),
       lngInput = document.getElementById('id_longitude'),
       selected_province = prov.options[prov.selectedIndex],
@@ -361,6 +363,7 @@
           };
           let preexistingRadioKey = sessionStorage.getItem('preexistingRadio') ? sessionStorage.getItem('preexistingRadio') : medicalOptionsIndex;
 
+
         //CHECKBOX TOGGLE
         if(checkboxKey === 'true') {
           checkbox.checked = true;
@@ -385,6 +388,16 @@
             questionnairesForm.classList.add('hidden');
             questionnairesForm.classList.remove('showing');
           }
+        });
+        age.addEventListener('change', function(e) {
+          //LOCATION TOGGLE
+          var selectedValue = document.getElementById('id_age_range').value;
+          if(selectedValue === "<18"){
+            document.getElementById('locationBlock').style.visibility = "hidden";
+          } else {
+            document.getElementById('locationBlock').style.visibility = "visible";
+          }
+
         });
 
         //PRE-EXISTING CONDITIONS
