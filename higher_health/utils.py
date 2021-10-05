@@ -106,6 +106,7 @@ def save_data(data, user):
             "history_diabetes": data.get("history_diabetes") or False,
             "history_hypertension": data.get("history_hypertension") or False,
             "history_cardiovascular": data.get("history_cardiovascular") or False,
+            "vaccine_uptake": data.get("vaccine_uptake"),
         }
     )
     submit_healthcheck_to_eventstore.delay(str(healthcheck.id))

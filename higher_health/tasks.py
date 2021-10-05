@@ -95,6 +95,7 @@ def submit_healthcheck_to_eventstore(healthcheck_id: Text) -> None:
             "diabetes": healthcheck.history_diabetes,
             "hypertension": healthcheck.history_hypertension,
             "cardiovascular": healthcheck.history_cardiovascular,
+            "vaccine_uptake": healthcheck.vaccine_uptake,
         },
     }
 

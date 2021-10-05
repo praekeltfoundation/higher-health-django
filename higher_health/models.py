@@ -108,6 +108,11 @@ class Covid19Triage(models.Model):
         (GENDER_NOT_SAY, "Rather not say"),
     )
 
+    VACCINE_UPTAKE = (
+        ("PARTIALLY", "Yes, partially vaccinated"),
+        ("FULLY", "Yes, fully vaccinated"),
+        ("NOT", "Not vaccinated"))
+
     class YesNoBoolChoice(Choice):
         Yes = True
         No = False
@@ -185,6 +190,10 @@ class Covid19Triage(models.Model):
     history_cardiovascular = models.BooleanField(default=False)
     user = models.ForeignKey(
         "auth.User", null=True, blank=True, on_delete=models.SET_NULL
+    )
+
+    vaccine_uptake = models.CharField(
+        max_length=9, choices=VACCINE_UPTAKE, blank=True, default=""
     )
 
     @property
