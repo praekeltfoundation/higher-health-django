@@ -37,7 +37,7 @@
           <div id="questionnaires">
             <div class="collapsibles__item login-form__location">
               <div class="pagination">
-                <p class="pagination__label">Step 1 of 4</p>
+                <p class="pagination__label">Step 1 of 5</p>
                 <span class="pagination__icon">+</span>
               </div>
               <div class="collapsibles__label">
@@ -102,7 +102,7 @@
 
             <div class="collapsibles__item login-form__medical">
               <div class="pagination">
-                <p class="pagination__label">Step 2 of 4</p>
+                <p class="pagination__label">Step 2 of 5</p>
                 <span class="pagination__icon">+</span>
               </div>
               <div class="collapsibles__label">
@@ -146,7 +146,7 @@
 
             <div class="collapsibles__item login-form__medical">
               <div class="pagination">
-                <p class="pagination__label">Step 3 of 4</p>
+                <p class="pagination__label">Step 3 of 5</p>
                 <span class="pagination__icon">+</span>
               </div>
               <div class="collapsibles__label">
@@ -199,7 +199,42 @@
             </div>
 
             <div class="collapsibles__item login-form__medical">
-              <p class="pagination-ux">Step 4 of 4</p>
+              <div class="pagination">
+                <p class="pagination__label">Step 4 of 5</p>
+                <span class="pagination__icon">+</span>
+              </div>
+              <div class="collapsibles__label">
+                <h2 class="heading-secondary">Vaccination</h2>
+              </div>
+              <div id="step_4" class="collapsibles__toggle">
+                <ul id="vaccine-uptake" class="fieldset">
+                  <li class="fieldset__vaccine_uptake">
+                    <label for="{{ form.vaccine_uptake.name }}" class="label">
+                    {{ form.vaccine_uptake.label }}
+                    </label>
+                    <ul id='id_{{form.vaccine_uptake.name}}'>
+                      {% for value, text in form.vaccine_uptake.field.choices %}
+                        <li>
+                          <input name="{{ form.vaccine_uptake.name }}"
+                           id="id_{{ form.vaccine_uptake.name|slugify }}_{{ forloop.counter0 }}" type="radio" value="{{ value }}" {% if form.vaccine_uptake.value == value %}checked="checked"{% endif %}/>
+
+                          <label for="id_{{ form.vaccine_uptake.name|slugify }}_{{ forloop.counter0 }}">{{ text|capfirst }}</label>
+                        </li>
+                      {% endfor %}
+                    </ul>
+                    {{form.vaccine_uptake.errors}}
+                  </li>
+                </ul>
+
+                <label id="notvaccinatedLabel" class="label">
+                  Do you know that your chance of ending up in the intensive care unit (ICU) or forming a severe disease with Covid-19 related complications is 80% higher when you are not vaccinated against the virus? Please get vaccinated. Both Pfizer and J&J vaccines have shown high effectiveness towards reducing your risk to severity of COVID-19.
+                </label>
+
+              </div>
+            </div>
+
+            <div class="collapsibles__item login-form__medical">
+              <p class="pagination-ux">Step 5 of 5</p>
               <h2 class="heading-secondary">How are you feeling today?</h2>
               {% if form.medical_fields_has_errors %}
                 <p class="error">Please correct the errors below</p>
@@ -267,6 +302,9 @@
       preexistingconditionsYes = document.getElementById('id_history_pre_existing_condition_0'),
       preexistingconditionsNo = document.getElementById('id_history_pre_existing_condition_1'),
       preexistingconditionsNotsure = document.getElementById('id_history_pre_existing_condition_2'),
+      vaccineuptakePartial = document.getElementById('id_vaccine_uptake_0'),
+      vaccineuptakeFull = document.getElementById('id_vaccine_uptake_1'),
+      vaccineuptakeNot = document.getElementById('id_vaccine_uptake_2'),
       isPageLoad = true,
       other_university = null;
       for(const [university, prov] of Object.entries(universities)){
@@ -353,6 +391,8 @@
           paginate = document.querySelectorAll('.pagination__icon'),
           sessionToggle = sessionStorage.getItem('steps') ? JSON.parse(sessionStorage.getItem('steps')) : {},
           collapsed,
+          vaccineUptakeOptions = document.getElementsByName('vaccine_uptake'),
+          vaccineUptakeOptionsIndex,
           medicalOptions = document.getElementsByName('history_pre_existing_condition'),
           medicalOptionsIndex;
 
@@ -363,6 +403,12 @@
           };
           let preexistingRadioKey = sessionStorage.getItem('preexistingRadio') ? sessionStorage.getItem('preexistingRadio') : medicalOptionsIndex;
 
+          for(let v= 0; v < vaccineUptakeOptions.length; v++) {
+            if(vaccineUptakeOptions[v].checked){
+              vaccineUptakeOptionsIndex = vaccineUptakeOptions[v].value
+            }
+          };
+          let vaccinatedRadioKey = sessionStorage.getItem('vaccinatedRadio') ? sessionStorage.getItem('vaccinatedRadio') : vaccineUptakeOptionsIndex;
 
         //CHECKBOX TOGGLE
         if(checkboxKey === 'true') {
@@ -443,6 +489,56 @@
             preexistingconditionsForm.classList.remove('showing');
           }
         });
+
+        //VACINE UPTAKE
+        if(vaccinatedRadioKey === 'partially' || vaccinatedRadioKey === 'fully') {
+          if(vaccinatedRadioKey === 'partially') {
+            vaccineuptakePartial.checked = true;
+          } else {
+            vaccineuptakeFull.checked = true;
+          }
+          notvaccinatedLabel.classList.add('hidden');
+          notvaccinatedLabel.classList.remove('showing');
+        } else if(vaccinatedRadioKey === 'not') {
+          vaccineuptakePartial.checked = false;
+          vaccineuptakeFull.checked = false;
+          vaccineuptakeNot.checked = true;
+          notvaccinatedLabel.classList.add('showing');
+          notvaccinatedLabel.classList.remove('hidden');
+        } else {
+          vaccineuptakeFull.checked = false;
+          notvaccinatedLabel.classList.remove('showing');
+          notvaccinatedLabel.classList.add('hidden');
+        }
+        vaccineuptakePartial.addEventListener('change', function(e){
+          if (e.target.checked) {
+            sessionStorage.setItem('vaccinatedRadio', 'partially');
+            notvaccinatedLabel.classList.add('hidden');
+            notvaccinatedLabel.classList.remove('showing');
+          } else {
+            sessionStorage.setItem('vaccinatedRadio', 'not');
+            notvaccinatedLabel.classList.add('showing');
+            notvaccinatedLabel.classList.remove('hidden');
+          }
+        });
+        vaccineuptakeNot.addEventListener('change', function(e) {
+          if (e.target.checked) {
+            sessionStorage.setItem('vaccinatedRadio', 'not');
+            notvaccinatedLabel.classList.add('showing');
+            notvaccinatedLabel.classList.remove('hidden');
+          }
+        });
+        vaccineuptakeFull.addEventListener('change', function(e) {
+          if (e.target.checked) {
+            sessionStorage.setItem('vaccinatedRadio', 'fully');
+            notvaccinatedLabel.classList.add('hidden');
+            notvaccinatedLabel.classList.remove('showing');
+          } else {
+            sessionStorage.setItem('vaccinatedRadio', 'not');
+            notvaccinatedLabel.classList.add('showing');
+            notvaccinatedLabel.classList.remove('hidden');
+          }
+        })
 
         //COLLAPSE & EXPAND
         for(let i = 0; i < paginate.length; i++) {
@@ -553,6 +649,17 @@
                 else if(collapsiblesToggle === 'step_3') {
                   let preexistingRadioKeyDisplay = preexistingRadioKey === "not_sure" ? "Not sure" : preexistingRadioKey;
                   excerpt.innerHTML = '<h5>'+preexistingRadioKeyDisplay+'</h5>';
+                }
+                else if(collapsiblesToggle === 'step_4') {
+                  let vaccinatedRadioKeyDisplay = "";
+                  if (vaccinatedRadioKey === "not") {
+                    vaccinatedRadioKeyDisplay = "Not vaccinated";
+                  } else if (vaccinatedRadioKey === "fully") {
+                    vaccinatedRadioKeyDisplay = "Yes, fully vaccinated";
+                  } else if (vaccinatedRadioKey === "partially") {
+                    vaccinatedRadioKeyDisplay = "Yes, partially vaccinated";
+                  }
+                  excerpt.innerHTML = '<h5>'+vaccinatedRadioKeyDisplay+'</h5>';
                 }
               excerpt.style.display = 'block';
               collapsiblesBlock.parentElement.append(excerpt);

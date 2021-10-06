@@ -30,6 +30,11 @@ class HealthCheckQuestionnaire(forms.Form):
     NOT_SURE = "not_sure"
     YES_NO = ((YES, "Yes"), (NO, "No"))
     YES_NO_NOT_SURE = ((YES, "Yes"), (NO, "No"), (NOT_SURE, "Not Sure"))
+    VACCINE_CHOICES = (
+        ("PARTIALLY", "Yes, partially vaccinated"),
+        ("FULLY", "Yes, fully vaccinated"),
+        ("NOT", "Not vaccinated"),
+    )
 
     PROVINCE_CHOICES = sorted(
         (s.code, s.name) for s in pycountry.subdivisions.get(country_code="ZA")
@@ -113,6 +118,11 @@ class HealthCheckQuestionnaire(forms.Form):
     )
     facility_destination_reason = forms.ChoiceField(
         label="Are you a:", choices=REASON_CHOICES, widget=forms.RadioSelect
+    )
+    vaccine_uptake = forms.ChoiceField(
+        label="Your opinion about getting vaccinated against COVID-19 matters to us.\n\nPlease tell us:\nHave you been vaccinated?",
+        choices=VACCINE_CHOICES,
+        widget=forms.RadioSelect,
     )
     history_pre_existing_condition = forms.ChoiceField(
         label="Do you have any other pre-existing medical conditions that we should be aware of?",

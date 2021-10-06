@@ -176,6 +176,7 @@ class QuestionnaireTest(TestCase):
             initial_data["facility_destination_reason"],
             data["facility_destination_reason"],
         )
+        self.assertEqual(initial_data["vaccine_uptake"], data["vaccine_uptake"])
 
         self.assertFalse(initial_data["history_obesity"])
         self.assertFalse(initial_data["history_diabetes"])

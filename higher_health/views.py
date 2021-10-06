@@ -95,6 +95,8 @@ class HealthCheckQuestionnaireView(
                 initial_data[
                     "history_pre_existing_condition"
                 ] = triage.preexisting_condition
+
+                initial_data["vaccine_uptake"] = triage.vaccine_uptake
         return initial_data
 
     def get_form_kwargs(self):

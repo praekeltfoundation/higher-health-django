@@ -36,6 +36,7 @@ def get_data(symptoms=0, exposure=False, age="<18", pre_existing_condition="no")
         "history_diabetes": "",
         "history_hypertension": "",
         "history_cardiovascular": "",
+        "vaccine_uptake": "FULLY",
     }
 
 

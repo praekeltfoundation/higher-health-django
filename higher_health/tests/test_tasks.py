@@ -70,6 +70,7 @@ class SubmitHealthCheckToEventStoreTests(TestCase):
                     "diabetes": healthcheck.history_diabetes,
                     "hypertension": healthcheck.history_hypertension,
                     "cardiovascular": healthcheck.history_cardiovascular,
+                    "vaccine_uptake": healthcheck.vaccine_uptake,
                 },
             },
         )
