@@ -208,8 +208,6 @@ class QuestionnaireTest(TestCase):
         self.assertEqual(response.status_code, 200)
 
         errors = response.context["form"].errors
-        self.assertEqual(errors["first_name"], ["This field is required."])
-        self.assertEqual(errors["last_name"], ["This field is required."])
         self.assertEqual(errors["age_range"], ["This field is required."])
         self.assertEqual(errors["gender"], ["This field is required."])
         self.assertEqual(errors["latitude"], ["This field is required."])
