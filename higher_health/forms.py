@@ -39,21 +39,6 @@ class HealthCheckQuestionnaire(forms.Form):
     PROVINCE_CHOICES = sorted(
         (s.code, s.name) for s in pycountry.subdivisions.get(country_code="ZA")
     )
-
-    first_name = forms.CharField(
-        label="Enter your name:",
-        widget=TextInput(
-            attrs={"placeholder": "Name", "aria-label": "Name input field"}
-        ),
-        required=True,
-    )
-    last_name = forms.CharField(
-        label="Enter your surname:",
-        widget=TextInput(
-            attrs={"placeholder": "Surname", "aria-label": "Surname input field"}
-        ),
-        required=True,
-    )
     age_range = forms.ChoiceField(
         label="How old are you?",
         choices=(
@@ -64,6 +49,20 @@ class HealthCheckQuestionnaire(forms.Form):
             (">65", _(">65")),
         ),
         required=True,
+    )
+    first_name = forms.CharField(
+        label="Enter your name:",
+        widget=TextInput(
+            attrs={"placeholder": "Name", "aria-label": "Name input field"}
+        ),
+        required=False,
+    )
+    last_name = forms.CharField(
+        label="Enter your surname:",
+        widget=TextInput(
+            attrs={"placeholder": "Surname", "aria-label": "Surname input field"}
+        ),
+        required=False,
     )
     gender = forms.ChoiceField(
         label="Please provide us with the gender you identify as:",
@@ -374,9 +373,9 @@ class HealthCheckQuestionnaire(forms.Form):
 
     def registration_fields(self):
         return [
+            self["age_range"],
             self["first_name"],
             self["last_name"],
-            self["age_range"],
             self["gender"],
         ]
 

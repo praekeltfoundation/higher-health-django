@@ -50,6 +50,23 @@
                   {% endif %}
                   <ul id="registration" class="fieldset">
                     {% for field in form.registration_fields %}
+                      {% if field.label == "Enter your name:" %}
+                        <li class="fieldset__item" id="firstNameBlock">
+                          <label for="{{ field.id_for_label }}" class="label">
+                            {{field.label}}
+                          </label>
+                          {{field}}
+                          {{field.errors}}
+                        </li>
+                      {% elif field.label == "Enter your surname:" %}
+                        <li class="fieldset__item" id="lastNameBlock">
+                          <label for="{{ field.id_for_label }}" class="label">
+                            {{field.label}}
+                          </label>
+                          {{field}}
+                          {{field.errors}}
+                        </li>
+                      {% else %}
                       <li class="fieldset__item">
                         <label for="{{ field.id_for_label }}" class="label">
                           {{field.label}}
@@ -57,6 +74,7 @@
                         {{field}}
                         {{field.errors}}
                       </li>
+                      {% endif %}
                     {% endfor %}
                   </ul>
                 </div>
@@ -439,9 +457,13 @@
           //LOCATION TOGGLE
           var selectedValue = document.getElementById('id_age_range').value;
           if(selectedValue === "<18"){
-            document.getElementById('locationBlock').style.visibility = "hidden";
+            document.getElementById('locationBlock').style.display = "none";
+            document.getElementById('firstNameBlock').style.display = "none";
+            document.getElementById('lastNameBlock').style.display = "none";
           } else {
-            document.getElementById('locationBlock').style.visibility = "visible";
+            document.getElementById('locationBlock').style.display = "unset";
+            document.getElementById('firstNameBlock').style.display = "unset";
+            document.getElementById('lastNameBlock').style.display = "unset";
           }
 
         });
