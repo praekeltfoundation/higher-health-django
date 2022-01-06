@@ -21,7 +21,7 @@ setup(
         "django-import-export==2.1.0",
         "django-compressor==2.4",
         "rapidpro-python==2.7.0",
-        "celery==4.4.6",
+        "celery==5.2.2",
     ],
     classifiers=[
         "Development Status :: 4 - Beta",
