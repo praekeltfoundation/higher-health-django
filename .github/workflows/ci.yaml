@@ -7,12 +7,14 @@ jobs:
   test:
     runs-on: ubuntu-latest
     env:
-      HIGHER_HEALTH_DATABASE: postgres://postgres:postgres@postgres:5432/postgres
+      HIGHER_HEALTH_DATABASE: postgres://postgres:postgres@localhost:5432/postgres
     services:
       postgres:
         image: postgres:9.4
         env:
           POSTGRES_PASSWORD: postgres
+        ports:
+          - 5432:5432
         options: >-
           --health-cmd pg_isready
           --health-interval 10s
