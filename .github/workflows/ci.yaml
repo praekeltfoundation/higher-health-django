@@ -1,0 +1,40 @@
+name: Continuous Integration
+
+on:
+  push
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    env:
+      POSTGRES_PASSWORD: postgres
+      HIGHER_HEALTH_DATABASE: postgres://postgres:postgres@postgres:5432/postgres
+    services:
+      postgres:
+        image: postgres:9.4
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-python@v2
+        with:
+          python-version: "3.6"
+      - name: Install dependancies
+        run: |
+          pip install --upgrade pip
+          pip install -r requirements.txt
+          pip install -r requirements-dev.txt
+      - name: Lint
+        run: |
+          flake8
+          black --check .
+          isort -c -rc .
+      - name: Unit tests
+        run: py.test
+      - name: Missing migrations
+        run: python manage.py makemigrations higher_health --dry-run | grep 'No changes detected' || (echo 'There are changes which require migrations.' && exit 1)
+
+
