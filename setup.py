@@ -14,7 +14,7 @@ setup(
         "django-environ>=0.4.5,<0.5",
         "psycopg2-binary>=2.8.3,<2.9",
         "sentry-sdk==0.14.3",
-        "django-filter==2.0.0",
+        "django-filter==2.4.0",
         "pycountry==19.8.18",
         "phonenumberslite==8.9.15",
         "requests==2.22.0",
