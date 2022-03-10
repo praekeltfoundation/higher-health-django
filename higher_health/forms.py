@@ -208,7 +208,9 @@ class HealthCheckQuestionnaire(forms.Form):
         """
         # If not configured, then probably dev, but log a warning anyway
         if not settings.SERVER_PLACES_API_KEY:
-            logger.error("SERVER_PLACES_API_KEY is not configured, not checking provided location")
+            logger.error(
+                "SERVER_PLACES_API_KEY is not configured, not checking provided location"
+            )
             return False, False, -1, -1
         # First try to get existing coords if address matches
         try:
@@ -293,7 +295,6 @@ class HealthCheckQuestionnaire(forms.Form):
                     "medical_confirm_accuracy",
                     "You need to confirm that this information is accurate.",
                 )
-        print(self.errors)
 
     def clean(self):
         cleaned_data = super(HealthCheckQuestionnaire, self).clean()
@@ -499,7 +500,9 @@ class HealthCheckLogin(forms.Form):
                 )
         # No rapidpro configured, so development, print out OTP
         else:
-            logger.error(f"RAPIDPRO_URL and RAPIDPRO_TOKEN not configured, not sending SMS with OTP {otp}")
+            logger.error(
+                f"RAPIDPRO_URL and RAPIDPRO_TOKEN not configured, not sending SMS with OTP {otp}"
+            )
 
     def clean(self):
         cleaned_data = super().clean()

@@ -74,3 +74,6 @@ logs/*.log
 local_settings.py
 node_modules/*
 .DS_Store
+
+# Default dev sqlite database
+higherhealth

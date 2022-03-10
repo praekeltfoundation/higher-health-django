@@ -20,4 +20,9 @@ RAPIDPRO_TOKEN = None
 RAPIDPRO_URL = None
 RAPIDPRO_SEND_OTP_SMS_FLOW = None
 
+EVENTSTORE_URL = "https://eventstore-placeholder"
+EVENTSTORE_TOKEN = "placeholder-token"
+
 CELERY_TASK_ALWAYS_EAGER = True
+
+DATABASES = {"default": env.db("HIGHER_HEALTH_DATABASE", default="sqlite:///:memory:")}
