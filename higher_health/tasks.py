@@ -1,3 +1,4 @@
+import logging
 from typing import Text
 from urllib.parse import urljoin
 
@@ -9,6 +10,7 @@ from requests.exceptions import RequestException
 from config.celery import app
 from higher_health.models import Covid19Triage
 
+logger = logging.getLogger(__name__)
 
 @app.task(
     autoretry_for=(RequestException, SoftTimeLimitExceeded),
@@ -98,7 +100,9 @@ def submit_healthcheck_to_eventstore(healthcheck_id: Text) -> None:
             "vaccine_uptake": healthcheck.vaccine_uptake,
         },
     }
-
+    if not settings.EVENTSTORE_URL or not settings.EVENTSTORE_TOKEN:
+        logger.error(f"EVENTSTORE_URL and EVENTSTORE_TOKEN are not configured, not submitting {data} to eventstore")
+        return
     response = requests.post(
         url=urljoin(settings.EVENTSTORE_URL, "/api/v3/covid19triage/"),
         headers={"Authorization": f"Token {settings.EVENTSTORE_TOKEN}"},
