@@ -101,7 +101,7 @@
           <div class="receipts-headings">
             <h4 class="heading subheading">HealthCheck Clearance
               {% if is_expired %}Expired{% else %}
-                {% if risk_level == "low" %}Granted{% elif risk_level == "moderate" or risk_level == "high" or risk_level == "critical" %}Denied{% endif %}
+                {% if risk_level == "low" or risk_level == "moderate" %}Granted{% elif risk_level == "high" or risk_level == "critical" %}Denied{% endif %}
               {% endif %}
             </h4>
           </div>

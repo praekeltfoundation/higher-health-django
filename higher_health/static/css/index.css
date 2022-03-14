@@ -280,7 +280,7 @@ button.menu__link {
   background: var(--dark-green);
 }
 .receipts-results--mid {
-  background: var(--bright-orange);
+  background: var(--dark-green);
 }
 .receipts-results--high {
   background: var(--dark-red);
