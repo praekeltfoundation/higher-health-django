@@ -301,10 +301,10 @@ button.menu__link {
   height: 50px;
   width: 50px;
 }
+.receipts-results--mid .receipts-headings:before,
 .receipts-results--low .receipts-headings:before {
   background-image: url('/static/images/icons/thumbsUp-icon.png');
 }
-.receipts-results--mid .receipts-headings:before,
 .receipts-results--high .receipts-headings:before {
   background-image: url('/static/images/icons/hand-icon.png');
   height: 60px;
