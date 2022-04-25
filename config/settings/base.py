@@ -93,13 +93,11 @@ WSGI_APPLICATION = "config.wsgi.application"
 
 DATABASE_URL = env.db("DATABASE_URL", "")
 if not DATABASE_URL:
-    DATABASE_URL = env.db("HIGHER_HEALTH_DATABASE",
-        "postgres://postgres@localhost:5432/higher_health"
+    DATABASE_URL = env.db(
+        "HIGHER_HEALTH_DATABASE", "postgres://postgres@localhost:5432/higher_health"
     )
 
-DATABASES = {
-    "default": DATABASE_URL
-}
+DATABASES = {"default": DATABASE_URL}
 
 
 # Password validation
