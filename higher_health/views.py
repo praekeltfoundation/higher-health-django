@@ -178,4 +178,4 @@ def healthcheck_terms(request, extra_context=None, template="healthcheck_terms.h
 
 
 def maintenance(request):
-    return render(request, 'maintenance.html')
+    return render(request, "maintenance.html")
