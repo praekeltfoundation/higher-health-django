@@ -12,4 +12,5 @@ urlpatterns = [
     path("login/", views.HealthCheckLoginView.as_view(), name="healthcheck_login"),
     path("otp/", views.HealthCheckOTPView.as_view(), name="healthcheck_otp"),
     path("terms/", views.healthcheck_terms, name="healthcheck_terms"),
+    path("maintenance/", views.maintenance, name="healthcheck_maintenance"),
 ]

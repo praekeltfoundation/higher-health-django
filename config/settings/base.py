@@ -56,6 +56,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
+    "higher_health.middleware.MaintenanceModeMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
@@ -172,3 +173,5 @@ CELERY_BROKER_URL = env.str("CELERY_BROKER_URL", "amqp://")
 
 EVENTSTORE_URL = env.str("EVENTSTORE_URL", None)
 EVENTSTORE_TOKEN = env.str("EVENTSTORE_TOKEN", None)
+
+MAINTENANCE_MODE = env.bool("MAINTENANCE_MODE", False)

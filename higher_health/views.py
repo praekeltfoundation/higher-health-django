@@ -175,3 +175,7 @@ class HealthCheckOTPView(generic.FormView):
 def healthcheck_terms(request, extra_context=None, template="healthcheck_terms.html"):
     locale_code = request.GET.get("locale")
     return render(request, template, {"locale_code": locale_code})
+
+
+def maintenance(request):
+    return render(request, "maintenance.html")
