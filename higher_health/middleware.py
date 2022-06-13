@@ -12,7 +12,6 @@ class MaintenanceModeMiddleware:
         if not maintenance:
             raise MiddlewareNotUsed
 
-
     def __call__(self, request):
         maintenance = getattr(settings, 'MAINTENANCE_MODE', None)
         if maintenance and reverse('healthcheck_maintenance') not in request.path:
