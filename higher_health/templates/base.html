@@ -63,18 +63,6 @@
                   <li class="menu__item menu__item--current" role="menuitem">
                     <a href="/" class="menu__link">Home</a>
                   </li>
-                  <li id="login" class="menu__item" role="menuitem">
-                    <a href="{% url 'healthcheck_login' %}" class="menu__link">Login</a>
-                  </li>
-                {% else %}
-                  <li id="login" class="menu__item" role="menuitem">
-                    <a href="{% url 'healthcheck_login' %}" class="menu__link">Home</a>
-                  </li>
-                  <li class="menu__item menu__item--current" role="menuitem">
-                    <a href="{% url 'healthcheck_receipt' %}" class="menu__link">
-                      Clearance Certificate
-                    </a>
-                  </li>
               {% endif %}
             </ul>
           </div>
